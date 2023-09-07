@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  # Database
+  db:
+    # We use a mariadb image which supports both amd64 & arm64 architecture
+    # You can change `latest` for whatever version of mariadb you require
+    # If you really want to use MySQL, replace the image below with `mysql:latest`
+    # or whichever version you require
+    image: mariadb:latest
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: 'no'
+    # See `.env` or `.env.sample` for the environment variables
+    env_file: .env
+    networks:
+      - wp_site
+
+  # PHPMyAdmin
+  phpmyadmin:
+    # PHPMyAdmin only starts up once the db servive has completed starting
+    depends_on:
+      - db
+    image: phpmyadmin:latest
+    restart: 'no'
+    ports:
+      - ${PMA_PORT}:80
+    # See `.env` or `.env.sample` for the environment variables
+    env_file: .env
+    networks:
+      - wp_site
+
+  # WordPress
+  wordpress:
+    # WordPress only starts up once the db servive has completed starting
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - ${WP_PORT}:80
+    restart: 'no'
+    # We map the `user.ini` file and `wp-content` folder to this directory for development purposes
+    volumes:
+      - wp_data:/var/www/html
+      - ./plugin:/var/www/html/wp-content/plugins/construct-wp
+      - ./theme:/var/www/html/wp-content/themes/theme-template
+    # See `.env` or `.env.sample` for the environment variables
+    env_file: .env
+    networks:
+      - wp_site
+
+networks:
+  wp_site:
+
+volumes:
+  db_data:
+  wp_data:

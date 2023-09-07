@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<ruleset name="CPD Coding Standards">
+    <!-- Config -->
+    <config name="installed_paths" value="vendor/phpcompatibility/php-compatibility,vendor/phpcsstandards/phpcsextra,vendor/phpcsstandards/phpcsutils,vendor/wp-coding-standards/wpcs/WordPress,vendor/wp-coding-standards/wpcs/WordPress-Docs,vendor/wp-coding-standards/wpcs/WordPress-Extra,vendor/wp-coding-standards/wpcs/WordPress-Core" />
+
+    <!-- Include paths -->
+    <file>./plugin</file>
+    <file>./theme</file>
+
+    <!-- Exclude paths -->
+    <exclude-pattern>*/css/*</exclude-pattern>
+    <exclude-pattern>*/gulp/*</exclude-pattern>
+    <exclude-pattern>*/js/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/scss/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <!-- Extensions -->
+    <arg name="extensions" value="php" />
+
+    <!-- Configs -->
+    <config name="minimum_supported_wp_version" value="6.2" />
+    <config name="testVersion" value="8.1" />
+
+    <!-- Rules -->
+    <rule ref="Generic.ControlStructures.DisallowYodaConditions" />
+    <rule ref="Generic.WhiteSpace.DisallowTabIndent" />
+
+
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing">
+        <properties>
+            <property name="spacing" value="1"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>
+
+    <rule ref="Squiz.WhiteSpace.ControlStructureSpacing.SpacingAfterOpen"/>
+    <rule ref="Squiz.WhiteSpace.ControlStructureSpacing.SpacingBeforeClose"/>
+    <rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace"/>
+    <!-- TODO line 131, change to > 1 -->
+    <!-- Look into: https://github.com/matthewbdaly/abstract-or-final-sniff -->
+    <!-- <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace"/> -->
+    <!-- TODO space before if statement, use Squiz.WhiteSpace.ControlStructureSpacing as guide? -->
+
+    <rule ref="PHPCompatibility" />
+
+    <rule ref="WordPress">
+        <!-- <exclude name="Generic.Arrays.DisallowShortArraySyntax" /> -->
+        <!-- <exclude name="Generic.Classes.OpeningBraceSameLine" /> -->
+        <!-- <exclude name="Generic.CodeAnalysis.EmptyStatement" /> -->
+        <!-- <exclude name="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" /> -->
+        <!-- <exclude name="Generic.CodeAnalysis.ForLoopWithTestFunctionCall" /> -->
+        <!-- <exclude name="Generic.CodeAnalysis.JumbledIncrementer" /> -->
+        <!-- <exclude name="Generic.CodeAnalysis.UnconditionalIfStatement" /> -->
+        <!-- <exclude name="Generic.CodeAnalysis.UnnecessaryFinalModifier" /> -->
+        <!-- <exclude name="Generic.CodeAnalysis.UselessOverridingMethod" /> -->
+        <!-- <exclude name="Generic.Commenting.DocComment" /> -->
+        <!-- <exclude name="Generic.ControlStructures.InlineControlStructure" /> -->
+        <!-- <exclude name="Generic.Files.ByteOrderMark" /> -->
+        <!-- <exclude name="Generic.Files.EndFileNewline" /> -->
+        <!-- <exclude name="Generic.Files.LineEndings" /> -->
+        <!-- <exclude name="Generic.Files.OneObjectStructurePerFile" /> -->
+        <!-- <exclude name="Generic.Formatting.DisallowMultipleStatements" /> -->
+        <!-- <exclude name="Generic.Formatting.MultipleStatementAlignment" /> -->
+        <!-- <exclude name="Generic.Formatting.SpaceAfterCast" /> -->
+        <!-- <exclude name="Generic.Functions.CallTimePassByReference" /> -->
+        <!-- <exclude name="Generic.Functions.FunctionCallArgumentSpacing" /> -->
+        <!-- <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie" /> -->
+        <!-- <exclude name="Generic.NamingConventions.UpperCaseConstantName" /> -->
+        <!-- <exclude name="Generic.PHP.BacktickOperator" /> -->
+        <!-- <exclude name="Generic.PHP.DisallowAlternativePHPTags" /> -->
+        <!-- <exclude name="Generic.PHP.DisallowShortOpenTag" /> -->
+        <!-- <exclude name="Generic.PHP.DiscourageGoto" /> -->
+        <!-- <exclude name="Generic.PHP.DeprecatedFunctions" /> -->
+        <!-- <exclude name="Generic.PHP.ForbiddenFunctions" /> -->
+        <!-- <exclude name="Generic.PHP.LowerCaseConstant" /> -->
+        <!-- <exclude name="Generic.PHP.LowerCaseKeyword" /> -->
+        <!-- <exclude name="Generic.PHP.LowerCaseType" /> -->
+        <!-- <exclude name="Generic.PHP.Syntax" /> -->
+        <!-- <exclude name="Generic.Strings.UnnecessaryStringConcat" /> -->
+        <!-- <exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing" /> -->
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" />
+        <!-- <exclude name="Generic.WhiteSpace.ScopeIndent" /> -->
+
+        <!-- <exclude name="PEAR.Files.IncludingFile" /> -->
+        <!-- <exclude name="PEAR.Functions.FunctionCallSignature" /> -->
+        <!-- <exclude name="PEAR.NamingConventions.ValidClassName" /> -->
+        <exclude name="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket" />
+        <exclude name="PEAR.Functions.FunctionCallSignature.MultipleArguments" />
+        <exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine" />
+
+        <!-- <exclude name="PSR12.Keywords.ShortFormTypeKeywords" /> -->
+
+        <exclude name="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody" />
+        <!-- <exclude name="PSR2.Classes.PropertyDeclaration" /> -->
+        <exclude name="PSR2.ControlStructures.ElseIfDeclaration" />
+        <!-- <exclude name="PSR2.ControlStructures.SwitchDeclaration" /> -->
+        <!-- <exclude name="PSR2.Files.ClosingTag" /> -->
+        <!-- <exclude name="PSR2.Methods.MethodDeclaration" /> -->
+        <!-- <exclude name="PSR2.Namespaces.NamespaceDeclaration" /> -->
+
+        <!-- <exclude name="Squiz.Classes.SelfMemberReference" /> -->
+        <!-- <exclude name="Squiz.Commenting.BlockComment" /> -->
+        <!-- <exclude name="Squiz.Commenting.ClassComment" /> -->
+        <!-- <exclude name="Squiz.Commenting.ClosingDeclarationComment" /> -->
+        <!-- <exclude name="Squiz.Commenting.DocCommentAlignment" /> -->
+        <!-- <exclude name="Squiz.Commenting.EmptyCatchComment" /> -->
+        <!-- <exclude name="Squiz.Commenting.FunctionCommentThrowTag" /> -->
+        <!-- <exclude name="Squiz.Commenting.InlineComment" /> -->
+        <!-- <exclude name="Squiz.ControlStructures.ControlSignature" /> -->
+        <!-- <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing" /> -->
+        <!-- <exclude name="Squiz.Functions.FunctionDuplicateArgument" /> -->
+        <!-- <exclude name="Squiz.Operators.IncrementDecrementUsage" /> -->
+        <!-- <exclude name="Squiz.Operators.ValidLogicalOperators" /> -->
+        <!-- <exclude name="Squiz.PHP.CommentedOutCode" /> -->
+        <!-- <exclude name="Squiz.PHP.DisallowMultipleAssignments" /> -->
+        <!-- <exclude name="Squiz.PHP.DisallowSizeFunctionsInLoops" /> -->
+        <!-- <exclude name="Squiz.PHP.EmbeddedPhp" /> -->
+        <!-- <exclude name="Squiz.PHP.Eval" /> -->
+        <!-- <exclude name="Squiz.PHP.NonExecutableCode" /> -->
+        <!-- <exclude name="Squiz.Scope.MethodScope" /> -->
+        <!-- <exclude name="Squiz.Strings.ConcatenationSpacing" /> -->
+        <!-- <exclude name="Squiz.Strings.DoubleQuoteUsage" /> -->
+        <!-- <exclude name="Squiz.WhiteSpace.CastSpacing" /> -->
+        <!-- <exclude name="Squiz.WhiteSpace.LanguageConstructSpacing" /> -->
+        <!-- <exclude name="Squiz.WhiteSpace.ObjectOperatorSpacing" /> -->
+        <!-- <exclude name="Squiz.WhiteSpace.ScopeKeywordSpacing" /> -->
+        <!-- <exclude name="Squiz.WhiteSpace.SemicolonSpacing" /> -->
+        <!-- <exclude name="Squiz.WhiteSpace.SuperfluousWhitespace" /> -->
+
+        <!-- <exclude name="WordPress.Arrays.ArrayDeclarationSpacing" /> -->
+        <!-- <exclude name="WordPress.Arrays.ArrayIndentation" /> -->
+        <!-- <exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions" /> -->
+        <!-- <exclude name="WordPress.Arrays.CommaAfterArrayItem" /> -->
+        <exclude name="WordPress.Arrays.MultipleStatementAlignment" />
+        <!-- <exclude name="WordPress.Classes.ClassInstantiation" /> -->
+        <!-- <exclude name="WordPress.CodeAnalysis.AssignmentInCondition" /> -->
+        <!-- <exclude name="WordPress.CodeAnalysis.EmptyStatement" /> -->
+        <!-- <exclude name="WordPress.CodeAnalysis.EscapedNotTranslated" /> -->
+        <!-- <exclude name="WordPress.NamingConventions.PrefixAllGlobals" /> -->
+        <!-- <exclude name="WordPress.NamingConventions.ValidFunctionName" /> -->
+        <!-- <exclude name="WordPress.NamingConventions.ValidHookName" /> -->
+        <!-- <exclude name="WordPress.NamingConventions.ValidPostTypeSlug" /> -->
+        <!-- <exclude name="WordPress.NamingConventions.ValidVariableName" /> -->
+        <!-- <exclude name="WordPress.PHP.DevelopmentFunctions" /> -->
+        <!-- <exclude name="WordPress.PHP.DisallowShortTernary" /> -->
+        <!-- <exclude name="WordPress.PHP.DiscouragedPHPFunctions" /> -->
+        <!-- <exclude name="WordPress.PHP.DontExtract" /> -->
+        <!-- <exclude name="WordPress.PHP.IniSet" /> -->
+        <!-- <exclude name="WordPress.PHP.NoSilencedErrors" /> -->
+        <!-- <exclude name="WordPress.PHP.POSIXFunctions" /> -->
+        <!-- <exclude name="WordPress.PHP.PregQuoteDelimiter" /> -->
+        <!-- <exclude name="WordPress.PHP.RestrictedPHPFunctions" /> -->
+        <exclude name="Universal.Operators.StrictComparisons" />
+        <exclude name="WordPress.PHP.StrictInArray" />
+        <!-- <exclude name="WordPress.PHP.TypeCasts" /> -->
+        <exclude name="WordPress.PHP.YodaConditions" />
+        <exclude name="WordPress.Security.EscapeOutput" />
+        <exclude name="WordPress.Security.NonceVerification" />
+        <!-- <exclude name="WordPress.Security.PluginMenuSlug" /> -->
+        <!-- <exclude name="WordPress.Security.SafeRedirect" /> -->
+        <!-- <exclude name="WordPress.Security.ValidatedSanitizedInput" /> -->
+        <!-- <exclude name="WordPress.Utils.I18nTextDomainFixer" /> -->
+        <!-- <exclude name="WordPress.WhiteSpace.CastStructureSpacing" /> -->
+        <!-- <exclude name="WordPress.WhiteSpace.ControlStructureSpacing" /> -->
+        <!-- <exclude name="WordPress.WhiteSpace.DisallowInlineTabs" /> -->
+        <!-- <exclude name="WordPress.WhiteSpace.OperatorSpacing" /> -->
+        <!-- <exclude name="WordPress.WhiteSpace.PrecisionAlignment" /> -->
+        <!-- <exclude name="WordPress.WP.AlternativeFunctions" /> -->
+        <!-- <exclude name="WordPress.WP.CapitalPDangit" /> -->
+        <!-- <exclude name="WordPress.WP.CronInterval" /> -->
+        <!-- <exclude name="WordPress.WP.DeprecatedClasses" /> -->
+        <!-- <exclude name="WordPress.WP.DeprecatedFunctions" /> -->
+        <!-- <exclude name="WordPress.WP.DeprecatedParameterValues" /> -->
+        <!-- <exclude name="WordPress.WP.DeprecatedParameters" /> -->
+        <!-- <exclude name="WordPress.WP.DiscouragedConstants" /> -->
+        <!-- <exclude name="WordPress.WP.DiscouragedFunctions" /> -->
+        <!-- <exclude name="WordPress.WP.GlobalVariablesOverride" /> -->
+        <!-- <exclude name="WordPress.WP.I18n" /> -->
+        <!-- <exclude name="WordPress.WP.PostsPerPage" /> -->
+        <!-- <exclude name="WordPress.WP.TimezoneChange" /> -->
+        <exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions.NoSpacesAroundArrayKeys" />
+
+
+        <!-- TODO: TEST -->
+        <exclude name="Generic.Classes.DuplicateClassName" />
+        <exclude name="Squiz.Commenting.FileComment" />
+        <exclude name="Squiz.Commenting.FunctionComment" />
+        <exclude name="Squiz.Commenting.VariableComment" />
+        <exclude name="WordPress.DB.DirectDatabaseQuery" />
+        <exclude name="WordPress.DB.PreparedSQL" />
+        <exclude name="WordPress.DB.PreparedSQLPlaceholders" />
+        <exclude name="WordPress.DB.RestrictedClasses" />
+        <exclude name="WordPress.DB.RestrictedFunctions" />
+        <exclude name="WordPress.DB.SlowDBQuery" />
+        <exclude name="WordPress.DateTime.CurrentTimeTimestamp" />
+        <exclude name="WordPress.DateTime.RestrictedFunctions" />
+        <exclude name="WordPress.Files.FileName" />
+        <exclude name="WordPress.WP.EnqueuedResourceParameters" />
+        <exclude name="WordPress.WP.EnqueuedResources" />
+    </rule>
+
+</ruleset>

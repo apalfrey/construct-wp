@@ -1,0 +1,58 @@
+{
+    "name": "apalfrey/construct-wp",
+    "type": "project",
+    "license": "MIT",
+    "description": "The Construct WP plugin & template theme",
+    "homepage": "https://github.com/apalfrey/construct-wp",
+    "authors": [
+        {
+            "name": "Andrew Palfrey",
+            "email": "apalfrey@apalfrey.me",
+            "homepage": "https://apalfrey.me"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/apalfrey/construct-wp/issues"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*"
+            ]
+        }
+    ],
+    "require": {
+        "wp-cli/wp-cli-bundle": "*",
+        "squizlabs/php_codesniffer": "*",
+        "phpcompatibility/php-compatibility": "*",
+        "wp-coding-standards/wpcs": "*"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "installer-paths": {
+            "plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        }
+    },
+    "scripts": {
+        "phpcs-compat": "phpcs -p ./plugin --colors --report-file=phpcs-compat.log --report-width=150 --extensions=php --standard=PHPCompatibility --runtime-set testVersion 8.2",
+        "phpcs-setup": "phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs",
+        "phpcs": "phpcs -ps ./ --colors --report-file=phpcs.log --report-width=150 --extensions=php -d memory_limit=512M",
+        "phpcs-config": "phpcs --config-show"
+    }
+}

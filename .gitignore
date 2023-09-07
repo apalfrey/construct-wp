@@ -1,0 +1,8 @@
+# Docker
+.env
+
+# Composer
+vendor/
+
+# Misc
+*.log
