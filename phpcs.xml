@@ -132,7 +132,7 @@
         <!-- <exclude name="WordPress.Arrays.ArrayIndentation" /> -->
         <!-- <exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions" /> -->
         <!-- <exclude name="WordPress.Arrays.CommaAfterArrayItem" /> -->
-        <exclude name="WordPress.Arrays.MultipleStatementAlignment" />
+        <!-- <exclude name="WordPress.Arrays.MultipleStatementAlignment" /> -->
         <!-- <exclude name="WordPress.Classes.ClassInstantiation" /> -->
         <!-- <exclude name="WordPress.CodeAnalysis.AssignmentInCondition" /> -->
         <!-- <exclude name="WordPress.CodeAnalysis.EmptyStatement" /> -->
