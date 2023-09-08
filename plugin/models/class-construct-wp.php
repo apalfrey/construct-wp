@@ -169,8 +169,7 @@ class Construct_WP {
      * @return  void
      */
     public static function remove_admin_bar() {
-        // TODO link to settings area.
-        if ( ! CWP_User::user_has_role( 'administrator' ) ) {
+        if ( ! current_user_can( 'cwp_view_admin_dashboard' ) ) {
             show_admin_bar( false );
         }
     }
