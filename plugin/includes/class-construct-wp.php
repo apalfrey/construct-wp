@@ -1,18 +1,4 @@
 <?php
-
-/**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       https://apalfrey.me
- * @since      1.0.0
- *
- * @package    Construct_Wp
- * @subpackage Construct_Wp/includes
- */
-
 /**
  * The core plugin class.
  *
@@ -23,11 +9,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Construct_Wp
- * @subpackage Construct_Wp/includes
+ * @package    construct-wp
+ * @subpackage construct-wp/includes
  * @author     APalfrey <apalfrey@apalfrey.me>
  */
-class Construct_Wp {
+class Construct_WP {
 
     /**
      * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +21,7 @@ class Construct_Wp {
      *
      * @since    1.0.0
      * @access   protected
-     * @var      Construct_Wp_Loader    $loader    Maintains and registers all hooks for the plugin.
+     * @var      CWP_Loader    $loader    Maintains and registers all hooks for the plugin.
      */
     protected $loader;
 
@@ -67,8 +53,8 @@ class Construct_Wp {
      * @since    1.0.0
      */
     public function __construct() {
-        if ( defined( 'CONSTRUCT_WP_VERSION' ) ) {
-            $this->version = CONSTRUCT_WP_VERSION;
+        if ( defined( 'CWP_VERSION' ) ) {
+            $this->version = CWP_VERSION;
         } else {
             $this->version = '1.0.0';
         }
@@ -86,10 +72,10 @@ class Construct_Wp {
      *
      * Include the following files that make up the plugin:
      *
-     * - Construct_Wp_Loader. Orchestrates the hooks of the plugin.
-     * - Construct_Wp_I18n. Defines internationalization functionality.
-     * - Construct_Wp_Admin. Defines all hooks for the admin area.
-     * - Construct_Wp_Public. Defines all hooks for the public side of the site.
+     * - CWP_Loader. Orchestrates the hooks of the plugin.
+     * - CWP_I18n. Defines internationalization functionality.
+     * - CWP_Admin. Defines all hooks for the admin area.
+     * - CWP_Public. Defines all hooks for the public side of the site.
      *
      * Create an instance of the loader which will be used to register the hooks
      * with WordPress.
@@ -121,20 +107,20 @@ class Construct_Wp {
          */
         require_once plugin_dir_path( __DIR__ ) . 'public/class-construct-wp-public.php';
 
-        $this->loader = new Construct_Wp_Loader();
+        $this->loader = new CWP_Loader();
     }
 
     /**
      * Define the locale for this plugin for internationalization.
      *
-     * Uses the Construct_Wp_I18n class in order to set the domain and to register the hook
+     * Uses the CWP_I18n class in order to set the domain and to register the hook
      * with WordPress.
      *
      * @since    1.0.0
      * @access   private
      */
     private function set_locale() {
-        $plugin_i18n = new Construct_Wp_I18n();
+        $plugin_i18n = new CWP_I18n();
 
         $this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
     }
@@ -147,7 +133,7 @@ class Construct_Wp {
      * @access   private
      */
     private function define_admin_hooks() {
-        $plugin_admin = new Construct_Wp_Admin( $this->get_plugin_name(), $this->get_version() );
+        $plugin_admin = new CWP_Admin( $this->get_plugin_name(), $this->get_version() );
 
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -161,7 +147,7 @@ class Construct_Wp {
      * @access   private
      */
     private function define_public_hooks() {
-        $plugin_public = new Construct_Wp_Public( $this->get_plugin_name(), $this->get_version() );
+        $plugin_public = new CWP_Public( $this->get_plugin_name(), $this->get_version() );
 
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -191,7 +177,7 @@ class Construct_Wp {
      * The reference to the class that orchestrates the hooks with the plugin.
      *
      * @since     1.0.0
-     * @return    Construct_Wp_Loader    Orchestrates the hooks of the plugin.
+     * @return    CWP_Loader    Orchestrates the hooks of the plugin.
      */
     public function get_loader() {
         return $this->loader;

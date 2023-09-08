@@ -8,8 +8,8 @@
  * @link       https://apalfrey.me
  * @since      1.0.0
  *
- * @package    Construct_Wp
- * @subpackage Construct_Wp/public/partials
+ * @package    construct-wp
+ * @subpackage construct-wp/public/partials
  */
 ?>
 

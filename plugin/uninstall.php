@@ -22,7 +22,7 @@
  * @link       https://apalfrey.me
  * @since      1.0.0
  *
- * @package    Construct_Wp
+ * @package    construct-wp
  */
 
 // If uninstall not called from WordPress, then exit.

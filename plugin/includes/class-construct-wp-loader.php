@@ -1,15 +1,4 @@
 <?php
-
-/**
- * Register all actions and filters for the plugin
- *
- * @link       https://apalfrey.me
- * @since      1.0.0
- *
- * @package    Construct_Wp
- * @subpackage Construct_Wp/includes
- */
-
 /**
  * Register all actions and filters for the plugin.
  *
@@ -17,11 +6,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Construct_Wp
- * @subpackage Construct_Wp/includes
+ * @package    construct-wp
+ * @subpackage construct-wp/includes
  * @author     APalfrey <apalfrey@apalfrey.me>
  */
-class Construct_Wp_Loader {
+class CWP_Loader {
 
     /**
      * The array of actions registered with WordPress.

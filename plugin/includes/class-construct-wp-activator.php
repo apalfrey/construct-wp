@@ -1,26 +1,15 @@
 <?php
-
-/**
- * Fired during plugin activation
- *
- * @link       https://apalfrey.me
- * @since      1.0.0
- *
- * @package    Construct_Wp
- * @subpackage Construct_Wp/includes
- */
-
 /**
  * Fired during plugin activation.
  *
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Construct_Wp
- * @subpackage Construct_Wp/includes
+ * @package    construct-wp
+ * @subpackage construct-wp/includes
  * @author     APalfrey <apalfrey@apalfrey.me>
  */
-class Construct_Wp_Activator {
+class CWP_Activator {
 
     /**
      * Short Description. (use period)
