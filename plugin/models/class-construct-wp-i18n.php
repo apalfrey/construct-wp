@@ -5,10 +5,10 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @since      1.0.0
- * @package    construct-wp
- * @subpackage construct-wp/includes
- * @author     APalfrey <apalfrey@apalfrey.me>
+ * @since       1.0.0
+ * @package     construct-wp
+ * @subpackage  construct-wp/models
+ * @author      APalfrey <apalfrey@apalfrey.me>
  */
 class CWP_I18n {
 

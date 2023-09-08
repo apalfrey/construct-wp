@@ -4,10 +4,10 @@
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      1.0.0
- * @package    construct-wp
- * @subpackage construct-wp/includes
- * @author     APalfrey <apalfrey@apalfrey.me>
+ * @since       1.0.0
+ * @package     construct-wp
+ * @subpackage  construct-wp/models
+ * @author      APalfrey <apalfrey@apalfrey.me>
  */
 class CWP_Deactivator {
 

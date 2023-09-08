@@ -5,9 +5,10 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    construct-wp
- * @subpackage construct-wp/admin
- * @author     APalfrey <apalfrey@apalfrey.me>
+ * @since       1.0.0
+ * @package     construct-wp
+ * @subpackage  construct-wp/admin
+ * @author      APalfrey <apalfrey@apalfrey.me>
  */
 class CWP_Admin {
 

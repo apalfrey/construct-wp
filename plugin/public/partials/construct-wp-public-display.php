@@ -5,11 +5,9 @@
  *
  * This file is used to markup the public-facing aspects of the plugin.
  *
- * @link       https://apalfrey.me
- * @since      1.0.0
- *
- * @package    construct-wp
- * @subpackage construct-wp/public/partials
+ * @since       1.0.0
+ * @package     construct-wp
+ * @subpackage  construct-wp/public/partials
  */
 ?>
 

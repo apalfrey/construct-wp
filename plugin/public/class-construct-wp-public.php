@@ -5,9 +5,9 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    construct-wp
- * @subpackage construct-wp/public
- * @author     APalfrey <apalfrey@apalfrey.me>
+ * @package     construct-wp
+ * @subpackage  construct-wp/public
+ * @author      APalfrey <apalfrey@apalfrey.me>
  */
 class CWP_Public {
 

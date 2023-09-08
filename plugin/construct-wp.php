@@ -1,17 +1,17 @@
 <?php
 /**
  * Plugin Name:       Construct WP
- * Plugin URI:        https://apalfrey.me
+ * Plugin URI:        https://github.com/apalfrey/construct-wp
  * Description:       Some info right here
  * Version:           1.0.0
  * Author:            APalfrey
- * Author URI:        https://apalfrey.me
+ * Author URI:        https://github.com/apalfrey
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       construct-wp
  * Domain Path:       /languages
  *
- * @link              https://apalfrey.me
+ * @link              https://github.com/apalfrey/construct-wp
  * @since             1.0.0
  * @package           construct-wp
  */
@@ -53,23 +53,11 @@ register_activation_hook( __FILE__, 'activate_construct_wp' );
 register_deactivation_hook( __FILE__, 'deactivate_construct_wp' );
 
 /**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
+ * The loader class to load in and set up all other classes.
  */
-require CWP_PLUGIN_PATH . 'models/class-construct-wp.php';
+require CWP_PLUGIN_PATH . 'models/class-construct-wp-loader.php';
 
 /**
  * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
  */
-function run_construct_wp() {
-    $plugin = new Construct_WP();
-    $plugin->run();
-}
-
-run_construct_wp();
+CWP_Loader::load();

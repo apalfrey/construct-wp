@@ -8,10 +8,10 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.0
- * @package    construct-wp
- * @subpackage construct-wp/includes
- * @author     APalfrey <apalfrey@apalfrey.me>
+ * @since       1.0.0
+ * @package     construct-wp
+ * @subpackage  construct-wp/models
+ * @author      APalfrey <apalfrey@apalfrey.me>
  */
 class Construct_WP {
 

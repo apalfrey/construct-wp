@@ -5,11 +5,9 @@
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       https://apalfrey.me
- * @since      1.0.0
- *
- * @package    construct-wp
- * @subpackage construct-wp/admin/partials
+ * @since       1.0.0
+ * @package     construct-wp
+ * @subpackage  construct-wp/admin/partials
  */
 ?>
 

@@ -1,111 +1,241 @@
 <?php
+// Setup WP Filesystem.
+require_once ABSPATH . 'wp-admin/includes/file.php';
+WP_Filesystem();
+
 /**
- * Register all actions and filters for the plugin.
+ * Construct loader functionality
  *
- * Maintain a list of all hooks that are registered throughout
- * the plugin, and register them with the WordPress API. Call the
- * run function to execute the list of actions and filters.
+ * Includes the models for each registered plugin along with the theme models. Plugin models are
+ * loaded on `plugins_loaded` hook while the theme models are loaded on `after_setup_theme` hook.
  *
- * @package    construct-wp
- * @subpackage construct-wp/includes
- * @author     APalfrey <apalfrey@apalfrey.me>
+ * @since       1.0.0
+ * @package     construct-wp
+ * @subpackage  construct-wp/models
+ * @author      APalfrey <apalfrey@apalfrey.me>
  */
 class CWP_Loader {
 
     /**
-     * The array of actions registered with WordPress.
+     * List of classes for each plugin
      *
-     * @since    1.0.0
-     * @access   protected
-     * @var      array    $actions    The actions registered with WordPress to fire when the plugin loads.
+     * @since   1.0.0
+     * @var     array
      */
-    protected $actions;
+    public static $plugin_classes = array();
 
     /**
-     * The array of filters registered with WordPress.
+     * List of classes for the themes
      *
-     * @since    1.0.0
-     * @access   protected
-     * @var      array    $filters    The filters registered with WordPress to fire when the plugin loads.
+     * @since   1.0.0
+     * @var     array
      */
-    protected $filters;
+    public static $theme_classes = array();
 
     /**
-     * Initialize the collections used to maintain the actions and filters.
+     * Whether the plugin models were loaded in to prevent multiple includes
      *
-     * @since    1.0.0
+     * @since   1.0.0
+     * @var     boolean
      */
-    public function __construct() {
-        $this->actions = array();
-        $this->filters = array();
+    private static $plugins_loaded = false;
+
+    /**
+     * Whether the theme models were loaded in to prevent multiple includes
+     *
+     * @since   1.0.0
+     * @var     boolean
+     */
+    private static $themes_loaded = false;
+
+    /**
+     * List of plugins registered to the Construct system
+     *
+     * @since   1.0.0
+     * @var     array
+     */
+    private static $plugins = array(
+        'construct-wp',
+    );
+
+    /**
+     * Loads Construct system
+     *
+     * Set up the actions to load the plugin and theme models.
+     *
+     * @since   1.0.0
+     * @return  void
+     */
+    public static function load() {
+        // Load plugin & theme models.
+        add_action( 'plugins_loaded', array( 'CWP_Loader', 'load_plugin_models' ) );
+        add_action( 'after_setup_theme', array( 'CWP_Loader', 'load_theme_models' ) );
     }
 
     /**
-     * Add a new action to the collection to be registered with WordPress.
+     * Loads plguin models
+     *
+     * Gathers a list of files within the models directory, gets the information for them and includes
+     * the files. Files are gathered from all registered Construct plugins.
      *
      * @since    1.0.0
-     * @param    string               $hook             The name of the WordPress action that is being registered.
-     * @param    object               $component        A reference to the instance of the object on which the action is defined.
-     * @param    string               $callback         The name of the function definition on the $component.
-     * @param    int                  $priority         Optional. The priority at which the function should be fired. Default is 10.
-     * @param    int                  $accepted_args    Optional. The number of arguments that should be passed to the $callback. Default is 1.
+     * @return   void
      */
-    public function add_action( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
-        $this->actions = $this->add( $this->actions, $hook, $component, $callback, $priority, $accepted_args );
-    }
-
-    /**
-     * Add a new filter to the collection to be registered with WordPress.
-     *
-     * @since    1.0.0
-     * @param    string               $hook             The name of the WordPress filter that is being registered.
-     * @param    object               $component        A reference to the instance of the object on which the filter is defined.
-     * @param    string               $callback         The name of the function definition on the $component.
-     * @param    int                  $priority         Optional. The priority at which the function should be fired. Default is 10.
-     * @param    int                  $accepted_args    Optional. The number of arguments that should be passed to the $callback. Default is 1
-     */
-    public function add_filter( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
-        $this->filters = $this->add( $this->filters, $hook, $component, $callback, $priority, $accepted_args );
-    }
-
-    /**
-     * A utility function that is used to register the actions and hooks into a single
-     * collection.
-     *
-     * @since    1.0.0
-     * @access   private
-     * @param    array                $hooks            The collection of hooks that is being registered (that is, actions or filters).
-     * @param    string               $hook             The name of the WordPress filter that is being registered.
-     * @param    object               $component        A reference to the instance of the object on which the filter is defined.
-     * @param    string               $callback         The name of the function definition on the $component.
-     * @param    int                  $priority         The priority at which the function should be fired.
-     * @param    int                  $accepted_args    The number of arguments that should be passed to the $callback.
-     * @return   array                                  The collection of actions and filters registered with WordPress.
-     */
-    private function add( $hooks, $hook, $component, $callback, $priority, $accepted_args ) {
-        $hooks[] = array(
-            'hook'          => $hook,
-            'component'     => $component,
-            'callback'      => $callback,
-            'priority'      => $priority,
-            'accepted_args' => $accepted_args,
-        );
-
-        return $hooks;
-    }
-
-    /**
-     * Register the filters and actions with WordPress.
-     *
-     * @since    1.0.0
-     */
-    public function run() {
-        foreach ( $this->filters as $hook ) {
-            add_filter( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
+    public static function load_plugin_models() {
+        if ( self::$plugins_loaded ) {
+            return;
         }
 
-        foreach ( $this->actions as $hook ) {
-            add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
+        self::$plugins = apply_filters( 'cwp_plugins', self::$plugins );
+
+        foreach ( self::$plugins as $plugin ) {
+            $models_path = trailingslashit( trailingslashit( WP_PLUGIN_DIR ) . $plugin ) . 'models';
+            $models      = self::get_models( $models_path );
+
+            if ( isset( $models['class-construct-wp-loader.php'] ) ) {
+                unset( $models['class-construct-wp-loader.php'] );
+            }
+
+            $models = apply_filters( 'cwp_plugin_models', $models, $plugin );
+
+            $before_classes = get_declared_classes();
+            self::load_models( $models );
+            $plugin_classes                = array_diff( get_declared_classes(), $before_classes );
+            self::$plugin_classes[$plugin] = apply_filters( 'cwp_plugin_classes', $plugin_classes, $plugin );
+        }
+
+        self::$plugins_loaded = true;
+    }
+
+    /**
+     * Loads theme models
+     *
+     * Gathers a list of files within the models directory, gets the information for them and includes
+     * the files. Files are gathered from both the template and stylesheet directories. These file
+     * listings are then merged together with a preference towards the stylesheet files.
+     *
+     * @since    1.0.0
+     * @return   void
+     */
+    public static function load_theme_models() {
+        if ( self::$themes_loaded ) {
+            return;
+        }
+
+        global $wp_filesystem;
+        $stylesheet_model_path = trailingslashit( get_stylesheet_directory() ) . 'models';
+        $stylesheet_models     = self::get_models( $stylesheet_model_path );
+        $template_model_path   = trailingslashit( get_template_directory() ) . 'models';
+        $template_models       = self::get_models( $template_model_path );
+        $models                = array_merge( $template_models, $stylesheet_models );
+        $models                = array_filter( $models, function ( $model ) {
+            return $model != 'loader.php';
+        }, ARRAY_FILTER_USE_KEY );
+
+        $models = apply_filters( 'cwp_theme_models', $models );
+
+        $before_classes = get_declared_classes();
+        self::load_models( $models );
+        $theme_classes       = array_diff( get_declared_classes(), $before_classes );
+        self::$theme_classes = apply_filters( 'cwp_theme_classes', $theme_classes );
+
+        self::$themes_loaded = true;
+    }
+
+    /**
+     * Finds models
+     *
+     * Searches a directory for models if the directory exists. Models are then ordered with directories
+     * at the end. The list is then cleaned so that directories are flattened out and each entry only
+     * has the path listed.
+     *
+     * @param   string  $path   The path to search for models
+     * @return  array           An array of model paths
+     */
+    private static function get_models( $path ) {
+        global $wp_filesystem;
+
+        if ( ! $wp_filesystem->exists( $path ) ) {
+            return array();
+        }
+
+        $model_list = $wp_filesystem->dirlist( $path, true, true );
+        $model_list = self::order_models( $model_list );
+        $models     = self::clean_models( $model_list, $path );
+        return $models;
+    }
+
+    /**
+     * Orders models
+     *
+     * Orders a model list so that directories are at the end of the list.
+     *
+     * @param   array   $models     Array of models to sort
+     * @return  array               Ordered array of models
+     */
+    private static function order_models( $models ) {
+        ksort( $models );
+        $files = array_filter( $models, function ( $v ) {
+            return $v['type'] === 'f';
+        } );
+        $dirs  = array_diff_key( $models, $files );
+
+        foreach ( $dirs as &$dir ) {
+            $dir['files'] = self::order_models( $dir['files'] );
+        }
+
+        return array_merge( $files, $dirs );
+    }
+
+    /**
+     * Processes model information
+     *
+     * Information is passed to this from the get_models function. This information is then
+     * processed to keep all files on the same level (not as multidimensional). The path for the file
+     * is also generated and added.
+     *
+     * @since   1.0.0
+     * @param   array   $models     The array of models, generated by wp_filesystem->dirlist
+     * @param   string  $base_path  The base path for the models
+     * @param   string  $path       The current path within the models folder
+     * @return  array               The processed array of models
+     */
+    private static function clean_models( $models, $base_path = '', $path = '' ) {
+        $model_info = array();
+
+        if ( $models ) {
+            foreach ( $models as $name => $info ) {
+                $full_name = ( $path !== '' ? trailingslashit( $path ) : '' ) . $name;
+                $full_path = ( $base_path !== '' ? trailingslashit( $base_path ) : '' ) . $full_name;
+
+                if ( isset( $info['files'] ) ) {
+                    $sub_models = self::clean_models( $info['files'], $base_path, trailingslashit( $full_name ) );
+                    $model_info = array_merge( $model_info, $sub_models );
+                    continue;
+                }
+
+                $model_info[$full_name] = $full_path;
+            }
+        }
+
+        return $model_info;
+    }
+
+    /**
+     * Loads models
+     *
+     * Loops through model list including each if the file exists.
+     *
+     * @param   array   $models     Array of models to include
+     * @return  void
+     */
+    private static function load_models( $models ) {
+        global $wp_filesystem;
+
+        foreach ( $models as $name => $path ) {
+            if ( $wp_filesystem->exists( $path ) ) {
+                include_once $path;
+            }
         }
     }
 
