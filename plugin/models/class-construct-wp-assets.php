@@ -271,4 +271,27 @@ class CWP_Assets {
         echo self::get_logo( $type );
     }
 
+    // TODO comment.
+    public static function get_image_size( $attachment_id, $size ) {
+        $image = wp_get_attachment_image_src( $attachment_id, $size );
+        return reset( $image );
+    }
+
+    // TODO comment.
+    public static function format_image( $image_id ) {
+        if ( ! $image_id ) {
+            return false;
+        }
+
+        $image                  = new stdClass();
+        $image->ID              = intval( $image_id );
+        $image->urls            = new stdClass();
+        $image->urls->thumbnail = self::get_image_size( $image->ID, 'thumbnail' );
+        $image->urls->medium    = self::get_image_size( $image->ID, 'medium' );
+        $image->urls->large     = self::get_image_size( $image->ID, 'large' );
+        $image->urls->full      = self::get_image_size( $image->ID, 'full' );
+
+        return $image;
+    }
+
 }
