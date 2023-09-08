@@ -2,11 +2,8 @@
 /**
  * The core plugin class.
  *
- * This is used to define internationalization, admin-specific hooks, and
- * public-facing site hooks.
- *
- * Also maintains the unique identifier of this plugin as well as the current
- * version of the plugin.
+ * Sets up the Construct system, optimizing WordPress, loading the text domain and other
+ * useful utilities.
  *
  * @since       1.0.0
  * @package     construct-wp
@@ -16,181 +13,253 @@
 class Construct_WP {
 
     /**
-     * The loader that's responsible for maintaining and registering all hooks that power
-     * the plugin.
+     * Whether the Construct system was loaded to prevent running again
      *
-     * @since    1.0.0
-     * @access   protected
-     * @var      CWP_Loader    $loader    Maintains and registers all hooks for the plugin.
+     * @since   1.0.0
+     * @var     boolean
      */
-    protected $loader;
+    private static $loaded = false;
 
     /**
-     * The unique identifier of this plugin.
+     * Sets up the Construct system
      *
-     * @since    1.0.0
-     * @access   protected
-     * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+     * @since   1.0.0
+     * @return  void
      */
-    protected $plugin_name;
-
-    /**
-     * The current version of the plugin.
-     *
-     * @since    1.0.0
-     * @access   protected
-     * @var      string    $version    The current version of the plugin.
-     */
-    protected $version;
-
-    /**
-     * Define the core functionality of the plugin.
-     *
-     * Set the plugin name and the plugin version that can be used throughout the plugin.
-     * Load the dependencies, define the locale, and set the hooks for the admin area and
-     * the public-facing side of the site.
-     *
-     * @since    1.0.0
-     */
-    public function __construct() {
-        if ( defined( 'CWP_VERSION' ) ) {
-            $this->version = CWP_VERSION;
-        } else {
-            $this->version = '1.0.0';
+    public static function setup() {
+        if ( self::$loaded ) {
+            return;
         }
 
-        $this->plugin_name = 'construct-wp';
+        do_action( 'cwp_before_setup' );
 
-        $this->load_dependencies();
-        $this->set_locale();
-        $this->define_admin_hooks();
-        $this->define_public_hooks();
+        // WordPress functionality setup.
+        self::optimize();
+        self::load_textdomain();
+        self::remove_admin_bar();
+        add_action( 'widgets_init', array( 'Construct_WP', 'register_sidebars' ) );
+
+        // Restrict access to admin area.
+        self::restrict_admin_access();
+
+        // Sort page templates.
+        add_filter( 'theme_page_templates', array( 'Construct_WP', 'sort_templates' ), 10, 1 );
+
+        // Run setup for all other models.
+        self::run_plugin_classes();
+        self::run_theme_classes();
+
+        do_action( 'cwp_after_setup' );
+
+        self::$loaded = true;
     }
 
     /**
-     * Load the required dependencies for this plugin.
+     * Optimizes WordPress
      *
-     * Include the following files that make up the plugin:
+     * Removes various bits of WordPress functionality to improve performance & security for the
+     * system
      *
-     * - CWP_Loader. Orchestrates the hooks of the plugin.
-     * - CWP_I18n. Defines internationalization functionality.
-     * - CWP_Admin. Defines all hooks for the admin area.
-     * - CWP_Public. Defines all hooks for the public side of the site.
+     * @since   1.0.0
+     * @return  void
+     */
+    private static function optimize() {
+        // TODO link to settings area.
+        remove_action( 'wp_head', 'feed_links', 2 );
+        remove_action( 'wp_head', 'feed_links_extra', 2 );
+        remove_action( 'wp_head', 'rsd_link', 2 );
+        remove_action( 'wp_head', 'wlwmanifest_link', 2 );
+        remove_action( 'wp_head', 'index_rel_link', 2 );
+        remove_action( 'wp_head', 'parent_post_rel_link', 2 );
+        remove_action( 'wp_head', 'start_post_rel_link', 2 );
+        remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 2 );
+        remove_action( 'wp_head', 'wp_generator', 2 );
+        remove_action( 'wp_head', 'wp_shortlink_wp_head', 10, 0 );
+
+        // Disables emoji.
+        remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+        remove_action( 'wp_print_styles', 'print_emoji_styles' );
+        remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+        remove_action( 'admin_print_styles', 'print_emoji_styles' );
+
+        // Disables XML-RPC.
+        add_filter( 'xmlrpc_enabled', '__return_false' );
+
+        // Disables jQuery migrate.
+        add_action( 'wp_enqueue_scripts', function () {
+            if ( ! is_admin() ) {
+                wp_deregister_script( 'jquery' );
+            }
+        } );
+
+        // Disables self pingback.
+        add_action( 'pre_ping', function ( &$links ) {
+            foreach ( $links as $l => $link ) {
+                if ( strpos( $link, get_option( 'home' ) ) === 0 ) {
+                    unset( $links[$l] );
+                }
+            }
+        } );
+
+        // Removes unnecessary dashboard meta boxes.
+        add_action( 'admin_init', function () {
+            remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
+            remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
+            remove_meta_box( 'dashboard_primary', 'dashboard', 'normal' );
+            remove_meta_box( 'dashboard_secondary', 'dashboard', 'normal' );
+            remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+            remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
+            remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
+            remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+        } );
+
+        // Disables the block editor from managing widgets in the Gutenberg plugin.
+        add_filter( 'gutenberg_use_widgets_block_editor', '__return_false', 100 );
+
+        // Disables the block editor from managing widgets. renamed from wp_use_widgets_block_editor.
+        add_filter( 'use_widgets_block_editor', '__return_false' );
+
+        // Disable contact form 7 styling.
+        add_filter( 'wpcf7_load_css', '__return_false' );
+    }
+
+    /**
+     * Loads the translation files for the plugin
      *
-     * Create an instance of the loader which will be used to register the hooks
-     * with WordPress.
+     * @see     https://developer.wordpress.org/reference/functions/load_plugin_textdomain/
+     *
+     * @since   1.0.0
+     * @return  void
+     */
+    public static function load_textdomain() {
+        load_plugin_textdomain( CWP_SLUG, false, CWP_PLUGIN_PATH . 'languages' );
+    }
+
+    /**
+     * Removes the admin bar for users if they're not admins
+     *
+     * @see   https://developer.wordpress.org/reference/functions/show_admin_bar/
      *
      * @since    1.0.0
-     * @access   private
+     * @return   void
      */
-    private function load_dependencies() {
-        /**
-         * The class responsible for orchestrating the actions and filters of the
-         * core plugin.
-         */
-        require_once plugin_dir_path( __DIR__ ) . 'includes/class-construct-wp-loader.php';
-
-        /**
-         * The class responsible for defining internationalization functionality
-         * of the plugin.
-         */
-        require_once plugin_dir_path( __DIR__ ) . 'includes/class-construct-wp-i18n.php';
-
-        /**
-         * The class responsible for defining all actions that occur in the admin area.
-         */
-        require_once plugin_dir_path( __DIR__ ) . 'admin/class-construct-wp-admin.php';
-
-        /**
-         * The class responsible for defining all actions that occur in the public-facing
-         * side of the site.
-         */
-        require_once plugin_dir_path( __DIR__ ) . 'public/class-construct-wp-public.php';
-
-        $this->loader = new CWP_Loader();
+    public static function remove_admin_bar() {
+        // TODO link to settings area.
+        if ( ! CWP_User::user_has_role( 'administrator' ) ) {
+            show_admin_bar( false );
+        }
     }
 
     /**
-     * Define the locale for this plugin for internationalization.
+     * Registers the sidebars (widget areas) required for the site
      *
-     * Uses the CWP_I18n class in order to set the domain and to register the hook
-     * with WordPress.
+     * Footer column count can be increased by adding a filter for `cwp_footer_column_count`.
+     * `before_widget`, `after_widget`, `before_title` and `after_title` can also be altered using the corresponding filter
      *
-     * @since    1.0.0
-     * @access   private
+     * @see     https://developer.wordpress.org/reference/functions/register_sidebar/
+     *
+     * @since   1.0.0
+     * @return  void
      */
-    private function set_locale() {
-        $plugin_i18n = new CWP_I18n();
+    public static function register_sidebars() {
+        $column_count = apply_filters( 'cwp_footer_column_count', 3 );
 
-        $this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+        for ( $i = 1; $i <= $column_count; $i++ ) {
+            register_sidebar( array(
+                'name'          => sprintf(
+                    /* translators: %d Footer column number */
+                    __( 'Footer %d', 'construct-wp' ),
+                    $i
+                ),
+                'id'            => 'footer-' . $i,
+                'description'   => sprintf(
+                    /* translators: %d Footer column number */
+                    __( 'Add widgets here to appear in your footer column %d', 'construct-wp' ),
+                    $i
+                ),
+                'before_widget' => apply_filters( 'cwp_footer_before_widget', '<section id="%1$s" class="widget %2$s">' ),
+                'after_widget'  => apply_filters( 'cwp_footer_after_widget', '</section>' ),
+                'before_title'  => apply_filters( 'cwp_footer_before_title', '<h3 class="widget-title">' ),
+                'after_title'   => apply_filters( 'cwp_footer_after_title', '</h3>' ),
+            ) );
+        }
     }
 
     /**
-     * Register all of the hooks related to the admin area functionality
-     * of the plugin.
+     * Restrict admin access based on the user's role
      *
-     * @since    1.0.0
-     * @access   private
+     * @since   1.0.0
+     * @return  void
      */
-    private function define_admin_hooks() {
-        $plugin_admin = new CWP_Admin( $this->get_plugin_name(), $this->get_version() );
+    public static function restrict_admin_access() {
+        // TODO link to settings area.
+        $allowed_roles = apply_filters( 'cwp_allowed_admin_roles', array(
+            'contributor',
+            'author',
+            'editor',
+            'administrator',
+        ) );
 
-        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+        if ( is_admin() && ! wp_doing_ajax() && is_user_logged_in() && ! CWP_User::user_has_role( $allowed_roles ) && ! is_super_admin() ) {
+            wp_safe_redirect( home_url() );
+            exit;
+        }
     }
 
     /**
-     * Register all of the hooks related to the public-facing functionality
-     * of the plugin.
+     * Sorts page templates by name
      *
-     * @since    1.0.0
-     * @access   private
+     * @since   1.0.0
+     * @param   array   $post_templates     List of page templates
+     * @return  array                       Sorted list of page templates
      */
-    private function define_public_hooks() {
-        $plugin_public = new CWP_Public( $this->get_plugin_name(), $this->get_version() );
-
-        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+    public static function sort_templates( $post_templates ) {
+        asort( $post_templates );
+        return $post_templates;
     }
 
     /**
-     * Run the loader to execute all of the hooks with WordPress.
+     * Runs setup for all plugin classes. Classes need a public method called `setup` for this method to
+     * run them. Running can be disabled per class using the `cwp_run_plugin_class_setup` filter and
+     * returning false where appropriate.
      *
-     * @since    1.0.0
+     * @return void
      */
-    public function run() {
-        $this->loader->run();
+    private static function run_plugin_classes() {
+        foreach ( CWP_Loader::$plugin_classes as $plugin => $classes ) {
+            foreach ( $classes as $class ) {
+                if ( $class === 'Construct_WP' ) {
+                    continue;
+                }
+
+                $run_setup = apply_filters( 'cwp_run_plugin_class_setup', true, $plugin, $class );
+
+                if ( $run_setup ) {
+                    if ( method_exists( $class, 'setup' ) && is_callable( array( $class, 'setup' ) ) ) {
+                        $class::setup();
+                    }
+                }
+            }
+        }
     }
 
     /**
-     * The name of the plugin used to uniquely identify it within the context of
-     * WordPress and to define internationalization functionality.
+     * Runs setup for all theme classes. Classes need a public method called `setup` for this method to
+     * run them. Running can be disabled per class using the `cwp_run_theme_class_setup` filter and
+     * returning false where appropriate.
      *
-     * @since     1.0.0
-     * @return    string    The name of the plugin.
+     * @return void
      */
-    public function get_plugin_name() {
-        return $this->plugin_name;
-    }
+    private static function run_theme_classes() {
+        foreach ( CWP_Loader::$theme_classes as $plugin => $classes ) {
+            $run_setup = apply_filters( 'cwp_run_theme_class_setup', true, $class );
 
-    /**
-     * The reference to the class that orchestrates the hooks with the plugin.
-     *
-     * @since     1.0.0
-     * @return    CWP_Loader    Orchestrates the hooks of the plugin.
-     */
-    public function get_loader() {
-        return $this->loader;
-    }
-
-    /**
-     * Retrieve the version number of the plugin.
-     *
-     * @since     1.0.0
-     * @return    string    The version number of the plugin.
-     */
-    public function get_version() {
-        return $this->version;
+            if ( $run_setup ) {
+                if ( method_exists( $class, 'setup' ) && is_callable( array( $class, 'setup' ) ) ) {
+                    $class::setup();
+                }
+            }
+        }
     }
 
 }

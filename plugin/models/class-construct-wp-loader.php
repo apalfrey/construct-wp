@@ -70,6 +70,9 @@ class CWP_Loader {
         // Load plugin & theme models.
         add_action( 'plugins_loaded', array( 'CWP_Loader', 'load_plugin_models' ) );
         add_action( 'after_setup_theme', array( 'CWP_Loader', 'load_theme_models' ) );
+
+        // Setup the plugin system.
+        add_action( 'init', array( 'Construct_WP', 'setup' ), 0 );
     }
 
     /**
