@@ -33,6 +33,10 @@ class Construct_WP {
 
         do_action( 'cwp_before_setup' );
 
+        if ( ! defined( 'CWP_THEME_SLUG' ) ) {
+            define( 'CWP_THEME_SLUG', CWP_SLUG );
+        }
+
         // WordPress functionality setup.
         self::optimize();
         self::load_textdomain();
@@ -48,6 +52,15 @@ class Construct_WP {
         // Run setup for all other models.
         self::run_plugin_classes();
         self::run_theme_classes();
+
+        // Include the current templates corresponding controller.
+        add_filter( 'template_include', array( 'CWP_Assets', 'template_controller' ), 1 );
+
+        // Include the base styles & scripts.
+        add_action( 'wp_enqueue_scripts', array( 'CWP_Assets', 'base_enqueue' ) );
+
+        // Include the current templates styles & scripts.
+        add_action( 'wp_enqueue_scripts', array( 'CWP_Assets', 'template_enqueue' ) );
 
         do_action( 'cwp_after_setup' );
 
