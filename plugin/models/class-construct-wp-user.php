@@ -18,7 +18,7 @@ class CWP_User {
      * @access  private
      * @var     boolean
      */
-    private $custom_capabilities = false;
+    private static $custom_capabilities = false;
 
     /**
      * Checks whether a user has a role
