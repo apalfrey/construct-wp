@@ -45,6 +45,12 @@
     <rule ref="PHPCompatibility" />
 
     <rule ref="WordPress">
+        <properties>
+            <property name="custom_capabilities" type="array">
+                <element value="cwp_view_admin_dashboard" />
+            </property>
+        </properties>
+
         <!-- <exclude name="Generic.Arrays.DisallowShortArraySyntax" /> -->
         <!-- <exclude name="Generic.Classes.OpeningBraceSameLine" /> -->
         <!-- <exclude name="Generic.CodeAnalysis.EmptyStatement" /> -->

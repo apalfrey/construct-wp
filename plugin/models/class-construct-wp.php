@@ -43,15 +43,14 @@ class Construct_WP {
         self::remove_admin_bar();
         add_action( 'widgets_init', array( 'Construct_WP', 'register_sidebars' ) );
 
-        // Restrict access to admin area.
-        self::restrict_admin_access();
+        // Add custom capabilities.
+        CWP_User::custom_caps();
 
         // Sort page templates.
         add_filter( 'theme_page_templates', array( 'Construct_WP', 'sort_templates' ), 10, 1 );
 
-        // Run setup for all other models.
-        self::run_plugin_classes();
-        self::run_theme_classes();
+        // Restrict access to admin area.
+        self::restrict_admin_access();
 
         // Include the current templates corresponding controller.
         add_filter( 'template_include', array( 'CWP_Assets', 'template_controller' ), 1 );
@@ -61,6 +60,10 @@ class Construct_WP {
 
         // Include the current templates styles & scripts.
         add_action( 'wp_enqueue_scripts', array( 'CWP_Assets', 'template_enqueue' ) );
+
+        // Run setup for all other models.
+        self::run_plugin_classes();
+        self::run_theme_classes();
 
         do_action( 'cwp_after_setup' );
 
@@ -205,15 +208,7 @@ class Construct_WP {
      * @return  void
      */
     public static function restrict_admin_access() {
-        // TODO link to settings area.
-        $allowed_roles = apply_filters( 'cwp_allowed_admin_roles', array(
-            'contributor',
-            'author',
-            'editor',
-            'administrator',
-        ) );
-
-        if ( is_admin() && ! wp_doing_ajax() && is_user_logged_in() && ! CWP_User::user_has_role( $allowed_roles ) && ! is_super_admin() ) {
+        if ( is_admin() && ! wp_doing_ajax() && is_user_logged_in() && ! current_user_can( 'cwp_view_admin_dashboard' ) && ! is_super_admin() ) {
             wp_safe_redirect( home_url() );
             exit;
         }
