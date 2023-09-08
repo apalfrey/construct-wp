@@ -37,7 +37,7 @@ define( 'CWP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
  * The code that runs during plugin activation.
  */
 function activate_construct_wp() {
-    require_once plugin_dir_path( __FILE__ ) . 'INCLUDES/class-construct-wp-activator.php';
+    require_once plugin_dir_path( __FILE__ ) . 'models/class-construct-wp-activator.php';
     CWP_Activator::activate();
 }
 
@@ -45,7 +45,7 @@ function activate_construct_wp() {
  * The code that runs during plugin deactivation.
  */
 function deactivate_construct_wp() {
-    require_once plugin_dir_path( __FILE__ ) . 'INCLUDES/class-construct-wp-deactivator.php';
+    require_once plugin_dir_path( __FILE__ ) . 'models/class-construct-wp-deactivator.php';
     CWP_Deactivator::deactivate();
 }
 
@@ -56,7 +56,7 @@ register_deactivation_hook( __FILE__, 'deactivate_construct_wp' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require CWP_PLUGIN_PATH . 'includes/class-construct-wp.php';
+require CWP_PLUGIN_PATH . 'models/class-construct-wp.php';
 
 /**
  * Begins execution of the plugin.
