@@ -141,4 +141,125 @@ class CWP_Assets {
         }
     }
 
+    /**
+     * Custom version of `get_custom_logo`. Returns a custom logo, linked to home unless the theme
+     * supports removing the link on the home page.
+     *
+     * @param array $args A list of arguments to set how to return the logo.
+     * @param int $blog_id Optional. ID of the blog in question. Default is the ID of the current blog.
+     * @return string Custom logo markup.
+     */
+    public static function get_the_logo( $args = array(), $blog_id = 0 ) {
+        $args = CWP_Utils::parse_args_recursive( $args, array(
+            'type'       => 'default',
+            'logo_attr'  => array(
+                'class'   => 'custom-logo',
+                'loading' => false,
+            ),
+            'link_class' => 'custom-logo-link',
+        ) );
+
+        $html          = '';
+        $switched_blog = false;
+
+        if ( is_multisite() && ! empty( $blog_id ) && get_current_blog_id() !== (int) $blog_id ) {
+            switch_to_blog( $blog_id );
+            $switched_blog = true;
+        }
+
+        $theme_mod      = $args['type'] == 'white' ? 'custom_white_logo' : 'custom_logo';
+        $custom_logo_id = get_theme_mod( $theme_mod );
+
+        // We have a logo. Logo is go.
+        if ( $custom_logo_id ) {
+            $unlink_homepage_logo = (bool) get_theme_support( 'custom-logo', 'unlink-homepage-logo' );
+
+            if ( $unlink_homepage_logo && is_front_page() && ! is_paged() ) {
+                /*
+                * If on the home page, set the logo alt attribute to an empty string,
+                * as the image is decorative and doesn't need its purpose to be described.
+                */
+                $args['logo_attr']['alt'] = '';
+            } else {
+                /*
+                * If the logo alt attribute is empty, get the site title and explicitly pass it
+                * to the attributes used by wp_get_attachment_image().
+                */
+                $image_alt = get_post_meta( $custom_logo_id, '_wp_attachment_image_alt', true );
+
+                if ( empty( $image_alt ) ) {
+                    $args['logo_attr']['alt'] = get_bloginfo( 'name', 'display' );
+                }
+            }
+
+            /**
+             * Filters the list of custom logo image attributes.
+             *
+             * @since 5.5.0
+             *
+             * @param array $args['logo_attr'] Custom logo image attributes.
+             * @param int   $custom_logo_id    Custom logo attachment ID.
+             * @param int   $blog_id           ID of the blog to get the custom logo for.
+             */
+            $args['logo_attr'] = apply_filters( 'get_custom_logo_image_attributes', $args['logo_attr'], $custom_logo_id, $blog_id );
+
+            /*
+            * If the alt attribute is not empty, there's no need to explicitly pass it
+            * because wp_get_attachment_image() already adds the alt attribute.
+            */
+            $image = wp_get_attachment_image( $custom_logo_id, 'full', false, $args['logo_attr'] );
+
+            if ( $unlink_homepage_logo && is_front_page() && ! is_paged() ) {
+                // If on the home page, don't link the logo to home.
+                $html = sprintf(
+                    '<span class="%2$s">%1$s</span>',
+                    $image,
+                    $args['link_class']
+                );
+            } else {
+                $aria_current = is_front_page() && ! is_paged() ? ' aria-current="page"' : '';
+
+                $html = sprintf(
+                    '<a href="%1$s" class="%4$s" rel="home"%2$s>%3$s</a>',
+                    esc_url( home_url( '/' ) ),
+                    $aria_current,
+                    $image,
+                    $args['link_class']
+                );
+            }
+        } else if ( is_customize_preview() ) {
+            // If no logo is set but we're in the Customizer, leave a placeholder (needed for the live preview).
+            $html = sprintf(
+                '<a href="%1$s" class="%2$s" style="display:none;"><img class="custom-logo" alt="" /></a>',
+                esc_url( home_url( '/' ) ),
+                $args['link_class']
+            );
+        }
+
+        if ( $switched_blog ) {
+            restore_current_blog();
+        }
+
+        /**
+         * Filters the custom logo output.
+         *
+         * @since 4.5.0
+         * @since 4.6.0 Added the `$blog_id` parameter.
+         *
+         * @param string $html    Custom logo HTML output.
+         * @param int    $blog_id ID of the blog to get the custom logo for.
+         */
+        return apply_filters( 'get_custom_logo', $html, $blog_id );
+    }
+
+    /**
+     * Echos a custom logo, linked to home unless the theme supports removing the link on the home page.
+     *
+     * @param string $type
+     * @return void
+     */
+    public static function the_logo( $type = 'default' ) {
+        echo self::get_logo( $type );
+    }
+
 }

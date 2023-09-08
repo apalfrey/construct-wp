@@ -43,6 +43,10 @@ class Construct_WP {
         self::remove_admin_bar();
         add_action( 'widgets_init', array( 'Construct_WP', 'register_sidebars' ) );
 
+        // Basic theme support declaration.
+        self::theme_support();
+        add_action( 'customize_register', array( 'Construct_WP', 'customize_settings' ) );
+
         // Add custom capabilities.
         CWP_User::custom_caps();
 
@@ -268,6 +272,79 @@ class Construct_WP {
                 }
             }
         }
+    }
+
+    // TODO document.
+    public static function theme_support() {
+        // Add default posts and comments RSS feed links to head.
+        add_theme_support( 'automatic-feed-links' );
+
+        /**
+         * Let WordPress manage the document title.
+         * This theme does not use a hard-coded <title> tag in the document head,
+         * WordPress will provide it for us.
+         */
+        add_theme_support( 'title-tag' );
+
+        /**
+         * Enable support for Post Thumbnails on posts and pages.
+         *
+         * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+         */
+        add_theme_support( 'post-thumbnails' );
+        set_post_thumbnail_size( 2560, 2560, false );
+
+        /**
+         * Switch default core markup to output valid HTML5.
+         */
+        add_theme_support( 'html5', array(
+            'caption',
+            'comment-form',
+            'comment-list',
+            'gallery',
+            'script',
+            'search-form',
+            'style',
+        ) );
+
+        /**
+         * Add support for core custom logo.
+         *
+         * @link https://codex.wordpress.org/Theme_Logo
+         */
+        add_theme_support( 'custom-logo' );
+
+        // Add theme support for selective refresh for widgets.
+        add_theme_support( 'customize-selective-refresh-widgets' );
+
+        // Add support for responsive embedded content.
+        add_theme_support( 'responsive-embeds' );
+    }
+
+    // TODO document.
+    public static function customize_settings( $wp_customize ) {
+        $wp_customize->add_setting(
+            'custom_white_logo',
+            array(
+                'default'    => '',
+                'type'       => 'theme_mod',
+                'capability' => 'edit_theme_options',
+            )
+        );
+
+        $wp_customize->add_control(
+            new WP_Customize_Media_Control(
+                $wp_customize,
+                'logo',
+                array(
+                    'mime_type' => 'image',
+                    'label'     => __( 'White Logo', 'construct-wp' ),
+                    'section'   => 'title_tagline',
+                    'settings'  => 'custom_white_logo',
+                    'priority'  => 9,
+                )
+            )
+        );
     }
 
 }
