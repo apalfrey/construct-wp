@@ -19,17 +19,19 @@ class CWP_Assets {
      * - CSS path
      * - JS path
      *
-     * @var array
+     * @since   1.0.0
+     * @access  private
+     * @var     array
      */
     private static $page_info = array();
 
     /**
-     * Finds & generates the path/URI for assets
-     *
-     * Finds assets based on whether they are in the parent or child theme, allowing for overrides
-     * Either the path or URI can be returned based on whether $url is true or false
+     * Finds & generates the path/URI for assets based on whether they are in the parent or child theme,
+     * allowing for overrides. Either the path or URI can be returned based on whether $url is true or
+     * false.
      *
      * @since   1.0.0
+     * @access  public
      * @param   string          $path   The path for the asset to find, starting from the theme root
      * @param   boolean         $url    Whether to return the URL or path of the asset
      * @return  string|null             Returns the URL/path if found, null if not
@@ -61,6 +63,7 @@ class CWP_Assets {
      * Includes the templates controller if found. This is called from the `template_include` filter.
      *
      * @since   1.0.0
+     * @access  public
      * @param   string  $template   The template for the current page
      * @return  string              The template for the current page
      */
@@ -95,9 +98,10 @@ class CWP_Assets {
     }
 
     /**
-     * Enqueues the base styles & scripts for the site
+     * Enqueues the base styles & scripts for the site.
      *
      * @since   1.0.0
+     * @access  public
      * @return  void
      */
     public static function base_enqueue() {
@@ -118,9 +122,10 @@ class CWP_Assets {
     }
 
     /**
-     * Enqueues the current template's styles & scripts
+     * Enqueues the current template's styles & scripts.
      *
      * @since   1.0.0
+     * @access  public
      * @return  void
      */
     public static function template_enqueue() {
@@ -145,9 +150,11 @@ class CWP_Assets {
      * Custom version of `get_custom_logo`. Returns a custom logo, linked to home unless the theme
      * supports removing the link on the home page.
      *
-     * @param array $args A list of arguments to set how to return the logo.
-     * @param int $blog_id Optional. ID of the blog in question. Default is the ID of the current blog.
-     * @return string Custom logo markup.
+     * @since   1.0.0
+     * @access  public
+     * @param   array   $args       A list of arguments to set how to return the logo.
+     * @param   int     $blog_id    Optional. ID of the blog in question. Default is the ID of the current blog.
+     * @return  string              Custom logo markup.
      */
     public static function get_the_logo( $args = array(), $blog_id = 0 ) {
         $args = CWP_Utils::parse_args_recursive( $args, array(
@@ -255,8 +262,10 @@ class CWP_Assets {
     /**
      * Echos a custom logo, linked to home unless the theme supports removing the link on the home page.
      *
-     * @param string $type
-     * @return void
+     * @since   1.0.0
+     * @access  public
+     * @param   string  $type   The type of custom logo to get. Can be 'default' or 'white'
+     * @return  void
      */
     public static function the_logo( $type = 'default' ) {
         echo self::get_logo( $type );

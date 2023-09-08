@@ -16,6 +16,7 @@ class Construct_WP {
      * Whether the Construct system was loaded to prevent running again
      *
      * @since   1.0.0
+     * @access  private
      * @var     boolean
      */
     private static $loaded = false;
@@ -24,6 +25,7 @@ class Construct_WP {
      * Sets up the Construct system
      *
      * @since   1.0.0
+     * @access  public
      * @return  void
      */
     public static function setup() {
@@ -81,6 +83,7 @@ class Construct_WP {
      * system
      *
      * @since   1.0.0
+     * @access  private
      * @return  void
      */
     private static function optimize() {
@@ -149,6 +152,7 @@ class Construct_WP {
      * @see     https://developer.wordpress.org/reference/functions/load_plugin_textdomain/
      *
      * @since   1.0.0
+     * @access  public
      * @return  void
      */
     public static function load_textdomain() {
@@ -160,8 +164,9 @@ class Construct_WP {
      *
      * @see   https://developer.wordpress.org/reference/functions/show_admin_bar/
      *
-     * @since    1.0.0
-     * @return   void
+     * @since   1.0.0
+     * @access  public
+     * @return  void
      */
     public static function remove_admin_bar() {
         // TODO link to settings area.
@@ -179,6 +184,7 @@ class Construct_WP {
      * @see     https://developer.wordpress.org/reference/functions/register_sidebar/
      *
      * @since   1.0.0
+     * @access  public
      * @return  void
      */
     public static function register_sidebars() {
@@ -209,6 +215,7 @@ class Construct_WP {
      * Restrict admin access based on the user's role
      *
      * @since   1.0.0
+     * @access  public
      * @return  void
      */
     public static function restrict_admin_access() {
@@ -222,6 +229,7 @@ class Construct_WP {
      * Sorts page templates by name
      *
      * @since   1.0.0
+     * @access  public
      * @param   array   $post_templates     List of page templates
      * @return  array                       Sorted list of page templates
      */
@@ -235,7 +243,9 @@ class Construct_WP {
      * run them. Running can be disabled per class using the `cwp_run_plugin_class_setup` filter and
      * returning false where appropriate.
      *
-     * @return void
+     * @since   1.0.0
+     * @access  private
+     * @return  void
      */
     private static function run_plugin_classes() {
         foreach ( CWP_Loader::$plugin_classes as $plugin => $classes ) {
@@ -260,7 +270,9 @@ class Construct_WP {
      * run them. Running can be disabled per class using the `cwp_run_theme_class_setup` filter and
      * returning false where appropriate.
      *
-     * @return void
+     * @since   1.0.0
+     * @access  private
+     * @return  void
      */
     private static function run_theme_classes() {
         foreach ( CWP_Loader::$theme_classes as $plugin => $classes ) {

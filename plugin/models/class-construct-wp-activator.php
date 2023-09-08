@@ -16,7 +16,8 @@ class CWP_Activator {
      *
      * Long Description.
      *
-     * @since    1.0.0
+     * @since   1.0.0
+     * @access  public
      */
     public static function activate() {}
 

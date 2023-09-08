@@ -15,6 +15,7 @@ class CWP_User {
      * Whether custom capabilities have been implemented.
      *
      * @since   1.0.0
+     * @access  private
      * @var     boolean
      */
     private $custom_capabilities = false;
@@ -22,6 +23,8 @@ class CWP_User {
     /**
      * Checks whether a user has a role
      *
+     * @since   1.0.0
+     * @access  public
      * @param   string|array    $role   Role(s) to check if the user has
      * @param   WP_User|null    $user   User to check the role of. Defaults to current user.
      * @return  boolean                 Whether the user has the role.
@@ -43,6 +46,8 @@ class CWP_User {
     /**
      * Creates custom capabilities for the Construct system.
      *
+     * @since   1.0.0
+     * @access  public
      * @return void
      */
     public static function custom_caps() {
@@ -74,6 +79,8 @@ class CWP_User {
     /**
      * Adds or removes capability from role based on params.
      *
+     * @since   1.0.0
+     * @access  private
      * @param   string      $role   The role to add/remove the capability
      * @param   string      $cap    The capability name
      * @param   boolean     $perm   Whether or not to grant the capability
