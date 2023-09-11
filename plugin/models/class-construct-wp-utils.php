@@ -74,11 +74,6 @@ class CWP_Utils {
     }
 
     // TODO comment.
-    public static function array_map_assoc( $callback, $item ) {
-        return array_column( array_map( $callback, array_keys( $item ), $item ), 1, 0 );
-    }
-
-    // TODO comment.
     public static function array_filter_recursive( $item, $callback = null, $mode = 0, $depth = -1 ) {
         foreach ( $item as &$value ) {
             if ( $depth != 0 && is_array( $value ) ) {
@@ -91,13 +86,6 @@ class CWP_Utils {
         }
 
         return array_filter( $item );
-    }
-
-    // TODO comment.
-    public static function wpautop( $content ) {
-        $content = wpautop( $content );
-        $content = preg_replace( '/<br\s?\/?>/', '</p><p>', $content );
-        return $content;
     }
 
     // TODO comment.

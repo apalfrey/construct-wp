@@ -278,7 +278,6 @@ class CWP_Assets {
     }
 
     // TODO comment.
-    public static function format_image( $image_id ) {
     public static function get_image_info( $image_id ) {
         if ( ! $image_id ) {
             return false;
