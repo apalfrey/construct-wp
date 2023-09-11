@@ -88,25 +88,24 @@ class CWP_Utils {
         return array_filter( $item );
     }
 
-    // TODO comment.
-    public static function html_atts( $filter = 'cwp_html_atts', $atts = array() ) {
-        $atts       = apply_filters( $filter, $atts );
-        $attributes = '';
+    /**
+     * Converts an array of HTML attributes into a string of HTML attributes
+     *
+     * @param array $atts Array of attributes to convert
+     * @return string String of HTML attributes
+     */
+    public static function html_atts( $atts = array() ) {
+        $atts = array_filter( $atts );
+        array_walk( $atts, function ( &$val, $key ) {
+            $val = is_array( $val ) || is_object( $val ) ? implode( ' ', (array) $val ) : $val;
+            $val = sprintf(
+                '%1$s="%2$s"',
+                esc_attr( $key ),
+                $key === 'href' || $key === 'src' ? esc_url( $val ) : esc_attr( $val )
+            );
+        } );
 
-        if ( is_array( $atts ) ) {
-            foreach ( $atts as $attr => $value ) {
-                if ( ! empty( $value ) ) {
-                    if ( is_array( $value ) ) {
-                        $value = implode( ' ', $value );
-                    }
-
-                    $value       = ( $attr == 'href' || $attr == 'src' ) ? esc_url( $value ) : esc_attr( $value );
-                    $attributes .= ' ' . $attr . '="' . $value . '"';
-                }
-            }
-        }
-
-        return $attributes;
+        return implode( ' ', $atts );
     }
 
     // TODO comment.
@@ -193,12 +192,14 @@ class CWP_Utils {
                 $page_atts['aria-current'] = 'page';
             }
 
+            $page_atts = apply_filters( 'cwp_pagination_li_atts', $page_atts );
+
             $page = str_replace( 'dots', 'disabled', $page );
             $page = str_replace( 'page-numbers', implode( ' ', $link_class ), $page );
 
             $page = sprintf(
                 '<li %1$s>%2$s</li>',
-                self::html_atts( 'cwp_pagination_li_atts', $page_atts ),
+                self::html_atts( $page_atts ),
                 $page
             );
 
@@ -210,9 +211,10 @@ class CWP_Utils {
                 'pagination',
             ), $args['ul_class'] ),
         );
+        $ul_atts   = apply_filters( 'cwp_pagination_ul_atts', $ul_atts );
         $page_list = sprintf(
             '<ul %1$s>%2$s</ul>',
-            self::html_atts( 'cwp_pagination_ul_atts', $ul_atts ),
+            self::html_atts( $ul_atts ),
             implode( ' ', $pages )
         );
 
@@ -220,9 +222,10 @@ class CWP_Utils {
             'class'      => $args['nav_class'],
             'aria-label' => esc_attr( $args['nav_label'] ),
         );
+        $nav_atts   = apply_filters( 'cwp_pagination_nav_atts', $nav_atts );
         $pagination = sprintf(
             '<nav %1$s>%2$s</nav>',
-            self::html_atts( 'cwp_pagination_nav_atts', $nav_atts ),
+            self::html_atts( $nav_atts ),
             $page_list
         );
 
