@@ -162,6 +162,8 @@ class CWP_Utils {
      *
      * @see https://developer.wordpress.org/reference/functions/paginate_links/
      *
+     * TODO spin-off to own class?
+     *
      * @since   1.0.0
      * @access  public
      * @param   array       $link_args  Arguments to send to `paginate_links`
@@ -175,10 +177,21 @@ class CWP_Utils {
             'max_num_pages' => max( 1, get_query_var( 'paged' ) ),
             'nav_label'     => __( 'Page navigation', 'construct-wp' ),
             'nav_class'     => array(),
-            'ul_class'      => array(),
-            'li_class'      => array(),
-            'link_class'    => array(),
-            'first_last'    => true,
+            'nav_template'  => '<nav %1$s>%2$s</nav>',
+            'ul_class'      => array(
+                'pagination',
+            ),
+            'ul_template'   => '<ul %1$s>%2$s</ul>',
+            'li_class'      => array(
+                'page-item',
+            ),
+            'li_template'   => '<li %1$s>%2$s</li>',
+            'link_class'    => array(
+                'page-link',
+            ),
+            'link_template' => '<a %1$s>%2$s</a>',
+            'show_first'    => true,
+            'show_last'     => true,
             'first_text'    => sprintf(
                 '<i class="fa-solid fa-angles-left"></i> <span class="visually-hidden">%s</span>',
                 __( 'First', 'construct-wp' )
@@ -215,65 +228,97 @@ class CWP_Utils {
         }
 
         $li_atts = array(
-            'class'        => wp_parse_args( $args['li_class'], array(
-                'page-item',
-            ) ),
+            'class'        => $args['li_class'],
             'aria-current' => false,
         );
 
-        $link_class = wp_parse_args( $args['link_class'], array(
-            'page-link',
-        ) );
+        $link_atts = array(
+            'class' => $args['link_class'],
+        );
 
-        if ( $args['first_last'] ) {
-            if ( $args['paged'] > 1 ) {
-                array_unshift( $pages, sprintf(
-                    '<a class="first page-numbers" href="%s">%s</a>',
-                    get_pagenum_link( 1 ),
-                    $args['first_text']
-                ) );
+        $pages = array_map( function ( $page ) use ( $args, $li_atts, $link_atts ) {
+            preg_match( '/>(.*)<\/(?:a|span)/', $page, $label );
+            preg_match( '/class="([^"]*)"/', $page, $page_li_class );
+            preg_match( '/href="([^"]*)"/', $page, $href );
+            $label         = end( $label );
+            $page_li_class = end( $page_li_class );
+            $href          = end( $href );
+
+            $page_li_class  = explode( ' ', $page_li_class );
+            $page_li_class  = array_diff( $page_li_class, array( 'page-numbers' ) );
+            $page_li_atts   = $li_atts;
+            $page_link_atts = $link_atts;
+
+            $page_link_atts['href'] = $href;
+            $page_li_atts['class']  = array_merge( $page_li_atts['class'], $page_li_class );
+
+            if ( in_array( 'current', $page_li_atts['class'] ) ) {
+                $page_li_atts['class'][]      = 'active';
+                $page_li_atts['aria-current'] = 'page';
             }
 
-            if ( $args['paged'] < $args['max_num_pages'] ) {
-                array_push( $pages, sprintf(
-                    '<a class="last page-numbers" href="%s">%s</a>',
-                    get_pagenum_link( $args['max_num_pages'] ),
-                    $args['last_text']
-                ) );
-            }
-        }
-
-        $pages = array_map( function ( $page ) use ( $li_atts, $link_class ) {
-            $current   = strpos( $page, 'current' ) !== false;
-            $page_atts = $li_atts;
-
-            if ( $current ) {
-                $page_atts['class'][]      = 'active';
-                $page_atts['aria-current'] = 'page';
+            if ( in_array( 'dots', $page_li_atts['class'] ) ) {
+                $page_li_atts['class'][] = 'disabled';
             }
 
-            $page_atts = apply_filters( 'cwp_pagination_li_atts', $page_atts );
-
-            $page = str_replace( 'dots', 'disabled', $page );
-            $page = str_replace( 'page-numbers', implode( ' ', $link_class ), $page );
+            $page_li_atts   = apply_filters( 'cwp_pagination_li_atts', $page_li_atts );
+            $page_link_atts = apply_filters( 'cwp_pagination_li_atts', $page_link_atts );
 
             $page = sprintf(
-                '<li %1$s>%2$s</li>',
-                self::html_atts( $page_atts ),
-                $page
+                $args['li_template'],
+                self::html_atts( $page_li_atts ),
+                sprintf(
+                    $args['link_template'],
+                    self::html_atts( $page_link_atts ),
+                    $label
+                )
             );
 
             return $page;
         }, $pages );
 
+        if ( $args['show_first'] && $args['paged'] > 1 ) {
+            $first_li_atts   = $li_atts;
+            $first_link_atts = $link_atts;
+
+            $first_li_atts['class'][] = 'first';
+            $first_link_atts['href']  = get_pagenum_link( 1 );
+
+            array_unshift( $pages, sprintf(
+                $args['li_template'],
+                self::html_atts( $first_li_atts ),
+                sprintf(
+                    $args['link_template'],
+                    self::html_atts( $first_link_atts ),
+                    $args['first_text']
+                )
+            ) );
+        }
+
+        if ( $args['show_last'] && $args['paged'] < $args['max_num_pages'] ) {
+            $last_li_atts   = $li_atts;
+            $last_link_atts = $link_atts;
+
+            $last_li_atts['class'][] = 'first';
+            $last_link_atts['href']  = get_pagenum_link( $args['max_num_pages'] );
+
+            array_push( $pages, sprintf(
+                $args['li_template'],
+                self::html_atts( $last_li_atts ),
+                sprintf(
+                    $args['link_template'],
+                    self::html_atts( $last_link_atts ),
+                    $args['last_text']
+                )
+            ) );
+        }
+
         $ul_atts   = array(
-            'class' => wp_parse_args( array(
-                'pagination',
-            ), $args['ul_class'] ),
+            'class' => $args['ul_class'],
         );
         $ul_atts   = apply_filters( 'cwp_pagination_ul_atts', $ul_atts );
         $page_list = sprintf(
-            '<ul %1$s>%2$s</ul>',
+            $args['ul_template'],
             self::html_atts( $ul_atts ),
             implode( ' ', $pages )
         );
@@ -284,7 +329,7 @@ class CWP_Utils {
         );
         $nav_atts   = apply_filters( 'cwp_pagination_nav_atts', $nav_atts );
         $pagination = sprintf(
-            '<nav %1$s>%2$s</nav>',
+            $args['nav_template'],
             self::html_atts( $nav_atts ),
             $page_list
         );
