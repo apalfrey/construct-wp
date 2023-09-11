@@ -279,17 +279,21 @@ class CWP_Assets {
 
     // TODO comment.
     public static function format_image( $image_id ) {
+    public static function get_image_info( $image_id ) {
         if ( ! $image_id ) {
             return false;
         }
 
         $image                  = new stdClass();
         $image->ID              = intval( $image_id );
+        $image->title           = get_the_title( $image_id );
+        $image->alt             = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+        $image->caption         = wp_get_attachment_caption( $image_id );
         $image->urls            = new stdClass();
-        $image->urls->thumbnail = self::get_image_size( $image->ID, 'thumbnail' );
-        $image->urls->medium    = self::get_image_size( $image->ID, 'medium' );
-        $image->urls->large     = self::get_image_size( $image->ID, 'large' );
-        $image->urls->full      = self::get_image_size( $image->ID, 'full' );
+        $image->urls->thumbnail = wp_get_attachment_image_url( $image->ID, 'thumbnail' );
+        $image->urls->medium    = wp_get_attachment_image_url( $image->ID, 'medium' );
+        $image->urls->large     = wp_get_attachment_image_url( $image->ID, 'large' );
+        $image->urls->full      = wp_get_attachment_image_url( $image->ID, 'full' );
 
         return $image;
     }
