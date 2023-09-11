@@ -271,7 +271,15 @@ class CWP_Assets {
         echo self::get_logo( $type );
     }
 
-    // TODO comment.
+    /**
+     * Returns a formatted object of information about an image. Retrieves title, caption & alt text meta.
+     * Retrieves image URLs for all default image sizes
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   int     $image_id   The image ID to retrieve information
+     * @return  object              A formatted object of information
+     */
     public static function get_image_info( $image_id ) {
         if ( ! $image_id ) {
             return false;

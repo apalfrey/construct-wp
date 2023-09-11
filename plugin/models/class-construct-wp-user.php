@@ -48,7 +48,7 @@ class CWP_User {
      *
      * @since   1.0.0
      * @access  public
-     * @return void
+     * @return  void
      */
     public static function custom_caps() {
         if ( self::$custom_capabilities ) {

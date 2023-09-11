@@ -37,7 +37,20 @@ class CWP_Utils {
         return $results;
     }
 
-    // TODO comment.
+    /**
+     * A custom implementation of `wp_nonce_field`. Retrieves or display nonce hidden field for forms.
+     *
+     * @see https://developer.wordpress.org/reference/functions/wp_nonce_field/
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   int|string  $action     Action name
+     * @param   string      $id         Nonce field id
+     * @param   string      $name       Nonce name
+     * @param   boolean     $referer    Whether to set the referer field for validation
+     * @param   boolean     $display    Whether to display or return hidden form field
+     * @return  void                    Nonce field HTML markup
+     */
     public static function wp_nonce_field( $action = -1, $id = '_wpnonce', $name = '_wpnonce', $referer = true, $display = true ) {
         $id          = esc_attr( $id );
         $name        = esc_attr( $name );
@@ -59,21 +72,55 @@ class CWP_Utils {
         return $nonce_field;
     }
 
-    // TODO comment.
+    /**
+     * Returns the output of `get_template_part` as a string.
+     *
+     * @see https://developer.wordpress.org/reference/functions/get_template_part/
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   string          $slug   The slug name for the generic template.
+     * @param   string|null     $name   The name of the specialized template.
+     * @param   array           $args   Additional arguments passed to the template.
+     * @return  string                  Template part HTML output
+     */
     public static function get_template_part( $slug, $name = null, $args = array() ) {
         ob_start();
         get_template_part( $slug, $name, $args );
         return ob_get_clean();
     }
 
-    // TODO comment.
+    /**
+     * Recursively applies a callback to an array
+     *
+     * TODO remove in favour of https://developer.wordpress.org/reference/functions/map_deep/?
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   callable    $callback   The function to map onto the array
+     * @param   mixed       $item       The array to map onto
+     * @return  mixed                   The value with the callback applied to all non-arrays inside it
+     */
     public static function array_map_recursive( $callback, $item ) {
         return array_map( function ( $item ) use ( $callback ) {
             return is_array( $item ) ? array_map_recursive( $callback, $item ) : $callback( $item );
         }, $item );
     }
 
-    // TODO comment.
+    /**
+     * Recursively filters elements from an array using a callback function
+     *
+     * @see https://stackoverflow.com/a/6795671
+     * @see https://www.php.net/manual/en/function.array-filter.php#87581
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   array       $item       The array to iterate over
+     * @param   callback    $callback   The callback function to use
+     * @param   integer     $mode       Flag determining what arguments are sent to callback
+     * @param   integer     $depth      Current depth in the array
+     * @return  array                   The filtered array
+     */
     public static function array_filter_recursive( $item, $callback = null, $mode = 0, $depth = -1 ) {
         foreach ( $item as &$value ) {
             if ( $depth != 0 && is_array( $value ) ) {
@@ -91,8 +138,10 @@ class CWP_Utils {
     /**
      * Converts an array of HTML attributes into a string of HTML attributes
      *
-     * @param array $atts Array of attributes to convert
-     * @return string String of HTML attributes
+     * @since   1.0.0
+     * @access  public
+     * @param   array   $atts   Array of attributes to convert
+     * @return  string          String of HTML attributes
      */
     public static function html_atts( $atts = array() ) {
         $atts = array_filter( $atts );
@@ -108,7 +157,18 @@ class CWP_Utils {
         return implode( ' ', $atts );
     }
 
-    // TODO comment.
+    /**
+     * Creates a pagination navigation element for use in the front end. Based on Bootstrap & Font Awesome
+     *
+     * @see https://developer.wordpress.org/reference/functions/paginate_links/
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   array       $link_args  Arguments to send to `paginate_links`
+     * @param   array       $args       Arguments for how to output the pagination
+     * @param   boolean     $display    Whether to display the pagination
+     * @return  string                  The pagination HTML
+     */
     public static function pagination( $link_args = array(), $args = array(), $display = true ) {
         $args = wp_parse_args( $args, array(
             'paged'         => get_query_var( 'paged' ),

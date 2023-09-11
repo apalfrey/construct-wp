@@ -285,7 +285,15 @@ class Construct_WP {
         }
     }
 
-    // TODO document.
+    /**
+     * Adds some basic theme support for Construct themes
+     *
+     * @see https://developer.wordpress.org/reference/functions/add_theme_support/
+     *
+     * @since   1.0.0
+     * @access  public
+     * @return  void
+     */
     public static function theme_support() {
         // Add default posts and comments RSS feed links to head.
         add_theme_support( 'automatic-feed-links' );
@@ -332,7 +340,16 @@ class Construct_WP {
         add_theme_support( 'responsive-embeds' );
     }
 
-    // TODO document.
+    /**
+     * Adds some useful settings to the customize area. Called by the `customize_register` action
+     *
+     * @see https://developer.wordpress.org/reference/hooks/customize_register/
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   WP_Customize_Manager    $wp_customize   WP_Customize_Manager instance
+     * @return  void
+     */
     public static function customize_settings( $wp_customize ) {
         $wp_customize->add_setting(
             'custom_white_logo',
