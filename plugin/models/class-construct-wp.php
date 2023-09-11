@@ -28,7 +28,7 @@ class Construct_WP {
      * @access  public
      * @return  void
      */
-    public static function setup() {
+    public static function init() {
         if ( self::$loaded ) {
             return;
         }
@@ -238,8 +238,8 @@ class Construct_WP {
     }
 
     /**
-     * Runs setup for all plugin classes. Classes need a public method called `setup` for this method to
-     * run them. Running can be disabled per class using the `cwp_run_plugin_class_setup` filter and
+     * Runs init for all plugin classes. Classes need a public method called `init` for this method to
+     * run them. Running can be disabled per class using the `cwp_run_plugin_class_init` filter and
      * returning false where appropriate.
      *
      * @since   1.0.0
@@ -253,11 +253,11 @@ class Construct_WP {
                     continue;
                 }
 
-                $run_setup = apply_filters( 'cwp_run_plugin_class_setup', true, $plugin, $class );
+                $run_init = apply_filters( 'cwp_run_plugin_class_init', true, $plugin, $class );
 
-                if ( $run_setup ) {
-                    if ( method_exists( $class, 'setup' ) && is_callable( array( $class, 'setup' ) ) ) {
-                        $class::setup();
+                if ( $run_init ) {
+                    if ( method_exists( $class, 'init' ) && is_callable( array( $class, 'init' ) ) ) {
+                        $class::init();
                     }
                 }
             }
@@ -265,8 +265,8 @@ class Construct_WP {
     }
 
     /**
-     * Runs setup for all theme classes. Classes need a public method called `setup` for this method to
-     * run them. Running can be disabled per class using the `cwp_run_theme_class_setup` filter and
+     * Runs init for all theme classes. Classes need a public method called `init` for this method to
+     * run them. Running can be disabled per class using the `cwp_run_theme_class_init` filter and
      * returning false where appropriate.
      *
      * @since   1.0.0
@@ -275,11 +275,11 @@ class Construct_WP {
      */
     private static function run_theme_classes() {
         foreach ( CWP_Loader::$theme_classes as $plugin => $classes ) {
-            $run_setup = apply_filters( 'cwp_run_theme_class_setup', true, $class );
+            $run_init = apply_filters( 'cwp_run_theme_class_init', true, $class );
 
-            if ( $run_setup ) {
-                if ( method_exists( $class, 'setup' ) && is_callable( array( $class, 'setup' ) ) ) {
-                    $class::setup();
+            if ( $run_init ) {
+                if ( method_exists( $class, 'init' ) && is_callable( array( $class, 'init' ) ) ) {
+                    $class::init();
                 }
             }
         }

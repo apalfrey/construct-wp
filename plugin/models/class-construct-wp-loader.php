@@ -76,7 +76,7 @@ class CWP_Loader {
         add_action( 'after_setup_theme', array( 'CWP_Loader', 'load_theme_models' ) );
 
         // Setup the plugin system.
-        add_action( 'init', array( 'Construct_WP', 'setup' ), 0 );
+        add_action( 'init', array( 'Construct_WP', 'init' ), 0 );
     }
 
     /**

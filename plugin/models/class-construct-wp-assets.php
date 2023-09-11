@@ -89,8 +89,8 @@ class CWP_Assets {
             $classes          = get_declared_classes();
             $controller_class = end( $classes );
 
-            if ( method_exists( $controller_class, 'setup' ) ) {
-                $controller_class::setup();
+            if ( method_exists( $controller_class, 'init' ) ) {
+                $controller_class::init();
             }
         }
 
