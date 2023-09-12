@@ -96,4 +96,37 @@ class CWP_User {
         }
     }
 
+    /**
+     * Recursive function to generate a unique username. If the username already exists, will add a
+     * numerical suffix which will increase until a unique username is found.
+     *
+     * @see https://gist.github.com/philipnewcomer/59a695415f5f9a2dd851deda42d0552f
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   string  $username   The username to make unique
+     * @return  string              The unique username
+     */
+    public static function generate_unique_username( $username, $i = 1 ) {
+        // Run through sanitization used by `wp_inset_user` prior to checking existance.
+        $user_login = sanitize_user( $username, true );
+        $user_login = apply_filters( 'pre_user_login', $user_login );
+        $user_login = trim( $user_login );
+
+        if ( ! username_exists( $user_login ) ) {
+            return $username;
+        }
+
+        $new_username = sprintf( '%s-%s', $username, $i );
+        $new_username = sanitize_user( $new_username, true );
+        $new_username = apply_filters( 'pre_user_login', $new_username );
+        $new_username = trim( $new_username );
+
+        if ( ! username_exists( $new_username ) ) {
+            return $new_username;
+        } else {
+            return self::generate_unique_username( $username, $i + 1 );
+        }
+    }
+
 }
