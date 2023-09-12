@@ -236,33 +236,32 @@ class CWP_Utils {
             'class' => $args['link_class'],
         );
 
-        $pages = array_map( function ( $page ) use ( $args, $li_atts, $link_atts ) {
-            preg_match( '/>(.*)<\/(?:a|span)/', $page, $label );
-            preg_match( '/class="([^"]*)"/', $page, $page_li_class );
-            preg_match( '/href="([^"]*)"/', $page, $href );
-            $label         = end( $label );
-            $page_li_class = end( $page_li_class );
-            $href          = end( $href );
+        $doc = new DOMDocument();
 
-            $page_li_class  = explode( ' ', $page_li_class );
+        $pages = array_map( function ( $page ) use ( $doc, $args, $li_atts, $link_atts ) {
+            $doc->loadHTML( $page );
+            // phpcs:disable WordPress.NamingConventions
+            $item          = $doc->documentElement->lastChild->lastChild;
+            $href          = $item->getAttribute( 'href' );
+            $page_li_class = explode( ' ', $item->getAttribute( 'class' ) );
+            $label         = implode( array_map( array( $item->ownerDocument, 'saveHTML' ), iterator_to_array( $item->childNodes ) ) );
+            // phpcs:enable WordPress.NamingConventions
+
             $page_li_class  = array_diff( $page_li_class, array( 'page-numbers' ) );
             $page_li_atts   = $li_atts;
             $page_link_atts = $link_atts;
 
-            $page_link_atts['href'] = $href;
-            $page_li_atts['class']  = array_merge( $page_li_atts['class'], $page_li_class );
-
-            if ( in_array( 'current', $page_li_atts['class'] ) ) {
-                $page_li_atts['class'][]      = 'active';
-                $page_li_atts['aria-current'] = 'page';
-            }
-
-            if ( in_array( 'dots', $page_li_atts['class'] ) ) {
-                $page_li_atts['class'][] = 'disabled';
-            }
+            $page_link_atts['href']       = $href;
+            $page_li_atts['class']        = array_filter( array(
+                ...$page_li_atts['class'],
+                ...$page_li_class,
+                in_array( 'current', $page_li_atts['class'] ) ? 'active' : false,
+                in_array( 'dots', $page_li_atts['class'] ) ? 'disabled' : false,
+            ) );
+            $page_li_atts['aria-current'] = in_array( 'current', $page_li_atts['class'] ) ? 'page' : false;
 
             $page_li_atts   = apply_filters( 'cwp_pagination_li_atts', $page_li_atts );
-            $page_link_atts = apply_filters( 'cwp_pagination_li_atts', $page_link_atts );
+            $page_link_atts = apply_filters( 'cwp_pagination_link_atts', $page_link_atts );
 
             $page = sprintf(
                 $args['li_template'],
