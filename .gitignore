@@ -1,6 +1,9 @@
 # Docker
 .env
 
+# Node.js
+node_modules/
+
 # Composer
 vendor/
 
