@@ -41,4 +41,5 @@
         "scss",
         "sass",
     ],
+    "phpsab.snifferEnable": true,
 }
