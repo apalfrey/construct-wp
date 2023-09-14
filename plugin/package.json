@@ -1,16 +1,16 @@
 {
-  "name": "customtheme",
+  "name": "construct-wp",
   "version": "1.0.0",
-  "description": "The customtheme WordPress theme",
+  "description": "The Construct WP WordPress plugin",
   "repository": {
     "type": "git",
-    "url": "https://github.com/USERNAME/REPO"
+    "url": "https://github.com/apalfrey/construct-wp"
   },
   "license": "MIT",
   "author": {
-    "name": "AUTHORNAME",
-    "email": "EMAIL@DOMAIN.com",
-    "url": "https://www.DOMAIN.com/"
+    "name": "Andrew Palfrey",
+    "email": "apalfrey@apalfrey.me",
+    "url": "https://github.com/apalfrey"
   },
   "main": "gulpfile.js",
   "scripts": {

@@ -39,9 +39,15 @@ class Construct_WP {
             define( 'CWP_THEME_SLUG', CWP_SLUG );
         }
 
+        // WordPress translation.
+        self::load_textdomain();
+
+        // Run setup for all other models.
+        self::run_plugin_classes();
+        self::run_theme_classes();
+
         // WordPress functionality setup.
         self::optimize();
-        self::load_textdomain();
         self::remove_admin_bar();
         add_action( 'widgets_init', array( 'Construct_WP', 'register_sidebars' ) );
 
@@ -66,10 +72,6 @@ class Construct_WP {
 
         // Include the current templates styles & scripts.
         add_action( 'wp_enqueue_scripts', array( 'CWP_Assets', 'template_enqueue' ) );
-
-        // Run setup for all other models.
-        self::run_plugin_classes();
-        self::run_theme_classes();
 
         do_action( 'cwp_after_setup' );
 

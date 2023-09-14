@@ -162,8 +162,6 @@ class CWP_Utils {
      *
      * @see https://developer.wordpress.org/reference/functions/paginate_links/
      *
-     * TODO spin-off to own class?
-     *
      * @since   1.0.0
      * @access  public
      * @param   array       $link_args  Arguments to send to `paginate_links`
