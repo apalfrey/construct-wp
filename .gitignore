@@ -9,3 +9,7 @@ vendor/
 
 # Misc
 *.log
+
+# Compiled files
+assets/
+dist/

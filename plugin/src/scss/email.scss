@@ -1,0 +1,94 @@
+// Bootstrap functions first to manipulate colors, SVGs, calc, etc
+@import "node_modules/bootstrap/scss/functions";
+// Remainder of the Bootstrap variables
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/variables-dark";
+
+// Remainder of required Bootstrap parts
+@import "node_modules/bootstrap/scss/maps";
+@import "node_modules/bootstrap/scss/mixins";
+
+// Email styling
+%heading {
+    margin-top: 0;
+    margin-bottom: $headings-margin-bottom;
+    font-family: $headings-font-family;
+    font-style: $headings-font-style;
+    font-weight: $headings-font-weight;
+    line-height: $headings-line-height;
+}
+
+h1 {
+    @extend %heading;
+    @include font-size($h1-font-size);
+}
+
+h2 {
+    @extend %heading;
+    @include font-size($h2-font-size);
+}
+
+h3 {
+    @extend %heading;
+    @include font-size($h3-font-size);
+}
+
+h4 {
+    @extend %heading;
+    @include font-size($h4-font-size);
+}
+
+h5 {
+    @extend %heading;
+    @include font-size($h5-font-size);
+}
+
+h6 {
+    @extend %heading;
+    @include font-size($h6-font-size);
+}
+
+
+p {
+    margin-top: 0;
+    margin-bottom: $paragraph-margin-bottom;
+}
+
+.container {
+    box-sizing: border-box;
+    width: 100%;
+    padding-right: .75rem;
+    padding-left: .75rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}

@@ -76,7 +76,7 @@ module.exports = () => {
                     base: './src/copy',
                 },
             ],
-            process: true,
+            process: false,
             watch: true,
         },
         js: {
@@ -89,7 +89,7 @@ module.exports = () => {
                     base: './src/js',
                 },
             ],
-            process: true,
+            process: false,
             watch: true,
             sourcemaps: process.env.NODE_ENV == 'development',
             eslint: {
@@ -107,7 +107,7 @@ module.exports = () => {
                         compact: false,
                     } ),
                 ],
-                treeshake: false,
+                treeshake: true,
                 onwarn( e ) {
                     if ( e.code === 'THIS_IS_UNDEFINED' ) {
                         return
@@ -209,7 +209,7 @@ module.exports = () => {
             },
             pot: {
                 domain: pkg.name,
-                package: 'CustomTheme',
+                package: 'Construct WP',
                 lastTranslator: `${pkg.author.name} <${pkg.author.email}>`,
                 headers: {
                     'Language-Team': `${pkg.author.name} <${pkg.author.email}>`,
@@ -224,7 +224,7 @@ module.exports = () => {
                     base: './src/images',
                 },
             ],
-            process: true,
+            process: false,
             watch: true,
             sharp: {
                 sharpOptions: {
