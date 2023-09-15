@@ -58,7 +58,7 @@ class CWP_Utils {
             '<input type="hidden" id="%1$s" name="%2$s" value="%3$s" />',
             $id,
             $name,
-            wp_create_nonce( $action ),
+            wp_create_nonce( $action )
         );
 
         if ( $referer ) {
