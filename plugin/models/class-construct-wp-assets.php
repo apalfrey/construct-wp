@@ -33,7 +33,7 @@ class CWP_Assets {
      * @since   1.0.0
      * @access  public
      * @param   string          $path   The path for the asset to find, starting from the theme root
-     * @param   boolean         $url    Whether to return the URL or path of the asset
+     * @param   boolean         $uri    Whether to return the URL or path of the asset
      * @return  string|null             Returns the URL/path if found, null if not
      */
     public static function final_path( $path, $uri = false ) {
@@ -146,6 +146,11 @@ class CWP_Assets {
         }
     }
 
+    /**
+     * Enqueue's files to the WordPress admin.
+     *
+     * @return void
+     */
     public static function admin_enqueue() {
         wp_enqueue_style( 'cwp-admin', CWP_PLUGIN_URL . '/assets/css/admin.css', true );
     }

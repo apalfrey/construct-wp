@@ -87,18 +87,16 @@ class CWP_Navwalker extends Walker_Nav_Menu {
     /**
      * Starts the element output.
      *
-     * @since 3.0.0
-     * @since 4.4.0 The {@see 'nav_menu_item_args'} filter was added.
-     * @since 5.9.0 Renamed `$item` to `$data_object` and `$id` to `$current_object_id`
-     *              to match parent class for PHP 8 named parameter support.
+     * @see https://developer.wordpress.org/reference/classes/walker_nav_menu/start_el/
      *
-     * @see Walker::start_el()
-     *
-     * @param string   $output            Used to append additional content (passed by reference).
-     * @param WP_Post  $data_object       Menu item data object.
-     * @param int      $depth             Depth of menu item. Used for padding.
-     * @param stdClass $args              An object of wp_nav_menu() arguments.
-     * @param int      $current_object_id Optional. ID of the current menu item. Default 0.
+     * @since   1.0.0
+     * @access  public
+     * @param   string   $output            Used to append additional content (passed by reference).
+     * @param   WP_Post  $data_object       Menu item data object.
+     * @param   int      $depth             Depth of menu item. Used for padding.
+     * @param   stdClass $args              An object of wp_nav_menu() arguments.
+     * @param   int      $current_object_id Optional. ID of the current menu item. Default 0.
+     * @return  void
      */
     public function start_el( &$output, $data_object, $depth = 0, $args = null, $current_object_id = 0 ) {
         // Restores the more descriptive, specific name for use within this method.

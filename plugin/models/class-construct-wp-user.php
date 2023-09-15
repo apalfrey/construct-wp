@@ -105,6 +105,7 @@ class CWP_User {
      * @since   1.0.0
      * @access  public
      * @param   string  $username   The username to make unique
+     * @param   string  $i          The current numerical suffix
      * @return  string              The unique username
      */
     public static function generate_unique_username( $username, $i = 1 ) {

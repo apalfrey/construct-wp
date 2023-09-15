@@ -49,7 +49,7 @@ class CWP_Utils {
      * @param   string      $name       Nonce name
      * @param   boolean     $referer    Whether to set the referer field for validation
      * @param   boolean     $display    Whether to display or return hidden form field
-     * @return  void                    Nonce field HTML markup
+     * @return  string                  Nonce field HTML markup
      */
     public static function wp_nonce_field( $action = -1, $id = '_wpnonce', $name = '_wpnonce', $referer = true, $display = true ) {
         $id          = esc_attr( $id );
