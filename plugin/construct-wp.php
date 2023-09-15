@@ -4,9 +4,11 @@
  * Plugin URI:        https://github.com/apalfrey/construct-wp
  * Description:       Some info right here
  * Version:           1.0.0
+ * Requires at least: 5.4.0
+ * Requires PHP:      7.4
  * Author:            APalfrey
  * Author URI:        https://github.com/apalfrey
- * License:           GPL-2.0+
+ * License:           GPL v2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       construct-wp
  * Domain Path:       /languages
