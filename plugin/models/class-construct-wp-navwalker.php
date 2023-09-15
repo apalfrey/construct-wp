@@ -112,7 +112,7 @@ class CWP_Navwalker extends Walker_Nav_Menu {
 
         if ( $menu_item->logout_link == '1' ) {
             // TODO re-work with page definition in back end?
-            $logout_redirect = add_filter( 'cwp_logout_redirect', get_home_url() );
+            $logout_redirect = apply_filters( 'cwp_logout_redirect', get_home_url() );
             $menu_item->url  = wp_logout_url( $logout_redirect );
         }
 
