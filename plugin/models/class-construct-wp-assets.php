@@ -146,6 +146,10 @@ class CWP_Assets {
         }
     }
 
+    public static function admin_enqueue() {
+        wp_enqueue_style( 'cwp-admin', CWP_PLUGIN_URL . '/assets/css/admin.css', true );
+    }
+
     /**
      * Custom version of `get_custom_logo`. Returns a custom logo, linked to home unless the theme
      * supports removing the link on the home page.

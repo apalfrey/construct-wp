@@ -104,11 +104,11 @@ class CWP_Navwalker extends Walker_Nav_Menu {
         // Restores the more descriptive, specific name for use within this method.
         $menu_item = $data_object;
 
-        if ( $menu_item->visibility == '1' && ! is_user_logged_in() ) {
+        if ( $menu_item->visibility == 'logged-in' && ! is_user_logged_in() ) {
             return;
         }
 
-        if ( $menu_item->visibility == '2' && is_user_logged_in() ) {
+        if ( $menu_item->visibility == 'logged-out' && is_user_logged_in() ) {
             return;
         }
 
@@ -129,7 +129,11 @@ class CWP_Navwalker extends Walker_Nav_Menu {
 
         $classes   = empty( $menu_item->classes ) ? array() : (array) $menu_item->classes;
         $classes[] = 'menu-item-' . $menu_item->ID;
-        $classes[] = 'nav-item';
+
+        // Don't add class for dropdown items.
+        if ( $depth === 0 ) {
+            $classes[] = 'nav-item';
+        }
 
         // Add .dropdown or .active classes where they are needed.
         if ( $this->has_children ) {
@@ -200,42 +204,55 @@ class CWP_Navwalker extends Walker_Nav_Menu {
 
         $output .= $indent . '<li' . $li_attributes . '>';
 
-        $atts           = array();
-        $atts['title']  = ! empty( $menu_item->attr_title ) ? $menu_item->attr_title : '';
-        $atts['target'] = ! empty( $menu_item->target ) ? $menu_item->target : '';
-        if ( $menu_item->target === '_blank' && empty( $menu_item->xfn ) ) {
-            $atts['rel'] = 'noopener noreferrer';
-        } else {
-            $atts['rel'] = $menu_item->xfn;
-        }
+        $link_tag      = 'a';
+        $atts          = array();
+        $atts['title'] = ! empty( $menu_item->attr_title ) ? $menu_item->attr_title : '';
 
-        // If the item has_children add atts to <a>.
-        if ( $this->has_children && $depth === 0 ) {
-            $atts['class']          = 'dropdown-toggle nav-link';
-            $atts['href']           = '#';
-            $atts['role']           = 'button';
-            $atts['data-bs-toggle'] = 'dropdown';
-            $atts['aria-expanded']  = 'false';
-            $atts['id']             = 'menu-item-dropdown-' . $menu_item->ID;
-        } else {
-            if ( ! empty( $menu_item->url ) ) {
-                if ( $menu_item->url === get_privacy_policy_url() ) {
-                    $atts['rel'] = empty( $atts['rel'] ) ? 'privacy-policy' : $atts['rel'] . ' privacy-policy';
+        if ( $menu_item->link_type === 'link' ) {
+            $atts['target'] = ! empty( $menu_item->target ) ? $menu_item->target : '';
+            if ( $menu_item->target === '_blank' && empty( $menu_item->xfn ) ) {
+                $atts['rel'] = 'noopener noreferrer';
+            } else {
+                $atts['rel'] = $menu_item->xfn;
+            }
+
+            // If the item has_children add atts to <a>.
+            if ( $this->has_children && $depth === 0 ) {
+                $atts['class']          = 'dropdown-toggle nav-link';
+                $atts['href']           = '#';
+                $atts['role']           = 'button';
+                $atts['data-bs-toggle'] = 'dropdown';
+                $atts['aria-expanded']  = 'false';
+                $atts['id']             = 'menu-item-dropdown-' . $menu_item->ID;
+            } else {
+                if ( ! empty( $menu_item->url ) ) {
+                    if ( $menu_item->url === get_privacy_policy_url() ) {
+                        $atts['rel'] = empty( $atts['rel'] ) ? 'privacy-policy' : $atts['rel'] . ' privacy-policy';
+                    }
+                    $atts['href'] = $menu_item->url;
+                } else {
+                    $atts['href'] = '';
                 }
-                $atts['href'] = $menu_item->url;
-            } else {
-                $atts['href'] = '';
+
+                // For items in dropdowns use .dropdown-item instead of .nav-link.
+                if ( $depth > 0 ) {
+                    $atts['class'] = 'dropdown-item';
+                } else {
+                    $atts['class'] = 'nav-link';
+                }
             }
 
-            // For items in dropdowns use .dropdown-item instead of .nav-link.
-            if ( $depth > 0 ) {
-                $atts['class'] = 'dropdown-item';
-            } else {
-                $atts['class'] = 'nav-link';
-            }
+            $atts['aria-current'] = $menu_item->current ? 'page' : '';
+        } else if ( $menu_item->link_type === 'header' ) {
+            $link_tag      = 'h6';
+            $atts['class'] = 'dropdown-header';
+        } else if ( $menu_item->link_type === 'divider' ) {
+            $link_tag      = 'hr';
+            $atts['class'] = 'dropdown-divider';
+        } else if ( $menu_item->link_type === 'text' ) {
+            $link_tag      = 'p';
+            $atts['class'] = 'dropdown-text';
         }
-
-        $atts['aria-current'] = $menu_item->current ? 'page' : '';
 
         /**
          * Filters the HTML attributes applied to a menu item's anchor element.
@@ -275,9 +292,20 @@ class CWP_Navwalker extends Walker_Nav_Menu {
         $title = apply_filters( 'nav_menu_item_title', $title, $menu_item, $args, $depth );
 
         $item_output  = $args->before;
-        $item_output .= '<a' . $attributes . '>';
-        $item_output .= $args->link_before . $title . $args->link_after;
-        $item_output .= '</a>';
+        $item_output .= '<' . $link_tag . $attributes . '>';
+
+        if ( $menu_item->link_type !== 'divider' ) {
+            $icon = '';
+
+            if ( $menu_item->icon !== '' ) {
+                $icon_class = apply_filters( 'cwp_menu_icon', $menu_item->icon . ' fa-fw' );
+                $icon       = '<i class="' . $icon_class . '"></i> ';
+            }
+
+            $item_output .= $args->link_before . $icon . $title . $args->link_after;
+            $item_output .= '</' . $link_tag . '>';
+        }
+
         $item_output .= $args->after;
 
         /**

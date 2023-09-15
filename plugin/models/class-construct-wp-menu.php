@@ -19,8 +19,10 @@ class CWP_Menu {
      * @var     array
      */
     private static $field_defaults = array(
-        'visibility'  => '0',
+        'visibility'  => 'always',
         'logout_link' => '0',
+        'link_type'   => 'link',
+        'icon'        => '',
     );
 
     /**
@@ -67,16 +69,31 @@ class CWP_Menu {
      */
     public static function custom_fields( $item_id, $menu_item ) {
         ?>
-        <p class="description description-wide">
+        <p class="description description-wide cwp-icon">
+            <label for="edit-menu-item-icon-<?php echo $item_id; ?>"><?php _e( 'Icon', 'construct-wp' ); ?></label>
+            <input
+                type="text"
+                name="edit-menu-item-icon[<?php echo $item_id; ?>]"
+                id="edit-menu-item-icon-<?php echo $item_id; ?>"
+                class="widefat code edit-menu-item-icon"
+                value="<?php echo esc_attr( $menu_item->icon ); ?>"
+            />
+        </p>
+
+        <p class="description description-wide cwp-visibility">
             <label for="edit-menu-item-visibility-<?php echo $item_id; ?>"><?php _e( 'Visibility', 'construct-wp' ); ?></label>
-            <select name="edit-menu-item-visibility[<?php echo $item_id; ?>]" id="edit-menu-item-visibility-<?php echo $item_id; ?>" class="widefat edit-menu-item-visibility">
-                <option value="0" <?php echo $menu_item->visibility == '0' ? 'selected' : ''; ?>><?php _e( 'Always', 'construct-wp' ); ?></option>
-                <option value="1" <?php echo $menu_item->visibility == '1' ? 'selected' : ''; ?>><?php _e( 'Logged in only', 'construct-wp' ); ?></option>
-                <option value="2" <?php echo $menu_item->visibility == '2' ? 'selected' : ''; ?>><?php _e( 'Logged out only', 'construct-wp' ); ?></option>
+            <select
+                name="edit-menu-item-visibility[<?php echo $item_id; ?>]"
+                id="edit-menu-item-visibility-<?php echo $item_id; ?>"
+                class="widefat edit-menu-item-visibility"
+            >
+                <option value="always" <?php echo $menu_item->visibility == 'always' ? 'selected' : ''; ?>><?php _e( 'Always', 'construct-wp' ); ?></option>
+                <option value="logged-in" <?php echo $menu_item->visibility == 'logged-in' ? 'selected' : ''; ?>><?php _e( 'Logged in only', 'construct-wp' ); ?></option>
+                <option value="logged-out" <?php echo $menu_item->visibility == 'logged-out' ? 'selected' : ''; ?>><?php _e( 'Logged out only', 'construct-wp' ); ?></option>
             </select>
         </p>
 
-        <p class="description description-wide">
+        <p class="description description-wide cwp-logout_link">
             <label for="edit-menu-item-logout_link-<?php echo $item_id; ?>">
                 <input
                     type="checkbox"
@@ -88,6 +105,17 @@ class CWP_Menu {
                 <?php _e( 'Logout link', 'construct-wp' ); ?>
             </label>
         </p>
+
+        <p class="description description-wide cwp-link_type">
+            <label for="edit-menu-item-link_type-<?php echo $item_id; ?>"><?php _e( 'Dropdown item type', 'construct-wp' ); ?></label>
+            <select name="edit-menu-item-link_type[<?php echo $item_id; ?>]" id="edit-menu-item-link_type-<?php echo $item_id; ?>" class="widefat edit-menu-item-link_type">
+                <option value="link" <?php echo $menu_item->link_type == 'link' ? 'selected' : ''; ?>><?php _e( 'Link', 'construct-wp' ); ?></option>
+                <option value="header" <?php echo $menu_item->link_type == 'header' ? 'selected' : ''; ?>><?php _e( 'Header', 'construct-wp' ); ?></option>
+                <option value="divider" <?php echo $menu_item->link_type == 'divider' ? 'selected' : ''; ?>><?php _e( 'Divider', 'construct-wp' ); ?></option>
+                <option value="text" <?php echo $menu_item->link_type == 'text' ? 'selected' : ''; ?>><?php _e( 'Text', 'construct-wp' ); ?></option>
+            </select>
+        </p>
+
         <?php
     }
 

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
 "Last-Translator: Andrew Palfrey <apalfrey@apalfrey.me>\n"
-"POT-Creation-Date: 2023-09-13 10:14+0000\n"
+"POT-Creation-Date: 2023-09-15 15:08+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -16,72 +16,96 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models/class-construct-wp-email.php:47, models/class-construct-wp-email.php:50
+#: models/class-construct-wp-email.php:67, models/class-construct-wp-email.php:70
 msgid "Email"
 msgstr ""
 
-#: models/class-construct-wp-email.php:49
+#: models/class-construct-wp-email.php:69
 msgid "Emails"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:51
+#: models/class-construct-wp-menu.php:53
 msgid "Primary menu"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:52
+#: models/class-construct-wp-menu.php:54
 msgid "Footer menu"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:71
+#: models/class-construct-wp-menu.php:73
+msgid "Icon"
+msgstr ""
+
+#: models/class-construct-wp-menu.php:84
 msgid "Visibility"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:73
+#: models/class-construct-wp-menu.php:90
 msgid "Always"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:74
+#: models/class-construct-wp-menu.php:91
 msgid "Logged in only"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:75
+#: models/class-construct-wp-menu.php:92
 msgid "Logged out only"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:88
+#: models/class-construct-wp-menu.php:105
 msgid "Logout link"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:178
+#: models/class-construct-wp-menu.php:110
+msgid "Dropdown item type"
+msgstr ""
+
+#: models/class-construct-wp-menu.php:112
+msgid "Link"
+msgstr ""
+
+#: models/class-construct-wp-menu.php:113
+msgid "Header"
+msgstr ""
+
+#: models/class-construct-wp-menu.php:114
+msgid "Divider"
+msgstr ""
+
+#: models/class-construct-wp-menu.php:115
+msgid "Text"
+msgstr ""
+
+#: models/class-construct-wp-utils.php:176
 msgid "Page navigation"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:197
+#: models/class-construct-wp-utils.php:195
 msgid "First"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:201
+#: models/class-construct-wp-utils.php:199
 msgid "Last"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:217
+#: models/class-construct-wp-utils.php:215
 msgid "Previous"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:221
+#: models/class-construct-wp-utils.php:219
 msgid "Next"
 msgstr ""
 
 #. translators: %d Footer column number
-#: models/class-construct-wp.php:198
+#: models/class-construct-wp.php:201
 msgid "Footer %d"
 msgstr ""
 
 #. translators: %d Footer column number
-#: models/class-construct-wp.php:204
+#: models/class-construct-wp.php:207
 msgid "Add widgets here to appear in your footer column %d"
 msgstr ""
 
-#: models/class-construct-wp.php:371
+#: models/class-construct-wp.php:374
 msgid "White Logo"
 msgstr ""

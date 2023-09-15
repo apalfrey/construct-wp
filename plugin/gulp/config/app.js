@@ -277,7 +277,7 @@ module.exports = () => {
                         './src/gutenberg/**/*.jsx',
                         './src/gutenberg/**/*.json',
                     ],
-                    dest: './assets/gutenberg',
+                    dest: './assets/js',
                     base: './src/gutenberg',
                 },
             ],

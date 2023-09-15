@@ -73,6 +73,9 @@ class Construct_WP {
         // Include the current templates styles & scripts.
         add_action( 'wp_enqueue_scripts', array( 'CWP_Assets', 'template_enqueue' ) );
 
+        // Include admin styles & scripts.
+        add_action( 'admin_enqueue_scripts', array( 'CWP_Assets', 'admin_enqueue' ) );
+
         do_action( 'cwp_after_setup' );
 
         self::$loaded = true;
