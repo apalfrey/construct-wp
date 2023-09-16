@@ -31,7 +31,7 @@ class CWP_Gutenberg {
      * @return  void
      */
     public static function enqueue_assets() {
-        wp_enqueue_script( 'cwp-gutenberg', CWP_PLUGIN_URL . '/assets/gutenberg/index.js', array(
+        wp_enqueue_script( 'cwp-gutenberg', CWP_PLUGIN_URL . 'assets/js/construct-wp-gutenberg.js', array(
             'wp-blocks',
             'wp-i18n',
             'wp-edit-post',
@@ -40,7 +40,7 @@ class CWP_Gutenberg {
             'wp-block-editor',
             'wp-plugins',
         ), true );
-        wp_enqueue_style( 'cwp-gutenberg', CWP_PLUGIN_URL . '/assets/css/gutenberg.css', array( 'wp-edit-blocks' ), true );
+        wp_enqueue_style( 'cwp-gutenberg', CWP_PLUGIN_URL . 'assets/css/construct-wp-gutenberg.css', array( 'wp-edit-blocks' ), true );
     }
 
 }

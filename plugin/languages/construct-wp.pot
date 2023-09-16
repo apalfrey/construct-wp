@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
 "Last-Translator: Andrew Palfrey <apalfrey@apalfrey.me>\n"
-"POT-Creation-Date: 2023-09-15 15:41+0000\n"
+"POT-Creation-Date: 2023-09-16 03:32+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -76,6 +76,14 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
+#: models/class-construct-wp-settings.php:81
+msgid "Construct WP Settings"
+msgstr ""
+
+#: models/class-construct-wp-settings.php:82
+msgid "Construct WP"
+msgstr ""
+
 #: models/class-construct-wp-utils.php:176
 msgid "Page navigation"
 msgstr ""
@@ -96,16 +104,20 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
+#: models/class-construct-wp.php:176
+msgid "No feed available"
+msgstr ""
+
 #. translators: %d Footer column number
-#: models/class-construct-wp.php:201
+#: models/class-construct-wp.php:234
 msgid "Footer %d"
 msgstr ""
 
 #. translators: %d Footer column number
-#: models/class-construct-wp.php:207
+#: models/class-construct-wp.php:240
 msgid "Add widgets here to appear in your footer column %d"
 msgstr ""
 
-#: models/class-construct-wp.php:374
+#: models/class-construct-wp.php:407
 msgid "White Logo"
 msgstr ""

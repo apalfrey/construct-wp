@@ -152,7 +152,7 @@ class CWP_Assets {
      * @return void
      */
     public static function admin_enqueue() {
-        wp_enqueue_style( 'cwp-admin', CWP_PLUGIN_URL . '/assets/css/admin.css', true );
+        wp_enqueue_style( 'cwp-admin', CWP_PLUGIN_URL . 'assets/css/construct-wp-admin.css', true );
     }
 
     /**
