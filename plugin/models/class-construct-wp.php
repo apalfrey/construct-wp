@@ -93,16 +93,39 @@ class Construct_WP {
      */
     private static function optimize() {
         // TODO link to settings area.
+        // Disable feeds.
         remove_action( 'wp_head', 'feed_links', 2 );
-        remove_action( 'wp_head', 'feed_links_extra', 2 );
-        remove_action( 'wp_head', 'rsd_link', 2 );
-        remove_action( 'wp_head', 'wlwmanifest_link', 2 );
-        remove_action( 'wp_head', 'index_rel_link', 2 );
-        remove_action( 'wp_head', 'parent_post_rel_link', 2 );
-        remove_action( 'wp_head', 'start_post_rel_link', 2 );
-        remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 2 );
-        remove_action( 'wp_head', 'wp_generator', 2 );
-        remove_action( 'wp_head', 'wp_shortlink_wp_head', 10, 0 );
+        remove_action( 'wp_head', 'feed_links_extra', 3 );
+        add_action( 'do_feed_atom', array( 'Construct_WP', 'disable_feed' ), 1 );
+        add_action( 'do_feed_rdf', array( 'Construct_WP', 'disable_feed' ), 1 );
+        add_action( 'do_feed_rss', array( 'Construct_WP', 'disable_feed' ), 1 );
+        add_action( 'do_feed_rss2', array( 'Construct_WP', 'disable_feed' ), 1 );
+        add_action( 'do_feed_atom_comments', array( 'Construct_WP', 'disable_feed' ), 1 );
+        add_action( 'do_feed_rss2_comments', array( 'Construct_WP', 'disable_feed' ), 1 );
+
+        // Disables RSD link.
+        remove_action( 'wp_head', 'rsd_link' );
+
+        // Disables relational attributes.
+        remove_action( 'wp_head', 'rel_canonical' );
+        remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+
+        // Disables relational links.
+        remove_action( 'wp_head', 'index_rel_link' );
+        remove_action( 'wp_head', 'parent_post_rel_link' );
+        remove_action( 'wp_head', 'start_post_rel_link' );
+        remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
+
+        // Disables WordPress version number.
+        remove_action( 'wp_head', 'wp_generator' );
+        add_filter( 'style_loader_src', array( 'Construct_WP', 'disable_script_version' ), 9999 );
+        add_filter( 'script_loader_src', array( 'Construct_WP', 'disable_script_version' ), 9999 );
+        add_filter( 'the_generator', '__return_empty_string' );
+
+        // Disables JSON API links.
+        remove_action( 'wp_head', 'rest_output_link_wp_head' );
+        remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+        remove_action( 'template_redirect', 'rest_output_link_header', 11 );
 
         // Disables emoji.
         remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -131,15 +154,34 @@ class Construct_WP {
 
         // Removes unnecessary dashboard meta boxes.
         add_action( 'admin_init', function () {
-            remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
-            remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' );
-            remove_meta_box( 'dashboard_primary', 'dashboard', 'normal' );
-            remove_meta_box( 'dashboard_secondary', 'dashboard', 'normal' );
-            remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
-            remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
-            remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
+            // Site health.
+            remove_meta_box( 'dashboard_site_health', 'dashboard', 'normal' );
+            // At a glance.
             remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+            // Activity.
+            remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
+            // Quick draft.
+            remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+            // WordPress events and news.
+            remove_meta_box( 'dashboard_primary', 'dashboard', 'normal' );
         } );
+    }
+
+    public static function disable_feed() {
+        global $wp_query;
+        $wp_query->is_feed = false;
+        $wp_query->set_404();
+        status_header( 404 );
+        nocache_headers();
+        wp_die( __( 'No feed available', 'construct-wp' ), '', 404 );
+    }
+
+    public static function disable_script_version( $src ) {
+        if ( strpos( $src, '?ver=' ) ) {
+            $src = remove_query_arg( 'ver', $src );
+        }
+
+        return $src;
     }
 
     /**
@@ -166,7 +208,7 @@ class Construct_WP {
      */
     public static function remove_admin_bar() {
         if ( ! current_user_can( 'cwp_view_admin_dashboard' ) ) {
-            show_admin_bar( false );
+            add_filter( 'show_admin_bar', '__return_false' );
         }
     }
 
