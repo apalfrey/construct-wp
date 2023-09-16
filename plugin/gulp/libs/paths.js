@@ -17,7 +17,7 @@ function getAllSrc( areas ) {
 }
 
 function relativeSrc( filePath ) {
-    return './' + path.normalize( path.relative( process.cwd(), filePath ) ).replace( /\\/g, '/' )
+    return './' + path.normalize( path.relative( process.cwd(), filePath ) ).replaceAll( '\\', '/' )
 }
 
 function getArea( filePath, areas ) {

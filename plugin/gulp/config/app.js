@@ -271,7 +271,7 @@ module.exports = () => {
         webpack: {
             paths: [
                 {
-                    src: './src/gutenberg/index.js',
+                    src: './src/gutenberg/*.js',
                     watch: [
                         './src/gutenberg/**/*.js',
                         './src/gutenberg/**/*.jsx',

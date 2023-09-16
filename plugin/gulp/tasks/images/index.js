@@ -37,7 +37,7 @@ function checkWatch() {
 }
 
 function startLog( src, dest ) {
-    if ( loggerConfig.full_log ) {
+    if ( loggerConfig.fullLog ) {
         global.iLabCompiler.logger.log( [
             'Optimizing:', src, '->', dest,
         ], loggerColor )
@@ -47,7 +47,7 @@ function startLog( src, dest ) {
 }
 
 function endLog( src, dest ) {
-    if ( loggerConfig.full_log ) {
+    if ( loggerConfig.fullLog ) {
         global.iLabCompiler.logger.log( [
             'Completed:', src, '->', dest,
         ], loggerColor )
@@ -61,13 +61,13 @@ function watchLog() {
 }
 
 function noOptimizeStartLog( src, dest ) {
-    if ( loggerConfig.full_log ) {
+    if ( loggerConfig.fullLog ) {
         global.iLabCompiler.logger.log( `Cannot optimize ${src}, copying to ${dest} instead`, copyColor )
     }
 }
 
 function noOptimizeEndLog( src, dest ) {
-    if ( loggerConfig.full_log ) {
+    if ( loggerConfig.fullLog ) {
         global.iLabCompiler.logger.log( [
             'Completed:', src, '->', dest,
         ], copyColor )

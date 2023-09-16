@@ -51,7 +51,7 @@ function checkWatch() {
 }
 
 function startLog( src, dest ) {
-    if ( loggerConfig.full_log ) {
+    if ( loggerConfig.fullLog ) {
         global.iLabCompiler.logger.log( [
             'Compiling:', src, '->', dest,
         ], loggerColor )
@@ -61,7 +61,7 @@ function startLog( src, dest ) {
 }
 
 function endLog( src, dest ) {
-    if ( loggerConfig.full_log ) {
+    if ( loggerConfig.fullLog ) {
         global.iLabCompiler.logger.log( [
             'Completed:', src, '->', dest,
         ], loggerColor )
@@ -81,13 +81,13 @@ function compile( lint = false ) {
         }
 
         let paths = {
+            src: global.iLabCompiler.libs.relativeSrc( file.path ),
             area: global.iLabCompiler.libs.getArea( global.iLabCompiler.libs.relativeSrc( file.path ), webpackConfig.paths.areas ),
         }
-        paths.area.dest = path.dirname( paths.area.dest + paths.area.src.replace( `${paths.area.base}`, '' ) )
 
-        startLog( paths.area.src, paths.area.dest )
+        startLog( paths.src, paths.area.dest )
 
-        gulp.src( paths.area.src, {
+        gulp.src( paths.src, {
             base: paths.area.base,
         } )
             .pipe( plumber() )
@@ -96,14 +96,14 @@ function compile( lint = false ) {
             .pipe( gulpIf( lint, eslint.failOnError() ) )
             .pipe( webpack( {
                 output: {
-                    filename: path.basename( paths.area.src ),
+                    filename: path.basename( paths.src ),
                 },
                 ...webpackConfig.webpack,
             } ) )
             .pipe( gulpIf( process.env.NODE_ENV != 'development', uglify( webpackConfig.uglify ) ) )
             .pipe( gulp.dest( paths.area.dest ) )
             .on( 'finish', () => {
-                endLog( paths.area.src, paths.area.dest )
+                endLog( paths.src, paths.area.dest )
                 return cb( null, file )
             } )
     } )
@@ -156,9 +156,6 @@ gulp.task( 'webpack:watch', ( cb ) => {
             if ( fs.existsSync( file ) && fs.statSync( file ).isFile() ) {
                 return gulp.src( file )
                     .pipe( plumber() )
-                    .pipe( eslint( webpackConfig.eslint ) )
-                    .pipe( eslint.format() )
-                    .pipe( eslint.failAfterError() )
                     .pipe( compile( true ) )
             }
         } )

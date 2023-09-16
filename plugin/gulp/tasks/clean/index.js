@@ -17,7 +17,7 @@ function checkProcess() {
 }
 
 function startLog( src ) {
-    if ( loggerConfig.full_log ) {
+    if ( loggerConfig.fullLog ) {
         global.iLabCompiler.logger.log( [
             'Cleaning:', src,
         ], loggerColor )
@@ -27,7 +27,7 @@ function startLog( src ) {
 }
 
 function endLog( src ) {
-    if ( loggerConfig.full_log ) {
+    if ( loggerConfig.fullLog ) {
         global.iLabCompiler.logger.log( [
             'Completed:', src,
         ], loggerColor )

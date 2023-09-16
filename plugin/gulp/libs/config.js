@@ -47,7 +47,7 @@ function indent( string, width = 4 ) {
         width = Array.from( { length: width + 1 } ).join( ' ' )
     }
 
-    return string.replace( /^(?!$)/gm, width )
+    return string.replaceAll( /^(?!$)/gm, width )
 }
 
 function rtrim( str, chr ) {

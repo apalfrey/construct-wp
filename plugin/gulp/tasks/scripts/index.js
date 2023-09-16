@@ -43,7 +43,7 @@ function checkWatch() {
 }
 
 function startLog( src, dest ) {
-    if ( loggerConfig.full_log ) {
+    if ( loggerConfig.fullLog ) {
         global.iLabCompiler.logger.log( [
             'Compiling:', src, '->', dest,
         ], loggerColor )
@@ -53,7 +53,7 @@ function startLog( src, dest ) {
 }
 
 function endLog( src, dest ) {
-    if ( loggerConfig.full_log ) {
+    if ( loggerConfig.fullLog ) {
         global.iLabCompiler.logger.log( [
             'Completed:', src, '->', dest,
         ], loggerColor )
