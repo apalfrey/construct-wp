@@ -7,8 +7,8 @@
       "color": "terminal.ansiCyan"
     },
     {
-      "name": "Plugin",
-      "cwd": "./plugin",
+      "name": "Plugin - Core",
+      "cwd": "./plugins/construct-wp",
       "color": "terminal.ansiYellow"
     }
   ]
