@@ -1,0 +1,15 @@
+{
+  "autorun": true,
+  "terminals": [
+    {
+      "name": "Server",
+      "focus": true,
+      "color": "terminal.ansiCyan"
+    },
+    {
+      "name": "Plugin",
+      "cwd": "./plugin",
+      "color": "terminal.ansiYellow"
+    }
+  ]
+}
