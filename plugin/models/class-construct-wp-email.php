@@ -80,6 +80,7 @@ class CWP_Email {
             'has_archive'         => false,
             'exclude_from_search' => true,
             'publicly_queryable'  => false,
+            'menu_icon'           => 'dashicons-email',
             'capabilities'        => array(
                 'edit_post'          => 'edit_cwp_email',
                 'read_post'          => 'read',
