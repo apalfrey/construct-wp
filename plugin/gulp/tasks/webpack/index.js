@@ -1,5 +1,4 @@
 // Core Dependencies
-const fs = require( 'node:fs' )
 const path = require( 'node:path' )
 
 // General Gulp Dependencies
@@ -151,14 +150,10 @@ gulp.task( 'webpack:watch', ( cb ) => {
         ...webpackConfig.paths.watch,
     ], {
         allowEmpty: true,
-    } )
-        .on( 'change', ( file ) => {
-            if ( fs.existsSync( file ) && fs.statSync( file ).isFile() ) {
-                return gulp.src( file )
-                    .pipe( plumber() )
-                    .pipe( compile( true ) )
-            }
-        } )
+        events: [
+            'change',
+        ],
+    }, gulp.series( 'webpack:compile' ) )
         // TODO add on delete?
         .on( 'error', ( error ) => {
             global.iLabCompiler.logger.log( [
