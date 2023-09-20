@@ -92,81 +92,138 @@ class Construct_WP {
      * @return  void
      */
     private static function optimize() {
-        // TODO link to settings area.
+        $optimize = boolval( get_option( 'cwp_optimize' ) );
+
+        if ( ! $optimize ) {
+            return;
+        }
+
+        $wp_bloat = get_option( 'cwp_optimize_wp_bloat' );
+
         // Disable feeds.
-        remove_action( 'wp_head', 'feed_links', 2 );
-        remove_action( 'wp_head', 'feed_links_extra', 3 );
-        add_action( 'do_feed_atom', array( 'Construct_WP', 'disable_feed' ), 1 );
-        add_action( 'do_feed_rdf', array( 'Construct_WP', 'disable_feed' ), 1 );
-        add_action( 'do_feed_rss', array( 'Construct_WP', 'disable_feed' ), 1 );
-        add_action( 'do_feed_rss2', array( 'Construct_WP', 'disable_feed' ), 1 );
-        add_action( 'do_feed_atom_comments', array( 'Construct_WP', 'disable_feed' ), 1 );
-        add_action( 'do_feed_rss2_comments', array( 'Construct_WP', 'disable_feed' ), 1 );
+        if ( $wp_bloat['feeds'] ) {
+            remove_action( 'wp_head', 'feed_links', 2 );
+            remove_action( 'wp_head', 'feed_links_extra', 3 );
+            add_action( 'do_feed_atom', array( 'Construct_WP', 'disable_feed' ), 1 );
+            add_action( 'do_feed_rdf', array( 'Construct_WP', 'disable_feed' ), 1 );
+            add_action( 'do_feed_rss', array( 'Construct_WP', 'disable_feed' ), 1 );
+            add_action( 'do_feed_rss2', array( 'Construct_WP', 'disable_feed' ), 1 );
+            add_action( 'do_feed_atom_comments', array( 'Construct_WP', 'disable_feed' ), 1 );
+            add_action( 'do_feed_rss2_comments', array( 'Construct_WP', 'disable_feed' ), 1 );
+        }
 
         // Disables RSD link.
-        remove_action( 'wp_head', 'rsd_link' );
+        if ( $wp_bloat['rsd_link'] ) {
+            remove_action( 'wp_head', 'rsd_link' );
+        }
 
         // Disables relational attributes.
-        remove_action( 'wp_head', 'rel_canonical' );
-        remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+        if ( $wp_bloat['rel_atts'] ) {
+            remove_action( 'wp_head', 'rel_canonical' );
+            remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+        }
 
         // Disables relational links.
-        remove_action( 'wp_head', 'index_rel_link' );
-        remove_action( 'wp_head', 'parent_post_rel_link' );
-        remove_action( 'wp_head', 'start_post_rel_link' );
-        remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
+        if ( $wp_bloat['rel_links'] ) {
+            remove_action( 'wp_head', 'index_rel_link' );
+            remove_action( 'wp_head', 'parent_post_rel_link' );
+            remove_action( 'wp_head', 'start_post_rel_link' );
+            remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
+        }
 
         // Disables WordPress version number.
-        remove_action( 'wp_head', 'wp_generator' );
-        add_filter( 'style_loader_src', array( 'Construct_WP', 'disable_script_version' ), 9999 );
-        add_filter( 'script_loader_src', array( 'Construct_WP', 'disable_script_version' ), 9999 );
-        add_filter( 'the_generator', '__return_empty_string' );
+        if ( $wp_bloat['version_number'] ) {
+            remove_action( 'wp_head', 'wp_generator' );
+            add_filter( 'style_loader_src', array( 'Construct_WP', 'disable_script_version' ), 9999 );
+            add_filter( 'script_loader_src', array( 'Construct_WP', 'disable_script_version' ), 9999 );
+            add_filter( 'the_generator', '__return_empty_string' );
+        }
 
         // Disables JSON API links.
-        remove_action( 'wp_head', 'rest_output_link_wp_head' );
-        remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
-        remove_action( 'template_redirect', 'rest_output_link_header', 11 );
+        if ( $wp_bloat['json_api_links'] ) {
+            remove_action( 'wp_head', 'rest_output_link_wp_head' );
+            remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+            remove_action( 'template_redirect', 'rest_output_link_header', 11 );
+        }
 
         // Disables emoji.
-        remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-        remove_action( 'wp_print_styles', 'print_emoji_styles' );
-        remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-        remove_action( 'admin_print_styles', 'print_emoji_styles' );
+        if ( $wp_bloat['emoji'] ) {
+            remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+            remove_action( 'wp_print_styles', 'print_emoji_styles' );
+            remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+            remove_action( 'admin_print_styles', 'print_emoji_styles' );
+        }
 
         // Disables XML-RPC.
-        add_filter( 'xmlrpc_enabled', '__return_false' );
+        if ( $wp_bloat['xmlrpc'] ) {
+            add_filter( 'xmlrpc_enabled', '__return_false' );
+        }
 
         // Disables jQuery migrate.
-        add_action( 'wp_enqueue_scripts', function () {
-            if ( ! is_admin() ) {
-                wp_deregister_script( 'jquery' );
-            }
-        } );
+        if ( $wp_bloat['jquery_migrate'] ) {
+            add_action( 'wp_enqueue_scripts', function () {
+                if ( ! is_admin() ) {
+                    wp_deregister_script( 'jquery' );
+                }
+            } );
+        }
 
         // Disables self pingback.
-        add_action( 'pre_ping', function ( &$links ) {
-            foreach ( $links as $l => $link ) {
-                if ( strpos( $link, get_option( 'home' ) ) === 0 ) {
-                    unset( $links[$l] );
+        if ( $wp_bloat['self_pingback'] ) {
+            add_action( 'pre_ping', function ( &$links ) {
+                foreach ( $links as $l => $link ) {
+                    if ( strpos( $link, get_option( 'home' ) ) === 0 ) {
+                        unset( $links[$l] );
+                    }
                 }
-            }
-        } );
+            } );
+        }
 
         // Removes unnecessary dashboard meta boxes.
         add_action( 'admin_init', function () {
+            $dashboard_options = get_option( 'cwp_optimize_dashboard_meta' );
+
+            // Welcome panel.
+            if ( $dashboard_options['welcome'] ) {
+                remove_action( 'welcome_panel', 'wp_welcome_panel' );
+            }
+
             // Site health.
-            remove_meta_box( 'dashboard_site_health', 'dashboard', 'normal' );
+            if ( $dashboard_options['site_health'] ) {
+                remove_meta_box( 'dashboard_site_health', 'dashboard', 'normal' );
+            }
+
             // At a glance.
-            remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+            if ( $dashboard_options['at_a_glance'] ) {
+                remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+            }
+
             // Activity.
-            remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
+            if ( $dashboard_options['activity'] ) {
+                remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
+            }
+
             // Quick draft.
-            remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+            if ( $dashboard_options['quick_draft'] ) {
+                remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+            }
+
             // WordPress events and news.
-            remove_meta_box( 'dashboard_primary', 'dashboard', 'normal' );
+            if ( $dashboard_options['events_and_news'] ) {
+                remove_meta_box( 'dashboard_primary', 'dashboard', 'normal' );
+            }
         } );
     }
 
+    /**
+     * Disables RSS feeds, displaying a custom message & returning 404
+     *
+     * @see https://library.wpcode.com/snippet/924zd4og/
+     *
+     * @since   1.0.0
+     * @access  public
+     * @return  void
+     */
     public static function disable_feed() {
         global $wp_query;
         $wp_query->is_feed = false;
@@ -176,6 +233,17 @@ class Construct_WP {
         wp_die( __( 'No feed available', 'construct-wp' ), '', 404 );
     }
 
+    /**
+     * Removes the version attribute from enqueued scripts & styles
+     *
+     * @see https://developer.wordpress.org/reference/hooks/style_loader_src/
+     * @see https://developer.wordpress.org/reference/hooks/script_loader_src/
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   string  $src    Script/style loader source path
+     * @return  string          Script/style loader source path without ver attribute
+     */
     public static function disable_script_version( $src ) {
         if ( strpos( $src, '?ver=' ) ) {
             $src = remove_query_arg( 'ver', $src );
@@ -207,7 +275,9 @@ class Construct_WP {
      * @return  void
      */
     public static function remove_admin_bar() {
-        if ( ! current_user_can( 'cwp_view_admin_dashboard' ) ) {
+        $setting = boolval( get_option( 'cwp_remove_admin_bar' ) );
+
+        if ( $setting && ! current_user_can( 'cwp_view_admin_dashboard' ) ) {
             add_filter( 'show_admin_bar', '__return_false' );
         }
     }
@@ -256,7 +326,9 @@ class Construct_WP {
      * @return  void
      */
     public static function restrict_admin_access() {
-        if ( is_admin() && ! wp_doing_ajax() && is_user_logged_in() && ! current_user_can( 'cwp_view_admin_dashboard' ) && ! is_super_admin() ) {
+        $setting = boolval( get_option( 'cwp_restrict_admin_access' ) );
+
+        if ( $setting && is_admin() && ! wp_doing_ajax() && is_user_logged_in() && ! current_user_can( 'cwp_view_admin_dashboard' ) && ! is_super_admin() ) {
             wp_safe_redirect( home_url() );
             exit;
         }

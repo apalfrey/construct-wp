@@ -1,0 +1,253 @@
+// Bootstrap functions first to manipulate colors, SVGs, calc, etc
+@import "node_modules/bootstrap/scss/functions";
+// Remainder of the Bootstrap variables
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/variables-dark";
+
+// Remainder of required Bootstrap parts
+@import "node_modules/bootstrap/scss/maps";
+@import "node_modules/bootstrap/scss/mixins";
+
+$cwp-primary: #11bd0b;
+$cwp-secondary: #14143b;
+
+body {
+    background-color: #e9ecef;
+}
+
+#wpcontent {
+    padding-left: 0;
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+}
+
+#construct-wp-settings {
+    --wp-components-color-accent: #{$cwp-primary};
+    --wp-components-color-accent--rgb: #{to-rgb($cwp-primary)};
+    --wp-components-color-accent-darker-10: #{shade-color($cwp-primary, 10%)};
+    --wp-components-color-accent-darker-10--rgb: #{to-rgb(shade-color($cwp-primary, 10%))};
+    --wp-components-color-accent-darker-20: #{shade-color($cwp-primary, 20%)};
+    --wp-components-color-accent-darker-20--rgb: #{to-rgb(shade-color($cwp-primary, 20%))};
+    --wp-components-color-accent-inverted: #{$white};
+    --wp-components-color-accent-inverted--rgb: #{to-rgb($white)};
+    --wp-components-color-accent-background: #{$white};
+    --wp-components-color-accent-background--rgb: #{to-rgb($white)};
+    --wp-components-color-accent-foreground: #{$cwp-secondary};
+    --wp-components-color-accent-foreground--to-rgb: #{to-rgb($cwp-secondary)};
+    --wp-components-color-accent-foreground-inverted: #{$white};
+    --wp-components-color-accent-foreground-inverted--to-rgb: #{to-rgb($white)};
+
+    color: var(--wp-components-color-accent-foreground);
+
+    &,
+    * {
+        font-size: 1rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-top: 0;
+        margin-bottom: .5rem;
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--wp-components-color-accent-foreground);
+    }
+
+    h1 {
+        font-size: calc(1.375rem + 1.5vw);
+
+        @media (min-width: 1200px) {
+            font-size: 2.5rem;
+        }
+    }
+
+    h2 {
+        margin-bottom: 1.5rem;
+        font-size: calc(1.325rem + .9vw);
+
+        @media (min-width: 1200px) {
+            font-size: 2rem;
+        }
+    }
+
+    h3 {
+        font-size: calc(1.3rem + .6vw);
+
+        @media (min-width: 1200px) {
+            font-size: 1.75rem;
+        }
+    }
+
+    h4 {
+        font-size: calc(1.275rem + .3vw);
+
+        @media (min-width: 1200px) {
+            font-size: 1.5rem;
+        }
+    }
+
+    h5 {
+        font-size: 1.25rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+    hr {
+        margin: 1rem 0;
+        color: inherit;
+        border: 0;
+        border-top: 1px solid;
+        opacity: .25;
+    }
+
+    .construct-wp__header,
+    .construct-wp__main {
+        background-color: var(--wp-components-color-accent-background);
+    }
+
+    .construct-wp__header {
+        padding: 1rem 1.5rem 0;
+    }
+
+    .construct-wp__main {
+        padding: 1.25rem 2rem;
+        margin: 1rem;
+    }
+
+    .construct-wp__container {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+
+        @media (min-width: 576px) {
+            max-width: 540px;
+        }
+
+        @media (min-width: 768px) {
+            max-width: 720px;
+        }
+
+        @media (min-width: 992px) {
+            max-width: 960px;
+        }
+
+        @media (min-width: 1200px) {
+            max-width: 1140px;
+        }
+
+        @media (min-width: 1400px) {
+            max-width: 1320px;
+        }
+    }
+
+    .construct-wp__logo {
+        max-height: 50px;
+        margin-right: 1rem;
+    }
+
+    .components-tab-panel__tabs-item {
+        padding-top: 0;
+    }
+
+    .components-tab-panel__tab-content {
+        display: none;
+    }
+
+    .components-base-control__help {
+        color: rgb(var(--wp-components-color-accent-foreground--to-rgb), .675);
+    }
+
+    .construct-wp__checklist {
+        columns: auto 2;
+        column-gap: 2rem;
+
+        .components-base-control__field {
+            margin-bottom: .5rem;
+        }
+    }
+
+
+    .construct-wp__loading-spinner {
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        vertical-align: -.125em;
+        border: .25em solid #ced4da;
+        border-right-color: var(--wp-components-color-accent);
+        // stylelint-disable-next-line property-disallowed-list
+        border-radius: 50%;
+        animation: .75s linear infinite spinner-border;
+    }
+
+    .construct-wp__title {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .construct-wp__version-badge {
+        display: inline-block;
+        padding: .35em .65em;
+        font-size: .9rem;
+        line-height: 1;
+        color: var(--wp-components-color-accent-inverted);
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        background-color: var(--wp-components-color-accent);
+        border: 1px solid var(--wp-components-color-accent);
+        /* stylelint-disable-next-line property-disallowed-list */
+        border-radius: .375rem;
+    }
+
+    .construct-wp__notices {
+        .components-snackbar {
+            position: fixed;
+            bottom: .5rem;
+            margin-left: .5rem;
+
+            .components-snackbar__content-with-icon {
+                align-items: center;
+                margin-left: 0;
+            }
+
+            .components-snackbar__icon {
+                position: static;
+                margin-right: .5rem;
+                /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+                font-family: dashicons;
+                font-size: 1.25rem;
+                font-style: normal;
+                line-height: 1;
+                vertical-align: top;
+            }
+        }
+    }
+}
+
+@keyframes spinner-border {
+    to {
+        transform: rotate(360deg);
+    }
+}
