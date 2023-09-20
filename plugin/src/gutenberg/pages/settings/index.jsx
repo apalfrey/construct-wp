@@ -1,5 +1,3 @@
-// See https://wholesomecode.net/create-a-settings-page-using-wordpress-block-editor-gutenberg-components/
-// See https://github.com/HardeepAsrani/my-awesome-plugin/blob/master/src/index.js
 import {
     Component,
 } from '@wordpress/element'
@@ -27,6 +25,7 @@ class SettingsPage extends Component {
 
         this.state = {
             currentTab: typeof requested === 'string' ? requested.replace( 'cwp-', '' ) : '',
+            siteUrl: window.location.origin + window.location.pathname + '?page=construct_wp_settings',
         }
     }
 
@@ -70,7 +69,7 @@ class SettingsPage extends Component {
                             tabs={tabs}
                             initialTabName={this.state.currentTab}
                             onSelect={( tabName ) => {
-                                window.history.replaceState( null, '', 'http://localhost:8000/wp-admin/options-general.php?page=construct_wp_settings&tab=cwp-' + tabName )
+                                window.history.replaceState( null, '', `${this.state.siteUrl}&tab=cwp-${tabName}` )
                                 this.setState( {
                                     currentTab: tabName,
                                 } )
