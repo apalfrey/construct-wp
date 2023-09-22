@@ -13,7 +13,7 @@
 class CWP_Email {
 
     /**
-     * Initialises the gutenberg functionality
+     * Initialises the email functionality
      *
      * @since   1.0.0
      * @access  public
@@ -36,7 +36,6 @@ class CWP_Email {
         $email_caps = array(
             'edit_cwp_email',
             'delete_cwp_email',
-            'edit_cwp_email',
             'edit_others_cwp_email',
             'publish_cwp_email',
             'read_private_cwp_email',
