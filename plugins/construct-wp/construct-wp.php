@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Construct WP
+ * Plugin Name:       ConstructWP
  * Plugin URI:        https://github.com/apalfrey/construct-wp
  * Description:       Some info right here
  * Version:           1.0.0

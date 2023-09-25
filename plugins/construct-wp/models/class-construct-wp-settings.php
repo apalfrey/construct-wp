@@ -153,8 +153,8 @@ class CWP_Settings {
      */
     public static function settings_page() {
         add_options_page(
-            __( 'Construct WP Settings', 'construct-wp' ),
-            __( 'Construct WP', 'construct-wp' ),
+            __( 'ConstructWP Settings', 'construct-wp' ),
+            __( 'ConstructWP', 'construct-wp' ),
             'manage_options',
             'construct_wp_settings',
             function () {

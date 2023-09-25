@@ -56,11 +56,11 @@ class SettingsPage extends Component {
                     <div className="construct-wp__container">
                         <div className="construct-wp__title">
                             <CWPLogo
-                                title={__( 'Construct WP', 'construct-wp' )}
+                                title={__( 'ConstructWP', 'construct-wp' )}
                                 className="construct-wp__logo"
                             />
                             <VisuallyHidden>
-                                { __( 'Construct WP', 'construct-wp' ) }
+                                { __( 'ConstructWP', 'construct-wp' ) }
                             </VisuallyHidden>
                             <span className="construct-wp__version-badge">v{cwpSettingsData.version}</span>
                         </div>
