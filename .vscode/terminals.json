@@ -1,15 +1,15 @@
 {
-  "autorun": true,
-  "terminals": [
-    {
-      "name": "Server",
-      "focus": true,
-      "color": "terminal.ansiCyan"
-    },
-    {
-      "name": "Plugin - Core",
-      "cwd": "./plugins/construct-wp",
-      "color": "terminal.ansiYellow"
-    }
-  ]
+    "autorun": true,
+    "terminals": [
+        {
+            "name": "Server",
+            "focus": true,
+            "color": "terminal.ansiCyan"
+        },
+        {
+            "name": "Plugin - Core",
+            "cwd": "./plugins/construct-wp",
+            "color": "terminal.ansiYellow"
+        }
+    ]
 }
