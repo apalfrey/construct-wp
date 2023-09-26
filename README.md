@@ -37,6 +37,6 @@ Yes! Models and controllers can be auto-initiated if the class has a static meth
 
 ## Changelog
 
-### 1.0.0 - 2023-09-26
+### 0.1.0 - 2023-09-26
 
 * Initial version
