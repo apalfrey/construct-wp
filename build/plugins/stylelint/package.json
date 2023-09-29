@@ -1,0 +1,11 @@
+{
+  "name": "@build/stylelint",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "fancy-log": "^2.0.0",
+    "plugin-error": "^2.0.1",
+    "stylelint": "^15.10.3"
+  }
+}

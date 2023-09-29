@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "scripts": {
+    "core:start": "yarn workspace construct-wp start",
+    "core:build": "yarn workspace construct-wp build",
+    "core:watch": "yarn workspace construct-wp watch"
+  },
+  "workspaces": [
+    "build/plugins/rollup",
+    "build/plugins/stylelint",
+    "build/tasks/archive",
+    "build/tasks/browsersync",
+    "build/tasks/clean",
+    "build/tasks/copy",
+    "build/tasks/default",
+    "build/tasks/images",
+    "build/tasks/scripts",
+    "build/tasks/styles",
+    "build/tasks/translate",
+    "build/tasks/webpack",
+    "build/utils",
+    "plugins/construct-wp"
+  ]
+}

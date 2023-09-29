@@ -1,43 +1,14 @@
 require( 'dotenv' ).config()
 
-const libs = require( './gulp/lib.js' )
+const gulp = require( 'gulp' )
 
-libs.checkConfig( './gulp/config/app.js', './gulp/libs/samples/app.sample.js' )
-
-global.iLabCompiler = {
-    config: {
-        app: require( './gulp/config/app.js' )(),
-    },
-    libs,
-}
-
-global.iLabCompiler.logger = require( './gulp/libs/logger.js' )
-
-libs.requireTasks()
-
-libs.defineSeries( 'process', [
-    'clean',
-    'copy',
-    'images',
-    'css',
-    'js',
-    'webpack',
-    'checktextdomain',
-    'translate',
-    'archive',
-] )
-
-libs.defineSeries( 'watch', [
-    'copy:watch',
-    'images:watch',
-    'css:watch',
-    'js:watch',
-    'webpack:watch',
-    'ftp:watch',
-    'translate:watch',
-] )
-
-libs.defineSeries( 'default', [
-    'process',
-    'watch',
-] )
+require( '@build/clean' )( gulp )
+// require( '@build/copy' )( gulp )
+// require( '@build/images' )( gulp )
+require( '@build/styles' )( gulp )
+// require( '@build/scripts' )( gulp )
+require( '@build/webpack' )( gulp )
+require( '@build/translate' )( gulp )
+require( '@build/browsersync' )( gulp )
+require( '@build/archive' )( gulp )
+require( '@build/default' )( gulp )

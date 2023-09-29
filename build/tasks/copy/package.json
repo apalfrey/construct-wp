@@ -1,0 +1,13 @@
+{
+  "name": "@build/copy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@build/utils": "^1.0.0",
+    "merge-stream": "^2.0.0"
+  },
+  "peerDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
