@@ -4,6 +4,7 @@ const plumber = require( 'gulp-plumber' )
 
 // Local utilities
 const logger = require( '@build/utils/log' )
+const stream = require( '@build/utils/stream' )
 
 // Config
 const config = require( `${process.cwd()}/.gulpconfig.js` ).archive
@@ -18,23 +19,25 @@ module.exports = ( {
         if ( config.process ) {
             logger.log( 'Archiving...', loggerColor )
 
-            let filename = config.filename + ( config.options.gzip && !config.filename.endsWith( '.gz' ) ? '.gz' : '' )
+            return stream( config, ( area ) => {
+                let filename = area.filename + ( area.options.gzip && !area.filename.endsWith( '.gz' ) ? '.gz' : '' )
 
-            return src( [
-                ...config.paths.src,
-                '!build/**',
-                '!node_modules/**',
-                '!gulpfile.js',
-                '!package.json',
-                '!package-lock.json',
-                '!yarn.lock',
-            ], config.srcOptions )
-                .pipe( plumber() )
-                .pipe( archiver( filename, config.format, config.options ) )
-                .pipe( dest( config.paths.dest ) )
-                .on( 'finish', () => {
-                    logger.log( 'Archiving complete!', loggerColor )
-                } )
+                return src( [
+                    ...area.paths.src,
+                    '!build/**',
+                    '!node_modules/**',
+                    '!gulpfile.js',
+                    '!package.json',
+                    '!package-lock.json',
+                    '!yarn.lock',
+                ], area.srcOptions )
+                    .pipe( plumber() )
+                    .pipe( archiver( filename, area.format, area.options ) )
+                    .pipe( dest( area.paths.dest ) )
+            }, () => {
+                logger.log( 'Archiving complete!', loggerColor )
+                return cb()
+            } )
         }
 
         logger.disabled( 'Archiving' )

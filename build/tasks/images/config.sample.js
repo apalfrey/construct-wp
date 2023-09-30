@@ -3,15 +3,22 @@ module.exports = {
     images: {
         process: true,
         watch: true,
-        paths: {
-            src: './src/images/**/*',
-            watch: './src/images/**/*',
-            dest: './assets/images',
-        },
-        srcOptions: {
-            allowEmpty: true,
-            base: './src/images',
-        },
+        areas: [
+            {
+                paths: {
+                    src: './src/images/**/*',
+                    watch: './src/images/**/*',
+                    dest: './assets/images',
+                },
+                srcOptions: {
+                    allowEmpty: true,
+                    base: './src/images',
+                },
+                pipes: {
+                    // Put any pipe overrides here
+                },
+            },
+        ],
         pipes: {
             sharp: {
                 sharpOptions: {

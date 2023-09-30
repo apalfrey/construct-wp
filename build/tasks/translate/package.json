@@ -9,8 +9,5 @@
     "gulp-plumber": "^1.2.1",
     "gulp-sort": "^2.0.0",
     "gulp-wp-pot": "^2.5.0"
-  },
-  "peerDependencies": {
-    "gulp": "^4.0.2"
   }
 }

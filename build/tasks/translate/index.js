@@ -6,6 +6,8 @@ const sort = require( 'gulp-sort' )
 
 // Local utilities
 const logger = require( '@build/utils/log' )
+const stream = require( '@build/utils/stream' )
+const watchFiles = require( '@build/utils/watch-files' )
 
 // Config
 const config = require( `${process.cwd()}/.gulpconfig.js` ).translate
@@ -22,15 +24,17 @@ module.exports = ( {
         if ( config.process ) {
             logger.log( 'Translating files...', loggerColor )
 
-            return src( config.paths.src, config.srcOptions )
-                .pipe( plumber() )
-                .pipe( sort() )
-                .pipe( checktextdomain( config.pipes.checktextdomain ) )
-                .pipe( pot( config.pipes.pot ) )
-                .pipe( dest( config.paths.dest ) )
-                .on( 'finish', () => {
-                    logger.log( 'Translating files complete!', loggerColor )
-                } )
+            return stream( config, ( area, pipes ) => {
+                return src( area.paths.src, area.srcOptions )
+                    .pipe( plumber() )
+                    .pipe( sort() )
+                    .pipe( checktextdomain( pipes.checktextdomain ) )
+                    .pipe( pot( pipes.pot ) )
+                    .pipe( dest( area.paths.dest ) )
+            }, () => {
+                logger.log( 'Translating files complete!', loggerColor )
+                return cb()
+            } )
         }
 
         logger.disabled( 'Translating files' )
@@ -42,7 +46,7 @@ module.exports = ( {
         if ( config.process && config.watch ) {
             logger.log( 'Watching PHP files for changes...', loggerColor )
 
-            watch( config.paths.watch, {
+            watch( watchFiles( config.areas ), {
                 events: [
                     'change',
                 ],

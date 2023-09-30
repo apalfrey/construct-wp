@@ -1,5 +1,6 @@
 // External dependencies
 const filter = require( 'gulp-filter' )
+const mergeStream = require( 'merge-stream' )
 const mimeTypes = require( 'mime-types' )
 const plumber = require( 'gulp-plumber' )
 const sharp = require( 'gulp-optimize-images' )
@@ -7,6 +8,8 @@ const svgo = require( 'gulp-svgmin' )
 
 // Local utilities
 const logger = require( '@build/utils/log' )
+const stream = require( '@build/utils/stream' )
+const watchFiles = require( '@build/utils/watch-files' )
 
 // Config
 const config = require( `${process.cwd()}/.gulpconfig.js` ).images
@@ -38,19 +41,20 @@ module.exports = ( {
                 restore: true,
             } )
 
-            return src( config.paths.src, config.srcOptions )
-                .pipe( plumber() )
-                .pipe( sharpFilter )
-                .pipe( sharp( config.pipes.sharp ) )
-                .pipe( sharpFilter.restore )
-                .pipe( svgoFilter )
-                .pipe( svgo( config.pipes.svgo ) )
-                .pipe( svgoFilter.restore )
-                .pipe( dest( config.paths.dest ) )
-                .on( 'finish', () => {
-                    logger.log( 'Optimizing images complete!', loggerColor )
-                } )
-
+            return stream( config, ( area, pipes ) => {
+                return src( area.paths.src, area.srcOptions )
+                    .pipe( plumber() )
+                    .pipe( sharpFilter )
+                    .pipe( sharp( pipes.sharp ) )
+                    .pipe( sharpFilter.restore )
+                    .pipe( svgoFilter )
+                    .pipe( svgo( pipes.svgo ) )
+                    .pipe( svgoFilter.restore )
+                    .pipe( dest( area.paths.dest ) )
+            }, () => {
+                logger.log( 'Optimizing images complete!', loggerColor )
+                return cb()
+            } )
         }
 
         logger.disabled( 'Optimizing images' )
@@ -62,7 +66,7 @@ module.exports = ( {
         if ( config.process && config.watch ) {
             logger.log( 'Watching images for changes...', loggerColor )
 
-            watch( config.paths.watch, {
+            watch( watchFiles( config.areas ), {
                 events: [
                     'change',
                 ],

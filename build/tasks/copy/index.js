@@ -1,8 +1,7 @@
-// External dependencies
-const mergeStream = require( 'merge-stream' )
-
 // Local utilities
 const logger = require( '@build/utils/log' )
+const stream = require( '@build/utils/stream' )
+const watchFiles = require( '@build/utils/watch-files' )
 
 // Config
 const config = require( `${process.cwd()}/.gulpconfig.js` ).copy
@@ -19,19 +18,12 @@ module.exports = ( {
         if ( config.process ) {
             logger.log( 'Copying files...', loggerColor )
 
-            let streams = mergeStream()
-            config.areas.forEach( ( area ) => {
-                let stream = src( area.paths.src, area.srcOptions )
+            return stream( config, ( area ) => {
+                return src( area.paths.src, area.srcOptions )
                     .pipe( dest( area.paths.dest ) )
-
-                streams.add( stream )
-            } )
-
-            return streams.on( 'unpipe', () => {
-                if ( streams.isEmpty() ) {
-                    logger.log( 'Copying files complete!', loggerColor )
-                    return cb()
-                }
+            }, () => {
+                logger.log( 'Copying files complete!', loggerColor )
+                return cb()
             } )
         }
 
@@ -44,19 +36,7 @@ module.exports = ( {
         if ( config.process && config.watch ) {
             logger.log( 'Watching copy files for changes...', loggerColor )
 
-            let watchFiles = []
-
-            config.areas.forEach( ( area ) => {
-                if ( Array.isArray( area.paths.watch ) ) {
-                    watchFiles.push( ...area.paths.watch )
-                } else {
-                    watchFiles.push( area.paths.watch )
-                }
-            } )
-
-            watchFiles = [...new Set( watchFiles )]
-
-            watch( watchFiles, {
+            watch( watchFiles( config.areas ), {
                 events: [
                     'change',
                 ],

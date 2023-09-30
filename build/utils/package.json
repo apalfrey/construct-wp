@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@stgdp/fancy-logger": "^1.0.0"
+    "@stgdp/fancy-logger": "^1.0.0",
+    "merge-stream": "^2.0.0"
   }
 }

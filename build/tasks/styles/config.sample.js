@@ -3,33 +3,40 @@ module.exports = {
     styles: {
         process: true,
         watch: true,
-        paths: {
-            src: './src/scss/styles.scss',
-            watch: './src/scss/**/*',
-            dest: './dist/css',
-        },
-        srcOptions: {
-            allowEmpty: true,
-            base: './src/scss',
-            sourcemaps: true,
-        },
-        destOptions: {
-            sourcemaps: '.',
-        },
-        filters: {
-            lint: [
-                '**/*.scss',
-            ],
-            build: [
-                '**/*.scss',
-                '!**/_*.scss',
-            ],
-        },
-        minify: {
-            process: true,
-            separate: false,
-        },
+        areas: [
+            {
+                paths: {
+                    src: './src/scss/styles.scss',
+                    watch: './src/scss/**/*',
+                    dest: './dist/css',
+                },
+                srcOptions: {
+                    allowEmpty: true,
+                    base: './src/scss',
+                    sourcemaps: true,
+                },
+                destOptions: {
+                    sourcemaps: '.',
+                },
+                minify: {
+                    process: true,
+                    separate: false,
+                },
+                pipes: {
+                    // Put any pipe overrides here
+                },
+            },
+        ],
         pipes: {
+            filters: {
+                lint: [
+                    '**/*.scss',
+                ],
+                build: [
+                    '**/*.scss',
+                    '!**/_*.scss',
+                ],
+            },
             stylelint: {
                 failOnError: true,
                 failAfterError: false,

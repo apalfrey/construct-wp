@@ -18,8 +18,5 @@
     "postcss": "^8.4.30",
     "sass": "^1.68.0",
     "stylelint": "^15.10.3"
-  },
-  "peerDependencies": {
-    "gulp": "^4.0.2"
   }
 }

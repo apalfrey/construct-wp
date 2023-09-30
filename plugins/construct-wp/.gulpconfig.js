@@ -34,15 +34,22 @@ module.exports = {
     images: {
         process: false,
         watch: true,
-        paths: {
-            src: './src/images/**/*',
-            watch: './src/images/**/*',
-            dest: './assets/images',
-        },
-        srcOptions: {
-            allowEmpty: true,
-            base: './src/images',
-        },
+        areas: [
+            {
+                paths: {
+                    src: './src/images/**/*',
+                    watch: './src/images/**/*',
+                    dest: './assets/images',
+                },
+                srcOptions: {
+                    allowEmpty: true,
+                    base: './src/images',
+                },
+                pipes: {
+                    // Put any pipe overrides here
+                },
+            },
+        ],
         pipes: {
             sharp: {
                 sharpOptions: {
@@ -90,33 +97,40 @@ module.exports = {
     styles: {
         process: true,
         watch: true,
-        paths: {
-            src: './src/scss/**/*',
-            watch: './src/scss/**/*',
-            dest: './assets/css',
-        },
-        srcOptions: {
-            allowEmpty: true,
-            base: './src/scss',
-            sourcemaps: true,
-        },
-        destOptions: {
-            sourcemaps: '.',
-        },
-        filters: {
-            lint: [
-                '**/*.scss',
-            ],
-            build: [
-                '**/*.scss',
-                '!**/_*.scss',
-            ],
-        },
-        minify: {
-            process: process.env.NODE_ENV !== 'development',
-            separate: false,
-        },
+        areas: [
+            {
+                paths: {
+                    src: './src/scss/**/*',
+                    watch: './src/scss/**/*',
+                    dest: './assets/css',
+                },
+                srcOptions: {
+                    allowEmpty: true,
+                    base: './src/scss',
+                    sourcemaps: true,
+                },
+                destOptions: {
+                    sourcemaps: '.',
+                },
+                minify: {
+                    process: process.env.NODE_ENV !== 'development',
+                    separate: false,
+                },
+                pipes: {
+                    // Put any pipe overrides here
+                },
+            },
+        ],
         pipes: {
+            filters: {
+                lint: [
+                    '**/*.scss',
+                ],
+                build: [
+                    '**/*.scss',
+                    '!**/_*.scss',
+                ],
+            },
             stylelint: {
                 failOnError: true,
                 failAfterError: false,
@@ -158,33 +172,40 @@ module.exports = {
     scripts: {
         process: false,
         watch: true,
-        paths: {
-            src: './src/js/**/*',
-            watch: './src/js/**/*',
-            dest: './assets/js',
-        },
-        srcOptions: {
-            allowEmpty: true,
-            base: './src/js',
-            sourcemaps: true,
-        },
-        destOptions: {
-            sourcemaps: '.',
-        },
-        filters: {
-            lint: [
-                '**/*.js',
-            ],
-            build: [
-                '**/*.js',
-                '!**/libs/**/*.js',
-            ],
-        },
-        minify: {
-            process: process.env.NODE_ENV !== 'development',
-            separate: false,
-        },
+        areas: [
+            {
+                paths: {
+                    src: './src/js/**/*',
+                    watch: './src/js/**/*',
+                    dest: './assets/js',
+                },
+                srcOptions: {
+                    allowEmpty: true,
+                    base: './src/js',
+                    sourcemaps: true,
+                },
+                destOptions: {
+                    sourcemaps: '.',
+                },
+                minify: {
+                    process: process.env.NODE_ENV !== 'development',
+                    separate: false,
+                },
+                pipes: {
+                    // Put any pipe overrides here
+                },
+            },
+        ],
         pipes: {
+            filters: {
+                lint: [
+                    '**/*.js',
+                ],
+                build: [
+                    '**/*.js',
+                    '!**/libs/**/*.js',
+                ],
+            },
             eslint: {
                 warnIgnored: true,
             },
@@ -220,35 +241,39 @@ module.exports = {
     webpack: {
         process: true,
         watch: true,
-        paths: {
-            src: './src/gutenberg/*',
-            watch: './src/gutenberg/**/*',
-            dest: './assets/js',
-        },
-        srcOptions: {
-            allowEmpty: true,
-            base: './src/js',
-            sourcemaps: true,
-        },
-        destOptions: {
-            sourcemaps: '.',
-        },
-        filters: {
-            lint: [
-                '**/*.js',
-                '**/*.jsx',
-            ],
-            build: [
-                '**/*.js',
-                '**/*.jsx',
-                '!**/libs/**/*',
-            ],
-        },
-        minify: {
-            process: process.env.NODE_ENV !== 'development',
-            separate: false,
-        },
+        areas: [
+            {
+                paths: {
+                    src: './src/gutenberg/*',
+                    watch: './src/gutenberg/**/*',
+                    dest: './assets/js',
+                },
+                srcOptions: {
+                    allowEmpty: true,
+                    base: './src/js',
+                    sourcemaps: true,
+                },
+                destOptions: {
+                    sourcemaps: '.',
+                },
+                minify: {
+                    process: process.env.NODE_ENV !== 'development',
+                    separate: false,
+                },
+            },
+        ],
         pipes: {
+            filters: {
+                lint: [
+                    '**/*.js',
+                    '**/*.jsx',
+                ],
+                build: [
+                    '**/*.js',
+                    '**/*.jsx',
+                    '!**/libs/**/*',
+                ],
+            },
             eslint: {
                 warnIgnored: true,
             },
@@ -309,14 +334,21 @@ module.exports = {
     translate: {
         process: true,
         watch: true,
-        paths: {
-            src: './**/*.php',
-            watch: './**/*.php',
-            dest: `./languages/${pkg.name}.pot`,
-        },
-        srcOptions: {
-            allowEmpty: true,
-        },
+        areas: [
+            {
+                paths: {
+                    src: './**/*.php',
+                    watch: './**/*.php',
+                    dest: `./languages/${pkg.name}.pot`,
+                },
+                srcOptions: {
+                    allowEmpty: true,
+                },
+                pipes: {
+                    // Put any pipe overrides here
+                },
+            },
+        ],
         pipes: {
             checktextdomain: {
                 text_domain: pkg.name,
@@ -370,24 +402,28 @@ module.exports = {
     },
     archive: {
         process: true,
-        paths: {
-            src: [
-                '**/*',
-                '!dist/**',
-                '!src/**',
-                '!**/*.zip*',
-                '!**/*.tar',
-            ],
-            dest: './dist',
-        },
-        srcOptions: {
-            allowEmpty: true,
-            base: '../',
-        },
-        filename: `${pkg.name}-${pkg.version}.zip`,
-        format: 'zip',
-        options: {
-            gzip: false,
-        },
+        areas: [
+            {
+                paths: {
+                    src: [
+                        '**/*',
+                        '!dist/**',
+                        '!src/**',
+                        '!**/*.zip*',
+                        '!**/*.tar',
+                    ],
+                    dest: './dist',
+                },
+                srcOptions: {
+                    allowEmpty: true,
+                    base: '../',
+                },
+                filename: `${pkg.name}-${pkg.version}.zip`,
+                format: 'zip',
+                options: {
+                    gzip: false,
+                },
+            },
+        ],
     },
 }

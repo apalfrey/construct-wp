@@ -6,8 +6,5 @@
   "dependencies": {
     "@build/utils": "^1.0.0",
     "browser-sync": "^2.29.3"
-  },
-  "peerDependencies": {
-    "gulp": "^4.0.2"
   }
 }

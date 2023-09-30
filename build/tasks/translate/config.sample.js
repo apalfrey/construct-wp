@@ -3,14 +3,21 @@ module.exports = {
     translate: {
         process: true,
         watch: true,
-        paths: {
-            src: './**/*.php',
-            watch: './**/*.php',
-            dest: './languages/PACKAGE.pot',
-        },
-        srcOptions: {
-            allowEmpty: true,
-        },
+        areas: [
+            {
+                paths: {
+                    src: './**/*.php',
+                    watch: './**/*.php',
+                    dest: './languages/PACKAGE.pot',
+                },
+                srcOptions: {
+                    allowEmpty: true,
+                },
+                pipes: {
+                    // Put any pipe overrides here
+                },
+            },
+        ],
         pipes: {
             checktextdomain: {
                 text_domain: 'PACKAGE',

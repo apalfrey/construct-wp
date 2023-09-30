@@ -11,6 +11,8 @@ const webpack = require( 'webpack-stream' )
 
 // Local utilities
 const logger = require( '@build/utils/log' )
+const stream = require( '@build/utils/stream' )
+const watchFiles = require( '@build/utils/watch-files' )
 
 // Config
 const config = require( `${process.cwd()}/.gulpconfig.js` ).webpack
@@ -23,30 +25,34 @@ module.exports = ( {
     dest,
     watch,
 } ) => {
-    const minTask = lazypipe()
-        .pipe( filter, [
-            '**/*.js',
-        ] )
-        .pipe( uglify, config.pipes.uglify )
-        .pipe( () => {
-            return gulpIf( config.minify.separate, rename( {
-                suffix: '.min',
-            } ) )
-        } )
+    const minTask = ( area, pipes ) => {
+        return lazypipe()
+            .pipe( filter, [
+                '**/*.js',
+            ] )
+            .pipe( uglify, pipes.uglify )
+            .pipe( () => {
+                return gulpIf( area.minify.separate, rename( {
+                    suffix: '.min',
+                } ) )
+            } )
+    }
 
     task( 'webpack:lint', ( cb ) => {
         if ( config.process ) {
             logger.log( 'Linting webpack scripts...', loggerColor )
 
-            return src( config.paths.watch, config.srcOptions )
-                .pipe( plumber() )
-                .pipe( filter( config.filters.lint ) )
-                .pipe( eslint( config.pipes.eslint ) )
-                .pipe( eslint.format() )
-                .pipe( eslint.failAfterError() )
-                .on( 'finish', () => {
-                    logger.log( 'Linting webpack scripts complete!', loggerColor )
-                } )
+            return stream( config, ( area, pipes ) => {
+                return src( area.paths.watch, area.srcOptions )
+                    .pipe( plumber() )
+                    .pipe( filter( pipes.filters.lint ) )
+                    .pipe( eslint( pipes.eslint ) )
+                    .pipe( eslint.format() )
+                    .pipe( eslint.failAfterError() )
+            }, () => {
+                logger.log( 'Linting webpack scripts complete!', loggerColor )
+                return cb()
+            } )
         }
 
         logger.disabled( 'Linting webpack scripts' )
@@ -58,17 +64,19 @@ module.exports = ( {
         if ( config.process ) {
             logger.log( 'Compiling webpack scripts...', loggerColor )
 
-            return src( config.paths.src, config.srcOptions )
-                .pipe( plumber() )
-                .pipe( filter( config.filters.build ) )
-                .pipe( named() )
-                .pipe( webpack( config.pipes.webpack ) )
-                .pipe( dest( config.paths.dest, config.destOptions ) )
-                .pipe( gulpIf( config.minify.process, minTask() ) )
-                .pipe( gulpIf( config.minify.process, dest( config.paths.dest, config.destOptions ) ) )
-                .on( 'finish', () => {
-                    logger.log( 'Compiling webpack scripts complete!', loggerColor )
-                } )
+            return stream( config, ( area, pipes ) => {
+                return src( area.paths.src, area.srcOptions )
+                    .pipe( plumber() )
+                    .pipe( filter( pipes.filters.build ) )
+                    .pipe( named() )
+                    .pipe( webpack( pipes.webpack ) )
+                    .pipe( dest( area.paths.dest, area.destOptions ) )
+                    .pipe( gulpIf( area.minify.process, minTask( area, pipes ) ) )
+                    .pipe( gulpIf( area.minify.process, dest( area.paths.dest, area.destOptions ) ) )
+            }, () => {
+                logger.log( 'Compiling webpack scripts complete!', loggerColor )
+                return cb()
+            } )
         }
 
         logger.disabled( 'Compiling webpack scripts' )
@@ -82,8 +90,7 @@ module.exports = ( {
         if ( config.process && config.watch ) {
             logger.log( 'Watching webpack scripts for changes...', loggerColor )
 
-            watch( config.paths.watch, {
-                ...config.srcOptions,
+            watch( watchFiles( config.areas ), {
                 events: [
                     'change',
                 ],

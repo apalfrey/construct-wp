@@ -15,8 +15,5 @@
     "gulp-uglify": "^3.0.2",
     "lazypipe": "^1.0.2",
     "rollup": "^3.29.4"
-  },
-  "peerDependencies": {
-    "gulp": "^4.0.2"
   }
 }

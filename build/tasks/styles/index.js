@@ -11,6 +11,8 @@ const stylelint = require( '@build/stylelint' )
 
 // Local utilities
 const logger = require( '@build/utils/log' )
+const stream = require( '@build/utils/stream' )
+const watchFiles = require( '@build/utils/watch-files' )
 
 // Config
 const config = require( `${process.cwd()}/.gulpconfig.js` ).styles
@@ -23,34 +25,38 @@ module.exports = ( {
     dest,
     watch,
 } ) => {
-    const minTask = lazypipe()
-        .pipe( filter, [
-            '**/*.css',
-        ] )
-        .pipe( postcss, [
-            cssnano( config.pipes.cssnano ),
-        ] )
-        .pipe( () => {
-            return gulpIf( config.minify.separate, rename( {
-                suffix: '.min',
-            } ) )
-        } )
+    const minTask = ( area, pipes ) => {
+        return lazypipe()
+            .pipe( filter, [
+                '**/*.css',
+            ] )
+            .pipe( postcss, [
+                cssnano( pipes.cssnano ),
+            ] )
+            .pipe( () => {
+                return gulpIf( area.minify.separate, rename( {
+                    suffix: '.min',
+                } ) )
+            } )()
+    }
 
     task( 'styles:lint', ( cb ) => {
         if ( config.process ) {
             logger.log( 'Linting styles...', loggerColor )
 
-            return src( config.paths.watch, config.srcOptions )
-                .pipe( plumber() )
-                .pipe( filter( config.filters.lint ) )
-                .pipe( stylelint( {
-                    ...config.pipes.stylelint,
-                    failOnError: false,
-                    failAfterError: true,
-                } ) )
-                .on( 'finish', () => {
-                    logger.log( 'Linting styles complete!', loggerColor )
-                } )
+            return stream( config, ( area, pipes ) => {
+                return src( area.paths.watch, area.srcOptions )
+                    .pipe( plumber() )
+                    .pipe( filter( pipes.filters.lint ) )
+                    .pipe( stylelint( {
+                        ...pipes.stylelint,
+                        failOnError: false,
+                        failAfterError: true,
+                    } ) )
+            }, () => {
+                logger.log( 'Linting styles complete!', loggerColor )
+                return cb()
+            } )
         }
 
         logger.disabled( 'Linting styles' )
@@ -62,16 +68,21 @@ module.exports = ( {
         if ( config.process ) {
             logger.log( 'Compiling styles...', loggerColor )
 
-            return src( config.paths.src, config.srcOptions )
-                .pipe( plumber() )
-                .pipe( filter( config.filters.build ) )
-                .pipe( sass( config.pipes.sass ) )
-                .pipe( postcss( config.pipes.postcss ) )
-                .pipe( dest( config.paths.dest, config.destOptions ) )
-                .pipe( gulpIf( config.minify.process, minTask() ) )
-                .pipe( gulpIf( config.minify.process, dest( config.paths.dest, config.destOptions ) ) )
+            return stream( config, ( area, pipes ) => {
+                return src( area.paths.src, area.srcOptions )
+                    .pipe( plumber() )
+                    .pipe( filter( pipes.filters.build ) )
+                    .pipe( sass( pipes.sass ) )
+                    .pipe( postcss( pipes.postcss ) )
+                    .pipe( dest( area.paths.dest, area.destOptions ) )
+                    .pipe( gulpIf( area.minify.process, minTask( area, pipes ) ) )
+                    .pipe( gulpIf( area.minify.process, dest( area.paths.dest, area.destOptions ) ) )
+            }, () => {
+                logger.log( 'Compiling styles complete!', loggerColor )
+                return cb()
+            } )
+
                 .on( 'finish', () => {
-                    logger.log( 'Compiling styles complete!', loggerColor )
                 } )
         }
 
@@ -86,8 +97,7 @@ module.exports = ( {
         if ( config.process && config.watch ) {
             logger.log( 'Watching styles for changes...', loggerColor )
 
-            watch( config.paths.watch, {
-                ...config.srcOptions,
+            watch( watchFiles( config.areas ), {
                 events: [
                     'change',
                 ],

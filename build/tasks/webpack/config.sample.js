@@ -3,33 +3,37 @@ module.exports = {
     webpack: {
         process: true,
         watch: true,
-        paths: {
-            src: './src/js/scripts.js',
-            watch: './src/js/**/*',
-            dest: './dist/js',
-        },
-        srcOptions: {
-            allowEmpty: true,
-            base: './src/js',
-            sourcemaps: true,
-        },
-        destOptions: {
-            sourcemaps: '.',
-        },
-        filters: {
-            lint: [
-                '**/*.js',
-            ],
-            build: [
-                '**/*.js',
-                '!**/libs/**/*.js',
-            ],
-        },
-        minify: {
-            process: true,
-            separate: false,
-        },
+        areas: [
+            {
+                paths: {
+                    src: './src/js/scripts.js',
+                    watch: './src/js/**/*',
+                    dest: './dist/js',
+                },
+                srcOptions: {
+                    allowEmpty: true,
+                    base: './src/js',
+                    sourcemaps: true,
+                },
+                destOptions: {
+                    sourcemaps: '.',
+                },
+                minify: {
+                    process: true,
+                    separate: false,
+                },
+            },
+        ],
         pipes: {
+            filters: {
+                lint: [
+                    '**/*.js',
+                ],
+                build: [
+                    '**/*.js',
+                    '!**/libs/**/*.js',
+                ],
+            },
             eslint: {
                 warnIgnored: true,
             },

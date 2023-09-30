@@ -6,8 +6,5 @@
   "dependencies": {
     "@build/utils": "^1.0.0",
     "del": "^7.1.0"
-  },
-  "peerDependencies": {
-    "gulp": "^4.0.2"
   }
 }
