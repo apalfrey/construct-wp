@@ -136,7 +136,7 @@ module.exports = {
                 stylelint: null,
                 options: {
                     formatter: 'verbose',
-                }
+                },
             },
             sass: {
                 outputStyle: 'expanded',
