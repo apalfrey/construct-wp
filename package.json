@@ -6,16 +6,16 @@
     "core:watch": "yarn workspace construct-wp watch"
   },
   "workspaces": [
-    "build/tasks/archive",
-    "build/tasks/browsersync",
-    "build/tasks/clean",
-    "build/tasks/copy",
-    "build/tasks/default",
-    "build/tasks/images",
-    "build/tasks/scripts",
-    "build/tasks/styles",
-    "build/tasks/translate",
-    "build/tasks/webpack",
+    "build/archive",
+    "build/browsersync",
+    "build/clean",
+    "build/copy",
+    "build/default",
+    "build/images",
+    "build/scripts",
+    "build/styles",
+    "build/translate",
+    "build/webpack",
     "build/utils",
     "plugins/construct-wp"
   ]
