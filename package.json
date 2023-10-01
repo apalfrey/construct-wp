@@ -7,7 +7,6 @@
   },
   "workspaces": [
     "build/plugins/rollup",
-    "build/plugins/stylelint",
     "build/tasks/archive",
     "build/tasks/browsersync",
     "build/tasks/clean",

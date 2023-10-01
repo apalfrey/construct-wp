@@ -38,14 +38,11 @@ module.exports = {
                 ],
             },
             stylelint: {
-                failOnError: true,
-                failAfterError: false,
-                reporters: [
-                    {
-                        formatter: 'verbose',
-                        console: true,
-                    },
-                ],
+                // Overrides the version of stylelint used
+                stylelint: null,
+                options: {
+                    formatter: 'verbose',
+                }
             },
             sass: {
                 outputStyle: 'expanded',

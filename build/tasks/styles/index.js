@@ -7,7 +7,7 @@ const plumber = require( 'gulp-plumber' )
 const postcss = require( 'gulp-postcss' )
 const rename = require( 'gulp-rename' )
 const sass = require( 'gulp-sass' )( require( 'sass' ) )
-const stylelint = require( '@build/stylelint' )
+const stylelint = require( 'stylelint' )
 
 // Local utilities
 const logger = require( '@build/utils/log' )
@@ -44,18 +44,18 @@ module.exports = ( {
         if ( config.process ) {
             logger.log( 'Linting styles...', loggerColor )
 
-            return stream( config, ( area, pipes ) => {
-                return src( area.paths.watch, area.srcOptions )
-                    .pipe( plumber() )
-                    .pipe( filter( pipes.filters.lint ) )
-                    .pipe( stylelint( {
-                        ...pipes.stylelint,
-                        failOnError: false,
-                        failAfterError: true,
-                    } ) )
-            }, () => {
+            const linter = config.pipes.stylelint.stylelint ?
+                config.pipes.stylelint.stylelint.lint :
+                stylelint.lint
+
+            return linter( {
+                files: watchFiles( config.areas ),
+                formatter: 'verbose',
+                ...config.pipes.stylelint.options,
+            } ).then( ( results ) => {
+                console.log( results.output )
                 logger.log( 'Linting styles complete!', loggerColor )
-                return cb()
+                cb()
             } )
         }
 
