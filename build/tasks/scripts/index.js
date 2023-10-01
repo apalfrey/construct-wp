@@ -5,7 +5,7 @@ const gulpIf = require( 'gulp-if' )
 const lazypipe = require( 'lazypipe' )
 const plumber = require( 'gulp-plumber' )
 const rename = require( 'gulp-rename' )
-const rollup = require( '@build/rollup' )
+const rollup = require( './rollup' )
 const uglify = require( 'gulp-uglify' )
 
 // Local utilities

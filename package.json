@@ -6,7 +6,6 @@
     "core:watch": "yarn workspace construct-wp watch"
   },
   "workspaces": [
-    "build/plugins/rollup",
     "build/tasks/archive",
     "build/tasks/browsersync",
     "build/tasks/clean",
