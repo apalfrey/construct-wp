@@ -1,5 +1,5 @@
 // External dependencies
-const eslint = require( 'gulp-eslint-new' )
+const { ESLint } = require( 'eslint' )
 const filter = require( 'gulp-filter' )
 const gulpIf = require( 'gulp-if' )
 const lazypipe = require( 'lazypipe' )
@@ -41,16 +41,26 @@ module.exports = ( {
         if ( config.process ) {
             logger.log( 'Linting scripts...', loggerColor )
 
-            return stream( config, ( area, pipes ) => {
-                return src( area.paths.watch, area.srcOptions )
-                    .pipe( plumber() )
-                    .pipe( filter( pipes.filters.lint ) )
-                    .pipe( eslint( pipes.eslint ) )
-                    .pipe( eslint.format() )
-                    .pipe( eslint.failAfterError() )
-            }, () => {
+            const Linter = config.pipes.eslint.eslint ?
+                config.pipes.eslint.eslint :
+                ESLint
+
+            return ( async function main() {
+                const eslint = new Linter( {
+                    ...config.pipes.eslint.options
+                } )
+                const results = await eslint.lintFiles( watchFiles( config.areas ) )
+                const formatter = await eslint.loadFormatter( config.pipes.eslint.formatter || 'stylish' )
+                const resultText = formatter.format( results )
+
+                if ( !resultText.length ) {
+                    console.log( '\n\x1b[32mNo errors found!\x1b[0m\n' )
+                } else {
+                    console.log( resultText )
+                }
+            } )().then( () => {
                 logger.log( 'Linting scripts complete!', loggerColor )
-                return cb()
+                cb()
             } )
         }
 

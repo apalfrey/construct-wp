@@ -35,7 +35,12 @@ module.exports = {
                 ],
             },
             eslint: {
-                warnIgnored: true,
+                // Overrides the version of eslint used
+                eslint: null,
+                formatter: 'stylish',
+                options: {
+                    fix: false,
+                },
             },
             webpack: {
                 externals: {

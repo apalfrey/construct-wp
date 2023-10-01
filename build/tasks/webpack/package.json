@@ -6,7 +6,6 @@
   "dependencies": {
     "@build/utils": "^1.0.0",
     "eslint": "^8.50.0",
-    "gulp-eslint-new": "^1.8.3",
     "gulp-if": "^3.0.0",
     "gulp-filter": "^7.0.0",
     "gulp-plumber": "^1.2.1",
