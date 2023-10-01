@@ -1,8 +1,8 @@
-const stream = require( 'node:stream' )
-const buffer = require( 'node:buffer' )
-const rollup = require( 'rollup' )
+const { Transform } = require( 'node:stream' )
+const { Buffer } = require( 'node:buffer' )
+const { rollup } = require( 'rollup' )
 
-module.exports = ( inputOptions, outputOptions, customRollup = false ) => new stream.Transform( {
+module.exports = ( options ) => new Transform( {
     objectMode: true,
     async transform( file, _encoding, done ) {
         if ( file.isNull() ) {
@@ -13,21 +13,18 @@ module.exports = ( inputOptions, outputOptions, customRollup = false ) => new st
             return done( new Error( 'Streams are not supported!' ), file )
         }
 
-        const build = !!customRollup ? await ( 0, customRollup.rollup )( {
+        const build = await( 0, options.rollup ? options.rollup : rollup )( {
             input: file.path,
-            ...inputOptions
-        } ) : await ( 0, rollup.rollup )( {
-            input: file.path,
-            ...inputOptions
+            ...options.input,
         } )
 
         const { output: [chunk] } = await build.generate( {
             sourcemap: Boolean( file.sourceMap ) && 'hidden',
-            ...outputOptions
+            ...options.output,
         } )
 
         const modified = file.clone()
-        modified.contents = buffer.Buffer.from( chunk.code )
+        modified.contents = Buffer.from( chunk.code )
         modified.sourceMap = chunk.map
 
         return done( null, modified )

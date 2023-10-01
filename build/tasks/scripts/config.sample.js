@@ -46,6 +46,10 @@ module.exports = {
                 },
             },
             rollup: {
+                // Overrides the version of rollup used.
+                // Make sure to pass through the rollup function
+                // e.g. require( 'rollup' ).rollup
+                rollup: null,
                 input: {
                     plugins: [
                         require( '@rollup/plugin-babel' ).babel( {
@@ -70,7 +74,6 @@ module.exports = {
                     generatedCode: 'es2015',
                     globals: {},
                 },
-                external: [],
             },
             uglify: {
                 output: {

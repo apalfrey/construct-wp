@@ -77,7 +77,7 @@ module.exports = ( {
                 return src( area.paths.src, area.srcOptions )
                     .pipe( plumber() )
                     .pipe( filter( pipes.filters.build ) )
-                    .pipe( rollup( pipes.rollup.input, pipes.rollup.output ) )
+                    .pipe( rollup( pipes.rollup ) )
                     .pipe( dest( area.paths.dest, area.destOptions ) )
                     .pipe( gulpIf( area.minify.process, minTask( area, pipes ) ) )
                     .pipe( gulpIf( area.minify.process, dest( area.paths.dest, area.destOptions ) ) )

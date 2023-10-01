@@ -212,6 +212,10 @@ module.exports = {
                 },
             },
             rollup: {
+                // Overrides the version of rollup used.
+                // Make sure to pass through the rollup function
+                // e.g. require( 'rollup' ).rollup
+                rollup: null,
                 input: {
                     plugins: [
                         require( '@rollup/plugin-babel' ).babel( {
