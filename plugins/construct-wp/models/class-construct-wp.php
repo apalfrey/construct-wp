@@ -384,7 +384,7 @@ class Construct_WP {
      * @return  void
      */
     private static function run_theme_classes() {
-        foreach ( CWP_Loader::$theme_classes as $plugin => $classes ) {
+        foreach ( CWP_Loader::$theme_classes as $class ) {
             $run_init = apply_filters( 'cwp_run_theme_class_init', true, $class );
 
             if ( $run_init ) {
