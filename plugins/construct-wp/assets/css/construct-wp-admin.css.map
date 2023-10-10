@@ -1,0 +1,1 @@
+{"version":3,"sources":["construct-wp-admin.scss","construct-wp-admin.css"],"names":[],"mappings":"AAEQ;EACI,aAAA;ACDZ","file":"construct-wp-admin.css","sourcesContent":[".menu-item {\n    &.menu-item-depth-0 {\n        .cwp-link_type {\n            display: none;\n        }\n    }\n}\n",".menu-item.menu-item-depth-0 .cwp-link_type {\n  display: none;\n}"]}

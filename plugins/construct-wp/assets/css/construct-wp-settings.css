@@ -1,0 +1,219 @@
+body {
+  background-color: #e9ecef;
+}
+
+#wpcontent {
+  padding-left: 0;
+}
+#wpcontent *,
+#wpcontent *::before,
+#wpcontent *::after {
+  box-sizing: border-box;
+}
+
+#construct-wp-settings {
+  --wp-components-color-accent: #11bd0b;
+  --wp-components-color-accent--rgb: 17, 189, 11;
+  --wp-components-color-accent-darker-10: #0faa0a;
+  --wp-components-color-accent-darker-10--rgb: 15, 170, 10;
+  --wp-components-color-accent-darker-20: #0e9709;
+  --wp-components-color-accent-darker-20--rgb: 14, 151, 9;
+  --wp-components-color-accent-inverted: #fff;
+  --wp-components-color-accent-inverted--rgb: 255, 255, 255;
+  --wp-components-color-accent-background: #fff;
+  --wp-components-color-accent-background--rgb: 255, 255, 255;
+  --wp-components-color-accent-foreground: #14143b;
+  --wp-components-color-accent-foreground--to-rgb: 20, 20, 59;
+  --wp-components-color-accent-foreground-inverted: #fff;
+  --wp-components-color-accent-foreground-inverted--to-rgb: 255, 255, 255;
+  color: var(--wp-components-color-accent-foreground);
+}
+#construct-wp-settings,
+#construct-wp-settings * {
+  font-size: 1rem;
+}
+#construct-wp-settings h1,
+#construct-wp-settings h2,
+#construct-wp-settings h3,
+#construct-wp-settings h4,
+#construct-wp-settings h5,
+#construct-wp-settings h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--wp-components-color-accent-foreground);
+}
+#construct-wp-settings h1 {
+  font-size: calc(1.375rem + 1.5vw);
+}
+@media (min-width: 1200px) {
+  #construct-wp-settings h1 {
+    font-size: 2.5rem;
+  }
+}
+#construct-wp-settings h2 {
+  margin-bottom: 1.5rem;
+  font-size: calc(1.325rem + 0.9vw);
+}
+@media (min-width: 1200px) {
+  #construct-wp-settings h2 {
+    font-size: 2rem;
+  }
+}
+#construct-wp-settings h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+@media (min-width: 1200px) {
+  #construct-wp-settings h3 {
+    font-size: 1.75rem;
+  }
+}
+#construct-wp-settings h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+@media (min-width: 1200px) {
+  #construct-wp-settings h4 {
+    font-size: 1.5rem;
+  }
+}
+#construct-wp-settings h5 {
+  font-size: 1.25rem;
+}
+#construct-wp-settings h6 {
+  font-size: 1rem;
+}
+#construct-wp-settings p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+#construct-wp-settings label {
+  font-size: 1rem;
+}
+#construct-wp-settings hr {
+  margin: 1rem 0;
+  color: inherit;
+  border: 0;
+  border-top: 1px solid;
+  opacity: 0.25;
+}
+#construct-wp-settings .construct-wp__header,
+#construct-wp-settings .construct-wp__main {
+  background-color: var(--wp-components-color-accent-background);
+}
+#construct-wp-settings .construct-wp__header {
+  padding: 1rem 1.5rem 0;
+}
+#construct-wp-settings .construct-wp__main {
+  padding: 1.25rem 2rem;
+  margin: 1rem;
+}
+#construct-wp-settings .construct-wp__container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 576px) {
+  #construct-wp-settings .construct-wp__container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  #construct-wp-settings .construct-wp__container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  #construct-wp-settings .construct-wp__container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  #construct-wp-settings .construct-wp__container {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  #construct-wp-settings .construct-wp__container {
+    max-width: 1320px;
+  }
+}
+#construct-wp-settings .construct-wp__logo {
+  max-height: 50px;
+  margin-right: 1rem;
+}
+#construct-wp-settings .components-tab-panel__tabs-item {
+  padding-top: 0;
+}
+#construct-wp-settings .components-tab-panel__tab-content {
+  display: none;
+}
+#construct-wp-settings .components-base-control__help {
+  color: rgb(var(--wp-components-color-accent-foreground--to-rgb), 0.675);
+}
+#construct-wp-settings .construct-wp__checklist {
+  -moz-columns: auto 2;
+  columns: auto 2;
+  -moz-column-gap: 2rem;
+  column-gap: 2rem;
+}
+#construct-wp-settings .construct-wp__checklist .components-base-control__field {
+  margin-bottom: 0.5rem;
+}
+#construct-wp-settings .construct-wp__loading-spinner {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  vertical-align: -0.125em;
+  border: 0.25em solid #ced4da;
+  border-right-color: var(--wp-components-color-accent);
+  border-radius: 50%;
+  animation: 0.75s linear infinite spinner-border;
+}
+#construct-wp-settings .construct-wp__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+#construct-wp-settings .construct-wp__version-badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.9rem;
+  line-height: 1;
+  color: var(--wp-components-color-accent-inverted);
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: var(--wp-components-color-accent);
+  border: 1px solid var(--wp-components-color-accent);
+  /* stylelint-disable-next-line property-disallowed-list */
+  border-radius: 0.375rem;
+}
+#construct-wp-settings .construct-wp__notices .components-snackbar {
+  position: fixed;
+  bottom: 0.5rem;
+  margin-left: 0.5rem;
+}
+#construct-wp-settings .construct-wp__notices .components-snackbar .components-snackbar__content-with-icon {
+  align-items: center;
+  margin-left: 0;
+}
+#construct-wp-settings .construct-wp__notices .components-snackbar .components-snackbar__icon {
+  position: static;
+  margin-right: 0.5rem;
+  /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+  font-family: dashicons;
+  font-size: 1.25rem;
+  font-style: normal;
+  line-height: 1;
+  vertical-align: top;
+}
+
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/*# sourceMappingURL=construct-wp-settings.css.map */

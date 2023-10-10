@@ -43,7 +43,7 @@ module.exports = {
                     src: {
                         allowEmpty: true,
                         base: `${areas.constructWp.path}/src/scss`,
-                        sourcemaps: process.env.NODE_ENV !== 'development',
+                        sourcemaps: process.env.NODE_ENV === 'development',
                     },
                     dest: {
                         sourcemaps: '.',
@@ -123,7 +123,7 @@ module.exports = {
                     src: {
                         allowEmpty: true,
                         base: `${areas.constructWp.path}/src/gutenberg`,
-                        sourcemaps: process.env.NODE_ENV !== 'development',
+                        sourcemaps: process.env.NODE_ENV === 'development',
                     },
                     dest: {
                         sourcemaps: '.',
@@ -201,8 +201,8 @@ module.exports = {
                     resolve: {
                         extensions: ['.js', '.jsx', '.json'],
                     },
-                    devtool: process.env.NODE_ENV == 'development' ? 'source-map' : false,
-                    mode: process.env.NODE_ENV == 'development' ? 'development' : 'production',
+                    devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false,
+                    mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
                 },
             },
             uglify: {
