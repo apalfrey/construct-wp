@@ -35,10 +35,6 @@ class Construct_WP {
 
         do_action( 'cwp_before_setup' );
 
-        if ( ! defined( 'CWP_THEME_SLUG' ) ) {
-            define( 'CWP_THEME_SLUG', CWP_SLUG );
-        }
-
         // WordPress translation.
         self::load_textdomain();
 

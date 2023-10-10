@@ -3,7 +3,7 @@
  * Assets functionality.
  *
  * Dynamically includes the required controller, CSS & JS file for the currently used template. Enqueues a global CSS
- * & JS file based on the `CWP_THEME_SLUG` constant.
+ * & JS file based on the theme names from `get_template()` and `get_stylesheet()`.
  *
  * @since       1.0.0
  * @package     construct-wp
@@ -107,17 +107,24 @@ class CWP_Assets {
     public static function base_enqueue() {
         global $wp_filesystem;
 
-        $style_path  = self::final_path( '/assets/css/' . CWP_THEME_SLUG . '.css', false );
-        $style_uri   = self::final_path( '/assets/css/' . CWP_THEME_SLUG . '.css', true );
-        $script_path = self::final_path( '/assets/js/' . CWP_THEME_SLUG . '.js', false );
-        $script_uri  = self::final_path( '/assets/js/' . CWP_THEME_SLUG . '.js', true );
+        $themes = array_unique( array(
+            get_template(),
+            get_stylesheet(),
+        ) );
 
-        if ( $wp_filesystem->exists( $style_path ) ) {
-            wp_enqueue_style( CWP_THEME_SLUG, $style_uri );
-        }
+        foreach ( $themes as $theme ) {
+            $style_path  = self::final_path( '/assets/css/' . $theme . '.css', false );
+            $style_uri   = self::final_path( '/assets/css/' . $theme . '.css', true );
+            $script_path = self::final_path( '/assets/js/' . $theme . '.js', false );
+            $script_uri  = self::final_path( '/assets/js/' . $theme . '.js', true );
 
-        if ( $wp_filesystem->exists( $script_path ) ) {
-            wp_enqueue_script( CWP_THEME_SLUG, $script_uri, array(), false, true );
+            if ( $wp_filesystem->exists( $style_path ) ) {
+                wp_enqueue_style( $theme, $style_uri );
+            }
+
+            if ( $wp_filesystem->exists( $script_path ) ) {
+                wp_enqueue_script( $theme, $script_uri, array(), false, true );
+            }
         }
     }
 
