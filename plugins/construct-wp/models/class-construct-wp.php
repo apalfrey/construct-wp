@@ -259,6 +259,7 @@ class Construct_WP {
      */
     public static function load_textdomain() {
         load_plugin_textdomain( CWP_SLUG, false, CWP_PLUGIN_PATH . 'languages' );
+        // TODO autoload theme textdomain.
     }
 
     /**

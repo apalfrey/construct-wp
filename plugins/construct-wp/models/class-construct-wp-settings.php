@@ -47,6 +47,15 @@ class CWP_Settings {
             'default'      => true,
         ) );
 
+        // TODO controller enable.
+        // TODO base stylesheet enable.
+        // TODO base js enable.
+        // TODO template stylesheet enable.
+        // TODO template js enable.
+        // TODO footer column count?.
+        // TODO autorun theme classes.
+        // TODO theme support.
+
         register_setting( 'cwp_settings', 'cwp_optimize', array(
             'type'         => 'boolean',
             'show_in_rest' => true,

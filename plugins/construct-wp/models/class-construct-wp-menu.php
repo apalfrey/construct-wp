@@ -34,6 +34,7 @@ class CWP_Menu {
      */
     public static function init() {
         self::register_navs();
+        // TODO make custom fields work in customize page.
         add_action( 'wp_nav_menu_item_custom_fields', array( 'CWP_Menu', 'custom_fields' ), 10, 2 );
         add_action( 'wp_update_nav_menu_item', array( 'CWP_Menu', 'menu_update' ), 10, 2 );
         add_filter( 'wp_get_nav_menu_items', array( 'CWP_Menu', 'filter_items' ), 10, 1 );
