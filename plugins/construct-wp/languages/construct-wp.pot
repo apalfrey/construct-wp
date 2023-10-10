@@ -1,14 +1,14 @@
-# Copyright (C) 2023 Construct WP
-# This file is distributed under the same license as the Construct WP package.
+# Copyright (C) 2023 ConstructWP
+# This file is distributed under the same license as the ConstructWP package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Construct WP\n"
+"Project-Id-Version: ConstructWP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
 "Last-Translator: Andrew Palfrey <apalfrey@apalfrey.me>\n"
-"POT-Creation-Date: 2023-09-25 14:45+0000\n"
+"POT-Creation-Date: 2023-10-10 15:18+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -16,117 +16,117 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models/class-construct-wp-email.php:66, models/class-construct-wp-email.php:69
+#: plugins/construct-wp/models/class-construct-wp-email.php:66, plugins/construct-wp/models/class-construct-wp-email.php:69
 msgid "Email"
 msgstr ""
 
-#: models/class-construct-wp-email.php:68
+#: plugins/construct-wp/models/class-construct-wp-email.php:68
 msgid "Emails"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:53
+#: plugins/construct-wp/models/class-construct-wp-menu.php:53
 msgid "Primary menu"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:54
+#: plugins/construct-wp/models/class-construct-wp-menu.php:54
 msgid "Footer menu"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:73
+#: plugins/construct-wp/models/class-construct-wp-menu.php:73
 msgid "Icon"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:84
+#: plugins/construct-wp/models/class-construct-wp-menu.php:84
 msgid "Visibility"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:90
+#: plugins/construct-wp/models/class-construct-wp-menu.php:90
 msgid "Always"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:91
+#: plugins/construct-wp/models/class-construct-wp-menu.php:91
 msgid "Logged in only"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:92
+#: plugins/construct-wp/models/class-construct-wp-menu.php:92
 msgid "Logged out only"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:105
+#: plugins/construct-wp/models/class-construct-wp-menu.php:105
 msgid "Logout link"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:110
+#: plugins/construct-wp/models/class-construct-wp-menu.php:110
 msgid "Dropdown item type"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:112
+#: plugins/construct-wp/models/class-construct-wp-menu.php:112
 msgid "Link"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:113
+#: plugins/construct-wp/models/class-construct-wp-menu.php:113
 msgid "Header"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:114
+#: plugins/construct-wp/models/class-construct-wp-menu.php:114
 msgid "Divider"
 msgstr ""
 
-#: models/class-construct-wp-menu.php:115
+#: plugins/construct-wp/models/class-construct-wp-menu.php:115
 msgid "Text"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:156
+#: plugins/construct-wp/models/class-construct-wp-settings.php:156
 msgid "ConstructWP Settings"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:157
+#: plugins/construct-wp/models/class-construct-wp-settings.php:157
 msgid "ConstructWP"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:207
+#: plugins/construct-wp/models/class-construct-wp-settings.php:207
 msgid "Settings"
 msgstr ""
 
 #. translators: %1$s - Opening p tag, %2$s - Closing p tag, %3$s - Opening a tag, %4$s - Closing a tag
-#: models/class-construct-wp-updater.php:135
+#: plugins/construct-wp/models/class-construct-wp-updater.php:135
 msgid "%1$sAn Unexpected HTTP Error occurred during the API request.%2$s %1$s%3$sTry again%4$s%2$s"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:176
+#: plugins/construct-wp/models/class-construct-wp-utils.php:178
 msgid "Page navigation"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:195
+#: plugins/construct-wp/models/class-construct-wp-utils.php:197
 msgid "First"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:199
+#: plugins/construct-wp/models/class-construct-wp-utils.php:201
 msgid "Last"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:215
+#: plugins/construct-wp/models/class-construct-wp-utils.php:217
 msgid "Previous"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:219
+#: plugins/construct-wp/models/class-construct-wp-utils.php:221
 msgid "Next"
 msgstr ""
 
-#: models/class-construct-wp.php:233
+#: plugins/construct-wp/models/class-construct-wp.php:233
 msgid "No feed available"
 msgstr ""
 
 #. translators: %d Footer column number
-#: models/class-construct-wp.php:304
+#: plugins/construct-wp/models/class-construct-wp.php:304
 msgid "Footer %d"
 msgstr ""
 
 #. translators: %d Footer column number
-#: models/class-construct-wp.php:310
+#: plugins/construct-wp/models/class-construct-wp.php:310
 msgid "Add widgets here to appear in your footer column %d"
 msgstr ""
 
-#: models/class-construct-wp.php:479
+#: plugins/construct-wp/models/class-construct-wp.php:479
 msgid "White Logo"
 msgstr ""

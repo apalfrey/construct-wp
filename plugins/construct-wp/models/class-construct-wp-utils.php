@@ -170,9 +170,11 @@ class CWP_Utils {
      * @return  string                  The pagination HTML
      */
     public static function pagination( $link_args = array(), $args = array(), $display = true ) {
+        global $wp_query;
+
         $args = wp_parse_args( $args, array(
-            'paged'         => get_query_var( 'paged' ),
-            'max_num_pages' => max( 1, get_query_var( 'paged' ) ),
+            'paged'         => max( 1, get_query_var( 'paged' ) ),
+            'max_num_pages' => max( 1, $wp_query->max_num_pages ),
             'nav_label'     => __( 'Page navigation', 'construct-wp' ),
             'nav_class'     => array(),
             'nav_template'  => '<nav %1$s>%2$s</nav>',
@@ -203,7 +205,7 @@ class CWP_Utils {
         $pages = paginate_links( wp_parse_args( $link_args, array(
             'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
             'format'       => '?paged=%#%',
-            'current'      => max( 1, $args['paged'] ),
+            'current'      => $args['paged'],
             'total'        => $args['max_num_pages'],
             'type'         => 'array',
             'show_all'     => false,
@@ -253,23 +255,31 @@ class CWP_Utils {
             $page_li_atts['class']        = array_filter( array(
                 ...$page_li_atts['class'],
                 ...$page_li_class,
-                in_array( 'current', $page_li_atts['class'] ) ? 'active' : false,
-                in_array( 'dots', $page_li_atts['class'] ) ? 'disabled' : false,
+                in_array( 'current', $page_li_class ) ? 'active' : false,
+                in_array( 'dots', $page_li_class ) ? 'disabled' : false,
             ) );
             $page_li_atts['aria-current'] = in_array( 'current', $page_li_atts['class'] ) ? 'page' : false;
 
             $page_li_atts   = apply_filters( 'cwp_pagination_li_atts', $page_li_atts );
             $page_link_atts = apply_filters( 'cwp_pagination_link_atts', $page_link_atts );
 
-            $page = sprintf(
-                $args['li_template'],
-                self::html_atts( $page_li_atts ),
-                sprintf(
-                    $args['link_template'],
-                    self::html_atts( $page_link_atts ),
+            if ( in_array( 'dots', $page_li_atts ) ) {
+                $page = sprintf(
+                    $args['li_template'],
+                    self::html_atts( $page_li_atts ),
                     $label
-                )
-            );
+                );
+            } else {
+                $page = sprintf(
+                    $args['li_template'],
+                    self::html_atts( $page_li_atts ),
+                    sprintf(
+                        $args['link_template'],
+                        self::html_atts( $page_link_atts ),
+                        $label
+                    )
+                );
+            }
 
             return $page;
         }, $pages );
