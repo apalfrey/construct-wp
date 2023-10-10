@@ -277,7 +277,7 @@ class CWP_Assets {
      * @return  void
      */
     public static function the_logo( $type = 'default' ) {
-        echo self::get_logo( $type );
+        echo self::get_the_logo( $type );
     }
 
     /**
