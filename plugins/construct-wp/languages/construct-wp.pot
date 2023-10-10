@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
 "Last-Translator: Andrew Palfrey <apalfrey@apalfrey.me>\n"
-"POT-Creation-Date: 2023-10-10 15:18+0000\n"
+"POT-Creation-Date: 2023-10-10 18:17+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -84,7 +84,7 @@ msgstr ""
 msgid "ConstructWP"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-settings.php:207
+#: plugins/construct-wp/models/class-construct-wp-settings.php:209
 msgid "Settings"
 msgstr ""
 
