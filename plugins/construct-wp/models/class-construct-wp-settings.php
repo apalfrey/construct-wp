@@ -181,9 +181,11 @@ class CWP_Settings {
             wp_enqueue_script( 'construct-wp-settings-script', CWP_PLUGIN_URL . 'assets/js/construct-wp-settings.js', array(
                 'wp-api',
                 'wp-components',
+                'wp-data',
                 'wp-element',
                 'wp-hooks',
                 'wp-i18n',
+                'wp-notices',
             ) );
             wp_localize_script( 'construct-wp-settings-script', 'cwpSettingsData', array(
                 'version' => CWP_VERSION,
