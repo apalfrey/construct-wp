@@ -37,6 +37,12 @@ Yes! Models and controllers can be auto-initiated if the class has a static meth
 
 ## Changelog
 
+### 0.1.1 - 2023-10-10
+
+* Fixed `the_logo` method in `CWP_Assets`
+* Fixed theme models not being loaded correctly
+* Fixed pagination not working
+
 ### 0.1.0 - 2023-09-26
 
 * Initial version
