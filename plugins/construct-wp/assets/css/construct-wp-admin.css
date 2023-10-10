@@ -1,4 +1,9 @@
 .menu-item.menu-item-depth-0 .cwp-link_type {
   display: none;
 }
+
+/* stylelint-disable-next-line selector-id-pattern */
+#toplevel_page_construct-wp .wp-first-item {
+  display: none;
+}
 /*# sourceMappingURL=construct-wp-admin.css.map */

@@ -120,6 +120,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components */ "./plugins/construct-wp/src/gutenberg/components/index.js");
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -128,14 +131,12 @@ __webpack_require__.r(__webpack_exports__);
 class SettingsPage extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
-    const urlParams = new URLSearchParams(window.location.search);
-    const requested = urlParams.get('tab');
-    this.state = {
-      currentTab: typeof requested === 'string' ? requested.replace('cwp-', '') : '',
-      siteUrl: window.location.origin + window.location.pathname + '?page=construct_wp_settings'
-    };
-  }
-  render() {
+    _defineProperty(this, "tabs", []);
+    _defineProperty(this, "panels", {});
+    _defineProperty(this, "siteUrl", '');
+    _defineProperty(this, "currentTab", '');
+    this.siteUrl = window.location.origin + window.location.pathname + '?page=construct-wp';
+
     /**
      * Must return as follows:
      * [
@@ -149,11 +150,16 @@ class SettingsPage extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compo
      * ]
      */
     let tabDetails = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__.applyFilters)('cwpTabs', []);
-    let tabs = tabDetails.map(tab => tab.tab);
-    let panels = {};
+    this.tabs = tabDetails.map(tab => tab.tab);
     tabDetails.forEach(tab => {
-      panels[tab.tab.name] = tab.panel;
+      this.panels[tab.tab.name] = tab.panel;
     });
+    const urlParams = new URLSearchParams(window.location.search);
+    const requested = urlParams.get('page').replace('construct-wp', '').replace(/^-/, '');
+    this.currentTab = typeof requested === 'string' ? requested : '';
+  }
+  render() {
+    // return <></>
     return wp.element.createElement(React.Fragment, null, wp.element.createElement("div", {
       className: "construct-wp__header"
     }, wp.element.createElement("div", {
@@ -166,28 +172,29 @@ class SettingsPage extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compo
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.VisuallyHidden, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('ConstructWP', 'construct-wp')), wp.element.createElement("span", {
       className: "construct-wp__version-badge"
     }, "v", cwpSettingsData.version)), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
-      tabs: tabs,
-      initialTabName: this.state.currentTab,
+      tabs: this.tabs,
+      initialTabName: this.currentTab,
       onSelect: tabName => {
-        window.history.replaceState(null, '', "".concat(this.state.siteUrl, "&tab=cwp-").concat(tabName));
-        this.setState({
-          currentTab: tabName
-        });
+        if (tabName !== this.currentTab) {
+          window.location.href = "".concat(this.siteUrl, "-").concat(tabName);
+        }
       }
     }, () => {}))), wp.element.createElement("div", {
       className: "construct-wp__main"
     }, wp.element.createElement("div", {
       className: "construct-wp__container"
-    }, Object.entries(panels).map((_ref, i) => {
+    }, !this.currentTab && wp.element.createElement("div", {
+      className: "construct-wp__loading-spinner"
+    }), Object.entries(this.panels).map((_ref, i) => {
       let [panelName, Panel] = _ref;
-      return wp.element.createElement("div", {
-        id: 'cwp-' + panelName,
-        className: "construct-wp__tab-panel",
-        key: i,
-        style: {
-          display: this.state.currentTab === panelName ? 'block' : 'none'
-        }
-      }, wp.element.createElement(Panel, null));
+      if (this.currentTab === panelName) {
+        return wp.element.createElement("div", {
+          id: 'cwp-' + panelName,
+          className: "construct-wp__tab-panel",
+          key: i
+        }, wp.element.createElement(Panel, null));
+      }
+      return wp.element.createElement(React.Fragment, null);
     }))), wp.element.createElement("div", {
       className: "construct-wp__notices"
     }, wp.element.createElement(_components__WEBPACK_IMPORTED_MODULE_4__.Notices, null)));

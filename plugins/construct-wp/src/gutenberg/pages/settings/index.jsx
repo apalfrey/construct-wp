@@ -17,19 +17,16 @@ import {
 } from '../../components'
 
 class SettingsPage extends Component {
+    tabs = []
+    panels = {}
+    siteUrl = ''
+    currentTab = ''
+
     constructor() {
         super()
 
-        const urlParams = new URLSearchParams( window.location.search )
-        const requested = urlParams.get( 'tab' )
+        this.siteUrl = window.location.origin + window.location.pathname + '?page=construct-wp'
 
-        this.state = {
-            currentTab: typeof requested === 'string' ? requested.replace( 'cwp-', '' ) : '',
-            siteUrl: window.location.origin + window.location.pathname + '?page=construct_wp_settings',
-        }
-    }
-
-    render() {
         /**
          * Must return as follows:
          * [
@@ -43,13 +40,20 @@ class SettingsPage extends Component {
          * ]
          */
         let tabDetails = applyFilters( 'cwpTabs', [] )
-        let tabs = tabDetails.map( ( tab ) => tab.tab )
-        let panels = {}
+        this.tabs = tabDetails.map( ( tab ) => tab.tab )
 
         tabDetails.forEach( ( tab ) => {
-            panels[tab.tab.name] = tab.panel
+            this.panels[tab.tab.name] = tab.panel
         } )
 
+        const urlParams = new URLSearchParams( window.location.search )
+        const requested = urlParams.get( 'page' ).replace( 'construct-wp', '' ).replace( /^-/, '' )
+
+        this.currentTab = typeof requested === 'string' ? requested : ''
+    }
+
+    render() {
+        // return <></>
         return (
             <>
                 <div className="construct-wp__header">
@@ -66,13 +70,12 @@ class SettingsPage extends Component {
                         </div>
 
                         <TabPanel
-                            tabs={tabs}
-                            initialTabName={this.state.currentTab}
+                            tabs={this.tabs}
+                            initialTabName={this.currentTab}
                             onSelect={( tabName ) => {
-                                window.history.replaceState( null, '', `${this.state.siteUrl}&tab=cwp-${tabName}` )
-                                this.setState( {
-                                    currentTab: tabName,
-                                } )
+                                if ( tabName !== this.currentTab ) {
+                                    window.location.href = `${this.siteUrl}-${tabName}`
+                                }
                             }}
                         >
                             { () => {} }
@@ -82,18 +85,22 @@ class SettingsPage extends Component {
 
                 <div className="construct-wp__main">
                     <div className="construct-wp__container">
-                        {Object.entries( panels ).map( ( [panelName, Panel], i ) => (
-                            <div
-                                id={'cwp-' + panelName}
-                                className="construct-wp__tab-panel"
-                                key={i}
-                                style={{
-                                    display: this.state.currentTab === panelName ? 'block' : 'none',
-                                }}
-                            >
-                                <Panel />
-                            </div>
-                        ) )}
+                        {!this.currentTab && <div className="construct-wp__loading-spinner"></div>}
+                        {Object.entries( this.panels ).map( ( [panelName, Panel], i ) => {
+                            if ( this.currentTab === panelName ) {
+                                return (
+                                    <div
+                                        id={'cwp-' + panelName}
+                                        className="construct-wp__tab-panel"
+                                        key={i}
+                                    >
+                                        <Panel />
+                                    </div>
+                                )
+                            }
+
+                            return <></>
+                        } )}
                     </div>
                 </div>
 

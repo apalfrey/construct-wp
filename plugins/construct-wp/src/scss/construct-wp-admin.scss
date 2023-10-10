@@ -5,3 +5,10 @@
         }
     }
 }
+
+/* stylelint-disable-next-line selector-id-pattern */
+#toplevel_page_construct-wp {
+    .wp-first-item {
+        display: none;
+    }
+}
