@@ -4,7 +4,7 @@ Tags: framework, system
 Requires at least: 5.4.0
 Tested up to: 6.3.1
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPL v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,12 @@ Controllers follow the same path and file name as their respective templates, lo
 Yes! Models and controllers can be auto-initiated if the class has a static method called `init`.
 
 == Changelog ==
+
+= 0.1.1 - 2023-10-10 =
+
+* Fixed `the_logo` method in `CWP_Assets`
+* Fixed theme models not being loaded correctly
+* Fixed pagination not working
 
 = 0.1.0 - 2023-09-26 =
 
