@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
 "Last-Translator: Andrew Palfrey <apalfrey@apalfrey.me>\n"
-"POT-Creation-Date: 2023-10-10 20:10+0000\n"
+"POT-Creation-Date: 2023-10-10 23:46+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -24,83 +24,83 @@ msgstr ""
 msgid "Emails"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:53
+#: plugins/construct-wp/models/class-construct-wp-menu.php:55
 msgid "Primary menu"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:54
+#: plugins/construct-wp/models/class-construct-wp-menu.php:56
 msgid "Footer menu"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:73
+#: plugins/construct-wp/models/class-construct-wp-menu.php:76, plugins/construct-wp/models/class-construct-wp-menu.php:189
 msgid "Icon"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:84
+#: plugins/construct-wp/models/class-construct-wp-menu.php:89, plugins/construct-wp/models/class-construct-wp-menu.php:190
 msgid "Visibility"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:90
+#: plugins/construct-wp/models/class-construct-wp-menu.php:95
 msgid "Always"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:91
+#: plugins/construct-wp/models/class-construct-wp-menu.php:96
 msgid "Logged in only"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:92
+#: plugins/construct-wp/models/class-construct-wp-menu.php:97
 msgid "Logged out only"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:105
+#: plugins/construct-wp/models/class-construct-wp-menu.php:111, plugins/construct-wp/models/class-construct-wp-menu.php:191
 msgid "Logout link"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:110
+#: plugins/construct-wp/models/class-construct-wp-menu.php:117, plugins/construct-wp/models/class-construct-wp-menu.php:192
 msgid "Dropdown item type"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:112
+#: plugins/construct-wp/models/class-construct-wp-menu.php:119
 msgid "Link"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:113
+#: plugins/construct-wp/models/class-construct-wp-menu.php:120
 msgid "Header"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:114
+#: plugins/construct-wp/models/class-construct-wp-menu.php:121
 msgid "Divider"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:115
+#: plugins/construct-wp/models/class-construct-wp-menu.php:122
 msgid "Text"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-settings.php:156
+#: plugins/construct-wp/models/class-construct-wp-settings.php:165
 msgid "ConstructWP Settings"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-settings.php:157
+#: plugins/construct-wp/models/class-construct-wp-settings.php:166
 msgid "ConstructWP"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-settings.php:168
+#: plugins/construct-wp/models/class-construct-wp-settings.php:177
 msgid "ConstructWP Settings - General"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-settings.php:169
+#: plugins/construct-wp/models/class-construct-wp-settings.php:178
 msgid "General"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-settings.php:177
+#: plugins/construct-wp/models/class-construct-wp-settings.php:186
 msgid "ConstructWP Settings - Optimize"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-settings.php:178
+#: plugins/construct-wp/models/class-construct-wp-settings.php:187
 msgid "Optimize"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-settings.php:238
+#: plugins/construct-wp/models/class-construct-wp-settings.php:247
 msgid "Settings"
 msgstr ""
 
@@ -134,15 +134,15 @@ msgid "No feed available"
 msgstr ""
 
 #. translators: %d Footer column number
-#: plugins/construct-wp/models/class-construct-wp.php:300
+#: plugins/construct-wp/models/class-construct-wp.php:301
 msgid "Footer %d"
 msgstr ""
 
 #. translators: %d Footer column number
-#: plugins/construct-wp/models/class-construct-wp.php:306
+#: plugins/construct-wp/models/class-construct-wp.php:307
 msgid "Add widgets here to appear in your footer column %d"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp.php:475
+#: plugins/construct-wp/models/class-construct-wp.php:476
 msgid "White Logo"
 msgstr ""

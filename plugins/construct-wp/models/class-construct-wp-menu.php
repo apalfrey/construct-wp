@@ -38,6 +38,7 @@ class CWP_Menu {
         add_action( 'wp_nav_menu_item_custom_fields', array( 'CWP_Menu', 'custom_fields' ), 10, 2 );
         add_action( 'wp_update_nav_menu_item', array( 'CWP_Menu', 'menu_update' ), 10, 2 );
         add_filter( 'wp_get_nav_menu_items', array( 'CWP_Menu', 'filter_items' ), 10, 1 );
+        add_filter( 'manage_nav-menus_columns', array( 'CWP_Menu', 'screen_options' ), 20 );
     }
 
     /**
@@ -70,31 +71,35 @@ class CWP_Menu {
      */
     public static function custom_fields( $item_id, $menu_item ) {
         ?>
-        <p class="description description-wide cwp-icon">
-            <label for="edit-menu-item-icon-<?php echo $item_id; ?>"><?php _e( 'Icon', 'construct-wp' ); ?></label>
-            <input
-                type="text"
-                name="edit-menu-item-icon[<?php echo $item_id; ?>]"
-                id="edit-menu-item-icon-<?php echo $item_id; ?>"
-                class="widefat code edit-menu-item-icon"
-                value="<?php echo esc_attr( $menu_item->icon ); ?>"
-            />
+        <p class="field-cwp-icon description description-wide">
+            <label for="edit-menu-item-icon-<?php echo $item_id; ?>">
+                <?php _e( 'Icon', 'construct-wp' ); ?>
+                <input
+                    type="text"
+                    name="edit-menu-item-icon[<?php echo $item_id; ?>]"
+                    id="edit-menu-item-icon-<?php echo $item_id; ?>"
+                    class="widefat code edit-menu-item-icon"
+                    value="<?php echo esc_attr( $menu_item->icon ); ?>"
+                />
+            </label>
         </p>
 
-        <p class="description description-wide cwp-visibility">
-            <label for="edit-menu-item-visibility-<?php echo $item_id; ?>"><?php _e( 'Visibility', 'construct-wp' ); ?></label>
-            <select
-                name="edit-menu-item-visibility[<?php echo $item_id; ?>]"
-                id="edit-menu-item-visibility-<?php echo $item_id; ?>"
-                class="widefat edit-menu-item-visibility"
-            >
-                <option value="always" <?php echo $menu_item->visibility == 'always' ? 'selected' : ''; ?>><?php _e( 'Always', 'construct-wp' ); ?></option>
-                <option value="logged-in" <?php echo $menu_item->visibility == 'logged-in' ? 'selected' : ''; ?>><?php _e( 'Logged in only', 'construct-wp' ); ?></option>
-                <option value="logged-out" <?php echo $menu_item->visibility == 'logged-out' ? 'selected' : ''; ?>><?php _e( 'Logged out only', 'construct-wp' ); ?></option>
-            </select>
+        <p class="field-cwp-visibility description description-wide">
+            <label for="edit-menu-item-visibility-<?php echo $item_id; ?>">
+                <?php _e( 'Visibility', 'construct-wp' ); ?>
+                <select
+                    name="edit-menu-item-visibility[<?php echo $item_id; ?>]"
+                    id="edit-menu-item-visibility-<?php echo $item_id; ?>"
+                    class="widefat edit-menu-item-visibility"
+                >
+                    <option value="always" <?php echo $menu_item->visibility == 'always' ? 'selected' : ''; ?>><?php _e( 'Always', 'construct-wp' ); ?></option>
+                    <option value="logged-in" <?php echo $menu_item->visibility == 'logged-in' ? 'selected' : ''; ?>><?php _e( 'Logged in only', 'construct-wp' ); ?></option>
+                    <option value="logged-out" <?php echo $menu_item->visibility == 'logged-out' ? 'selected' : ''; ?>><?php _e( 'Logged out only', 'construct-wp' ); ?></option>
+                </select>
+            </label>
         </p>
 
-        <p class="description description-wide cwp-logout_link">
+        <p class="field-cwp-logout_link description description-wide">
             <label for="edit-menu-item-logout_link-<?php echo $item_id; ?>">
                 <input
                     type="checkbox"
@@ -107,14 +112,16 @@ class CWP_Menu {
             </label>
         </p>
 
-        <p class="description description-wide cwp-link_type">
-            <label for="edit-menu-item-link_type-<?php echo $item_id; ?>"><?php _e( 'Dropdown item type', 'construct-wp' ); ?></label>
-            <select name="edit-menu-item-link_type[<?php echo $item_id; ?>]" id="edit-menu-item-link_type-<?php echo $item_id; ?>" class="widefat edit-menu-item-link_type">
-                <option value="link" <?php echo $menu_item->link_type == 'link' ? 'selected' : ''; ?>><?php _e( 'Link', 'construct-wp' ); ?></option>
-                <option value="header" <?php echo $menu_item->link_type == 'header' ? 'selected' : ''; ?>><?php _e( 'Header', 'construct-wp' ); ?></option>
-                <option value="divider" <?php echo $menu_item->link_type == 'divider' ? 'selected' : ''; ?>><?php _e( 'Divider', 'construct-wp' ); ?></option>
-                <option value="text" <?php echo $menu_item->link_type == 'text' ? 'selected' : ''; ?>><?php _e( 'Text', 'construct-wp' ); ?></option>
-            </select>
+        <p class="field-cwp-link_type description description-wide">
+            <label for="edit-menu-item-link_type-<?php echo $item_id; ?>">
+                <?php _e( 'Dropdown item type', 'construct-wp' ); ?>
+                <select name="edit-menu-item-link_type[<?php echo $item_id; ?>]" id="edit-menu-item-link_type-<?php echo $item_id; ?>" class="widefat edit-menu-item-link_type">
+                    <option value="link" <?php echo $menu_item->link_type == 'link' ? 'selected' : ''; ?>><?php _e( 'Link', 'construct-wp' ); ?></option>
+                    <option value="header" <?php echo $menu_item->link_type == 'header' ? 'selected' : ''; ?>><?php _e( 'Header', 'construct-wp' ); ?></option>
+                    <option value="divider" <?php echo $menu_item->link_type == 'divider' ? 'selected' : ''; ?>><?php _e( 'Divider', 'construct-wp' ); ?></option>
+                    <option value="text" <?php echo $menu_item->link_type == 'text' ? 'selected' : ''; ?>><?php _e( 'Text', 'construct-wp' ); ?></option>
+                </select>
+            </label>
         </p>
 
         <?php
@@ -139,6 +146,8 @@ class CWP_Menu {
                 $value = isset( $_POST['edit-menu-item-' . $field][$menu_item_db_id] ) ? $_POST['edit-menu-item-' . $field][$menu_item_db_id] : $default;
                 $value = sanitize_text_field( $value );
                 update_post_meta( $menu_item_db_id, '_menu_item_' . $field, $value );
+            } else {
+                delete_post_meta( $menu_item_db_id, '_menu_item_' . $field );
             }
         }
     }
@@ -166,6 +175,23 @@ class CWP_Menu {
         }
 
         return $items;
+    }
+
+    /**
+     * Add screen options to Menus page
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   array   $columns    The column header labels keyed by column ID
+     * @return  array               The columns with added items
+     */
+    public static function screen_options( $columns ) {
+        $columns['cwp-icon']        = __( 'Icon', 'construct-wp' );
+        $columns['cwp-visibility']  = __( 'Visibility', 'construct-wp' );
+        $columns['cwp-logout_link'] = __( 'Logout link', 'construct-wp' );
+        $columns['cwp-link_type']   = __( 'Dropdown item type', 'construct-wp' );
+
+        return $columns;
     }
 
 }
