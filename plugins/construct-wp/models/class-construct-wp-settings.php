@@ -55,6 +55,7 @@ class CWP_Settings {
         // TODO footer column count?.
         // TODO autorun theme classes.
         // TODO theme support.
+        // TODO autoload theme textdomain.
 
         register_setting( 'cwp_settings', 'cwp_optimize', array(
             'type'         => 'boolean',

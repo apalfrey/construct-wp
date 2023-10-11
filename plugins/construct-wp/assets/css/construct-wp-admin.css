@@ -1,9 +1,41 @@
-.menu-item.menu-item-depth-0 .cwp-link_type {
-  display: none;
+.menu-item.menu-item-depth-0 .field-cwp-link_type {
+  display: none !important;
 }
 
 /* stylelint-disable-next-line selector-id-pattern */
 #toplevel_page_construct-wp .wp-first-item {
   display: none;
+}
+
+.control-section-nav_menu .field-cwp-icon {
+  display: none;
+}
+
+.control-section-nav_menu.field-cwp-icon-active .field-cwp-icon {
+  display: block;
+}
+
+.control-section-nav_menu .field-cwp-visibility {
+  display: none;
+}
+
+.control-section-nav_menu.field-cwp-visibility-active .field-cwp-visibility {
+  display: block;
+}
+
+.control-section-nav_menu .field-cwp-logout_link {
+  display: none;
+}
+
+.control-section-nav_menu.field-cwp-logout_link-active .field-cwp-logout_link {
+  display: block;
+}
+
+.control-section-nav_menu .field-cwp-link_type {
+  display: none;
+}
+
+.control-section-nav_menu.field-cwp-link_type-active .field-cwp-link_type {
+  display: block;
 }
 /*# sourceMappingURL=construct-wp-admin.css.map */

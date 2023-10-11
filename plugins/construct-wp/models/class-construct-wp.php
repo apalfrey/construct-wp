@@ -72,6 +72,9 @@ class Construct_WP {
         // Include admin styles & scripts.
         add_action( 'admin_enqueue_scripts', array( 'CWP_Assets', 'admin_enqueue' ) );
 
+        // Include customizer styles & scripts.
+        add_action( 'customize_controls_enqueue_scripts', array( 'CWP_Assets', 'customizer_enqueue' ) );
+
         do_action( 'cwp_after_setup' );
 
         self::$loaded = true;

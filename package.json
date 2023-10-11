@@ -53,6 +53,7 @@
     "@ilabdev/browsersync": "^1.0.0",
     "@ilabdev/clean": "^1.0.0",
     "@ilabdev/default": "^1.0.0",
+    "@ilabdev/scripts": "^1.0.0",
     "@ilabdev/styles": "^1.0.0",
     "@ilabdev/translate": "^1.0.0",
     "@ilabdev/webpack": "^1.0.0",

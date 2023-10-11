@@ -159,7 +159,18 @@ class CWP_Assets {
      * @return void
      */
     public static function admin_enqueue() {
-        wp_enqueue_style( 'cwp-admin', CWP_PLUGIN_URL . 'assets/css/construct-wp-admin.css', true );
+        wp_enqueue_style( 'cwp-admin', CWP_PLUGIN_URL . 'assets/css/construct-wp-admin.css' );
+    }
+
+    /**
+     * Enqueue's files to the WordPress customizer.
+     *
+     * @return void
+     */
+    public static function customizer_enqueue() {
+        wp_enqueue_script( 'cwp-customizer', CWP_PLUGIN_URL . 'assets/js/construct-wp-customizer.js', array(
+            'customize-nav-menus',
+        ), filemtime( CWP_PLUGIN_PATH . '/assets/js/construct-wp-customizer.js' ), true );
     }
 
     /**

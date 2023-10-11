@@ -103,6 +103,92 @@ module.exports = {
             },
         },
     },
+    scripts: {
+        process: true,
+        watch: true,
+        logColor: 'magenta',
+        areas: [
+            {
+                paths: {
+                    src: `${areas.constructWp.path}/src/js/**/*`,
+                    watch: `${areas.constructWp.path}/src/js/**/*`,
+                    dest: `${areas.constructWp.path}/assets/js`,
+                },
+                minify: {
+                    process: process.env.NODE_ENV !== 'development',
+                    separate: false,
+                },
+                pipes: {
+                    // Put any pipe overrides here
+                    src: {
+                        allowEmpty: true,
+                        base: `${areas.constructWp.path}/src/js`,
+                        sourcemaps: process.env.NODE_ENV === 'development',
+                    },
+                    dest: {
+                        sourcemaps: '.',
+                    },
+                },
+            },
+        ],
+        pipes: {
+            filters: {
+                lint: [
+                    '**/*.js',
+                ],
+                build: [
+                    '**/*.js',
+                    '!**/libs/**/*.js',
+                ],
+            },
+            watch: {
+                events: 'all',
+            },
+            eslint: {
+                // Overrides the version of eslint used
+                eslint: null,
+                formatter: 'stylish',
+                options: {
+                    fix: false,
+                },
+            },
+            rollup: {
+                // Overrides the version of rollup used.
+                // Make sure to pass through the rollup function
+                // e.g. require( 'rollup' ).rollup
+                rollup: null,
+                input: {
+                    plugins: [
+                        require( '@rollup/plugin-babel' ).babel( {
+                            exclude: 'node_modules/**',
+                            babelHelpers: 'bundled',
+                        } ),
+                        require( '@rollup/plugin-node-resolve' ).nodeResolve(),
+                    ],
+                    treeshake: false,
+                    onwarn( e ) {
+                        if ( e.code === 'THIS_IS_UNDEFINED' ) {
+                            return
+                        }
+
+                        console.warn( e.message )
+                    },
+                },
+                output: {
+                    file: 'scripts.js',
+                    name: 'Scripts',
+                    format: 'umd',
+                    generatedCode: 'es2015',
+                    globals: {},
+                },
+            },
+            uglify: {
+                output: {
+                    comments: '/^!|@preserve|@license|@cc_on/i',
+                },
+            },
+        },
+    },
     webpack: {
         process: true,
         watch: true,
