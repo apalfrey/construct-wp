@@ -244,10 +244,10 @@ class CWP_Settings {
      */
     public static function admin_enqueue( $hook_suffix ) {
         if ( strpos( $hook_suffix, 'construct-wp' ) !== false ) {
-            wp_enqueue_style( 'construct-wp-settings-style', CWP_PLUGIN_URL . 'assets/css/construct-wp-settings.css', array(
+            wp_enqueue_style( 'cwp-settings', CWP_PLUGIN_URL . 'assets/css/construct-wp-settings.css', array(
                 'wp-components',
             ) );
-            wp_enqueue_script( 'construct-wp-settings-script', CWP_PLUGIN_URL . 'assets/js/construct-wp-settings.js', array(
+            wp_enqueue_script( 'cwp-settings', CWP_PLUGIN_URL . 'assets/js/construct-wp-settings.js', array(
                 'wp-api',
                 'wp-components',
                 'wp-data',
@@ -255,10 +255,12 @@ class CWP_Settings {
                 'wp-hooks',
                 'wp-i18n',
                 'wp-notices',
-            ) );
-            wp_localize_script( 'construct-wp-settings-script', 'cwpSettingsData', array(
+            ), false, true );
+            wp_localize_script( 'cwp-settings', 'cwpSettingsData', array(
                 'version' => CWP_VERSION,
             ) );
+
+            wp_set_script_translations( 'cwp-settings', 'construct-wp', CWP_PLUGIN_PATH . 'languages/js' );
         }
     }
 

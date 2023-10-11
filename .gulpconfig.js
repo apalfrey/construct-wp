@@ -1,10 +1,45 @@
 const pkg = require( './package.json' )
+const TerserPlugin = require( 'terser-webpack-plugin' )
 const areas = {
     constructWp: {
         path: './plugins/construct-wp',
         name: 'construct-wp',
         title: 'ConstructWP',
         version: '0.1.1',
+    },
+}
+
+const translatePipes = {
+    checktextdomain: {
+        text_domain: 'text-domain',
+        keywords: [
+            '__:1,2d',
+            '_e:1,2d',
+            '_x:1,2c,3d',
+            '_ex:1,2c,3d',
+            '_n:1,2,4d',
+            '_nx:1,2,4c,5d',
+            '_n_noop:1,2,3d',
+            '_nx_noop:1,2,3c,4d',
+            'esc_html__:1,2d',
+            'esc_html_e:1,2d',
+            'esc_html_x:1,2c,3d',
+            'esc_attr__:1,2d',
+            'esc_attr_e:1,2d',
+            'esc_attr_x:1,2c,3d',
+        ],
+        report_missing: true,
+        report_success: false,
+        report_variable_domain: true,
+        correct_domain: true,
+        create_report_file: false,
+        force: false,
+    },
+    pot: {
+        domain: 'text-domain',
+        package: 'Package Name',
+        team: `${pkg.author.name} <${pkg.author.email}>`,
+        lastTranslator: `${pkg.author.name} <${pkg.author.email}>`,
     },
 }
 
@@ -15,7 +50,6 @@ module.exports = {
         paths: [
             `${areas.constructWp.path}/assets`,
             `${areas.constructWp.path}/dist`,
-            `${areas.constructWp.path}/languages`,
         ],
         pipes: {
             del: {
@@ -278,7 +312,9 @@ module.exports = {
                                                 },
                                             ],
                                         ],
-                                        plugins: [],
+                                        plugins: [
+                                            '@automattic/babel-plugin-preserve-i18n',
+                                        ],
                                     },
                                 },
                             },
@@ -286,6 +322,40 @@ module.exports = {
                     },
                     resolve: {
                         extensions: ['.js', '.jsx', '.json'],
+                    },
+                    optimization: {
+                        minimizer: [
+                            new TerserPlugin( {
+                                parallel: true,
+                                terserOptions: {
+                                    output: {
+                                        comments: /translators:/i,
+                                    },
+                                    compress: {
+                                        passes: 2,
+                                    },
+                                    mangle: {
+                                        reserved: [
+                                            '__',
+                                            '_e',
+                                            '_x',
+                                            '_ex',
+                                            '_n',
+                                            '_nx',
+                                            '_n_noop',
+                                            '_nx_noop',
+                                            'esc_html__',
+                                            'esc_html_e',
+                                            'esc_html_x',
+                                            'esc_attr__',
+                                            'esc_attr_e',
+                                            'esc_attr_x',
+                                        ],
+                                    },
+                                },
+                                extractComments: false,
+                            } ),
+                        ],
                     },
                     devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false,
                     mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
@@ -315,44 +385,48 @@ module.exports = {
                         allowEmpty: true,
                     },
                     dest: {},
+                    checktextdomain: {
+                        ...translatePipes.checktextdomain,
+                        text_domain: areas.constructWp.name,
+                    },
+                    pot: {
+                        ...translatePipes.pot,
+                        domain: areas.constructWp.name,
+                        package: areas.constructWp.title,
+                        relativeTo: 'plugins/construct-wp',
+                    },
+                },
+            },
+            {
+                paths: {
+                    src: `${areas.constructWp.path}/assets/js/**/*.js`,
+                    watch: `${areas.constructWp.path}/assets/js/**/*.js`,
+                    dest: `${areas.constructWp.path}/languages/js/${areas.constructWp.name}.pot`,
+                },
+                pipes: {
+                    // Put any pipe overrides here
+                    src: {
+                        allowEmpty: true,
+                    },
+                    dest: {},
+                    checktextdomain: {
+                        ...translatePipes.checktextdomain,
+                        text_domain: areas.constructWp.name,
+                    },
+                    pot: {
+                        ...translatePipes.pot,
+                        domain: areas.constructWp.name,
+                        package: areas.constructWp.title,
+                        relativeTo: 'plugins/construct-wp',
+                        parser: 'js',
+                        parserOptions: {
+                            ecmaVersion: 9,
+                        },
+                    },
                 },
             },
         ],
-        pipes: {
-            checktextdomain: {
-                text_domain: areas.constructWp.name,
-                keywords: [
-                    '__:1,2d',
-                    '_e:1,2d',
-                    '_x:1,2c,3d',
-                    '_ex:1,2c,3d',
-                    '_n:1,2,4d',
-                    '_nx:1,2,4c,5d',
-                    '_n_noop:1,2,3d',
-                    '_nx_noop:1,2,3c,4d',
-                    'esc_html__:1,2d',
-                    'esc_html_e:1,2d',
-                    'esc_html_x:1,2c,3d',
-                    'esc_attr__:1,2d',
-                    'esc_attr_e:1,2d',
-                    'esc_attr_x:1,2c,3d',
-                ],
-                report_missing: true,
-                report_success: false,
-                report_variable_domain: true,
-                correct_domain: true,
-                create_report_file: false,
-                force: false,
-            },
-            pot: {
-                domain: areas.constructWp.name,
-                package: areas.constructWp.title,
-                lastTranslator: `${pkg.author.name} <${pkg.author.email}>`,
-                headers: {
-                    'Language-Team': `${pkg.author.name} <${pkg.author.email}>`,
-                },
-            },
-        },
+        pipes: translatePipes,
     },
     browsersync: {
         watch: true,

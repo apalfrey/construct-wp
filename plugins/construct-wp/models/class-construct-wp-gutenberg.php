@@ -42,6 +42,8 @@ class CWP_Gutenberg {
                 'wp-plugins',
             ), true );
             wp_enqueue_style( 'cwp-gutenberg', CWP_PLUGIN_URL . 'assets/css/construct-wp-gutenberg.css', array( 'wp-edit-blocks' ), true );
+
+            wp_set_script_translations( 'cwp-gutenberg', 'construct-wp', CWP_PLUGIN_PATH . 'languages/js' );
         }
     }
 

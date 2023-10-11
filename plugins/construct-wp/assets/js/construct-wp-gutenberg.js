@@ -21,6 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const __ = _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__;
 function EmailPanel() {
   const postType = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.select)('core/editor').getCurrentPostType();
   if (postType !== 'cwp_email') {
@@ -38,10 +39,10 @@ function EmailPanel() {
   } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)('core/editor', [slug]);
   return wp.element.createElement(_wordpress_edit_post__WEBPACK_IMPORTED_MODULE_0__.PluginDocumentSettingPanel, {
     name: "ilab-restrict-access-sidebar",
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Permalink', 'lancashire-textile-gallery')
+    title: __('Permalink', 'construct-wp')
   }, wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Set the email permalink', 'construct-wp'),
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('This is used as a reference for this email template. This can be automatically generated on creation.', 'construct-wp'),
+    label: __('Set the email permalink', 'construct-wp'),
+    help: __('This is used as a reference for this email template. This can be automatically generated on creation.', 'construct-wp'),
     type: "text",
     value: slug,
     onChange: value => editPost({

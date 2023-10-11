@@ -127,6 +127,7 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 
+const __ = _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__;
 
 class SettingsPage extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
@@ -167,9 +168,9 @@ class SettingsPage extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compo
     }, wp.element.createElement("div", {
       className: "construct-wp__title"
     }, wp.element.createElement(_components__WEBPACK_IMPORTED_MODULE_4__.CWPLogo, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('ConstructWP', 'construct-wp'),
+      title: __('ConstructWP', 'construct-wp'),
       className: "construct-wp__logo"
-    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.VisuallyHidden, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('ConstructWP', 'construct-wp')), wp.element.createElement("span", {
+    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.VisuallyHidden, null, __('ConstructWP', 'construct-wp')), wp.element.createElement("span", {
       className: "construct-wp__version-badge"
     }, "v", cwpSettingsData.version)), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
       tabs: this.tabs,
@@ -225,6 +226,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // eslint-disable-next-line new-cap
+const __ = _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__;
 const htmlToElem = html => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.RawHTML)({
   children: html
 });
@@ -266,13 +268,14 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
   }
   render() {
     if (!this.state.isAPILoaded) {
-      return wp.element.createElement(React.Fragment, null, wp.element.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('General', 'construct-wp')), wp.element.createElement("div", {
+      return wp.element.createElement(React.Fragment, null, wp.element.createElement("h2", null, __('General', 'construct-wp')), wp.element.createElement("div", {
         className: "construct-wp__loading-spinner"
       }));
     }
-    return wp.element.createElement(React.Fragment, null, wp.element.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('General', 'construct-wp')), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove admin bar', 'construct-wp'),
-      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Removes the admin bar from the frontend if the user doesn\'t have the %s capability', 'construct-wp'), '<code>cwp_view_admin_dashboard</code>')),
+    return wp.element.createElement(React.Fragment, null, wp.element.createElement("h2", null, __('General', 'construct-wp')), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: __('Remove admin bar', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %s - The capability in a code tag */
+      __('Removes the admin bar from the frontend if the user doesn\'t have the %s capability', 'construct-wp'), '<code>cwp_view_admin_dashboard</code>')),
       checked: this.state.removeAdminBar,
       onChange: () => {
         this.setState({
@@ -281,8 +284,9 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       },
       disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Restrict admin access', 'construct-wp'),
-      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Redirects users to the frontend if they try to access the admin area without the %s capability', 'construct-wp'), '<code>cwp_view_admin_dashboard</code>')),
+      label: __('Restrict admin access', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %s - The capability in a code tag */
+      __('Redirects users to the frontend if they try to access the admin area without the %s capability', 'construct-wp'), '<code>cwp_view_admin_dashboard</code>')),
       checked: this.state.restrictAdminAccess,
       onChange: () => {
         this.setState({
@@ -291,8 +295,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       },
       disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable controllers', 'construct-wp'),
-      help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enables controllers on the frontend based on the current template file', 'construct-wp'),
+      label: __('Enable controllers', 'construct-wp'),
+      help: __('Enables controllers on the frontend based on the current template file', 'construct-wp'),
       checked: this.state.controllers,
       onChange: () => {
         this.setState({
@@ -301,8 +305,9 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       },
       disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Auto-enqueue theme styles', 'construct-wp'),
-      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Automatically enqueues the theme\'s styles based on the parent and child theme names. e.g. %s', 'construct-wp'), '<code>/assets/css/theme-name.css</code>')),
+      label: __('Auto-enqueue theme styles', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %s - An example theme style path */
+      __('Automatically enqueues the theme\'s styles based on the parent and child theme names. e.g. %s', 'construct-wp'), '<code>/assets/css/theme-name.css</code>')),
       checked: this.state.baseStyles,
       onChange: () => {
         this.setState({
@@ -311,8 +316,9 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       },
       disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Auto-enqueue theme scripts', 'construct-wp'),
-      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Automatically enqueues the theme\'s scripts based on the parent and child theme names. e.g. %s', 'construct-wp'), '<code>/assets/js/theme-name.js</code>')),
+      label: __('Auto-enqueue theme scripts', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %s - An example theme script path */
+      __('Automatically enqueues the theme\'s scripts based on the parent and child theme names. e.g. %s', 'construct-wp'), '<code>/assets/js/theme-name.js</code>')),
       checked: this.state.baseScripts,
       onChange: () => {
         this.setState({
@@ -321,8 +327,9 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       },
       disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Auto-enqueue template styles', 'construct-wp'),
-      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Automatically enqueues a template\'s styles based on the template name. e.g. %s', 'construct-wp'), '<code>/assets/css/templates/template-name.css</code>')),
+      label: __('Auto-enqueue template styles', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %s - An example template style path */
+      __('Automatically enqueues a template\'s styles based on the template name. e.g. %s', 'construct-wp'), '<code>/assets/css/templates/template-name.css</code>')),
       checked: this.state.templateStyles,
       onChange: () => {
         this.setState({
@@ -331,8 +338,9 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       },
       disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Auto-enqueue template scripts', 'construct-wp'),
-      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Automatically enqueues a template\'s scripts based on the template name. e.g. %s', 'construct-wp'), '<code>/assets/js/templates/template-name.js</code>')),
+      label: __('Auto-enqueue template scripts', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %s - An example template script path */
+      __('Automatically enqueues a template\'s scripts based on the template name. e.g. %s', 'construct-wp'), '<code>/assets/js/templates/template-name.js</code>')),
       checked: this.state.templateScripts,
       onChange: () => {
         this.setState({
@@ -341,8 +349,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       },
       disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Footer columns', 'construct-wp'),
-      help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The number of footer widget areas to create', 'construct-wp'),
+      label: __('Footer columns', 'construct-wp'),
+      help: __('The number of footer widget areas to create', 'construct-wp'),
       type: "number",
       value: this.state.footerColumnCount,
       onChange: value => {
@@ -385,14 +393,14 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
             templateScripts: !!response.cwp_template_scripts,
             footerColumnCount: response.cwp_footer_column_count
           });
-          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createSuccessNotice((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Settings saved!', 'construct-wp'), {
+          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createSuccessNotice(__('Settings saved!', 'construct-wp'), {
             type: 'snackbar',
             speak: true,
             isDismissible: true,
             icon: ''
           });
         }).catch(() => {
-          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createErrorNotice((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Unable to save settings', 'construct-wp'), {
+          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createErrorNotice(__('Unable to save settings', 'construct-wp'), {
             type: 'snackbar',
             speak: true,
             isDismissible: true,
@@ -400,13 +408,13 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
           });
         });
       }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Save', 'construct-wp')));
+    }, __('Save', 'construct-wp')));
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = ({
   tab: {
     name: 'general',
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('General', 'construct-wp')
+    title: __('General', 'construct-wp')
   },
   panel: GeneralTab
 });
@@ -450,6 +458,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const __ = _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__;
 class OptimizeTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
@@ -480,7 +489,7 @@ class OptimizeTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compon
     const isAllChecked = Object.values(this.state[state]).every(Boolean);
     const isIndeterminate = Object.values(this.state[state]).some(Boolean) && !isAllChecked;
     return wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CheckboxControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Select all', 'construct-wp'),
+      label: __('Select all', 'construct-wp'),
       checked: isAllChecked,
       indeterminate: isIndeterminate,
       onChange: value => {
@@ -513,13 +522,13 @@ class OptimizeTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compon
   }
   render() {
     if (!this.state.isAPILoaded) {
-      return wp.element.createElement(React.Fragment, null, wp.element.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Optimize', 'construct-wp')), wp.element.createElement("div", {
+      return wp.element.createElement(React.Fragment, null, wp.element.createElement("h2", null, __('Optimize', 'construct-wp')), wp.element.createElement("div", {
         className: "construct-wp__loading-spinner"
       }));
     }
-    return wp.element.createElement(React.Fragment, null, wp.element.createElement("div", null, wp.element.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Optimize', 'construct-wp')), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Optimize', 'construct-wp'),
-      help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Whether to optimize the site to remove bloat', 'construct-wp'),
+    return wp.element.createElement(React.Fragment, null, wp.element.createElement("div", null, wp.element.createElement("h2", null, __('Optimize', 'construct-wp')), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: __('Optimize', 'construct-wp'),
+      help: __('Whether to optimize the site to remove bloat', 'construct-wp'),
       checked: this.state.optimize,
       onChange: () => {
         this.setState({
@@ -529,13 +538,13 @@ class OptimizeTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compon
       disabled: this.state.isAPISaving
     })), this.state.optimize && wp.element.createElement(React.Fragment, null, wp.element.createElement("h4", null, "Remove bloat"), wp.element.createElement("hr", null), wp.element.createElement("div", {
       className: "construct-wp__section"
-    }, wp.element.createElement("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('WordPress', 'construct-wp')), this.selectAll('wpBloat'), wp.element.createElement("div", {
+    }, wp.element.createElement("h5", null, __('WordPress', 'construct-wp')), this.selectAll('wpBloat'), wp.element.createElement("div", {
       className: "construct-wp__checklist"
-    }, this.checkbox('wpBloat', 'feeds', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Feeds', 'construct-wp')), this.checkbox('wpBloat', 'rsd_link', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Really Simple Directory link', 'construct-wp')), this.checkbox('wpBloat', 'rel_atts', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Relational attributes', 'construct-wp')), this.checkbox('wpBloat', 'rel_links', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Relational links', 'construct-wp')), this.checkbox('wpBloat', 'version_number', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Version numbers', 'construct-wp')), this.checkbox('wpBloat', 'json_api_links', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('JSON API links', 'construct-wp')), this.checkbox('wpBloat', 'emoji', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Emoji', 'construct-wp')), this.checkbox('wpBloat', 'xmlrpc', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('XML-RPC', 'construct-wp')), this.checkbox('wpBloat', 'jquery_migrate', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('jQuery migrate', 'construct-wp')), this.checkbox('wpBloat', 'self_pingback', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Self pingback', 'construct-wp')))), wp.element.createElement("div", {
+    }, this.checkbox('wpBloat', 'feeds', __('Feeds', 'construct-wp')), this.checkbox('wpBloat', 'rsd_link', __('Really Simple Directory link', 'construct-wp')), this.checkbox('wpBloat', 'rel_atts', __('Relational attributes', 'construct-wp')), this.checkbox('wpBloat', 'rel_links', __('Relational links', 'construct-wp')), this.checkbox('wpBloat', 'version_number', __('Version numbers', 'construct-wp')), this.checkbox('wpBloat', 'json_api_links', __('JSON API links', 'construct-wp')), this.checkbox('wpBloat', 'emoji', __('Emoji', 'construct-wp')), this.checkbox('wpBloat', 'xmlrpc', __('XML-RPC', 'construct-wp')), this.checkbox('wpBloat', 'jquery_migrate', __('jQuery migrate', 'construct-wp')), this.checkbox('wpBloat', 'self_pingback', __('Self pingback', 'construct-wp')))), wp.element.createElement("div", {
       className: "construct-wp__section"
-    }, wp.element.createElement("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Dashboard meta boxes', 'construct-wp')), this.selectAll('dashboardMeta'), wp.element.createElement("div", {
+    }, wp.element.createElement("h5", null, __('Dashboard meta boxes', 'construct-wp')), this.selectAll('dashboardMeta'), wp.element.createElement("div", {
       className: "construct-wp__checklist"
-    }, this.checkbox('dashboardMeta', 'welcome', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Welcome panel', 'construct-wp')), this.checkbox('dashboardMeta', 'site_health', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Site health', 'construct-wp')), this.checkbox('dashboardMeta', 'at_a_glance', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('At a glance', 'construct-wp')), this.checkbox('dashboardMeta', 'activity', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Activity', 'construct-wp')), this.checkbox('dashboardMeta', 'quick_draft', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Quick draft', 'construct-wp')), this.checkbox('dashboardMeta', 'events_and_news', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Events and news', 'construct-wp'))))), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    }, this.checkbox('dashboardMeta', 'welcome', __('Welcome panel', 'construct-wp')), this.checkbox('dashboardMeta', 'site_health', __('Site health', 'construct-wp')), this.checkbox('dashboardMeta', 'at_a_glance', __('At a glance', 'construct-wp')), this.checkbox('dashboardMeta', 'activity', __('Activity', 'construct-wp')), this.checkbox('dashboardMeta', 'quick_draft', __('Quick draft', 'construct-wp')), this.checkbox('dashboardMeta', 'events_and_news', __('Events and news', 'construct-wp'))))), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
       variant: "primary",
       disabled: this.state.isAPISaving,
       isBusy: this.state.isAPISaving,
@@ -559,14 +568,14 @@ class OptimizeTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compon
             wpBloat: response.cwp_optimize_wp_bloat,
             dashboardMeta: response.cwp_optimize_dashboard_meta
           });
-          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createSuccessNotice((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Settings saved!', 'construct-wp'), {
+          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createSuccessNotice(__('Settings saved!', 'construct-wp'), {
             type: 'snackbar',
             speak: true,
             isDismissible: true,
             icon: ''
           });
         }).catch(() => {
-          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createErrorNotice((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Unable to save settings', 'construct-wp'), {
+          (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createErrorNotice(__('Unable to save settings', 'construct-wp'), {
             type: 'snackbar',
             speak: true,
             isDismissible: true,
@@ -574,13 +583,13 @@ class OptimizeTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compon
           });
         });
       }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Save', 'construct-wp')));
+    }, __('Save', 'construct-wp')));
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = ({
   tab: {
     name: 'optimize',
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Optimize', 'construct-wp')
+    title: __('Optimize', 'construct-wp')
   },
   panel: OptimizeTab
 });

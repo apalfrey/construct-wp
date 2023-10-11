@@ -74,6 +74,7 @@ class GeneralTab extends Component {
                 <ToggleControl
                     label={__( 'Remove admin bar', 'construct-wp' )}
                     help={htmlToElem( sprintf(
+                        /* translators: %s - The capability in a code tag */
                         __( 'Removes the admin bar from the frontend if the user doesn\'t have the %s capability', 'construct-wp' ),
                         '<code>cwp_view_admin_dashboard</code>'
                     ) )}
@@ -89,6 +90,7 @@ class GeneralTab extends Component {
                 <ToggleControl
                     label={__( 'Restrict admin access', 'construct-wp' )}
                     help={htmlToElem( sprintf(
+                        /* translators: %s - The capability in a code tag */
                         __( 'Redirects users to the frontend if they try to access the admin area without the %s capability', 'construct-wp' ),
                         '<code>cwp_view_admin_dashboard</code>'
                     ) )}
@@ -116,6 +118,7 @@ class GeneralTab extends Component {
                 <ToggleControl
                     label={__( 'Auto-enqueue theme styles', 'construct-wp' )}
                     help={htmlToElem( sprintf(
+                        /* translators: %s - An example theme style path */
                         __( 'Automatically enqueues the theme\'s styles based on the parent and child theme names. e.g. %s', 'construct-wp' ),
                         '<code>/assets/css/theme-name.css</code>'
                     ) )}
@@ -131,6 +134,7 @@ class GeneralTab extends Component {
                 <ToggleControl
                     label={__( 'Auto-enqueue theme scripts', 'construct-wp' )}
                     help={htmlToElem( sprintf(
+                        /* translators: %s - An example theme script path */
                         __( 'Automatically enqueues the theme\'s scripts based on the parent and child theme names. e.g. %s', 'construct-wp' ),
                         '<code>/assets/js/theme-name.js</code>'
                     ) )}
@@ -146,6 +150,7 @@ class GeneralTab extends Component {
                 <ToggleControl
                     label={__( 'Auto-enqueue template styles', 'construct-wp' )}
                     help={htmlToElem( sprintf(
+                        /* translators: %s - An example template style path */
                         __( 'Automatically enqueues a template\'s styles based on the template name. e.g. %s', 'construct-wp' ),
                         '<code>/assets/css/templates/template-name.css</code>'
                     ) )}
@@ -161,6 +166,7 @@ class GeneralTab extends Component {
                 <ToggleControl
                     label={__( 'Auto-enqueue template scripts', 'construct-wp' )}
                     help={htmlToElem( sprintf(
+                        /* translators: %s - An example template script path */
                         __( 'Automatically enqueues a template\'s scripts based on the template name. e.g. %s', 'construct-wp' ),
                         '<code>/assets/js/templates/template-name.js</code>'
                     ) )}

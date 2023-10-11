@@ -211,7 +211,10 @@ class CWP_Assets {
     public static function customizer_enqueue() {
         wp_enqueue_script( 'cwp-customizer', CWP_PLUGIN_URL . 'assets/js/construct-wp-customizer.js', array(
             'customize-nav-menus',
+            'wp-i18n',
         ), filemtime( CWP_PLUGIN_PATH . '/assets/js/construct-wp-customizer.js' ), true );
+
+        wp_set_script_translations( 'cwp-customizer', 'construct-wp', CWP_PLUGIN_PATH . 'languages/js' );
     }
 
     /**
