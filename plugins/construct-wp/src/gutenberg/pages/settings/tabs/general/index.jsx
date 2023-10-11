@@ -26,6 +26,7 @@ class GeneralTab extends Component {
             isAPISaving: false,
             removeAdminBar: true,
             restrictAdminAccess: true,
+            controllers: true,
         }
     }
 
@@ -39,6 +40,7 @@ class GeneralTab extends Component {
                         isAPILoaded: true,
                         removeAdminBar: !!response.cwp_remove_admin_bar,
                         restrictAdminAccess: !!response.cwp_restrict_admin_access,
+                        controllers: !!response.cwp_controllers,
                     } )
                 } )
             }
@@ -88,6 +90,18 @@ class GeneralTab extends Component {
                     disabled={this.state.isAPISaving}
                 />
 
+                <ToggleControl
+                    label={__( 'Enable controllers', 'construct-wp' )}
+                    help={__( 'Enables controllers on the frontend based on the current template file', 'construct-wp' )}
+                    checked={this.state.controllers}
+                    onChange={() => {
+                        this.setState( {
+                            controllers: !this.state.controllers,
+                        } )
+                    }}
+                    disabled={this.state.isAPISaving}
+                />
+
                 <Button
                     isPrimary
                     isLarge
@@ -101,6 +115,7 @@ class GeneralTab extends Component {
                             /* eslint-disable camelcase */
                             cwp_remove_admin_bar: this.state.removeAdminBar,
                             cwp_restrict_admin_access: this.state.restrictAdminAccess,
+                            cwp_controllers: this.state.controllers,
                             /* eslint-enable camelcase */
                         } )
 
@@ -110,6 +125,7 @@ class GeneralTab extends Component {
                                     isAPISaving: false,
                                     removeAdminBar: !!response.cwp_remove_admin_bar,
                                     restrictAdminAccess: !!response.cwp_restrict_admin_access,
+                                    controllers: !!response.cwp_controllers,
                                 } )
 
                                 dispatch( 'core/notices' ).createSuccessNotice(

@@ -47,7 +47,12 @@ class CWP_Settings {
             'default'      => true,
         ) );
 
-        // TODO controller enable.
+        register_setting( 'cwp_settings', 'cwp_controllers', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
         // TODO base stylesheet enable.
         // TODO base js enable.
         // TODO template stylesheet enable.

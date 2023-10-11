@@ -13,7 +13,7 @@
 class CWP_Assets {
 
     /**
-     * Contains information about the page:
+     * Contains information about the template:
      * - Template path
      * - Controller path
      * - CSS path
@@ -23,7 +23,7 @@ class CWP_Assets {
      * @access  private
      * @var     array
      */
-    private static $page_info = array();
+    private static $template_info = array();
 
     /**
      * Finds & generates the path/URI for assets based on whether they are in the parent or child theme,
@@ -60,6 +60,33 @@ class CWP_Assets {
     }
 
     /**
+     * Gathers information about the template:
+     * - Template path
+     * - Controller path
+     * - CSS path
+     * - JS path
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   string  $template   The template for the current page
+     * @return  string              The template for the current page
+     */
+    public static function get_template_info( $template ) {
+        $template_base = str_replace( trailingslashit( get_stylesheet_directory() ), '', $template );
+        $template_base = str_replace( trailingslashit( get_template_directory() ), '', $template_base );
+        $template_base = str_replace( '.php', '', $template_base );
+
+        self::$template_info = array(
+            'template'   => $template_base . '.php',
+            'controller' => '/controllers/' . $template_base . '.php',
+            'css'        => '/assets/css/' . $template_base . '.css',
+            'js'         => '/assets/js/' . $template_base . '.js',
+        );
+
+        return $template;
+    }
+
+    /**
      * Includes the templates controller if found. This is called from the `template_include` filter.
      *
      * @since   1.0.0
@@ -68,20 +95,13 @@ class CWP_Assets {
      * @return  string              The template for the current page
      */
     public static function template_controller( $template ) {
-        global $wp_filesystem;
+        $setting = boolval( get_option( 'cwp_controllers' ) );
 
-        $template_base = str_replace( trailingslashit( get_stylesheet_directory() ), '', $template );
-        $template_base = str_replace( trailingslashit( get_template_directory() ), '', $template_base );
-        $template_base = str_replace( '.php', '', $template_base );
+        if ( ! $setting ) {
+            return $template;
+        }
 
-        self::$page_info = array(
-            'template'   => $template_base . '.php',
-            'controller' => '/controllers/' . $template_base . '.php',
-            'css'        => '/assets/css/' . $template_base . '.css',
-            'js'         => '/assets/js/' . $template_base . '.js',
-        );
-
-        $controller_path = self::final_path( self::$page_info['controller'], false );
+        $controller_path = self::final_path( self::$template_info['controller'], false );
 
         if ( $controller_path ) {
             include_once $controller_path;
@@ -105,8 +125,6 @@ class CWP_Assets {
      * @return  void
      */
     public static function base_enqueue() {
-        global $wp_filesystem;
-
         $themes = array_unique( array(
             get_template(),
             get_stylesheet(),
@@ -118,11 +136,11 @@ class CWP_Assets {
             $script_path = self::final_path( '/assets/js/' . $theme . '.js', false );
             $script_uri  = self::final_path( '/assets/js/' . $theme . '.js', true );
 
-            if ( $wp_filesystem->exists( $style_path ) ) {
+            if ( $style_path ) {
                 wp_enqueue_style( $theme, $style_uri );
             }
 
-            if ( $wp_filesystem->exists( $script_path ) ) {
+            if ( $script_path ) {
                 wp_enqueue_script( $theme, $script_uri, array(), false, true );
             }
         }
@@ -136,19 +154,17 @@ class CWP_Assets {
      * @return  void
      */
     public static function template_enqueue() {
-        global $wp_filesystem;
+        $handle      = basename( self::$template_info['template'], '.php' );
+        $style_path  = self::final_path( self::$template_info['css'], false );
+        $style_uri   = self::final_path( self::$template_info['css'], true );
+        $script_path = self::final_path( self::$template_info['js'], false );
+        $script_uri  = self::final_path( self::$template_info['js'], true );
 
-        $handle      = basename( self::$page_info['template'], '.php' );
-        $style_path  = self::final_path( self::$page_info['css'], false );
-        $style_uri   = self::final_path( self::$page_info['css'], true );
-        $script_path = self::final_path( self::$page_info['js'], false );
-        $script_uri  = self::final_path( self::$page_info['js'], true );
-
-        if ( $wp_filesystem->exists( $style_path ) ) {
+        if ( $style_path ) {
             wp_enqueue_style( $handle, $style_uri );
         }
 
-        if ( $wp_filesystem->exists( $script_path ) ) {
+        if ( $script_path ) {
             wp_enqueue_script( $handle, $script_uri, array(), false, true );
         }
     }

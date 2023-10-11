@@ -235,7 +235,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       isAPILoaded: false,
       isAPISaving: false,
       removeAdminBar: true,
-      restrictAdminAccess: true
+      restrictAdminAccess: true,
+      controllers: true
     };
   }
   componentDidMount() {
@@ -246,7 +247,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
           this.setState({
             isAPILoaded: true,
             removeAdminBar: !!response.cwp_remove_admin_bar,
-            restrictAdminAccess: !!response.cwp_restrict_admin_access
+            restrictAdminAccess: !!response.cwp_restrict_admin_access,
+            controllers: !!response.cwp_controllers
           });
         });
       }
@@ -278,6 +280,16 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
         });
       },
       disabled: this.state.isAPISaving
+    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enable controllers', 'construct-wp'),
+      help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Enables controllers on the frontend based on the current template file', 'construct-wp'),
+      checked: this.state.controllers,
+      onChange: () => {
+        this.setState({
+          controllers: !this.state.controllers
+        });
+      },
+      disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
       isPrimary: true,
       isLarge: true,
@@ -289,7 +301,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
         const settings = new wp.api.models.Settings({
           /* eslint-disable camelcase */
           cwp_remove_admin_bar: this.state.removeAdminBar,
-          cwp_restrict_admin_access: this.state.restrictAdminAccess
+          cwp_restrict_admin_access: this.state.restrictAdminAccess,
+          cwp_controllers: this.state.controllers
           /* eslint-enable camelcase */
         });
 
@@ -297,7 +310,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
           this.setState({
             isAPISaving: false,
             removeAdminBar: !!response.cwp_remove_admin_bar,
-            restrictAdminAccess: !!response.cwp_restrict_admin_access
+            restrictAdminAccess: !!response.cwp_restrict_admin_access,
+            controllers: !!response.cwp_controllers
           });
           (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createSuccessNotice((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Settings saved!', 'construct-wp'), {
             type: 'snackbar',

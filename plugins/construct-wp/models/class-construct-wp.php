@@ -60,6 +60,9 @@ class Construct_WP {
         // Restrict access to admin area.
         self::restrict_admin_access();
 
+        // Gets path info for the template for use throughout the system.
+        add_filter( 'template_include', array( 'CWP_Assets', 'get_template_info' ), 1 );
+
         // Include the current templates corresponding controller.
         add_filter( 'template_include', array( 'CWP_Assets', 'template_controller' ), 1 );
 
