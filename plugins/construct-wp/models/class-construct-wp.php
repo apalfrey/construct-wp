@@ -298,7 +298,7 @@ class Construct_WP {
      * @return  void
      */
     public static function register_sidebars() {
-        $column_count = apply_filters( 'cwp_footer_column_count', 3 );
+        $column_count = apply_filters( 'cwp_footer_column_count', get_option( 'cwp_footer_column_count' ) );
 
         for ( $i = 1; $i <= $column_count; $i++ ) {
             register_sidebar( array(

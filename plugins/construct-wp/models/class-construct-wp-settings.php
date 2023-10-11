@@ -77,7 +77,12 @@ class CWP_Settings {
             'default'      => true,
         ) );
 
-        // TODO footer column count?.
+        register_setting( 'cwp_settings', 'cwp_footer_column_count', array(
+            'type'         => 'number',
+            'show_in_rest' => true,
+            'default'      => 3,
+        ) );
+
         // TODO autorun theme classes.
         // TODO theme support.
         // TODO autoload theme textdomain.

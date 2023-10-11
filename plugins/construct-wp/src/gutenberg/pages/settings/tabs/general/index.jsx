@@ -4,6 +4,7 @@ import {
 } from '@wordpress/element'
 import {
     Button,
+    TextControl,
     ToggleControl,
 } from '@wordpress/components'
 import {
@@ -31,6 +32,7 @@ class GeneralTab extends Component {
             baseScripts: true,
             templateStyles: true,
             templateScripts: true,
+            footerColumnCount: 3,
         }
     }
 
@@ -49,6 +51,7 @@ class GeneralTab extends Component {
                         baseScripts: !!response.cwp_base_scripts,
                         templateStyles: !!response.cwp_template_styles,
                         templateScripts: !!response.cwp_template_scripts,
+                        footerColumnCount: response.cwp_footer_column_count,
                     } )
                 } )
             }
@@ -170,6 +173,19 @@ class GeneralTab extends Component {
                     disabled={this.state.isAPISaving}
                 />
 
+                <TextControl
+                    label={__( 'Footer columns', 'construct-wp' )}
+                    help={__( 'The number of footer widget areas to create', 'construct-wp' )}
+                    type="number"
+                    value={this.state.footerColumnCount}
+                    onChange={( value ) => {
+                        this.setState( {
+                            footerColumnCount: value,
+                        } )
+                    }}
+                    disabled={this.state.isAPISaving}
+                />
+
                 <Button
                     isPrimary
                     isLarge
@@ -188,6 +204,7 @@ class GeneralTab extends Component {
                             cwp_base_scripts: this.state.baseScripts,
                             cwp_template_styles: this.state.templateStyles,
                             cwp_template_scripts: this.state.templateScripts,
+                            cwp_footer_column_count: this.state.footerColumnCount,
                             /* eslint-enable camelcase */
                         } )
 
@@ -202,6 +219,7 @@ class GeneralTab extends Component {
                                     baseScripts: !!response.cwp_base_scripts,
                                     templateStyles: !!response.cwp_template_styles,
                                     templateScripts: !!response.cwp_template_scripts,
+                                    footerColumnCount: response.cwp_footer_column_count,
                                 } )
 
                                 dispatch( 'core/notices' ).createSuccessNotice(
