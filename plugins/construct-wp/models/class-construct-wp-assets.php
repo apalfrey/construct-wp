@@ -125,23 +125,35 @@ class CWP_Assets {
      * @return  void
      */
     public static function base_enqueue() {
+        $styles_setting  = boolval( get_option( 'cwp_base_styles' ) );
+        $scripts_setting = boolval( get_option( 'cwp_base_scripts' ) );
+
+        if ( ! $styles_setting && ! $scripts_setting ) {
+            return;
+        }
+
         $themes = array_unique( array(
             get_template(),
             get_stylesheet(),
         ) );
 
         foreach ( $themes as $theme ) {
-            $style_path  = self::final_path( '/assets/css/' . $theme . '.css', false );
-            $style_uri   = self::final_path( '/assets/css/' . $theme . '.css', true );
-            $script_path = self::final_path( '/assets/js/' . $theme . '.js', false );
-            $script_uri  = self::final_path( '/assets/js/' . $theme . '.js', true );
+            if ( $styles_setting ) {
+                $style_path = self::final_path( '/assets/css/' . $theme . '.css', false );
+                $style_uri  = self::final_path( '/assets/css/' . $theme . '.css', true );
 
-            if ( $style_path ) {
-                wp_enqueue_style( $theme, $style_uri );
+                if ( $style_path ) {
+                    wp_enqueue_style( $theme, $style_uri );
+                }
             }
 
-            if ( $script_path ) {
-                wp_enqueue_script( $theme, $script_uri, array(), false, true );
+            if ( $scripts_setting ) {
+                $script_path = self::final_path( '/assets/js/' . $theme . '.js', false );
+                $script_uri  = self::final_path( '/assets/js/' . $theme . '.js', true );
+
+                if ( $script_path ) {
+                    wp_enqueue_script( $theme, $script_uri, array(), false, true );
+                }
             }
         }
     }
@@ -154,18 +166,31 @@ class CWP_Assets {
      * @return  void
      */
     public static function template_enqueue() {
-        $handle      = basename( self::$template_info['template'], '.php' );
-        $style_path  = self::final_path( self::$template_info['css'], false );
-        $style_uri   = self::final_path( self::$template_info['css'], true );
-        $script_path = self::final_path( self::$template_info['js'], false );
-        $script_uri  = self::final_path( self::$template_info['js'], true );
+        $styles_setting  = boolval( get_option( 'cwp_template_styles' ) );
+        $scripts_setting = boolval( get_option( 'cwp_template_scripts' ) );
 
-        if ( $style_path ) {
-            wp_enqueue_style( $handle, $style_uri );
+        if ( ! $styles_setting && ! $scripts_setting ) {
+            return;
         }
 
-        if ( $script_path ) {
-            wp_enqueue_script( $handle, $script_uri, array(), false, true );
+        $handle = basename( self::$template_info['template'], '.php' );
+
+        if ( $styles_setting ) {
+            $style_path = self::final_path( self::$template_info['css'], false );
+            $style_uri  = self::final_path( self::$template_info['css'], true );
+
+            if ( $style_path ) {
+                wp_enqueue_style( $handle, $style_uri );
+            }
+        }
+
+        if ( $scripts_setting ) {
+            $script_path = self::final_path( self::$template_info['js'], false );
+            $script_uri  = self::final_path( self::$template_info['js'], true );
+
+            if ( $script_path ) {
+                wp_enqueue_script( $handle, $script_uri, array(), false, true );
+            }
         }
     }
 

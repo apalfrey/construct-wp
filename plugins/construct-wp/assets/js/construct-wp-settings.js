@@ -236,7 +236,11 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       isAPISaving: false,
       removeAdminBar: true,
       restrictAdminAccess: true,
-      controllers: true
+      controllers: true,
+      baseStyles: true,
+      baseScripts: true,
+      templateStyles: true,
+      templateScripts: true
     };
   }
   componentDidMount() {
@@ -248,7 +252,11 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
             isAPILoaded: true,
             removeAdminBar: !!response.cwp_remove_admin_bar,
             restrictAdminAccess: !!response.cwp_restrict_admin_access,
-            controllers: !!response.cwp_controllers
+            controllers: !!response.cwp_controllers,
+            baseStyles: !!response.cwp_base_styles,
+            baseScripts: !!response.cwp_base_scripts,
+            templateStyles: !!response.cwp_template_styles,
+            templateScripts: !!response.cwp_template_scripts
           });
         });
       }
@@ -290,6 +298,46 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
         });
       },
       disabled: this.state.isAPISaving
+    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Auto-enqueue theme styles', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Automatically enqueues the theme\'s styles based on the parent and child theme names. e.g. %s', 'construct-wp'), '<code>/assets/css/theme-name.css</code>')),
+      checked: this.state.baseStyles,
+      onChange: () => {
+        this.setState({
+          baseStyles: !this.state.baseStyles
+        });
+      },
+      disabled: this.state.isAPISaving
+    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Auto-enqueue theme scripts', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Automatically enqueues the theme\'s scripts based on the parent and child theme names. e.g. %s', 'construct-wp'), '<code>/assets/js/theme-name.js</code>')),
+      checked: this.state.baseScripts,
+      onChange: () => {
+        this.setState({
+          baseScripts: !this.state.baseScripts
+        });
+      },
+      disabled: this.state.isAPISaving
+    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Auto-enqueue template styles', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Automatically enqueues a template\'s styles based on the template name. e.g. %s', 'construct-wp'), '<code>/assets/css/templates/template-name.css</code>')),
+      checked: this.state.templateStyles,
+      onChange: () => {
+        this.setState({
+          templateStyles: !this.state.templateStyles
+        });
+      },
+      disabled: this.state.isAPISaving
+    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Auto-enqueue template scripts', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Automatically enqueues a template\'s scripts based on the template name. e.g. %s', 'construct-wp'), '<code>/assets/js/templates/template-name.js</code>')),
+      checked: this.state.templateScripts,
+      onChange: () => {
+        this.setState({
+          templateScripts: !this.state.templateScripts
+        });
+      },
+      disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
       isPrimary: true,
       isLarge: true,
@@ -302,7 +350,11 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
           /* eslint-disable camelcase */
           cwp_remove_admin_bar: this.state.removeAdminBar,
           cwp_restrict_admin_access: this.state.restrictAdminAccess,
-          cwp_controllers: this.state.controllers
+          cwp_controllers: this.state.controllers,
+          cwp_base_styles: this.state.baseStyles,
+          cwp_base_scripts: this.state.baseScripts,
+          cwp_template_styles: this.state.templateStyles,
+          cwp_template_scripts: this.state.templateScripts
           /* eslint-enable camelcase */
         });
 
@@ -311,7 +363,11 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
             isAPISaving: false,
             removeAdminBar: !!response.cwp_remove_admin_bar,
             restrictAdminAccess: !!response.cwp_restrict_admin_access,
-            controllers: !!response.cwp_controllers
+            controllers: !!response.cwp_controllers,
+            baseStyles: !!response.cwp_base_styles,
+            baseScripts: !!response.cwp_base_scripts,
+            templateStyles: !!response.cwp_template_styles,
+            templateScripts: !!response.cwp_template_scripts
           });
           (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createSuccessNotice((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Settings saved!', 'construct-wp'), {
             type: 'snackbar',

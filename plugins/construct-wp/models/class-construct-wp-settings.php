@@ -53,10 +53,30 @@ class CWP_Settings {
             'default'      => true,
         ) );
 
-        // TODO base stylesheet enable.
-        // TODO base js enable.
-        // TODO template stylesheet enable.
-        // TODO template js enable.
+        register_setting( 'cwp_settings', 'cwp_base_styles', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_base_scripts', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_template_styles', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_template_scripts', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
         // TODO footer column count?.
         // TODO autorun theme classes.
         // TODO theme support.
