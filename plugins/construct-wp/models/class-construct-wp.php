@@ -461,25 +461,64 @@ class Construct_WP {
      * @return  void
      */
     public static function customize_settings( $wp_customize ) {
+        $custom_logo_args = get_theme_support( 'custom-logo' );
+
+        $wp_customize->add_control(
+            new WP_Customize_Cropped_Image_Control(
+                $wp_customize,
+                'custom_logo',
+                array(
+                    'label'         => __( 'Logo', 'construct-wp' ),
+                    'description'   => '<p>' . __( 'This should be your regular, colored logo.', 'construct-wp' ) . '</p>',
+                    'section'       => 'title_tagline',
+                    'priority'      => 10,
+                    'height'        => isset( $custom_logo_args[0]['height'] ) ? $custom_logo_args[0]['height'] : null,
+                    'width'         => isset( $custom_logo_args[0]['width'] ) ? $custom_logo_args[0]['width'] : null,
+                    'flex_height'   => isset( $custom_logo_args[0]['flex-height'] ) ? $custom_logo_args[0]['flex-height'] : null,
+                    'flex_width'    => isset( $custom_logo_args[0]['flex-width'] ) ? $custom_logo_args[0]['flex-width'] : null,
+                    'button_labels' => array(
+                        'select'       => __( 'Select logo', 'construct-wp' ),
+                        'change'       => __( 'Change logo', 'construct-wp' ),
+                        'remove'       => __( 'Remove', 'construct-wp' ),
+                        'default'      => __( 'Default', 'construct-wp' ),
+                        'placeholder'  => __( 'No logo selected', 'construct-wp' ),
+                        'frame_title'  => __( 'Select logo', 'construct-wp' ),
+                        'frame_button' => __( 'Choose logo', 'construct-wp' ),
+                    ),
+                )
+            )
+        );
+
         $wp_customize->add_setting(
             'custom_white_logo',
             array(
-                'default'    => '',
-                'type'       => 'theme_mod',
-                'capability' => 'edit_theme_options',
+                'theme_supports' => array( 'custom-logo' ),
+                'transport'      => 'postMessage',
             )
         );
 
         $wp_customize->add_control(
-            new WP_Customize_Media_Control(
+            new WP_Customize_Cropped_Image_Control(
                 $wp_customize,
-                'logo',
+                'custom_white_logo',
                 array(
-                    'mime_type' => 'image',
-                    'label'     => __( 'White Logo', 'construct-wp' ),
-                    'section'   => 'title_tagline',
-                    'settings'  => 'custom_white_logo',
-                    'priority'  => 9,
+                    'label'         => __( 'White Logo', 'construct-wp' ),
+                    'description'   => '<p>' . __( 'This should the white version of your logo for placement on colored backgrounds.', 'construct-wp' ) . '</p>',
+                    'section'       => 'title_tagline',
+                    'priority'      => 10,
+                    'height'        => isset( $custom_logo_args[0]['height'] ) ? $custom_logo_args[0]['height'] : null,
+                    'width'         => isset( $custom_logo_args[0]['width'] ) ? $custom_logo_args[0]['width'] : null,
+                    'flex_height'   => isset( $custom_logo_args[0]['flex-height'] ) ? $custom_logo_args[0]['flex-height'] : null,
+                    'flex_width'    => isset( $custom_logo_args[0]['flex-width'] ) ? $custom_logo_args[0]['flex-width'] : null,
+                    'button_labels' => array(
+                        'select'       => __( 'Select logo', 'construct-wp' ),
+                        'change'       => __( 'Change logo', 'construct-wp' ),
+                        'remove'       => __( 'Remove', 'construct-wp' ),
+                        'default'      => __( 'Default', 'construct-wp' ),
+                        'placeholder'  => __( 'No logo selected', 'construct-wp' ),
+                        'frame_title'  => __( 'Select logo', 'construct-wp' ),
+                        'frame_button' => __( 'Choose logo', 'construct-wp' ),
+                    ),
                 )
             )
         );

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
 "Last-Translator: Andrew Palfrey <apalfrey@apalfrey.me>\n"
-"POT-Creation-Date: 2023-10-11 10:48+0000\n"
+"POT-Creation-Date: 2023-10-11 12:52+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -143,6 +143,42 @@ msgstr ""
 msgid "Add widgets here to appear in your footer column %d"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp.php:479
+#: plugins/construct-wp/models/class-construct-wp.php:471
+msgid "Logo"
+msgstr ""
+
+#: plugins/construct-wp/models/class-construct-wp.php:472
+msgid "This should be your regular, colored logo."
+msgstr ""
+
+#: plugins/construct-wp/models/class-construct-wp.php:480, plugins/construct-wp/models/class-construct-wp.php:485, plugins/construct-wp/models/class-construct-wp.php:514, plugins/construct-wp/models/class-construct-wp.php:519
+msgid "Select logo"
+msgstr ""
+
+#: plugins/construct-wp/models/class-construct-wp.php:481, plugins/construct-wp/models/class-construct-wp.php:515
+msgid "Change logo"
+msgstr ""
+
+#: plugins/construct-wp/models/class-construct-wp.php:482, plugins/construct-wp/models/class-construct-wp.php:516
+msgid "Remove"
+msgstr ""
+
+#: plugins/construct-wp/models/class-construct-wp.php:483, plugins/construct-wp/models/class-construct-wp.php:517
+msgid "Default"
+msgstr ""
+
+#: plugins/construct-wp/models/class-construct-wp.php:484, plugins/construct-wp/models/class-construct-wp.php:518
+msgid "No logo selected"
+msgstr ""
+
+#: plugins/construct-wp/models/class-construct-wp.php:486, plugins/construct-wp/models/class-construct-wp.php:520
+msgid "Choose logo"
+msgstr ""
+
+#: plugins/construct-wp/models/class-construct-wp.php:505
 msgid "White Logo"
+msgstr ""
+
+#: plugins/construct-wp/models/class-construct-wp.php:506
+msgid "This should the white version of your logo for placement on colored backgrounds."
 msgstr ""
