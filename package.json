@@ -29,7 +29,9 @@
     "translate": "gulp translate",
     "translate:watch": "gulp translate:watch",
     "browsersync": "gulp browsersync",
-    "archive": "gulp archive"
+    "archive": "gulp archive",
+    "phpcs": "composer run-script phpcs",
+    "phpcs:watch": "nodemon --watch . -e php --ignore vendor/ --ignore node_modules/ --exec \"composer run-script phpcs\""
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
@@ -68,6 +70,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-unicorn": "^48.0.1",
     "gulp": "^4.0.2",
+    "nodemon": "^3.0.1",
     "postcss": "^8.4.31",
     "stylelint": "^15.10.3",
     "stylelint-config-twbs-bootstrap": "^11.0.1",

@@ -361,8 +361,9 @@ module.exports = {
             port: 4000,
             ui: false,
             files: [
-                '**/*',
-                '!**/src/**/*'
+                'plugins/**/*',
+                'themes/**/*',
+                '!**/src/**/*',
             ],
             ghostmode: false,
             open: false,
