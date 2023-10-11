@@ -240,7 +240,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       baseStyles: true,
       baseScripts: true,
       templateStyles: true,
-      templateScripts: true
+      templateScripts: true,
+      footerColumnCount: 3
     };
   }
   componentDidMount() {
@@ -256,7 +257,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
             baseStyles: !!response.cwp_base_styles,
             baseScripts: !!response.cwp_base_scripts,
             templateStyles: !!response.cwp_template_styles,
-            templateScripts: !!response.cwp_template_scripts
+            templateScripts: !!response.cwp_template_scripts,
+            footerColumnCount: response.cwp_footer_column_count
           });
         });
       }
@@ -338,10 +340,22 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
         });
       },
       disabled: this.state.isAPISaving
+    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Footer columns', 'construct-wp'),
+      help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('The number of footer widget areas to create', 'construct-wp'),
+      type: "number",
+      value: this.state.footerColumnCount,
+      onChange: value => {
+        this.setState({
+          footerColumnCount: value
+        });
+      },
+      disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-      isPrimary: true,
-      isLarge: true,
+      variant: "primary",
       disabled: this.state.isAPISaving,
+      isBusy: this.state.isAPISaving,
+      className: "components-submit-button",
       onClick: () => {
         this.setState({
           isAPISaving: true
@@ -354,7 +368,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
           cwp_base_styles: this.state.baseStyles,
           cwp_base_scripts: this.state.baseScripts,
           cwp_template_styles: this.state.templateStyles,
-          cwp_template_scripts: this.state.templateScripts
+          cwp_template_scripts: this.state.templateScripts,
+          cwp_footer_column_count: this.state.footerColumnCount
           /* eslint-enable camelcase */
         });
 
@@ -367,7 +382,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
             baseStyles: !!response.cwp_base_styles,
             baseScripts: !!response.cwp_base_scripts,
             templateStyles: !!response.cwp_template_styles,
-            templateScripts: !!response.cwp_template_scripts
+            templateScripts: !!response.cwp_template_scripts,
+            footerColumnCount: response.cwp_footer_column_count
           });
           (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createSuccessNotice((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Settings saved!', 'construct-wp'), {
             type: 'snackbar',
@@ -383,9 +399,6 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
             icon: ''
           });
         });
-      },
-      style: {
-        marginTop: '1.5rem'
       }
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Save', 'construct-wp')));
   }
@@ -514,30 +527,19 @@ class OptimizeTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compon
         });
       },
       disabled: this.state.isAPISaving
-    })), this.state.optimize && wp.element.createElement(React.Fragment, null, wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Card, {
-      style: {
-        boxShadow: 'none'
-      }
-    }, wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardHeader, null, wp.element.createElement("h4", {
-      style: {
-        margin: 0
-      }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove bloat', 'construct-wp'))), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, wp.element.createElement("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('WordPress', 'construct-wp')), this.selectAll('wpBloat'), wp.element.createElement("div", {
+    })), this.state.optimize && wp.element.createElement(React.Fragment, null, wp.element.createElement("h4", null, "Remove bloat"), wp.element.createElement("hr", null), wp.element.createElement("div", {
+      className: "construct-wp__section"
+    }, wp.element.createElement("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('WordPress', 'construct-wp')), this.selectAll('wpBloat'), wp.element.createElement("div", {
       className: "construct-wp__checklist"
-    }, this.checkbox('wpBloat', 'feeds', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Feeds', 'construct-wp')), this.checkbox('wpBloat', 'rsd_link', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Really Simple Directory link', 'construct-wp')), this.checkbox('wpBloat', 'rel_atts', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Relational attributes', 'construct-wp')), this.checkbox('wpBloat', 'rel_links', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Relational links', 'construct-wp')), this.checkbox('wpBloat', 'version_number', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Version numbers', 'construct-wp')), this.checkbox('wpBloat', 'json_api_links', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('JSON API links', 'construct-wp')), this.checkbox('wpBloat', 'emoji', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Emoji', 'construct-wp')), this.checkbox('wpBloat', 'xmlrpc', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('XML-RPC', 'construct-wp')), this.checkbox('wpBloat', 'jquery_migrate', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('jQuery migrate', 'construct-wp')), this.checkbox('wpBloat', 'self_pingback', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Self pingback', 'construct-wp'))))), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Card, {
-      style: {
-        boxShadow: 'none'
-      }
-    }, wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardHeader, null, wp.element.createElement("h4", {
-      style: {
-        margin: 0
-      }
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Remove dashboard meta boxes', 'construct-wp'))), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.CardBody, null, this.selectAll('dashboardMeta'), wp.element.createElement("div", {
+    }, this.checkbox('wpBloat', 'feeds', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Feeds', 'construct-wp')), this.checkbox('wpBloat', 'rsd_link', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Really Simple Directory link', 'construct-wp')), this.checkbox('wpBloat', 'rel_atts', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Relational attributes', 'construct-wp')), this.checkbox('wpBloat', 'rel_links', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Relational links', 'construct-wp')), this.checkbox('wpBloat', 'version_number', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Version numbers', 'construct-wp')), this.checkbox('wpBloat', 'json_api_links', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('JSON API links', 'construct-wp')), this.checkbox('wpBloat', 'emoji', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Emoji', 'construct-wp')), this.checkbox('wpBloat', 'xmlrpc', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('XML-RPC', 'construct-wp')), this.checkbox('wpBloat', 'jquery_migrate', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('jQuery migrate', 'construct-wp')), this.checkbox('wpBloat', 'self_pingback', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Self pingback', 'construct-wp')))), wp.element.createElement("div", {
+      className: "construct-wp__section"
+    }, wp.element.createElement("h5", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Dashboard meta boxes', 'construct-wp')), this.selectAll('dashboardMeta'), wp.element.createElement("div", {
       className: "construct-wp__checklist"
-    }, this.checkbox('dashboardMeta', 'welcome', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Welcome panel', 'construct-wp')), this.checkbox('dashboardMeta', 'site_health', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Site health', 'construct-wp')), this.checkbox('dashboardMeta', 'at_a_glance', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('At a glance', 'construct-wp')), this.checkbox('dashboardMeta', 'activity', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Activity', 'construct-wp')), this.checkbox('dashboardMeta', 'quick_draft', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Quick draft', 'construct-wp')), this.checkbox('dashboardMeta', 'events_and_news', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Events and news', 'construct-wp')))))), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-      isPrimary: true,
-      isLarge: true,
+    }, this.checkbox('dashboardMeta', 'welcome', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Welcome panel', 'construct-wp')), this.checkbox('dashboardMeta', 'site_health', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Site health', 'construct-wp')), this.checkbox('dashboardMeta', 'at_a_glance', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('At a glance', 'construct-wp')), this.checkbox('dashboardMeta', 'activity', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Activity', 'construct-wp')), this.checkbox('dashboardMeta', 'quick_draft', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Quick draft', 'construct-wp')), this.checkbox('dashboardMeta', 'events_and_news', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Events and news', 'construct-wp'))))), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+      variant: "primary",
       disabled: this.state.isAPISaving,
+      isBusy: this.state.isAPISaving,
+      className: "components-submit-button",
       onClick: () => {
         this.setState({
           isAPISaving: true
@@ -571,9 +573,6 @@ class OptimizeTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compon
             icon: ''
           });
         });
-      },
-      style: {
-        marginTop: '1.5rem'
       }
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Save', 'construct-wp')));
   }

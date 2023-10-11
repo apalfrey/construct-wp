@@ -187,9 +187,10 @@ class GeneralTab extends Component {
                 />
 
                 <Button
-                    isPrimary
-                    isLarge
+                    variant="primary"
                     disabled={this.state.isAPISaving}
+                    isBusy={this.state.isAPISaving}
+                    className="components-submit-button"
                     onClick={() => {
                         this.setState( {
                             isAPISaving: true,
@@ -243,9 +244,6 @@ class GeneralTab extends Component {
                                     }
                                 )
                             } )
-                    }}
-                    style={{
-                        marginTop: '1.5rem',
                     }}
                 >
                     { __( 'Save', 'construct-wp' ) }

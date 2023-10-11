@@ -104,6 +104,35 @@ body {
 #construct-wp-settings .construct-wp__header {
   padding: 1rem 1.5rem 0;
 }
+#construct-wp-settings .construct-wp__header .construct-wp__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+#construct-wp-settings .construct-wp__header .construct-wp__logo {
+  max-height: 50px;
+  margin-right: 1rem;
+}
+#construct-wp-settings .construct-wp__header .construct-wp__version-badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.9rem;
+  line-height: 1;
+  color: var(--wp-components-color-accent-inverted);
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: var(--wp-components-color-accent);
+  border: 1px solid var(--wp-components-color-accent);
+  /* stylelint-disable-next-line property-disallowed-list */
+  border-radius: 0.375rem;
+}
+#construct-wp-settings .construct-wp__header .components-tab-panel__tabs {
+  margin-top: 1rem;
+}
+#construct-wp-settings .construct-wp__header .components-tab-panel__tabs-item {
+  padding-top: 0;
+}
 #construct-wp-settings .construct-wp__main {
   padding: 1.25rem 2rem;
   margin: 1rem;
@@ -138,28 +167,6 @@ body {
     max-width: 1320px;
   }
 }
-#construct-wp-settings .construct-wp__logo {
-  max-height: 50px;
-  margin-right: 1rem;
-}
-#construct-wp-settings .components-tab-panel__tabs-item {
-  padding-top: 0;
-}
-#construct-wp-settings .components-tab-panel__tab-content {
-  display: none;
-}
-#construct-wp-settings .components-base-control__help {
-  color: rgb(var(--wp-components-color-accent-foreground--to-rgb), 0.675);
-}
-#construct-wp-settings .construct-wp__checklist {
-  -moz-columns: auto 2;
-  columns: auto 2;
-  -moz-column-gap: 2rem;
-  column-gap: 2rem;
-}
-#construct-wp-settings .construct-wp__checklist .components-base-control__field {
-  margin-bottom: 0.5rem;
-}
 #construct-wp-settings .construct-wp__loading-spinner {
   display: inline-block;
   width: 2rem;
@@ -172,24 +179,52 @@ body {
   border-radius: 50%;
   animation: 0.75s linear infinite spinner-border;
 }
-#construct-wp-settings .construct-wp__title {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+#construct-wp-settings .construct-wp__checklist {
+  -moz-columns: auto 2;
+  columns: auto 2;
+  -moz-column-gap: 2rem;
+  column-gap: 2rem;
 }
-#construct-wp-settings .construct-wp__version-badge {
-  display: inline-block;
-  padding: 0.35em 0.65em;
-  font-size: 0.9rem;
-  line-height: 1;
-  color: var(--wp-components-color-accent-inverted);
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  background-color: var(--wp-components-color-accent);
-  border: 1px solid var(--wp-components-color-accent);
-  /* stylelint-disable-next-line property-disallowed-list */
+#construct-wp-settings .construct-wp__checklist .components-base-control__field {
+  margin-bottom: 0.5rem;
+}
+#construct-wp-settings .construct-wp__section {
+  margin-bottom: 1.5rem;
+}
+#construct-wp-settings .construct-wp__section:last-of-type {
+  margin-bottom: 0;
+}
+#construct-wp-settings .components-base-control .components-base-control__label {
+  font-weight: 400;
+  text-transform: none;
+}
+#construct-wp-settings .components-base-control .components-text-control__input,
+#construct-wp-settings .components-base-control .components-text-control__input [type=color],
+#construct-wp-settings .components-base-control .components-text-control__input [type=date],
+#construct-wp-settings .components-base-control .components-text-control__input [type=datetime-local],
+#construct-wp-settings .components-base-control .components-text-control__input [type=datetime],
+#construct-wp-settings .components-base-control .components-text-control__input [type=email],
+#construct-wp-settings .components-base-control .components-text-control__input [type=month],
+#construct-wp-settings .components-base-control .components-text-control__input [type=number],
+#construct-wp-settings .components-base-control .components-text-control__input [type=password],
+#construct-wp-settings .components-base-control .components-text-control__input [type=tel],
+#construct-wp-settings .components-base-control .components-text-control__input [type=text],
+#construct-wp-settings .components-base-control .components-text-control__input [type=time],
+#construct-wp-settings .components-base-control .components-text-control__input [type=url],
+#construct-wp-settings .components-base-control .components-text-control__input [type=week] {
+  display: block;
+  max-width: 500px;
   border-radius: 0.375rem;
+}
+#construct-wp-settings .components-base-control .components-base-control__help {
+  color: rgb(var(--wp-components-color-accent-foreground--to-rgb), 0.675);
+}
+#construct-wp-settings .components-base-control:last-of-type .components-base-control__help {
+  margin-bottom: 0;
+}
+#construct-wp-settings .components-submit-button {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 #construct-wp-settings .construct-wp__notices .components-snackbar {
   position: fixed;

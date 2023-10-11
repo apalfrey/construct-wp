@@ -3,9 +3,6 @@ import {
 } from '@wordpress/element'
 import {
     Button,
-    Card,
-    CardBody,
-    CardHeader,
     CheckboxControl,
     ToggleControl,
 } from '@wordpress/components'
@@ -119,63 +116,50 @@ class OptimizeTab extends Component {
 
                 {this.state.optimize && (
                     <>
-                        <Card style={{
-                            boxShadow: 'none',
-                        }}>
-                            <CardHeader>
-                                <h4 style={{
-                                    margin: 0,
-                                }}>{__( 'Remove bloat', 'construct-wp' )}</h4>
-                            </CardHeader>
+                        <h4>Remove bloat</h4>
 
-                            <CardBody>
-                                <h5>{__( 'WordPress', 'construct-wp' )}</h5>
+                        <hr />
 
-                                {this.selectAll( 'wpBloat' )}
-                                <div className="construct-wp__checklist">
-                                    {this.checkbox( 'wpBloat', 'feeds', __( 'Feeds', 'construct-wp' ) )}
-                                    {this.checkbox( 'wpBloat', 'rsd_link', __( 'Really Simple Directory link', 'construct-wp' ) )}
-                                    {this.checkbox( 'wpBloat', 'rel_atts', __( 'Relational attributes', 'construct-wp' ) )}
-                                    {this.checkbox( 'wpBloat', 'rel_links', __( 'Relational links', 'construct-wp' ) )}
-                                    {this.checkbox( 'wpBloat', 'version_number', __( 'Version numbers', 'construct-wp' ) )}
-                                    {this.checkbox( 'wpBloat', 'json_api_links', __( 'JSON API links', 'construct-wp' ) )}
-                                    {this.checkbox( 'wpBloat', 'emoji', __( 'Emoji', 'construct-wp' ) )}
-                                    {this.checkbox( 'wpBloat', 'xmlrpc', __( 'XML-RPC', 'construct-wp' ) )}
-                                    {this.checkbox( 'wpBloat', 'jquery_migrate', __( 'jQuery migrate', 'construct-wp' ) )}
-                                    {this.checkbox( 'wpBloat', 'self_pingback', __( 'Self pingback', 'construct-wp' ) )}
-                                </div>
-                            </CardBody>
-                        </Card>
+                        <div className="construct-wp__section">
+                            <h5>{__( 'WordPress', 'construct-wp' )}</h5>
 
-                        <Card style={{
-                            boxShadow: 'none',
-                        }}>
-                            <CardHeader>
-                                <h4 style={{
-                                    margin: 0,
-                                }}>{__( 'Remove dashboard meta boxes', 'construct-wp' )}</h4>
-                            </CardHeader>
+                            {this.selectAll( 'wpBloat' )}
+                            <div className="construct-wp__checklist">
+                                {this.checkbox( 'wpBloat', 'feeds', __( 'Feeds', 'construct-wp' ) )}
+                                {this.checkbox( 'wpBloat', 'rsd_link', __( 'Really Simple Directory link', 'construct-wp' ) )}
+                                {this.checkbox( 'wpBloat', 'rel_atts', __( 'Relational attributes', 'construct-wp' ) )}
+                                {this.checkbox( 'wpBloat', 'rel_links', __( 'Relational links', 'construct-wp' ) )}
+                                {this.checkbox( 'wpBloat', 'version_number', __( 'Version numbers', 'construct-wp' ) )}
+                                {this.checkbox( 'wpBloat', 'json_api_links', __( 'JSON API links', 'construct-wp' ) )}
+                                {this.checkbox( 'wpBloat', 'emoji', __( 'Emoji', 'construct-wp' ) )}
+                                {this.checkbox( 'wpBloat', 'xmlrpc', __( 'XML-RPC', 'construct-wp' ) )}
+                                {this.checkbox( 'wpBloat', 'jquery_migrate', __( 'jQuery migrate', 'construct-wp' ) )}
+                                {this.checkbox( 'wpBloat', 'self_pingback', __( 'Self pingback', 'construct-wp' ) )}
+                            </div>
+                        </div>
 
-                            <CardBody>
-                                {this.selectAll( 'dashboardMeta' )}
+                        <div className="construct-wp__section">
+                            <h5>{__( 'Dashboard meta boxes', 'construct-wp' )}</h5>
 
-                                <div className="construct-wp__checklist">
-                                    {this.checkbox( 'dashboardMeta', 'welcome', __( 'Welcome panel', 'construct-wp' ) )}
-                                    {this.checkbox( 'dashboardMeta', 'site_health', __( 'Site health', 'construct-wp' ) )}
-                                    {this.checkbox( 'dashboardMeta', 'at_a_glance', __( 'At a glance', 'construct-wp' ) )}
-                                    {this.checkbox( 'dashboardMeta', 'activity', __( 'Activity', 'construct-wp' ) )}
-                                    {this.checkbox( 'dashboardMeta', 'quick_draft', __( 'Quick draft', 'construct-wp' ) )}
-                                    {this.checkbox( 'dashboardMeta', 'events_and_news', __( 'Events and news', 'construct-wp' ) )}
-                                </div>
-                            </CardBody>
-                        </Card>
+                            {this.selectAll( 'dashboardMeta' )}
+
+                            <div className="construct-wp__checklist">
+                                {this.checkbox( 'dashboardMeta', 'welcome', __( 'Welcome panel', 'construct-wp' ) )}
+                                {this.checkbox( 'dashboardMeta', 'site_health', __( 'Site health', 'construct-wp' ) )}
+                                {this.checkbox( 'dashboardMeta', 'at_a_glance', __( 'At a glance', 'construct-wp' ) )}
+                                {this.checkbox( 'dashboardMeta', 'activity', __( 'Activity', 'construct-wp' ) )}
+                                {this.checkbox( 'dashboardMeta', 'quick_draft', __( 'Quick draft', 'construct-wp' ) )}
+                                {this.checkbox( 'dashboardMeta', 'events_and_news', __( 'Events and news', 'construct-wp' ) )}
+                            </div>
+                        </div>
                     </>
                 )}
 
                 <Button
-                    isPrimary
-                    isLarge
+                    variant="primary"
                     disabled={this.state.isAPISaving}
+                    isBusy={this.state.isAPISaving}
+                    className="components-submit-button"
                     onClick={() => {
                         this.setState( {
                             isAPISaving: true,
@@ -219,9 +203,6 @@ class OptimizeTab extends Component {
                                     }
                                 )
                             } )
-                    }}
-                    style={{
-                        marginTop: '1.5rem',
                     }}
                 >
                     { __( 'Save', 'construct-wp' ) }

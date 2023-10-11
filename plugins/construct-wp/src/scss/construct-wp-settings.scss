@@ -126,6 +126,39 @@ body {
 
     .construct-wp__header {
         padding: 1rem 1.5rem 0;
+
+        .construct-wp__title {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .construct-wp__logo {
+            max-height: 50px;
+            margin-right: 1rem;
+        }
+
+        .construct-wp__version-badge {
+            display: inline-block;
+            padding: .35em .65em;
+            font-size: .9rem;
+            line-height: 1;
+            color: var(--wp-components-color-accent-inverted);
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            background-color: var(--wp-components-color-accent);
+            border: 1px solid var(--wp-components-color-accent);
+            /* stylelint-disable-next-line property-disallowed-list */
+            border-radius: .375rem;
+        }
+
+        .components-tab-panel__tabs {
+            margin-top: 1rem;
+        }
+        .components-tab-panel__tabs-item {
+            padding-top: 0;
+        }
     }
 
     .construct-wp__main {
@@ -159,33 +192,6 @@ body {
         }
     }
 
-    .construct-wp__logo {
-        max-height: 50px;
-        margin-right: 1rem;
-    }
-
-    .components-tab-panel__tabs-item {
-        padding-top: 0;
-    }
-
-    .components-tab-panel__tab-content {
-        display: none;
-    }
-
-    .components-base-control__help {
-        color: rgb(var(--wp-components-color-accent-foreground--to-rgb), .675);
-    }
-
-    .construct-wp__checklist {
-        columns: auto 2;
-        column-gap: 2rem;
-
-        .components-base-control__field {
-            margin-bottom: .5rem;
-        }
-    }
-
-
     .construct-wp__loading-spinner {
         display: inline-block;
         width: 2rem;
@@ -200,25 +206,64 @@ body {
         animation: .75s linear infinite spinner-border;
     }
 
-    .construct-wp__title {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
+    .construct-wp__checklist {
+        columns: auto 2;
+        column-gap: 2rem;
+
+        .components-base-control__field {
+            margin-bottom: .5rem;
+        }
     }
 
-    .construct-wp__version-badge {
-        display: inline-block;
-        padding: .35em .65em;
-        font-size: .9rem;
-        line-height: 1;
-        color: var(--wp-components-color-accent-inverted);
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: baseline;
-        background-color: var(--wp-components-color-accent);
-        border: 1px solid var(--wp-components-color-accent);
-        /* stylelint-disable-next-line property-disallowed-list */
-        border-radius: .375rem;
+    .construct-wp__section {
+        margin-bottom: 1.5rem;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+
+    .components-base-control {
+        .components-base-control__label {
+            font-weight: 400;
+            text-transform: none;
+        }
+
+        .components-text-control__input {
+            &,
+            [type="color"],
+            [type="date"],
+            [type="datetime-local"],
+            [type="datetime"],
+            [type="email"],
+            [type="month"],
+            [type="number"],
+            [type="password"],
+            [type="tel"],
+            [type="text"],
+            [type="time"],
+            [type="url"],
+            [type="week"] {
+                display: block;
+                max-width: 500px;
+                @include border-radius($border-radius);
+            }
+        }
+
+        .components-base-control__help {
+            color: rgb(var(--wp-components-color-accent-foreground--to-rgb), .675);
+        }
+
+        &:last-of-type {
+            .components-base-control__help {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .components-submit-button {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
     }
 
     .construct-wp__notices {
