@@ -393,7 +393,7 @@ module.exports = {
                         ...translatePipes.pot,
                         domain: areas.constructWp.name,
                         package: areas.constructWp.title,
-                        relativeTo: 'plugins/construct-wp',
+                        relativeTo: areas.constructWp.path,
                     },
                 },
             },
@@ -417,7 +417,7 @@ module.exports = {
                         ...translatePipes.pot,
                         domain: areas.constructWp.name,
                         package: areas.constructWp.title,
-                        relativeTo: 'plugins/construct-wp',
+                        relativeTo: areas.constructWp.path,
                         parser: 'js',
                         parserOptions: {
                             ecmaVersion: 9,
@@ -427,6 +427,18 @@ module.exports = {
             },
         ],
         pipes: translatePipes,
+    },
+    po2json: {
+        process: true,
+        watch: true,
+        paths: [
+            `${areas.constructWp.path}/languages/**/*.po`,
+        ],
+        bin: 'vendor/bin/wp',
+        pretty: true,
+        execSync: {
+            shell: 'C:\\Program Files\\Git\\bin\\bash.exe',
+        },
     },
     browsersync: {
         watch: true,
