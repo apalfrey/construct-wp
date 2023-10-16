@@ -164,13 +164,14 @@ class CWP_Utils {
      *
      * @since   1.0.0
      * @access  public
-     * @param   array       $link_args  Arguments to send to `paginate_links`
-     * @param   array       $args       Arguments for how to output the pagination
-     * @param   boolean     $display    Whether to display the pagination
-     * @return  string                  The pagination HTML
+     * @param   array           $link_args  Arguments to send to `paginate_links`
+     * @param   array           $args       Arguments for how to output the pagination
+     * @param   WP_Query|null   $args       The query to use for pagination
+     * @param   boolean         $display    Whether to display the pagination
+     * @return  string                      The pagination HTML
      */
-    public static function pagination( $link_args = array(), $args = array(), $wp_query = false, $display = true ) {
-        if ( !$wp_query ) {
+    public static function pagination( $link_args = array(), $args = array(), $wp_query = null, $display = true ) {
+        if ( ! $wp_query ) {
             global $wp_query;
         }
 
