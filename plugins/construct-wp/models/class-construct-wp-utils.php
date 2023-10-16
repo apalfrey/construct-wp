@@ -169,8 +169,10 @@ class CWP_Utils {
      * @param   boolean     $display    Whether to display the pagination
      * @return  string                  The pagination HTML
      */
-    public static function pagination( $link_args = array(), $args = array(), $display = true ) {
-        global $wp_query;
+    public static function pagination( $link_args = array(), $args = array(), $wp_query = false, $display = true ) {
+        if ( !$wp_query ) {
+            global $wp_query;
+        }
 
         $args = wp_parse_args( $args, array(
             'paged'         => max( 1, get_query_var( 'paged' ) ),

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
 "Last-Translator: Andrew Palfrey <apalfrey@apalfrey.me>\n"
-"POT-Creation-Date: 2023-10-12 11:45+0000\n"
+"POT-Creation-Date: 2023-10-16 16:24+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -109,23 +109,23 @@ msgstr ""
 msgid "%1$sAn Unexpected HTTP Error occurred during the API request.%2$s %1$s%3$sTry again%4$s%2$s"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:178
+#: models/class-construct-wp-utils.php:180
 msgid "Page navigation"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:197
+#: models/class-construct-wp-utils.php:199
 msgid "First"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:201
+#: models/class-construct-wp-utils.php:203
 msgid "Last"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:217
+#: models/class-construct-wp-utils.php:219
 msgid "Previous"
 msgstr ""
 
-#: models/class-construct-wp-utils.php:221
+#: models/class-construct-wp-utils.php:223
 msgid "Next"
 msgstr ""
 
