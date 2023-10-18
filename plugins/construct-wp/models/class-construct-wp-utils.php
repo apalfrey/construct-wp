@@ -166,7 +166,7 @@ class CWP_Utils {
      * @access  public
      * @param   array           $link_args  Arguments to send to `paginate_links`
      * @param   array           $args       Arguments for how to output the pagination
-     * @param   WP_Query|null   $args       The query to use for pagination
+     * @param   WP_Query|null   $wp_query   The query to use for pagination
      * @param   boolean         $display    Whether to display the pagination
      * @return  string                      The pagination HTML
      */
