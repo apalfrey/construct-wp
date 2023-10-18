@@ -240,6 +240,8 @@ class CWP_Navwalker extends Walker_Nav_Menu {
             }
 
             $atts['aria-current'] = $menu_item->current ? 'page' : '';
+
+            $atts['class'] .= $menu_item->current ? ' active' : '';
         } else if ( $menu_item->link_type === 'header' ) {
             $link_tag      = 'h6';
             $atts['class'] = 'dropdown-header';
