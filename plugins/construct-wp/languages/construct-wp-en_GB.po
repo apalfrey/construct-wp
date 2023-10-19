@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ConstructWP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-11 20:03+0000\n"
+"POT-Creation-Date: 2023-10-19 15:20+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andrew Palfrey <apalfrey1@uclan.ac.uk>\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
@@ -14,7 +14,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
+"_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;"
+"esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 3.4\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -96,56 +98,60 @@ msgstr "Divider"
 msgid "Text"
 msgstr "Text"
 
-#: models/class-construct-wp-settings.php:196
+#: models/class-construct-wp-settings.php:212
 msgid "ConstructWP Settings"
 msgstr "ConstructWP Settings"
 
-#: models/class-construct-wp-settings.php:197
+#: models/class-construct-wp-settings.php:213
 msgid "ConstructWP"
 msgstr "ConstructWP"
 
-#: models/class-construct-wp-settings.php:208
+#: models/class-construct-wp-settings.php:224
 msgid "ConstructWP Settings - General"
 msgstr "ConstructWP Settings - General"
 
-#: models/class-construct-wp-settings.php:209
+#: models/class-construct-wp-settings.php:225
 msgid "General"
 msgstr "General"
 
-#: models/class-construct-wp-settings.php:217
+#: models/class-construct-wp-settings.php:233
 msgid "ConstructWP Settings - Optimize"
 msgstr "ConstructWP Settings - Optimise"
 
-#: models/class-construct-wp-settings.php:218
+#: models/class-construct-wp-settings.php:234
 msgid "Optimize"
 msgstr "Optimise"
 
-#: models/class-construct-wp-settings.php:280
+#: models/class-construct-wp-settings.php:296
 msgid "Settings"
 msgstr "Settings"
 
 #. translators: %1$s - Opening p tag, %2$s - Closing p tag, %3$s - Opening a tag, %4$s - Closing a tag
 #: models/class-construct-wp-updater.php:135
-msgid "%1$sAn Unexpected HTTP Error occurred during the API request.%2$s %1$s%3$sTry again%4$s%2$s"
-msgstr "%1$sAn Unexpected HTTP Error occurred during the API request.%2$s %1$s%3$sTry again%4$s%2$s"
+msgid ""
+"%1$sAn Unexpected HTTP Error occurred during the API request.%2$s "
+"%1$s%3$sTry again%4$s%2$s"
+msgstr ""
+"%1$sAn Unexpected HTTP Error occurred during the API request.%2$s "
+"%1$s%3$sTry again%4$s%2$s"
 
-#: models/class-construct-wp-utils.php:178
+#: models/class-construct-wp-utils.php:181
 msgid "Page navigation"
 msgstr "Page navigation"
 
-#: models/class-construct-wp-utils.php:197
+#: models/class-construct-wp-utils.php:200
 msgid "First"
 msgstr "First"
 
-#: models/class-construct-wp-utils.php:201
+#: models/class-construct-wp-utils.php:204
 msgid "Last"
 msgstr "Last"
 
-#: models/class-construct-wp-utils.php:217
+#: models/class-construct-wp-utils.php:220
 msgid "Previous"
 msgstr "Previous"
 
-#: models/class-construct-wp-utils.php:221
+#: models/class-construct-wp-utils.php:224
 msgid "Next"
 msgstr "Next"
 
@@ -154,52 +160,56 @@ msgid "No feed available"
 msgstr "No feed available"
 
 #. translators: %d Footer column number
-#: models/class-construct-wp.php:307
+#: models/class-construct-wp.php:316
 msgid "Footer %d"
 msgstr "Footer %d"
 
 #. translators: %d Footer column number
-#: models/class-construct-wp.php:313
+#: models/class-construct-wp.php:322
 msgid "Add widgets here to appear in your footer column %d"
 msgstr "Add widgets here to appear in your footer column %d"
 
-#: models/class-construct-wp.php:474
+#: models/class-construct-wp.php:489
 msgid "Logo"
 msgstr "Logo"
 
-#: models/class-construct-wp.php:475
+#: models/class-construct-wp.php:490
 msgid "This should be your regular, colored logo."
 msgstr "This should be your regular, coloured logo."
 
-#: models/class-construct-wp.php:483, models/class-construct-wp.php:488,
-#: models/class-construct-wp.php:517, models/class-construct-wp.php:522
+#: models/class-construct-wp.php:498, models/class-construct-wp.php:503,
+#: models/class-construct-wp.php:532, models/class-construct-wp.php:537
 msgid "Select logo"
 msgstr "Select logo"
 
-#: models/class-construct-wp.php:484, models/class-construct-wp.php:518
+#: models/class-construct-wp.php:499, models/class-construct-wp.php:533
 msgid "Change logo"
 msgstr "Change logo"
 
-#: models/class-construct-wp.php:485, models/class-construct-wp.php:519
+#: models/class-construct-wp.php:500, models/class-construct-wp.php:534
 msgid "Remove"
 msgstr "Remove"
 
-#: models/class-construct-wp.php:486, models/class-construct-wp.php:520
+#: models/class-construct-wp.php:501, models/class-construct-wp.php:535
 msgid "Default"
 msgstr "Default"
 
-#: models/class-construct-wp.php:487, models/class-construct-wp.php:521
+#: models/class-construct-wp.php:502, models/class-construct-wp.php:536
 msgid "No logo selected"
 msgstr "No logo selected"
 
-#: models/class-construct-wp.php:489, models/class-construct-wp.php:523
+#: models/class-construct-wp.php:504, models/class-construct-wp.php:538
 msgid "Choose logo"
 msgstr "Choose logo"
 
-#: models/class-construct-wp.php:508
+#: models/class-construct-wp.php:523
 msgid "White Logo"
 msgstr "White Logo"
 
-#: models/class-construct-wp.php:509
-msgid "This should the white version of your logo for placement on colored backgrounds."
-msgstr "This should the white version of your logo for placement on coloured backgrounds."
+#: models/class-construct-wp.php:524
+msgid ""
+"This should the white version of your logo for placement on colored "
+"backgrounds."
+msgstr ""
+"This should the white version of your logo for placement on coloured "
+"backgrounds."

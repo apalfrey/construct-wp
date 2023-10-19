@@ -58,6 +58,24 @@
             "Automatically enqueues a template's scripts based on the template name. e.g. %s": [
                 "Automatically enqueues a template's scripts based on the template name. e.g. %s"
             ],
+            "Auto-include theme classes": [
+                "Auto-include theme styles"
+            ],
+            "Automatically includes classes within the theme's %s directory": [
+                "Automatically includes classes within the theme's %s directory"
+            ],
+            "Auto-run theme classes": [
+                "Auto-include theme styles"
+            ],
+            "Automatically runs classes within the theme's %1$s directory if they have a public %2$s method": [
+                "Automatically runs classes within the theme's %1$s directory if they have a public %2$s method"
+            ],
+            "Auto-load theme textdomain": [
+                "Auto-load theme textdomain"
+            ],
+            "Automatically loads a theme's textdomain based on the theme name. Language files must be located in %s of the theme's directory": [
+                "Automatically loads a theme's textdomain based on the theme name. Language files must be located in %s of the theme's directory"
+            ],
             "Footer columns": [
                 "Footer columns"
             ],

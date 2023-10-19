@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ConstructWP\n"
-"POT-Creation-Date: 2023-10-12 11:20+0000\n"
+"POT-Creation-Date: 2023-10-19 15:20+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andrew Palfrey <apalfrey1@uclan.ac.uk>\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
@@ -42,18 +42,18 @@ msgstr ""
 msgid "ConstructWP"
 msgstr "ConstructWP"
 
-#: assets/js/construct-wp-settings.js:271,
-#: assets/js/construct-wp-settings.js:275,
-#: assets/js/construct-wp-settings.js:417
+#: assets/js/construct-wp-settings.js:277,
+#: assets/js/construct-wp-settings.js:281,
+#: assets/js/construct-wp-settings.js:462
 msgid "General"
 msgstr "General"
 
-#: assets/js/construct-wp-settings.js:276
+#: assets/js/construct-wp-settings.js:282
 msgid "Remove admin bar"
 msgstr "Remove admin bar"
 
 #. translators: %s - The capability in a code tag
-#: assets/js/construct-wp-settings.js:278
+#: assets/js/construct-wp-settings.js:284
 msgid ""
 "Removes the admin bar from the frontend if the user doesn't have the %s "
 "capability"
@@ -61,12 +61,12 @@ msgstr ""
 "Removes the admin bar from the frontend if the user doesn't have the %s "
 "capability"
 
-#: assets/js/construct-wp-settings.js:287
+#: assets/js/construct-wp-settings.js:293
 msgid "Restrict admin access"
 msgstr "Restrict admin access"
 
 #. translators: %s - The capability in a code tag
-#: assets/js/construct-wp-settings.js:289
+#: assets/js/construct-wp-settings.js:295
 msgid ""
 "Redirects users to the frontend if they try to access the admin area without "
 "the %s capability"
@@ -74,20 +74,20 @@ msgstr ""
 "Redirects users to the frontend if they try to access the admin area without "
 "the %s capability"
 
-#: assets/js/construct-wp-settings.js:298
+#: assets/js/construct-wp-settings.js:304
 msgid "Enable controllers"
 msgstr "Enable controllers"
 
-#: assets/js/construct-wp-settings.js:299
+#: assets/js/construct-wp-settings.js:305
 msgid "Enables controllers on the frontend based on the current template file"
 msgstr "Enables controllers on the frontend based on the current template file"
 
-#: assets/js/construct-wp-settings.js:308
+#: assets/js/construct-wp-settings.js:314
 msgid "Auto-enqueue theme styles"
 msgstr "Auto-enqueue theme styles"
 
 #. translators: %s - An example theme style path
-#: assets/js/construct-wp-settings.js:310
+#: assets/js/construct-wp-settings.js:316
 msgid ""
 "Automatically enqueues the theme's styles based on the parent and child "
 "theme names. e.g. %s"
@@ -95,12 +95,12 @@ msgstr ""
 "Automatically enqueues the theme's styles based on the parent and child "
 "theme names. e.g. %s"
 
-#: assets/js/construct-wp-settings.js:319
+#: assets/js/construct-wp-settings.js:325
 msgid "Auto-enqueue theme scripts"
 msgstr "Auto-enqueue theme scripts"
 
 #. translators: %s - An example theme script path
-#: assets/js/construct-wp-settings.js:321
+#: assets/js/construct-wp-settings.js:327
 msgid ""
 "Automatically enqueues the theme's scripts based on the parent and child "
 "theme names. e.g. %s"
@@ -108,12 +108,12 @@ msgstr ""
 "Automatically enqueues the theme's scripts based on the parent and child "
 "theme names. e.g. %s"
 
-#: assets/js/construct-wp-settings.js:330
+#: assets/js/construct-wp-settings.js:336
 msgid "Auto-enqueue template styles"
 msgstr "Auto-enqueue template styles"
 
 #. translators: %s - An example template style path
-#: assets/js/construct-wp-settings.js:332
+#: assets/js/construct-wp-settings.js:338
 msgid ""
 "Automatically enqueues a template's styles based on the template name. e.g. "
 "%s"
@@ -121,12 +121,12 @@ msgstr ""
 "Automatically enqueues a template's styles based on the template name. e.g. "
 "%s"
 
-#: assets/js/construct-wp-settings.js:341
+#: assets/js/construct-wp-settings.js:347
 msgid "Auto-enqueue template scripts"
 msgstr "Auto-enqueue template scripts"
 
 #. translators: %s - An example template script path
-#: assets/js/construct-wp-settings.js:343
+#: assets/js/construct-wp-settings.js:349
 msgid ""
 "Automatically enqueues a template's scripts based on the template name. e.g. "
 "%s"
@@ -134,112 +134,147 @@ msgstr ""
 "Automatically enqueues a template's scripts based on the template name. e.g. "
 "%s"
 
-#: assets/js/construct-wp-settings.js:352
+#: assets/js/construct-wp-settings.js:358
+msgid "Auto-include theme classes"
+msgstr "Auto-include theme styles"
+
+#. translators: %s - the models directory
+#: assets/js/construct-wp-settings.js:360
+msgid "Automatically includes classes within the theme's %s directory"
+msgstr "Automatically includes classes within the theme's %s directory"
+
+#: assets/js/construct-wp-settings.js:369
+msgid "Auto-run theme classes"
+msgstr "Auto-include theme styles"
+
+#. translators: %1$s - the models directory. %2$s - The init method name
+#: assets/js/construct-wp-settings.js:371
+msgid ""
+"Automatically runs classes within the theme's %1$s directory if they have a "
+"public %2$s method"
+msgstr ""
+"Automatically runs classes within the theme's %1$s directory if they have a "
+"public %2$s method"
+
+#: assets/js/construct-wp-settings.js:380
+msgid "Auto-load theme textdomain"
+msgstr "Auto-load theme textdomain"
+
+#. translators: %s - The languages directory
+#: assets/js/construct-wp-settings.js:382
+msgid ""
+"Automatically loads a theme's textdomain based on the theme name. Language "
+"files must be located in %s of the theme's directory"
+msgstr ""
+"Automatically loads a theme's textdomain based on the theme name. Language "
+"files must be located in %s of the theme's directory"
+
+#: assets/js/construct-wp-settings.js:391
 msgid "Footer columns"
 msgstr "Footer columns"
 
-#: assets/js/construct-wp-settings.js:353
+#: assets/js/construct-wp-settings.js:392
 msgid "The number of footer widget areas to create"
 msgstr "The number of footer widget areas to create"
 
-#: assets/js/construct-wp-settings.js:403,
-#: assets/js/construct-wp-settings.js:578
+#: assets/js/construct-wp-settings.js:448,
+#: assets/js/construct-wp-settings.js:623
 msgid "Unable to save settings"
 msgstr "Unable to save settings"
 
-#: assets/js/construct-wp-settings.js:396,
-#: assets/js/construct-wp-settings.js:571
+#: assets/js/construct-wp-settings.js:441,
+#: assets/js/construct-wp-settings.js:616
 msgid "Settings saved!"
 msgstr "Settings saved!"
 
-#: assets/js/construct-wp-settings.js:411,
-#: assets/js/construct-wp-settings.js:586
+#: assets/js/construct-wp-settings.js:456,
+#: assets/js/construct-wp-settings.js:631
 msgid "Save"
 msgstr "Save"
 
-#: assets/js/construct-wp-settings.js:492
+#: assets/js/construct-wp-settings.js:537
 msgid "Select all"
 msgstr "Select all"
 
-#: assets/js/construct-wp-settings.js:525,
-#: assets/js/construct-wp-settings.js:529,
-#: assets/js/construct-wp-settings.js:530,
-#: assets/js/construct-wp-settings.js:592
+#: assets/js/construct-wp-settings.js:570,
+#: assets/js/construct-wp-settings.js:574,
+#: assets/js/construct-wp-settings.js:575,
+#: assets/js/construct-wp-settings.js:637
 msgid "Optimize"
 msgstr "Optimise"
 
-#: assets/js/construct-wp-settings.js:531
+#: assets/js/construct-wp-settings.js:576
 msgid "Whether to optimize the site to remove bloat"
 msgstr "Whether to optimise the site to remove bloat"
 
-#: assets/js/construct-wp-settings.js:541
+#: assets/js/construct-wp-settings.js:586
 msgid "WordPress"
 msgstr "WordPress"
 
-#: assets/js/construct-wp-settings.js:543
+#: assets/js/construct-wp-settings.js:588
 msgid "Feeds"
 msgstr "Feeds"
 
-#: assets/js/construct-wp-settings.js:543
+#: assets/js/construct-wp-settings.js:588
 msgid "Really Simple Directory link"
 msgstr "Really Simple Directory link"
 
-#: assets/js/construct-wp-settings.js:543
+#: assets/js/construct-wp-settings.js:588
 msgid "Relational attributes"
 msgstr "Relational attributes"
 
-#: assets/js/construct-wp-settings.js:543
+#: assets/js/construct-wp-settings.js:588
 msgid "Relational links"
 msgstr "Relational links"
 
-#: assets/js/construct-wp-settings.js:543
+#: assets/js/construct-wp-settings.js:588
 msgid "Version numbers"
 msgstr "Version numbers"
 
-#: assets/js/construct-wp-settings.js:543
+#: assets/js/construct-wp-settings.js:588
 msgid "JSON API links"
 msgstr "JSON API links"
 
-#: assets/js/construct-wp-settings.js:543
+#: assets/js/construct-wp-settings.js:588
 msgid "Emoji"
 msgstr "Emoji"
 
-#: assets/js/construct-wp-settings.js:543
+#: assets/js/construct-wp-settings.js:588
 msgid "XML-RPC"
 msgstr "XML-RPC"
 
-#: assets/js/construct-wp-settings.js:543
+#: assets/js/construct-wp-settings.js:588
 msgid "jQuery migrate"
 msgstr "jQuery migrate"
 
-#: assets/js/construct-wp-settings.js:543
+#: assets/js/construct-wp-settings.js:588
 msgid "Self pingback"
 msgstr "Self pingback"
 
-#: assets/js/construct-wp-settings.js:545
+#: assets/js/construct-wp-settings.js:590
 msgid "Dashboard meta boxes"
 msgstr "Dashboard meta boxes"
 
-#: assets/js/construct-wp-settings.js:547
+#: assets/js/construct-wp-settings.js:592
 msgid "Welcome panel"
 msgstr "Welcome panel"
 
-#: assets/js/construct-wp-settings.js:547
+#: assets/js/construct-wp-settings.js:592
 msgid "Site health"
 msgstr "Site health"
 
-#: assets/js/construct-wp-settings.js:547
+#: assets/js/construct-wp-settings.js:592
 msgid "At a glance"
 msgstr "At a glance"
 
-#: assets/js/construct-wp-settings.js:547
+#: assets/js/construct-wp-settings.js:592
 msgid "Activity"
 msgstr "Activity"
 
-#: assets/js/construct-wp-settings.js:547
+#: assets/js/construct-wp-settings.js:592
 msgid "Quick draft"
 msgstr "Quick draft"
 
-#: assets/js/construct-wp-settings.js:547
+#: assets/js/construct-wp-settings.js:592
 msgid "Events and news"
 msgstr "Events and news"
