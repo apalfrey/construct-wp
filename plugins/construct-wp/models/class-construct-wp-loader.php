@@ -110,6 +110,9 @@ class CWP_Loader {
             self::$plugin_classes[$plugin] = apply_filters( 'cwp_plugin_classes', $plugin_classes, $plugin );
         }
 
+        // Setup the settings early.
+        CWP_Settings::init();
+
         self::$plugins_loaded = true;
     }
 

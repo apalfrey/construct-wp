@@ -264,6 +264,7 @@ class Construct_WP {
      * @return  void
      */
     public static function load_textdomain() {
+        // TODO fix js textdomain - theme class ones are wrong somehow?
         load_plugin_textdomain( CWP_SLUG, false, dirname( CWP_BASENAME ) . 'languages' );
 
         $theme_setting = boolval( get_option( 'cwp_theme_textdomain' ) );
@@ -371,7 +372,7 @@ class Construct_WP {
     private static function run_plugin_classes() {
         foreach ( CWP_Loader::$plugin_classes as $plugin => $classes ) {
             foreach ( $classes as $class ) {
-                if ( $class === 'Construct_WP' ) {
+                if ( $class === 'Construct_WP' || $class === 'CWP_Settings' ) {
                     continue;
                 }
 

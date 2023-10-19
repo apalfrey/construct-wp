@@ -12,6 +12,57 @@
 class CWP_Settings {
 
     /**
+     * Whether the class was setup to prevent multiple runs.
+     *
+     * @since   1.0.0
+     * @access  private
+     * @var     boolean
+     */
+    private static $setup = false;
+
+    /**
+     * List of settings registered to the Construct system.
+     *
+     * @since   1.0.0
+     * @access  private
+     * @var     array
+     */
+    public static $settings = array(
+        'cwp_remove_admin_bar'           => true,
+        'cwp_restrict_admin_access'      => true,
+        'cwp_controllers'                => true,
+        'cwp_base_styles'                => true,
+        'cwp_base_scripts'               => true,
+        'cwp_template_styles'            => true,
+        'cwp_template_scripts'           => true,
+        'cwp_auto_include_theme_classes' => true,
+        'cwp_auto_run_theme_classes'     => true,
+        'cwp_theme_textdomain'           => true,
+        'cwp_footer_column_count'        => 3,
+        'cwp_optimize'                   => true,
+        'cwp_optimize_wp_bloat'          => array(
+            'feeds'          => true,
+            'rsd_link'       => true,
+            'rel_atts'       => true,
+            'rel_links'      => true,
+            'version_number' => true,
+            'json_api_links' => true,
+            'emoji'          => true,
+            'xmlrpc'         => true,
+            'jquery_migrate' => true,
+            'self_pingback'  => true,
+        ),
+        'cwp_optimize_dashboard_meta'    => array(
+            'welcome'         => true,
+            'site_health'     => true,
+            'at_a_glance'     => true,
+            'activity'        => true,
+            'quick_draft'     => true,
+            'events_and_news' => true,
+        ),
+    );
+
+    /**
      * Initialises the settings functionality
      *
      * @since   1.0.0
@@ -19,10 +70,49 @@ class CWP_Settings {
      * @return  void
      */
     public static function init() {
+        if ( ! self::$setup ) {
+            return;
+        }
+
+        self::$settings = apply_filters( 'cwp_settings_defaults', self::$settings );
+        self::apply_defaults();
         self::register_settings();
+        self::get_settings();
         add_action( 'admin_menu', array( 'CWP_Settings', 'settings_page' ) );
         add_action( 'admin_enqueue_scripts', array( 'CWP_Settings', 'admin_enqueue' ) );
         add_action( 'plugin_action_links_' . CWP_BASENAME, array( 'CWP_Settings', 'settings_link' ), 10 );
+
+        self::$setup = true;
+    }
+
+    /**
+     * Apply the default settings to the database if they don't exist. This is to prevent
+     * issues where the setting returns false
+     *
+     * @since   1.0.0
+     * @access  public
+     * @return  void
+     */
+    private static function apply_defaults() {
+        $version = get_option( 'cwp_version' );
+
+        if ( $version === false || $version !== CWP_VERSION ) {
+            update_option( 'cwp_version', CWP_VERSION );
+
+            foreach ( self::$settings as $setting => $default ) {
+                if ( get_option( $setting ) === false ) {
+                    if ( ! is_array( $default ) ) {
+                        $default = strval( $default );
+                    }
+
+                    update_option( $setting, $default );
+                } else if ( is_array( $default ) ) {
+                    $options = get_option( $setting );
+                    $options = wp_parse_args( $options, $default );
+                    update_option( $setting, $options );
+                }
+            }
+        }
     }
 
     /**
@@ -38,67 +128,67 @@ class CWP_Settings {
         register_setting( 'cwp_settings', 'cwp_remove_admin_bar', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
-            'default'      => true,
+            'default'      => self::$settings['cwp_remove_admin_bar'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_restrict_admin_access', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
-            'default'      => true,
+            'default'      => self::$settings['cwp_restrict_admin_access'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_controllers', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
-            'default'      => true,
+            'default'      => self::$settings['cwp_controllers'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_base_styles', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
-            'default'      => true,
+            'default'      => self::$settings['cwp_base_styles'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_base_scripts', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
-            'default'      => true,
+            'default'      => self::$settings['cwp_base_scripts'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_template_styles', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
-            'default'      => true,
+            'default'      => self::$settings['cwp_template_styles'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_template_scripts', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
-            'default'      => true,
+            'default'      => self::$settings['cwp_template_scripts'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_auto_include_theme_classes', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
-            'default'      => true,
+            'default'      => self::$settings['cwp_auto_include_theme_classes'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_auto_run_theme_classes', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
-            'default'      => true,
+            'default'      => self::$settings['cwp_auto_run_theme_classes'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_theme_textdomain', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
-            'default'      => true,
+            'default'      => self::$settings['cwp_theme_textdomain'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_footer_column_count', array(
             'type'         => 'number',
             'show_in_rest' => true,
-            'default'      => 3,
+            'default'      => self::$settings['cwp_footer_column_count'],
         ) );
 
         // TODO theme support.
@@ -106,7 +196,7 @@ class CWP_Settings {
         register_setting( 'cwp_settings', 'cwp_optimize', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
-            'default'      => true,
+            'default'      => self::$settings['cwp_optimize'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_optimize_wp_bloat', array(
@@ -148,18 +238,7 @@ class CWP_Settings {
                     ),
                 ),
             ),
-            'default'      => array(
-                'feeds'          => true,
-                'rsd_link'       => true,
-                'rel_atts'       => true,
-                'rel_links'      => true,
-                'version_number' => true,
-                'json_api_links' => true,
-                'emoji'          => true,
-                'xmlrpc'         => true,
-                'jquery_migrate' => true,
-                'self_pingback'  => true,
-            ),
+            'default'      => self::$settings['cwp_optimize_wp_bloat'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_optimize_dashboard_meta', array(
@@ -189,15 +268,29 @@ class CWP_Settings {
                     ),
                 ),
             ),
-            'default'      => array(
-                'welcome'         => true,
-                'site_health'     => true,
-                'at_a_glance'     => true,
-                'activity'        => true,
-                'quick_draft'     => true,
-                'events_and_news' => true,
-            ),
+            'default'      => self::$settings['cwp_optimize_dashboard_meta'],
         ) );
+    }
+
+    /**
+     * Gets all the settings listed in the settings array & formats them as necessary
+     *
+     * @since   1.0.0
+     * @access  public
+     * @return  void
+     */
+    private static function get_settings() {
+        foreach ( self::$settings as $setting => $default ) {
+            $option = get_option( $setting );
+
+            if ( is_bool( $default ) ) {
+                self::$settings[$setting] = boolval( $option );
+            } else if ( is_numeric( $default ) ) {
+                self::$settings[$setting] = intval( $option );
+            }
+        }
+
+        self::$settings = apply_filters( 'cwp_settings', self::$settings );
     }
 
     /**
