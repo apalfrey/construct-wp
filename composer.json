@@ -52,7 +52,7 @@
     "scripts": {
         "phpcs-compat": "phpcs -p ./plugin --colors --report-file=phpcs-compat.log --report-width=150 --extensions=php --standard=PHPCompatibility --runtime-set testVersion 8.2",
         "phpcs-setup": "phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs",
-        "phpcs": "phpcs -ps ./ --colors --report-file=phpcs.log --report-width=150 --extensions=php -d memory_limit=512M",
+        "phpcs": "phpcs -ps ./ --colors --report-file=phpcs.log --report-width=150 --extensions=php -d memory_limit=512M --runtime-set ignore_warnings_on_exit true --runtime-set ignore_errors_on_exit true",
         "phpcs-config": "phpcs --config-show"
     }
 }

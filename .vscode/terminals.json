@@ -7,9 +7,11 @@
             "color": "terminal.ansiCyan"
         },
         {
-            "name": "Plugin - Core",
-            "cwd": "./plugins/construct-wp",
-            "color": "terminal.ansiYellow"
+            "name": "PHPCS",
+            "color": "terminal.ansiYellow",
+            "command": "yarn phpcs:watch",
+            "execute": false,
+            "split": "Server"
         }
     ]
 }

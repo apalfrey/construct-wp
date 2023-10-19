@@ -1,10 +1,45 @@
 const pkg = require( './package.json' )
+const TerserPlugin = require( 'terser-webpack-plugin' )
 const areas = {
     constructWp: {
         path: './plugins/construct-wp',
         name: 'construct-wp',
         title: 'ConstructWP',
-        version: '0.1.0',
+        version: '0.2.0',
+    },
+}
+
+const translatePipes = {
+    checktextdomain: {
+        text_domain: 'text-domain',
+        keywords: [
+            '__:1,2d',
+            '_e:1,2d',
+            '_x:1,2c,3d',
+            '_ex:1,2c,3d',
+            '_n:1,2,4d',
+            '_nx:1,2,4c,5d',
+            '_n_noop:1,2,3d',
+            '_nx_noop:1,2,3c,4d',
+            'esc_html__:1,2d',
+            'esc_html_e:1,2d',
+            'esc_html_x:1,2c,3d',
+            'esc_attr__:1,2d',
+            'esc_attr_e:1,2d',
+            'esc_attr_x:1,2c,3d',
+        ],
+        report_missing: true,
+        report_success: false,
+        report_variable_domain: true,
+        correct_domain: true,
+        create_report_file: false,
+        force: false,
+    },
+    pot: {
+        domain: 'text-domain',
+        package: 'Package Name',
+        team: `${pkg.author.name} <${pkg.author.email}>`,
+        lastTranslator: `${pkg.author.name} <${pkg.author.email}>`,
     },
 }
 
@@ -15,7 +50,6 @@ module.exports = {
         paths: [
             `${areas.constructWp.path}/assets`,
             `${areas.constructWp.path}/dist`,
-            `${areas.constructWp.path}/languages`,
         ],
         pipes: {
             del: {
@@ -43,7 +77,7 @@ module.exports = {
                     src: {
                         allowEmpty: true,
                         base: `${areas.constructWp.path}/src/scss`,
-                        sourcemaps: process.env.NODE_ENV !== 'development',
+                        sourcemaps: process.env.NODE_ENV === 'development',
                     },
                     dest: {
                         sourcemaps: '.',
@@ -103,6 +137,92 @@ module.exports = {
             },
         },
     },
+    scripts: {
+        process: true,
+        watch: true,
+        logColor: 'magenta',
+        areas: [
+            {
+                paths: {
+                    src: `${areas.constructWp.path}/src/js/**/*`,
+                    watch: `${areas.constructWp.path}/src/js/**/*`,
+                    dest: `${areas.constructWp.path}/assets/js`,
+                },
+                minify: {
+                    process: process.env.NODE_ENV !== 'development',
+                    separate: false,
+                },
+                pipes: {
+                    // Put any pipe overrides here
+                    src: {
+                        allowEmpty: true,
+                        base: `${areas.constructWp.path}/src/js`,
+                        sourcemaps: process.env.NODE_ENV === 'development',
+                    },
+                    dest: {
+                        sourcemaps: '.',
+                    },
+                },
+            },
+        ],
+        pipes: {
+            filters: {
+                lint: [
+                    '**/*.js',
+                ],
+                build: [
+                    '**/*.js',
+                    '!**/libs/**/*.js',
+                ],
+            },
+            watch: {
+                events: 'all',
+            },
+            eslint: {
+                // Overrides the version of eslint used
+                eslint: null,
+                formatter: 'stylish',
+                options: {
+                    fix: false,
+                },
+            },
+            rollup: {
+                // Overrides the version of rollup used.
+                // Make sure to pass through the rollup function
+                // e.g. require( 'rollup' ).rollup
+                rollup: null,
+                input: {
+                    plugins: [
+                        require( '@rollup/plugin-babel' ).babel( {
+                            exclude: 'node_modules/**',
+                            babelHelpers: 'bundled',
+                        } ),
+                        require( '@rollup/plugin-node-resolve' ).nodeResolve(),
+                    ],
+                    treeshake: false,
+                    onwarn( e ) {
+                        if ( e.code === 'THIS_IS_UNDEFINED' ) {
+                            return
+                        }
+
+                        console.warn( e.message )
+                    },
+                },
+                output: {
+                    file: 'scripts.js',
+                    name: 'Scripts',
+                    format: 'umd',
+                    generatedCode: 'es2015',
+                    globals: {},
+                },
+            },
+            uglify: {
+                output: {
+                    comments: '/^!|@preserve|@license|@cc_on/i',
+                },
+            },
+        },
+    },
     webpack: {
         process: true,
         watch: true,
@@ -123,7 +243,7 @@ module.exports = {
                     src: {
                         allowEmpty: true,
                         base: `${areas.constructWp.path}/src/gutenberg`,
-                        sourcemaps: process.env.NODE_ENV !== 'development',
+                        sourcemaps: process.env.NODE_ENV === 'development',
                     },
                     dest: {
                         sourcemaps: '.',
@@ -192,7 +312,9 @@ module.exports = {
                                                 },
                                             ],
                                         ],
-                                        plugins: [],
+                                        plugins: [
+                                            '@automattic/babel-plugin-preserve-i18n',
+                                        ],
                                     },
                                 },
                             },
@@ -201,8 +323,42 @@ module.exports = {
                     resolve: {
                         extensions: ['.js', '.jsx', '.json'],
                     },
-                    devtool: process.env.NODE_ENV == 'development' ? 'source-map' : false,
-                    mode: process.env.NODE_ENV == 'development' ? 'development' : 'production',
+                    optimization: {
+                        minimizer: [
+                            new TerserPlugin( {
+                                parallel: true,
+                                terserOptions: {
+                                    output: {
+                                        comments: /translators:/i,
+                                    },
+                                    compress: {
+                                        passes: 2,
+                                    },
+                                    mangle: {
+                                        reserved: [
+                                            '__',
+                                            '_e',
+                                            '_x',
+                                            '_ex',
+                                            '_n',
+                                            '_nx',
+                                            '_n_noop',
+                                            '_nx_noop',
+                                            'esc_html__',
+                                            'esc_html_e',
+                                            'esc_html_x',
+                                            'esc_attr__',
+                                            'esc_attr_e',
+                                            'esc_attr_x',
+                                        ],
+                                    },
+                                },
+                                extractComments: false,
+                            } ),
+                        ],
+                    },
+                    devtool: process.env.NODE_ENV === 'development' ? 'source-map' : false,
+                    mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
                 },
             },
             uglify: {
@@ -229,43 +385,59 @@ module.exports = {
                         allowEmpty: true,
                     },
                     dest: {},
+                    checktextdomain: {
+                        ...translatePipes.checktextdomain,
+                        text_domain: areas.constructWp.name,
+                    },
+                    pot: {
+                        ...translatePipes.pot,
+                        domain: areas.constructWp.name,
+                        package: areas.constructWp.title,
+                        relativeTo: areas.constructWp.path,
+                    },
+                },
+            },
+            {
+                paths: {
+                    src: `${areas.constructWp.path}/assets/js/**/*.js`,
+                    watch: `${areas.constructWp.path}/assets/js/**/*.js`,
+                    dest: `${areas.constructWp.path}/languages/js/${areas.constructWp.name}.pot`,
+                },
+                pipes: {
+                    // Put any pipe overrides here
+                    src: {
+                        allowEmpty: true,
+                    },
+                    dest: {},
+                    checktextdomain: {
+                        ...translatePipes.checktextdomain,
+                        text_domain: areas.constructWp.name,
+                    },
+                    pot: {
+                        ...translatePipes.pot,
+                        domain: areas.constructWp.name,
+                        package: areas.constructWp.title,
+                        relativeTo: areas.constructWp.path,
+                        parser: 'js',
+                        parserOptions: {
+                            ecmaVersion: 9,
+                        },
+                    },
                 },
             },
         ],
-        pipes: {
-            checktextdomain: {
-                text_domain: areas.constructWp.name,
-                keywords: [
-                    '__:1,2d',
-                    '_e:1,2d',
-                    '_x:1,2c,3d',
-                    '_ex:1,2c,3d',
-                    '_n:1,2,4d',
-                    '_nx:1,2,4c,5d',
-                    '_n_noop:1,2,3d',
-                    '_nx_noop:1,2,3c,4d',
-                    'esc_html__:1,2d',
-                    'esc_html_e:1,2d',
-                    'esc_html_x:1,2c,3d',
-                    'esc_attr__:1,2d',
-                    'esc_attr_e:1,2d',
-                    'esc_attr_x:1,2c,3d',
-                ],
-                report_missing: true,
-                report_success: false,
-                report_variable_domain: true,
-                correct_domain: true,
-                create_report_file: false,
-                force: false,
-            },
-            pot: {
-                domain: areas.constructWp.name,
-                package: areas.constructWp.title,
-                lastTranslator: `${pkg.author.name} <${pkg.author.email}>`,
-                headers: {
-                    'Language-Team': `${pkg.author.name} <${pkg.author.email}>`,
-                },
-            },
+        pipes: translatePipes,
+    },
+    po2json: {
+        process: true,
+        watch: true,
+        paths: [
+            `${areas.constructWp.path}/languages/**/*.po`,
+        ],
+        bin: 'vendor/bin/wp',
+        pretty: true,
+        execSync: {
+            shell: 'C:\\Program Files\\Git\\bin\\bash.exe',
         },
     },
     browsersync: {
@@ -275,8 +447,9 @@ module.exports = {
             port: 4000,
             ui: false,
             files: [
-                '**/*',
-                '!**/src/**/*'
+                'plugins/**/*',
+                'themes/**/*',
+                '!**/src/**/*',
             ],
             ghostmode: false,
             open: false,

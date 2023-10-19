@@ -1,0 +1,24 @@
+{
+    "translation-revision-date": "",
+    "generator": "WP-CLI\/2.8.1",
+    "source": "assets\/js\/construct-wp-gutenberg.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "en_GB",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "Permalink": [
+                "Permalink"
+            ],
+            "Set the email permalink": [
+                "Set the email permalink"
+            ],
+            "This is used as a reference for this email template. This can be automatically generated on creation.": [
+                "This is used as a reference for this email template. This can be automatically generated on creation."
+            ]
+        }
+    }
+}

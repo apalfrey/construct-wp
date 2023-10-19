@@ -1,0 +1,159 @@
+{
+    "translation-revision-date": "",
+    "generator": "WP-CLI\/2.8.1",
+    "source": "assets\/js\/construct-wp-settings.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "en_GB",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "ConstructWP": [
+                "ConstructWP"
+            ],
+            "General": [
+                "General"
+            ],
+            "Remove admin bar": [
+                "Remove admin bar"
+            ],
+            "Removes the admin bar from the frontend if the user doesn't have the %s capability": [
+                "Removes the admin bar from the frontend if the user doesn't have the %s capability"
+            ],
+            "Restrict admin access": [
+                "Restrict admin access"
+            ],
+            "Redirects users to the frontend if they try to access the admin area without the %s capability": [
+                "Redirects users to the frontend if they try to access the admin area without the %s capability"
+            ],
+            "Enable controllers": [
+                "Enable controllers"
+            ],
+            "Enables controllers on the frontend based on the current template file": [
+                "Enables controllers on the frontend based on the current template file"
+            ],
+            "Auto-enqueue theme styles": [
+                "Auto-enqueue theme styles"
+            ],
+            "Automatically enqueues the theme's styles based on the parent and child theme names. e.g. %s": [
+                "Automatically enqueues the theme's styles based on the parent and child theme names. e.g. %s"
+            ],
+            "Auto-enqueue theme scripts": [
+                "Auto-enqueue theme scripts"
+            ],
+            "Automatically enqueues the theme's scripts based on the parent and child theme names. e.g. %s": [
+                "Automatically enqueues the theme's scripts based on the parent and child theme names. e.g. %s"
+            ],
+            "Auto-enqueue template styles": [
+                "Auto-enqueue template styles"
+            ],
+            "Automatically enqueues a template's styles based on the template name. e.g. %s": [
+                "Automatically enqueues a template's styles based on the template name. e.g. %s"
+            ],
+            "Auto-enqueue template scripts": [
+                "Auto-enqueue template scripts"
+            ],
+            "Automatically enqueues a template's scripts based on the template name. e.g. %s": [
+                "Automatically enqueues a template's scripts based on the template name. e.g. %s"
+            ],
+            "Auto-include theme classes": [
+                "Auto-include theme styles"
+            ],
+            "Automatically includes classes within the theme's %s directory": [
+                "Automatically includes classes within the theme's %s directory"
+            ],
+            "Auto-run theme classes": [
+                "Auto-include theme styles"
+            ],
+            "Automatically runs classes within the theme's %1$s directory if they have a public %2$s method": [
+                "Automatically runs classes within the theme's %1$s directory if they have a public %2$s method"
+            ],
+            "Auto-load theme textdomain": [
+                "Auto-load theme textdomain"
+            ],
+            "Automatically loads a theme's textdomain based on the theme name. Language files must be located in %s of the theme's directory": [
+                "Automatically loads a theme's textdomain based on the theme name. Language files must be located in %s of the theme's directory"
+            ],
+            "Footer columns": [
+                "Footer columns"
+            ],
+            "The number of footer widget areas to create": [
+                "The number of footer widget areas to create"
+            ],
+            "Unable to save settings": [
+                "Unable to save settings"
+            ],
+            "Settings saved!": [
+                "Settings saved!"
+            ],
+            "Save": [
+                "Save"
+            ],
+            "Select all": [
+                "Select all"
+            ],
+            "Optimize": [
+                "Optimise"
+            ],
+            "Whether to optimize the site to remove bloat": [
+                "Whether to optimise the site to remove bloat"
+            ],
+            "WordPress": [
+                "WordPress"
+            ],
+            "Feeds": [
+                "Feeds"
+            ],
+            "Really Simple Directory link": [
+                "Really Simple Directory link"
+            ],
+            "Relational attributes": [
+                "Relational attributes"
+            ],
+            "Relational links": [
+                "Relational links"
+            ],
+            "Version numbers": [
+                "Version numbers"
+            ],
+            "JSON API links": [
+                "JSON API links"
+            ],
+            "Emoji": [
+                "Emoji"
+            ],
+            "XML-RPC": [
+                "XML-RPC"
+            ],
+            "jQuery migrate": [
+                "jQuery migrate"
+            ],
+            "Self pingback": [
+                "Self pingback"
+            ],
+            "Dashboard meta boxes": [
+                "Dashboard meta boxes"
+            ],
+            "Welcome panel": [
+                "Welcome panel"
+            ],
+            "Site health": [
+                "Site health"
+            ],
+            "At a glance": [
+                "At a glance"
+            ],
+            "Activity": [
+                "Activity"
+            ],
+            "Quick draft": [
+                "Quick draft"
+            ],
+            "Events and news": [
+                "Events and news"
+            ]
+        }
+    }
+}

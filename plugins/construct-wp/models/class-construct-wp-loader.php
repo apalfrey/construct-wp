@@ -127,6 +127,12 @@ class CWP_Loader {
             return;
         }
 
+        $autoload = boolval( get_option( 'cwp_auto_include_theme_classes' ) );
+
+        if ( ! $autoload ) {
+            return;
+        }
+
         global $wp_filesystem;
         $stylesheet_model_path = trailingslashit( get_stylesheet_directory() ) . 'models';
         $stylesheet_models     = self::get_models( $stylesheet_model_path );

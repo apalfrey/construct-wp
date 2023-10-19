@@ -38,10 +38,6 @@
     <rule ref="Squiz.WhiteSpace.ControlStructureSpacing.SpacingAfterOpen"/>
     <rule ref="Squiz.WhiteSpace.ControlStructureSpacing.SpacingBeforeClose"/>
     <rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace"/>
-    <!-- TODO line 131, change to > 1 -->
-    <!-- Look into: https://github.com/matthewbdaly/abstract-or-final-sniff -->
-    <!-- <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace"/> -->
-    <!-- TODO space before if statement, use Squiz.WhiteSpace.ControlStructureSpacing as guide? -->
 
     <rule ref="PHPCompatibility" />
 
@@ -189,7 +185,6 @@
         <exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions.NoSpacesAroundArrayKeys" />
 
 
-        <!-- TODO: TEST -->
         <exclude name="Generic.Classes.DuplicateClassName" />
         <exclude name="Squiz.Commenting.FileComment" />
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType" />

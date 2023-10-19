@@ -1,7 +1,26 @@
 .menu-item {
     &.menu-item-depth-0 {
-        .cwp-link_type {
-            display: none;
+        .field-cwp-link_type {
+            display: none !important;
         }
+    }
+}
+
+/* stylelint-disable-next-line selector-id-pattern */
+#toplevel_page_construct-wp {
+    .wp-first-item {
+        display: none;
+    }
+}
+
+$menu-fields: icon, visibility, logout_link, link_type;
+
+@each $field in $menu-fields {
+    .control-section-nav_menu .field-cwp-#{$field} {
+        display: none;
+    }
+
+    .control-section-nav_menu.field-cwp-#{$field}-active .field-cwp-#{$field} {
+        display: block;
     }
 }

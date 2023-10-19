@@ -1,0 +1,1 @@
+{"version":3,"sources":["construct-wp-gutenberg.scss","construct-wp-gutenberg.css"],"names":[],"mappings":"AAAA;EACI,eAAA;ACCJ","file":"construct-wp-gutenberg.css","sourcesContent":["body {\n    cursor: default;\n}\n","body {\n  cursor: default;\n}"]}

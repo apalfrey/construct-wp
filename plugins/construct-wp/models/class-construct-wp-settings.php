@@ -47,6 +47,62 @@ class CWP_Settings {
             'default'      => true,
         ) );
 
+        register_setting( 'cwp_settings', 'cwp_controllers', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_base_styles', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_base_scripts', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_template_styles', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_template_scripts', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_auto_include_theme_classes', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_auto_run_theme_classes', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_theme_textdomain', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_footer_column_count', array(
+            'type'         => 'number',
+            'show_in_rest' => true,
+            'default'      => 3,
+        ) );
+
+        // TODO theme support.
+
         register_setting( 'cwp_settings', 'cwp_optimize', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
@@ -152,17 +208,46 @@ class CWP_Settings {
      * @return  void
      */
     public static function settings_page() {
-        add_options_page(
+        add_menu_page(
             __( 'ConstructWP Settings', 'construct-wp' ),
             __( 'ConstructWP', 'construct-wp' ),
             'manage_options',
-            'construct_wp_settings',
-            function () {
-                ?>
-                <div id="construct-wp-settings"></div>
-                <?php
-            },
+            'construct-wp',
+            array( __CLASS__, 'render_page' ),
+            // phpcs:ignore
+            'data:image/svg+xml;base64,' . base64_encode( '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="black" d="m9.34,9.11l-2.62,1.01,2.62,1.01v.61l-3.31-1.31v-.64l3.31-1.31v.61Zm2.72-2.62h.64l-2.44,6.96h-.64l2.44-6.96Zm4.17,3.32v.64l-3.31,1.31v-.61l2.63-1.01-2.63-1.01v-.61l3.31,1.31Zm.57,3.43c-1.17,2.23-3.5,3.75-6.19,3.75-3.86,0-6.98-3.13-6.98-6.98s3.13-6.98,6.98-6.98c2.69,0,5.02,1.52,6.19,3.75l2.59-1.56C17.69,2.1,14.4,0,10.61,0,5.09,0,.61,4.48.61,10s4.48,10,10,10c3.78,0,7.08-2.1,8.77-5.2l-2.59-1.56Z"/></svg>' ),
+            80
         );
+
+        add_submenu_page(
+            'construct-wp',
+            __( 'ConstructWP Settings - General', 'construct-wp' ),
+            __( 'General', 'construct-wp' ),
+            'manage_options',
+            'construct-wp-general',
+            array( __CLASS__, 'render_page' )
+        );
+
+        add_submenu_page(
+            'construct-wp',
+            __( 'ConstructWP Settings - Optimize', 'construct-wp' ),
+            __( 'Optimize', 'construct-wp' ),
+            'manage_options',
+            'construct-wp-optimize',
+            array( __CLASS__, 'render_page' )
+        );
+    }
+
+    /**
+     * The render function for the settings pages. This only has to output a target div for React
+     * to target and inject the page
+     *
+     * @return void
+     */
+    public static function render_page() {
+        ?>
+        <div id="construct-wp-settings"></div>
+        <?php
     }
 
     /**
@@ -174,20 +259,24 @@ class CWP_Settings {
      * @return  void
      */
     public static function admin_enqueue( $hook_suffix ) {
-        if ( strpos( $hook_suffix, 'construct_wp_settings' ) !== false ) {
-            wp_enqueue_style( 'construct-wp-settings-style', CWP_PLUGIN_URL . 'assets/css/construct-wp-settings.css', array(
+        if ( strpos( $hook_suffix, 'construct-wp' ) !== false ) {
+            wp_enqueue_style( 'cwp-settings', CWP_PLUGIN_URL . 'assets/css/construct-wp-settings.css', array(
                 'wp-components',
             ) );
-            wp_enqueue_script( 'construct-wp-settings-script', CWP_PLUGIN_URL . 'assets/js/construct-wp-settings.js', array(
+            wp_enqueue_script( 'cwp-settings', CWP_PLUGIN_URL . 'assets/js/construct-wp-settings.js', array(
                 'wp-api',
                 'wp-components',
+                'wp-data',
                 'wp-element',
                 'wp-hooks',
                 'wp-i18n',
-            ) );
-            wp_localize_script( 'construct-wp-settings-script', 'cwpSettingsData', array(
+                'wp-notices',
+            ), false, true );
+            wp_localize_script( 'cwp-settings', 'cwpSettingsData', array(
                 'version' => CWP_VERSION,
             ) );
+
+            wp_set_script_translations( 'cwp-settings', 'construct-wp', CWP_PLUGIN_PATH . 'languages/js' );
         }
     }
 
@@ -203,8 +292,8 @@ class CWP_Settings {
         array_unshift(
             $actions,
             '<a href="' . add_query_arg( array(
-                'page' => 'construct_wp_settings',
-            ), admin_url( 'options-general.php' ) ) . '">' . __( 'Settings', 'construct-wp' ) . '</a>'
+                'page' => 'construct-wp',
+            ), admin_url( 'admin.php' ) ) . '">' . __( 'Settings', 'construct-wp' ) . '</a>'
         );
         return $actions;
     }

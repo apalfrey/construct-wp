@@ -31,7 +31,7 @@ function EmailPanel() {
     return (
         <PluginDocumentSettingPanel
             name="ilab-restrict-access-sidebar"
-            title={__( 'Permalink', 'lancashire-textile-gallery' )}
+            title={__( 'Permalink', 'construct-wp' )}
         >
             <TextControl
                 label={__( 'Set the email permalink', 'construct-wp' )}

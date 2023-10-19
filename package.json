@@ -14,6 +14,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "postinstall": "patch-package",
     "start": "gulp",
     "build": "gulp build",
     "watch": "gulp watch",
@@ -29,21 +30,28 @@
     "translate": "gulp translate",
     "translate:watch": "gulp translate:watch",
     "browsersync": "gulp browsersync",
-    "archive": "gulp archive"
+    "archive": "gulp archive",
+    "phpcs": "composer run-script phpcs",
+    "phpcs:watch": "nodemon --watch . -e php --ignore vendor/ --ignore node_modules/ --exec \"composer run-script phpcs\""
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "@wordpress/components": "^25.7.0",
-    "@wordpress/edit-post": "^7.18.0",
-    "@wordpress/element": "^5.18.0",
-    "@wordpress/hooks": "^3.41.0",
-    "@wordpress/i18n": "^4.41.0",
-    "@wordpress/plugins": "^6.9.0",
+    "@wordpress/components": "^25.9.0",
+    "@wordpress/data": "^9.13.0",
+    "@wordpress/edit-post": "^7.20.0",
+    "@wordpress/element": "^5.20.0",
+    "@wordpress/hooks": "^3.43.0",
+    "@wordpress/i18n": "^4.43.0",
+    "@wordpress/notices": "^4.11.0",
+    "@wordpress/plugins": "^6.11.0",
     "bootstrap": "^5.3.2",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@automattic/babel-plugin-preserve-i18n": "^1.0.0",
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-react": "^7.22.15",
@@ -51,6 +59,7 @@
     "@ilabdev/browsersync": "^1.0.0",
     "@ilabdev/clean": "^1.0.0",
     "@ilabdev/default": "^1.0.0",
+    "@ilabdev/scripts": "^1.0.0",
     "@ilabdev/styles": "^1.0.0",
     "@ilabdev/translate": "^1.0.0",
     "@ilabdev/webpack": "^1.0.0",
@@ -65,10 +74,12 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-unicorn": "^48.0.1",
     "gulp": "^4.0.2",
+    "nodemon": "^3.0.1",
     "postcss": "^8.4.31",
     "stylelint": "^15.10.3",
     "stylelint-config-twbs-bootstrap": "^11.0.1",
     "stylelint-stylistic": "^0.4.3",
+    "terser-webpack-plugin": "^5.3.9",
     "webpack": "^5.88.2"
   }
 }

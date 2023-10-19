@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
 "Last-Translator: Andrew Palfrey <apalfrey@apalfrey.me>\n"
-"POT-Creation-Date: 2023-10-10 15:18+0000\n"
+"POT-Creation-Date: 2023-10-19 15:20+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -16,117 +16,169 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: plugins/construct-wp/models/class-construct-wp-email.php:66, plugins/construct-wp/models/class-construct-wp-email.php:69
+#: models/class-construct-wp-email.php:66, models/class-construct-wp-email.php:69
 msgid "Email"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-email.php:68
+#: models/class-construct-wp-email.php:68
 msgid "Emails"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:53
+#: models/class-construct-wp-menu.php:57
 msgid "Primary menu"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:54
+#: models/class-construct-wp-menu.php:58
 msgid "Footer menu"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:73
+#: models/class-construct-wp-menu.php:78, models/class-construct-wp-menu.php:198, models/class-construct-wp-menu.php:312
 msgid "Icon"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:84
+#: models/class-construct-wp-menu.php:91, models/class-construct-wp-menu.php:210, models/class-construct-wp-menu.php:313
 msgid "Visibility"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:90
+#: models/class-construct-wp-menu.php:97, models/class-construct-wp-menu.php:216
 msgid "Always"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:91
+#: models/class-construct-wp-menu.php:98, models/class-construct-wp-menu.php:217
 msgid "Logged in only"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:92
+#: models/class-construct-wp-menu.php:99, models/class-construct-wp-menu.php:218
 msgid "Logged out only"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:105
+#: models/class-construct-wp-menu.php:113, models/class-construct-wp-menu.php:231, models/class-construct-wp-menu.php:314
 msgid "Logout link"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:110
+#: models/class-construct-wp-menu.php:119, models/class-construct-wp-menu.php:237, models/class-construct-wp-menu.php:315
 msgid "Dropdown item type"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:112
+#: models/class-construct-wp-menu.php:121, models/class-construct-wp-menu.php:239
 msgid "Link"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:113
+#: models/class-construct-wp-menu.php:122, models/class-construct-wp-menu.php:240
 msgid "Header"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:114
+#: models/class-construct-wp-menu.php:123, models/class-construct-wp-menu.php:241
 msgid "Divider"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-menu.php:115
+#: models/class-construct-wp-menu.php:124, models/class-construct-wp-menu.php:242
 msgid "Text"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-settings.php:156
+#: models/class-construct-wp-settings.php:212
 msgid "ConstructWP Settings"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-settings.php:157
+#: models/class-construct-wp-settings.php:213
 msgid "ConstructWP"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-settings.php:207
+#: models/class-construct-wp-settings.php:224
+msgid "ConstructWP Settings - General"
+msgstr ""
+
+#: models/class-construct-wp-settings.php:225
+msgid "General"
+msgstr ""
+
+#: models/class-construct-wp-settings.php:233
+msgid "ConstructWP Settings - Optimize"
+msgstr ""
+
+#: models/class-construct-wp-settings.php:234
+msgid "Optimize"
+msgstr ""
+
+#: models/class-construct-wp-settings.php:296
 msgid "Settings"
 msgstr ""
 
 #. translators: %1$s - Opening p tag, %2$s - Closing p tag, %3$s - Opening a tag, %4$s - Closing a tag
-#: plugins/construct-wp/models/class-construct-wp-updater.php:135
+#: models/class-construct-wp-updater.php:135
 msgid "%1$sAn Unexpected HTTP Error occurred during the API request.%2$s %1$s%3$sTry again%4$s%2$s"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-utils.php:178
+#: models/class-construct-wp-utils.php:181
 msgid "Page navigation"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-utils.php:197
+#: models/class-construct-wp-utils.php:200
 msgid "First"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-utils.php:201
+#: models/class-construct-wp-utils.php:204
 msgid "Last"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-utils.php:217
+#: models/class-construct-wp-utils.php:220
 msgid "Previous"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp-utils.php:221
+#: models/class-construct-wp-utils.php:224
 msgid "Next"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp.php:233
+#: models/class-construct-wp.php:235
 msgid "No feed available"
 msgstr ""
 
 #. translators: %d Footer column number
-#: plugins/construct-wp/models/class-construct-wp.php:304
+#: models/class-construct-wp.php:316
 msgid "Footer %d"
 msgstr ""
 
 #. translators: %d Footer column number
-#: plugins/construct-wp/models/class-construct-wp.php:310
+#: models/class-construct-wp.php:322
 msgid "Add widgets here to appear in your footer column %d"
 msgstr ""
 
-#: plugins/construct-wp/models/class-construct-wp.php:479
+#: models/class-construct-wp.php:489
+msgid "Logo"
+msgstr ""
+
+#: models/class-construct-wp.php:490
+msgid "This should be your regular, colored logo."
+msgstr ""
+
+#: models/class-construct-wp.php:498, models/class-construct-wp.php:503, models/class-construct-wp.php:532, models/class-construct-wp.php:537
+msgid "Select logo"
+msgstr ""
+
+#: models/class-construct-wp.php:499, models/class-construct-wp.php:533
+msgid "Change logo"
+msgstr ""
+
+#: models/class-construct-wp.php:500, models/class-construct-wp.php:534
+msgid "Remove"
+msgstr ""
+
+#: models/class-construct-wp.php:501, models/class-construct-wp.php:535
+msgid "Default"
+msgstr ""
+
+#: models/class-construct-wp.php:502, models/class-construct-wp.php:536
+msgid "No logo selected"
+msgstr ""
+
+#: models/class-construct-wp.php:504, models/class-construct-wp.php:538
+msgid "Choose logo"
+msgstr ""
+
+#: models/class-construct-wp.php:523
 msgid "White Logo"
+msgstr ""
+
+#: models/class-construct-wp.php:524
+msgid "This should the white version of your logo for placement on colored backgrounds."
 msgstr ""

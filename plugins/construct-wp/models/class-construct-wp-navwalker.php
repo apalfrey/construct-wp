@@ -111,7 +111,6 @@ class CWP_Navwalker extends Walker_Nav_Menu {
         }
 
         if ( $menu_item->logout_link == '1' ) {
-            // TODO re-work with page definition in back end?
             $logout_redirect = apply_filters( 'cwp_logout_redirect', get_home_url() );
             $menu_item->url  = wp_logout_url( $logout_redirect );
         }
@@ -241,6 +240,8 @@ class CWP_Navwalker extends Walker_Nav_Menu {
             }
 
             $atts['aria-current'] = $menu_item->current ? 'page' : '';
+
+            $atts['class'] .= $menu_item->current ? ' active' : '';
         } else if ( $menu_item->link_type === 'header' ) {
             $link_tag      = 'h6';
             $atts['class'] = 'dropdown-header';

@@ -35,10 +35,6 @@ class Construct_WP {
 
         do_action( 'cwp_before_setup' );
 
-        if ( ! defined( 'CWP_THEME_SLUG' ) ) {
-            define( 'CWP_THEME_SLUG', CWP_SLUG );
-        }
-
         // WordPress translation.
         self::load_textdomain();
 
@@ -64,6 +60,9 @@ class Construct_WP {
         // Restrict access to admin area.
         self::restrict_admin_access();
 
+        // Gets path info for the template for use throughout the system.
+        add_filter( 'template_include', array( 'CWP_Assets', 'get_template_info' ), 1 );
+
         // Include the current templates corresponding controller.
         add_filter( 'template_include', array( 'CWP_Assets', 'template_controller' ), 1 );
 
@@ -75,6 +74,9 @@ class Construct_WP {
 
         // Include admin styles & scripts.
         add_action( 'admin_enqueue_scripts', array( 'CWP_Assets', 'admin_enqueue' ) );
+
+        // Include customizer styles & scripts.
+        add_action( 'customize_controls_enqueue_scripts', array( 'CWP_Assets', 'customizer_enqueue' ) );
 
         do_action( 'cwp_after_setup' );
 
@@ -253,7 +255,7 @@ class Construct_WP {
     }
 
     /**
-     * Loads the translation files for the plugin
+     * Loads the translation files for the plugin & themes
      *
      * @see     https://developer.wordpress.org/reference/functions/load_plugin_textdomain/
      *
@@ -262,7 +264,17 @@ class Construct_WP {
      * @return  void
      */
     public static function load_textdomain() {
-        load_plugin_textdomain( CWP_SLUG, false, CWP_PLUGIN_PATH . 'languages' );
+        load_plugin_textdomain( CWP_SLUG, false, dirname( CWP_BASENAME ) . 'languages' );
+
+        $theme_setting = boolval( get_option( 'cwp_theme_textdomain' ) );
+
+        if ( $theme_setting ) {
+            load_theme_textdomain( get_template(), get_template_directory() . '/languages' );
+
+            if ( get_template() !== get_stylesheet() ) {
+                load_theme_textdomain( get_stylesheet(), get_stylesheet_directory() . '/languages' );
+            }
+        }
     }
 
     /**
@@ -295,7 +307,7 @@ class Construct_WP {
      * @return  void
      */
     public static function register_sidebars() {
-        $column_count = apply_filters( 'cwp_footer_column_count', 3 );
+        $column_count = apply_filters( 'cwp_footer_column_count', get_option( 'cwp_footer_column_count' ) );
 
         for ( $i = 1; $i <= $column_count; $i++ ) {
             register_sidebar( array(
@@ -384,6 +396,12 @@ class Construct_WP {
      * @return  void
      */
     private static function run_theme_classes() {
+        $autorun = boolval( get_option( 'cwp_auto_run_theme_classes' ) );
+
+        if ( ! $autorun ) {
+            return;
+        }
+
         foreach ( CWP_Loader::$theme_classes as $class ) {
             $run_init = apply_filters( 'cwp_run_theme_class_init', true, $class );
 
@@ -461,25 +479,64 @@ class Construct_WP {
      * @return  void
      */
     public static function customize_settings( $wp_customize ) {
+        $custom_logo_args = get_theme_support( 'custom-logo' );
+
+        $wp_customize->add_control(
+            new WP_Customize_Cropped_Image_Control(
+                $wp_customize,
+                'custom_logo',
+                array(
+                    'label'         => __( 'Logo', 'construct-wp' ),
+                    'description'   => '<p>' . __( 'This should be your regular, colored logo.', 'construct-wp' ) . '</p>',
+                    'section'       => 'title_tagline',
+                    'priority'      => 10,
+                    'height'        => isset( $custom_logo_args[0]['height'] ) ? $custom_logo_args[0]['height'] : null,
+                    'width'         => isset( $custom_logo_args[0]['width'] ) ? $custom_logo_args[0]['width'] : null,
+                    'flex_height'   => isset( $custom_logo_args[0]['flex-height'] ) ? $custom_logo_args[0]['flex-height'] : null,
+                    'flex_width'    => isset( $custom_logo_args[0]['flex-width'] ) ? $custom_logo_args[0]['flex-width'] : null,
+                    'button_labels' => array(
+                        'select'       => __( 'Select logo', 'construct-wp' ),
+                        'change'       => __( 'Change logo', 'construct-wp' ),
+                        'remove'       => __( 'Remove', 'construct-wp' ),
+                        'default'      => __( 'Default', 'construct-wp' ),
+                        'placeholder'  => __( 'No logo selected', 'construct-wp' ),
+                        'frame_title'  => __( 'Select logo', 'construct-wp' ),
+                        'frame_button' => __( 'Choose logo', 'construct-wp' ),
+                    ),
+                )
+            )
+        );
+
         $wp_customize->add_setting(
             'custom_white_logo',
             array(
-                'default'    => '',
-                'type'       => 'theme_mod',
-                'capability' => 'edit_theme_options',
+                'theme_supports' => array( 'custom-logo' ),
+                'transport'      => 'postMessage',
             )
         );
 
         $wp_customize->add_control(
-            new WP_Customize_Media_Control(
+            new WP_Customize_Cropped_Image_Control(
                 $wp_customize,
-                'logo',
+                'custom_white_logo',
                 array(
-                    'mime_type' => 'image',
-                    'label'     => __( 'White Logo', 'construct-wp' ),
-                    'section'   => 'title_tagline',
-                    'settings'  => 'custom_white_logo',
-                    'priority'  => 9,
+                    'label'         => __( 'White Logo', 'construct-wp' ),
+                    'description'   => '<p>' . __( 'This should the white version of your logo for placement on colored backgrounds.', 'construct-wp' ) . '</p>',
+                    'section'       => 'title_tagline',
+                    'priority'      => 10,
+                    'height'        => isset( $custom_logo_args[0]['height'] ) ? $custom_logo_args[0]['height'] : null,
+                    'width'         => isset( $custom_logo_args[0]['width'] ) ? $custom_logo_args[0]['width'] : null,
+                    'flex_height'   => isset( $custom_logo_args[0]['flex-height'] ) ? $custom_logo_args[0]['flex-height'] : null,
+                    'flex_width'    => isset( $custom_logo_args[0]['flex-width'] ) ? $custom_logo_args[0]['flex-width'] : null,
+                    'button_labels' => array(
+                        'select'       => __( 'Select logo', 'construct-wp' ),
+                        'change'       => __( 'Change logo', 'construct-wp' ),
+                        'remove'       => __( 'Remove', 'construct-wp' ),
+                        'default'      => __( 'Default', 'construct-wp' ),
+                        'placeholder'  => __( 'No logo selected', 'construct-wp' ),
+                        'frame_title'  => __( 'Select logo', 'construct-wp' ),
+                        'frame_button' => __( 'Choose logo', 'construct-wp' ),
+                    ),
                 )
             )
         );
