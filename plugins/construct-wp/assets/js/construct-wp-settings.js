@@ -243,6 +243,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       baseScripts: true,
       templateStyles: true,
       templateScripts: true,
+      autoIncludeThemeClasses: true,
+      autoRunThemeClasses: true,
       footerColumnCount: 3
     };
   }
@@ -260,6 +262,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
             baseScripts: !!response.cwp_base_scripts,
             templateStyles: !!response.cwp_template_styles,
             templateScripts: !!response.cwp_template_scripts,
+            autoIncludeThemeClasses: !!response.cwp_auto_include_theme_classes,
+            autoRunThemeClasses: !!response.cwp_auto_run_theme_classes,
             footerColumnCount: response.cwp_footer_column_count
           });
         });
@@ -348,6 +352,28 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
         });
       },
       disabled: this.state.isAPISaving
+    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: __('Auto-include theme classes', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %s - the models directory */
+      __('Automatically includes classes within the theme\'s %s directory', 'construct-wp'), '<code>/models</code>')),
+      checked: this.state.autoIncludeThemeClasses,
+      onChange: () => {
+        this.setState({
+          autoIncludeThemeClasses: !this.state.autoIncludeThemeClasses
+        });
+      },
+      disabled: this.state.isAPISaving
+    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: __('Auto-run theme classes', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %s - the models directory */
+      __('Automatically runs classes within the theme\'s %1$s directory if they have a public %2$s method', 'construct-wp'), '<code>/models</code>', '<code>init</code>')),
+      checked: this.state.autoRunThemeClasses,
+      onChange: () => {
+        this.setState({
+          autoRunThemeClasses: !this.state.autoRunThemeClasses
+        });
+      },
+      disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
       label: __('Footer columns', 'construct-wp'),
       help: __('The number of footer widget areas to create', 'construct-wp'),
@@ -377,6 +403,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
           cwp_base_scripts: this.state.baseScripts,
           cwp_template_styles: this.state.templateStyles,
           cwp_template_scripts: this.state.templateScripts,
+          cwp_auto_include_theme_classes: this.state.autoIncludeThemeClasses,
+          cwp_auto_run_theme_classes: this.state.autoRunThemeClasses,
           cwp_footer_column_count: this.state.footerColumnCount
           /* eslint-enable camelcase */
         });
@@ -391,6 +419,8 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
             baseScripts: !!response.cwp_base_scripts,
             templateStyles: !!response.cwp_template_styles,
             templateScripts: !!response.cwp_template_scripts,
+            autoIncludeThemeClasses: !!response.cwp_auto_include_theme_classes,
+            autoRunThemeClasses: !!response.cwp_auto_run_theme_classes,
             footerColumnCount: response.cwp_footer_column_count
           });
           (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createSuccessNotice(__('Settings saved!', 'construct-wp'), {

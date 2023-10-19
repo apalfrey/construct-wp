@@ -77,13 +77,24 @@ class CWP_Settings {
             'default'      => true,
         ) );
 
+        register_setting( 'cwp_settings', 'cwp_auto_include_theme_classes', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_auto_run_theme_classes', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
         register_setting( 'cwp_settings', 'cwp_footer_column_count', array(
             'type'         => 'number',
             'show_in_rest' => true,
             'default'      => 3,
         ) );
 
-        // TODO autorun theme classes.
         // TODO theme support.
         // TODO autoload theme textdomain.
 

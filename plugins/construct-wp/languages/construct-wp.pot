@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
 "Last-Translator: Andrew Palfrey <apalfrey@apalfrey.me>\n"
-"POT-Creation-Date: 2023-10-16 16:27+0000\n"
+"POT-Creation-Date: 2023-10-19 09:53+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -76,31 +76,31 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:196
+#: models/class-construct-wp-settings.php:207
 msgid "ConstructWP Settings"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:197
+#: models/class-construct-wp-settings.php:208
 msgid "ConstructWP"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:208
+#: models/class-construct-wp-settings.php:219
 msgid "ConstructWP Settings - General"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:209
+#: models/class-construct-wp-settings.php:220
 msgid "General"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:217
+#: models/class-construct-wp-settings.php:228
 msgid "ConstructWP Settings - Optimize"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:218
+#: models/class-construct-wp-settings.php:229
 msgid "Optimize"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:280
+#: models/class-construct-wp-settings.php:291
 msgid "Settings"
 msgstr ""
 
@@ -143,42 +143,42 @@ msgstr ""
 msgid "Add widgets here to appear in your footer column %d"
 msgstr ""
 
-#: models/class-construct-wp.php:474
+#: models/class-construct-wp.php:480
 msgid "Logo"
 msgstr ""
 
-#: models/class-construct-wp.php:475
+#: models/class-construct-wp.php:481
 msgid "This should be your regular, colored logo."
 msgstr ""
 
-#: models/class-construct-wp.php:483, models/class-construct-wp.php:488, models/class-construct-wp.php:517, models/class-construct-wp.php:522
+#: models/class-construct-wp.php:489, models/class-construct-wp.php:494, models/class-construct-wp.php:523, models/class-construct-wp.php:528
 msgid "Select logo"
 msgstr ""
 
-#: models/class-construct-wp.php:484, models/class-construct-wp.php:518
+#: models/class-construct-wp.php:490, models/class-construct-wp.php:524
 msgid "Change logo"
 msgstr ""
 
-#: models/class-construct-wp.php:485, models/class-construct-wp.php:519
+#: models/class-construct-wp.php:491, models/class-construct-wp.php:525
 msgid "Remove"
 msgstr ""
 
-#: models/class-construct-wp.php:486, models/class-construct-wp.php:520
+#: models/class-construct-wp.php:492, models/class-construct-wp.php:526
 msgid "Default"
 msgstr ""
 
-#: models/class-construct-wp.php:487, models/class-construct-wp.php:521
+#: models/class-construct-wp.php:493, models/class-construct-wp.php:527
 msgid "No logo selected"
 msgstr ""
 
-#: models/class-construct-wp.php:489, models/class-construct-wp.php:523
+#: models/class-construct-wp.php:495, models/class-construct-wp.php:529
 msgid "Choose logo"
 msgstr ""
 
-#: models/class-construct-wp.php:508
+#: models/class-construct-wp.php:514
 msgid "White Logo"
 msgstr ""
 
-#: models/class-construct-wp.php:509
+#: models/class-construct-wp.php:515
 msgid "This should the white version of your logo for placement on colored backgrounds."
 msgstr ""
