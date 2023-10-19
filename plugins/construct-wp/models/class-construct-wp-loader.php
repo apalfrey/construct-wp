@@ -130,7 +130,7 @@ class CWP_Loader {
             return;
         }
 
-        $autoload = boolval( get_option( 'cwp_auto_include_theme_classes' ) );
+        $autoload = CWP_Settings::$settings['cwp_auto_include_theme_classes'];
 
         if ( ! $autoload ) {
             return;

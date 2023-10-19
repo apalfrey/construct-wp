@@ -94,13 +94,13 @@ class Construct_WP {
      * @return  void
      */
     private static function optimize() {
-        $optimize = boolval( get_option( 'cwp_optimize' ) );
+        $optimize = CWP_Settings::$settings['cwp_optimize'];
 
         if ( ! $optimize ) {
             return;
         }
 
-        $wp_bloat = get_option( 'cwp_optimize_wp_bloat' );
+        $wp_bloat = CWP_Settings::$settings['cwp_optimize_wp_bloat'];
 
         // Disable feeds.
         if ( $wp_bloat['feeds'] ) {
@@ -183,7 +183,7 @@ class Construct_WP {
 
         // Removes unnecessary dashboard meta boxes.
         add_action( 'admin_init', function () {
-            $dashboard_options = get_option( 'cwp_optimize_dashboard_meta' );
+            $dashboard_options = CWP_Settings::$settings['cwp_optimize_dashboard_meta'];
 
             // Welcome panel.
             if ( $dashboard_options['welcome'] ) {
@@ -266,7 +266,7 @@ class Construct_WP {
     public static function load_textdomain() {
         load_plugin_textdomain( CWP_SLUG, false, dirname( CWP_BASENAME ) . 'languages' );
 
-        $theme_setting = boolval( get_option( 'cwp_theme_textdomain' ) );
+        $theme_setting = CWP_Settings::$settings['cwp_theme_textdomain'];
 
         if ( $theme_setting ) {
             load_theme_textdomain( get_template(), get_template_directory() . '/languages' );
@@ -287,7 +287,7 @@ class Construct_WP {
      * @return  void
      */
     public static function remove_admin_bar() {
-        $setting = boolval( get_option( 'cwp_remove_admin_bar' ) );
+        $setting = CWP_Settings::$settings['cwp_remove_admin_bar'];
 
         if ( $setting && ! current_user_can( 'cwp_view_admin_dashboard' ) ) {
             add_filter( 'show_admin_bar', '__return_false' );
@@ -307,7 +307,7 @@ class Construct_WP {
      * @return  void
      */
     public static function register_sidebars() {
-        $column_count = apply_filters( 'cwp_footer_column_count', get_option( 'cwp_footer_column_count' ) );
+        $column_count = apply_filters( 'cwp_footer_column_count', CWP_Settings::$settings['cwp_footer_column_count'] );
 
         for ( $i = 1; $i <= $column_count; $i++ ) {
             register_sidebar( array(
@@ -338,7 +338,7 @@ class Construct_WP {
      * @return  void
      */
     public static function restrict_admin_access() {
-        $setting = boolval( get_option( 'cwp_restrict_admin_access' ) );
+        $setting = CWP_Settings::$settings['cwp_restrict_admin_access'];
 
         if ( $setting && is_admin() && ! wp_doing_ajax() && is_user_logged_in() && ! current_user_can( 'cwp_view_admin_dashboard' ) && ! is_super_admin() ) {
             wp_safe_redirect( home_url() );
@@ -396,7 +396,7 @@ class Construct_WP {
      * @return  void
      */
     private static function run_theme_classes() {
-        $autorun = boolval( get_option( 'cwp_auto_run_theme_classes' ) );
+        $autorun = CWP_Settings::$settings['cwp_auto_run_theme_classes'];
 
         if ( ! $autorun ) {
             return;
