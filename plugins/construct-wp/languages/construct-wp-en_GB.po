@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ConstructWP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-19 19:32+0000\n"
+"POT-Creation-Date: 2023-10-19 19:49+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andrew Palfrey <apalfrey1@uclan.ac.uk>\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
@@ -22,79 +22,79 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: models/class-construct-wp-email.php:66,
-#: models/class-construct-wp-email.php:69
+#: models/class-construct-wp-email.php:81,
+#: models/class-construct-wp-email.php:84
 msgid "Email"
 msgstr "Email"
 
-#: models/class-construct-wp-email.php:68
+#: models/class-construct-wp-email.php:83
 msgid "Emails"
 msgstr "Emails"
 
-#: models/class-construct-wp-menu.php:57
+#: models/class-construct-wp-menu.php:72
 msgid "Primary menu"
 msgstr "Primary menu"
 
-#: models/class-construct-wp-menu.php:58
+#: models/class-construct-wp-menu.php:73
 msgid "Footer menu"
 msgstr "Footer menu"
 
-#: models/class-construct-wp-menu.php:78,
-#: models/class-construct-wp-menu.php:198,
-#: models/class-construct-wp-menu.php:312
+#: models/class-construct-wp-menu.php:93,
+#: models/class-construct-wp-menu.php:213,
+#: models/class-construct-wp-menu.php:327
 msgid "Icon"
 msgstr "Icon"
 
-#: models/class-construct-wp-menu.php:91,
-#: models/class-construct-wp-menu.php:210,
-#: models/class-construct-wp-menu.php:313
+#: models/class-construct-wp-menu.php:106,
+#: models/class-construct-wp-menu.php:225,
+#: models/class-construct-wp-menu.php:328
 msgid "Visibility"
 msgstr "Visibility"
 
-#: models/class-construct-wp-menu.php:97,
-#: models/class-construct-wp-menu.php:216
+#: models/class-construct-wp-menu.php:112,
+#: models/class-construct-wp-menu.php:231
 msgid "Always"
 msgstr "Always"
 
-#: models/class-construct-wp-menu.php:98,
-#: models/class-construct-wp-menu.php:217
+#: models/class-construct-wp-menu.php:113,
+#: models/class-construct-wp-menu.php:232
 msgid "Logged in only"
 msgstr "Logged in only"
 
-#: models/class-construct-wp-menu.php:99,
-#: models/class-construct-wp-menu.php:218
+#: models/class-construct-wp-menu.php:114,
+#: models/class-construct-wp-menu.php:233
 msgid "Logged out only"
 msgstr "Logged out only"
 
-#: models/class-construct-wp-menu.php:113,
-#: models/class-construct-wp-menu.php:231,
-#: models/class-construct-wp-menu.php:314
+#: models/class-construct-wp-menu.php:128,
+#: models/class-construct-wp-menu.php:246,
+#: models/class-construct-wp-menu.php:329
 msgid "Logout link"
 msgstr "Logout link"
 
-#: models/class-construct-wp-menu.php:119,
-#: models/class-construct-wp-menu.php:237,
-#: models/class-construct-wp-menu.php:315
+#: models/class-construct-wp-menu.php:134,
+#: models/class-construct-wp-menu.php:252,
+#: models/class-construct-wp-menu.php:330
 msgid "Dropdown item type"
 msgstr "Dropdown item type"
 
-#: models/class-construct-wp-menu.php:121,
-#: models/class-construct-wp-menu.php:239
+#: models/class-construct-wp-menu.php:136,
+#: models/class-construct-wp-menu.php:254
 msgid "Link"
 msgstr "Link"
 
-#: models/class-construct-wp-menu.php:122,
-#: models/class-construct-wp-menu.php:240
+#: models/class-construct-wp-menu.php:137,
+#: models/class-construct-wp-menu.php:255
 msgid "Header"
 msgstr "Header"
 
-#: models/class-construct-wp-menu.php:123,
-#: models/class-construct-wp-menu.php:241
+#: models/class-construct-wp-menu.php:138,
+#: models/class-construct-wp-menu.php:256
 msgid "Divider"
 msgstr "Divider"
 
-#: models/class-construct-wp-menu.php:124,
-#: models/class-construct-wp-menu.php:242
+#: models/class-construct-wp-menu.php:139,
+#: models/class-construct-wp-menu.php:257
 msgid "Text"
 msgstr "Text"
 
@@ -127,7 +127,7 @@ msgid "Settings"
 msgstr "Settings"
 
 #. translators: %1$s - Opening p tag, %2$s - Closing p tag, %3$s - Opening a tag, %4$s - Closing a tag
-#: models/class-construct-wp-updater.php:135
+#: models/class-construct-wp-updater.php:150
 msgid ""
 "%1$sAn Unexpected HTTP Error occurred during the API request.%2$s "
 "%1$s%3$sTry again%4$s%2$s"

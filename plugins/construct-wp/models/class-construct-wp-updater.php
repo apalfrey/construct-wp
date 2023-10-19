@@ -13,6 +13,15 @@
 class CWP_Updater {
 
     /**
+     * Whether the class was loaded to prevent running again
+     *
+     * @since   1.0.0
+     * @access  private
+     * @var     boolean
+     */
+    private static $loaded = false;
+
+    /**
      * Initialises the update functionality
      *
      * @since   1.0.0
@@ -20,12 +29,18 @@ class CWP_Updater {
      * @return  void
      */
     public static function init() {
+        if ( self::$loaded ) {
+            return;
+        }
+
         add_filter( 'http_request_args', array( 'CWP_Updater', 'update_disable' ), 5, 2 );
 
         add_filter( 'pre_set_site_transient_update_plugins', array( 'CWP_Updater', 'update_plugin' ) );
         add_filter( 'pre_set_transient_update_plugins', array( 'CWP_Updater', 'update_plugin' ) );
 
         add_filter( 'plugins_api', array( 'CWP_Updater', 'get_plugin_info' ), 10, 3 );
+
+        self::$loaded = true;
     }
 
     /**

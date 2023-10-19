@@ -12,6 +12,15 @@
 class CWP_Menu {
 
     /**
+     * Whether the class was loaded to prevent running again
+     *
+     * @since   1.0.0
+     * @access  private
+     * @var     boolean
+     */
+    private static $loaded = false;
+
+    /**
      * Defaults for the custom menu item fields
      *
      * @since   1.0.0
@@ -33,6 +42,10 @@ class CWP_Menu {
      * @return  void
      */
     public static function init() {
+        if ( self::$loaded ) {
+            return;
+        }
+
         self::register_navs();
         add_action( 'wp_nav_menu_item_custom_fields', array( 'CWP_Menu', 'menu_fields' ), 10, 2 );
         add_action( 'wp_update_nav_menu_item', array( 'CWP_Menu', 'menu_update' ), 10, 2 );
@@ -41,6 +54,8 @@ class CWP_Menu {
 
         add_action( 'wp_nav_menu_item_custom_fields_customize_template', array( 'CWP_Menu', 'customize_menu_fields' ), 10 );
         add_action( 'customize_save_after', array( 'CWP_Menu', 'customize_menu_update' ), 10, 1 );
+
+        self::$loaded = true;
     }
 
     /**

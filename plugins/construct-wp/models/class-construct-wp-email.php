@@ -13,6 +13,15 @@
 class CWP_Email {
 
     /**
+     * Whether the class was loaded to prevent running again
+     *
+     * @since   1.0.0
+     * @access  private
+     * @var     boolean
+     */
+    private static $loaded = false;
+
+    /**
      * Initialises the email functionality
      *
      * @since   1.0.0
@@ -20,8 +29,14 @@ class CWP_Email {
      * @return  void
      */
     public static function init() {
+        if ( self::$loaded ) {
+            return;
+        }
+
         add_filter( 'cwp_capabilities', array( 'CWP_Email', 'capabilities' ) );
         self::register_post_type();
+
+        self::$loaded = true;
     }
 
     /**

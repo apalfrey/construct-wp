@@ -12,13 +12,13 @@
 class CWP_Settings {
 
     /**
-     * Whether the class was setup to prevent multiple runs.
+     * Whether the class was loaded to prevent running again
      *
      * @since   1.0.0
      * @access  private
      * @var     boolean
      */
-    private static $setup = false;
+    private static $loaded = false;
 
     /**
      * List of settings registered to the Construct system.
@@ -70,7 +70,7 @@ class CWP_Settings {
      * @return  void
      */
     public static function init() {
-        if ( ! self::$setup ) {
+        if ( self::$loaded ) {
             return;
         }
 
@@ -82,7 +82,7 @@ class CWP_Settings {
         add_action( 'admin_enqueue_scripts', array( 'CWP_Settings', 'admin_enqueue' ) );
         add_action( 'plugin_action_links_' . CWP_BASENAME, array( 'CWP_Settings', 'settings_link' ), 10 );
 
-        self::$setup = true;
+        self::$loaded = true;
     }
 
     /**

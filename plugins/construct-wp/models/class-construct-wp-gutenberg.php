@@ -12,6 +12,15 @@
 class CWP_Gutenberg {
 
     /**
+     * Whether the class was loaded to prevent running again
+     *
+     * @since   1.0.0
+     * @access  private
+     * @var     boolean
+     */
+    private static $loaded = false;
+
+    /**
      * Initialises the gutenberg functionality
      *
      * @since   1.0.0
@@ -19,7 +28,13 @@ class CWP_Gutenberg {
      * @return  void
      */
     public static function init() {
+        if ( self::$loaded ) {
+            return;
+        }
+
         add_action( 'enqueue_block_editor_assets', array( 'CWP_Gutenberg', 'enqueue_assets' ) );
+
+        self::$loaded = true;
     }
 
     /**
