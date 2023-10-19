@@ -3,7 +3,7 @@
  * Plugin Name:       ConstructWP
  * Plugin URI:        https://github.com/apalfrey/construct-wp
  * Description:       ConstructWP is a framework system to allow for easier development as well as useful tools and addons.
- * Version:           0.1.1
+ * Version:           0.2.0
  * Requires at least: 5.4.0
  * Requires PHP:      7.4
  * Author:            APalfrey
@@ -32,7 +32,7 @@ if ( ! defined( 'WPINC' ) ) {
  * * Plugin directory url
  * * Plugin basename
  */
-define( 'CWP_VERSION', '0.1.1' );
+define( 'CWP_VERSION', '0.2.0' );
 define( 'CWP_SLUG', 'construct-wp' );
 define( 'CWP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'CWP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

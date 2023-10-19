@@ -1,10 +1,10 @@
 === ConstructWP ===
 Contributors: apalfrey
 Tags: framework, system
-Requires at least: 5.4.0
-Tested up to: 6.3.1
+Requires at least: 5.4
+Tested up to: 6.3
 Requires PHP: 7.4
-Stable tag: 0.1.1
+Stable tag: 0.2.0
 License: GPL v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,7 +49,41 @@ Yes! Models and controllers can be auto-initiated if the class has a static meth
 
 == Changelog ==
 
+= 0.2.0 - 2023-10-19 =
+
+#### Added
+
+* Allowed the assets to be committed
+* Custom menu item fields can now be hidden in screen options
+* Custom menu item fields can now be set in the customizer
+* Implemented setting to enable controllers
+* Implemented settings to enable auto-enqueue of scripts & styles
+* Implemented setting to control footer column count
+* Implemented JS translation functionality
+* Implemented settings for auto including & running theme classes
+* Implemented theme texdomain autoloading & accompanying setting
+
+#### Fixed
+
+* Fixed settings page not loading
+* Fixed PHP notice in widgets page caused by gutenberg js
+* Active class is now applied to the `a` tag in the navwalker
+
+#### Changed
+
+* Moved settings page ad main menu item
+* Moved settings pages from using tabs to working with multiple pages
+* Improved how custom white logo setting is declared
+* Moved both custom logos positions below site title & tagline
+* Pagination util can now have a `WP_Query` object passed through for use
+
+#### Removed
+
+* `CWP_THEME_SLUG` is no longer needed. Theme names are now retrieved from `get_template()` and `get_stylesheet()`
+
 = 0.1.1 - 2023-10-10 =
+
+#### Fixed
 
 * Fixed `the_logo` method in `CWP_Assets`
 * Fixed theme models not being loaded correctly
