@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
 "Last-Translator: Andrew Palfrey <apalfrey@apalfrey.me>\n"
-"POT-Creation-Date: 2023-10-19 19:49+0000\n"
+"POT-Creation-Date: 2023-10-19 21:15+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models/class-construct-wp-email.php:81, models/class-construct-wp-email.php:84
+#: models/class-construct-wp-email.php:81, models/class-construct-wp-email.php:83
 msgid "Email"
 msgstr ""
 
-#: models/class-construct-wp-email.php:83
+#: models/class-construct-wp-email.php:84
 msgid "Emails"
 msgstr ""
 
@@ -127,6 +127,183 @@ msgstr ""
 
 #: models/class-construct-wp-utils.php:224
 msgid "Next"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:373
+msgid "Add %s"
+msgstr ""
+
+#. translators: %s post type singular label
+#. translators: %s taxonomy singular label
+#: models/class-construct-wp-utils.php:375, models/class-construct-wp-utils.php:463
+msgid "Add new %s"
+msgstr ""
+
+#. translators: %s post type singular label
+#. translators: %s taxonomy singular label
+#: models/class-construct-wp-utils.php:377, models/class-construct-wp-utils.php:457
+msgid "Edit %s"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:379
+msgid "New %s"
+msgstr ""
+
+#. translators: %s post type singular label
+#. translators: %s post type plural label
+#. translators: %s taxonomy singular label
+#: models/class-construct-wp-utils.php:381, models/class-construct-wp-utils.php:383, models/class-construct-wp-utils.php:459
+msgid "View %s"
+msgstr ""
+
+#. translators: %s post type plural label
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:385, models/class-construct-wp-utils.php:447
+msgid "Search %s"
+msgstr ""
+
+#. translators: %s post type plural label
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:387, models/class-construct-wp-utils.php:471
+msgid "No %s found"
+msgstr ""
+
+#. translators: %s post type plural label
+#: models/class-construct-wp-utils.php:389
+msgid "No %s found in Trash"
+msgstr ""
+
+#. translators: %s post type singular label
+#. translators: %s taxonomy singular label
+#: models/class-construct-wp-utils.php:391, models/class-construct-wp-utils.php:455
+msgid "Parent %s:"
+msgstr ""
+
+#. translators: %s post type plural label
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:393, models/class-construct-wp-utils.php:451
+msgid "All %s"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:395
+msgid "%s archives"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:397
+msgid "%s attributes"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:399
+msgid "Insert into %s"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:401
+msgid "Uploaded to this %s"
+msgstr ""
+
+#. translators: %s post type plural label
+#: models/class-construct-wp-utils.php:404
+msgid "Filter %s list"
+msgstr ""
+
+#. translators: %s post type plural label
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:406, models/class-construct-wp-utils.php:475
+msgid "%s list navigation"
+msgstr ""
+
+#. translators: %s post type plural label
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:408, models/class-construct-wp-utils.php:477
+msgid "%s list"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:410
+msgid "%s published"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:412
+msgid "%s published privately"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:414
+msgid "%s reverted to draft"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:416
+msgid "%s trashed"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:418
+msgid "%s scheduled"
+msgstr ""
+
+#. translators: %s post type singular label
+#: models/class-construct-wp-utils.php:420
+msgid "%s updated"
+msgstr ""
+
+#. translators: %s post type singular label
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:422, models/class-construct-wp-utils.php:481
+msgid "%s link"
+msgstr ""
+
+#. translators: %s post type singular label
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:424, models/class-construct-wp-utils.php:483
+msgid "A link to a %s"
+msgstr ""
+
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:449
+msgid "Popular %s"
+msgstr ""
+
+#. translators: %s taxonomy singular label
+#: models/class-construct-wp-utils.php:453
+msgid "Parent %s"
+msgstr ""
+
+#. translators: %s taxonomy singular label
+#: models/class-construct-wp-utils.php:461
+msgid "Update %s"
+msgstr ""
+
+#. translators: %s taxonomy singular label
+#: models/class-construct-wp-utils.php:465
+msgid "New %s name"
+msgstr ""
+
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:467
+msgid "Separate %s with commas"
+msgstr ""
+
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:469
+msgid "Add or remove %s"
+msgstr ""
+
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:473
+msgid "No %s"
+msgstr ""
+
+#. translators: %s taxonomy plural label
+#: models/class-construct-wp-utils.php:479
+msgid "Back to %s"
 msgstr ""
 
 #: models/class-construct-wp.php:235
