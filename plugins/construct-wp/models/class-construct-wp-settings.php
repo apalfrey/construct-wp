@@ -89,6 +89,12 @@ class CWP_Settings {
             'default'      => true,
         ) );
 
+        register_setting( 'cwp_settings', 'cwp_theme_textdomain', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => true,
+        ) );
+
         register_setting( 'cwp_settings', 'cwp_footer_column_count', array(
             'type'         => 'number',
             'show_in_rest' => true,
@@ -96,7 +102,6 @@ class CWP_Settings {
         ) );
 
         // TODO theme support.
-        // TODO autoload theme textdomain.
 
         register_setting( 'cwp_settings', 'cwp_optimize', array(
             'type'         => 'boolean',

@@ -245,6 +245,7 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       templateScripts: true,
       autoIncludeThemeClasses: true,
       autoRunThemeClasses: true,
+      themeTextdomain: true,
       footerColumnCount: 3
     };
   }
@@ -264,6 +265,7 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
             templateScripts: !!response.cwp_template_scripts,
             autoIncludeThemeClasses: !!response.cwp_auto_include_theme_classes,
             autoRunThemeClasses: !!response.cwp_auto_run_theme_classes,
+            themeTextdomain: !!response.cwp_theme_textdomain,
             footerColumnCount: response.cwp_footer_column_count
           });
         });
@@ -365,12 +367,23 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
       disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
       label: __('Auto-run theme classes', 'construct-wp'),
-      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %s - the models directory */
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %1$s - the models directory. %2$s - The init method name */
       __('Automatically runs classes within the theme\'s %1$s directory if they have a public %2$s method', 'construct-wp'), '<code>/models</code>', '<code>init</code>')),
       checked: this.state.autoRunThemeClasses,
       onChange: () => {
         this.setState({
           autoRunThemeClasses: !this.state.autoRunThemeClasses
+        });
+      },
+      disabled: this.state.isAPISaving
+    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: __('Auto-load theme textdomain', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %s - The languages directory */
+      __('Automatically loads a theme\'s textdomain based on the theme name. Language files must be located in %s of the theme\'s directory', 'construct-wp'), '<code>/languages</code>')),
+      checked: this.state.themeTextdomain,
+      onChange: () => {
+        this.setState({
+          themeTextdomain: !this.state.themeTextdomain
         });
       },
       disabled: this.state.isAPISaving
@@ -405,6 +418,7 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
           cwp_template_scripts: this.state.templateScripts,
           cwp_auto_include_theme_classes: this.state.autoIncludeThemeClasses,
           cwp_auto_run_theme_classes: this.state.autoRunThemeClasses,
+          cwp_theme_textdomain: this.state.themeTextdomain,
           cwp_footer_column_count: this.state.footerColumnCount
           /* eslint-enable camelcase */
         });
@@ -421,6 +435,7 @@ class GeneralTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Compone
             templateScripts: !!response.cwp_template_scripts,
             autoIncludeThemeClasses: !!response.cwp_auto_include_theme_classes,
             autoRunThemeClasses: !!response.cwp_auto_run_theme_classes,
+            themeTextdomain: !!response.cwp_theme_textdomain,
             footerColumnCount: response.cwp_footer_column_count
           });
           (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createSuccessNotice(__('Settings saved!', 'construct-wp'), {

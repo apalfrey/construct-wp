@@ -255,7 +255,7 @@ class Construct_WP {
     }
 
     /**
-     * Loads the translation files for the plugin
+     * Loads the translation files for the plugin & themes
      *
      * @see     https://developer.wordpress.org/reference/functions/load_plugin_textdomain/
      *
@@ -265,7 +265,16 @@ class Construct_WP {
      */
     public static function load_textdomain() {
         load_plugin_textdomain( CWP_SLUG, false, dirname( CWP_BASENAME ) . 'languages' );
-        // TODO autoload theme textdomain.
+
+        $theme_setting = boolval( get_option( 'cwp_theme_textdomain' ) );
+
+        if ( $theme_setting ) {
+            load_theme_textdomain( get_template(), get_template_directory() . '/languages' );
+
+            if ( get_template() !== get_stylesheet() ) {
+                load_theme_textdomain( get_stylesheet(), get_stylesheet_directory() . '/languages' );
+            }
+        }
     }
 
     /**
