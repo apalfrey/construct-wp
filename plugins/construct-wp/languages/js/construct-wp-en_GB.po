@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ConstructWP\n"
-"POT-Creation-Date: 2023-10-19 15:20+0000\n"
+"POT-Creation-Date: 2023-10-19 19:32+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andrew Palfrey <apalfrey1@uclan.ac.uk>\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
@@ -136,7 +136,7 @@ msgstr ""
 
 #: assets/js/construct-wp-settings.js:358
 msgid "Auto-include theme classes"
-msgstr "Auto-include theme styles"
+msgstr "Auto-include theme classes"
 
 #. translators: %s - the models directory
 #: assets/js/construct-wp-settings.js:360
@@ -145,7 +145,7 @@ msgstr "Automatically includes classes within the theme's %s directory"
 
 #: assets/js/construct-wp-settings.js:369
 msgid "Auto-run theme classes"
-msgstr "Auto-include theme styles"
+msgstr "Auto-run theme classes"
 
 #. translators: %1$s - the models directory. %2$s - The init method name
 #: assets/js/construct-wp-settings.js:371

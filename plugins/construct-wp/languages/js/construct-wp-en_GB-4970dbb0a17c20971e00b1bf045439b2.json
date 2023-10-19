@@ -59,13 +59,13 @@
                 "Automatically enqueues a template's scripts based on the template name. e.g. %s"
             ],
             "Auto-include theme classes": [
-                "Auto-include theme styles"
+                "Auto-include theme classes"
             ],
             "Automatically includes classes within the theme's %s directory": [
                 "Automatically includes classes within the theme's %s directory"
             ],
             "Auto-run theme classes": [
-                "Auto-include theme styles"
+                "Auto-run theme classes"
             ],
             "Automatically runs classes within the theme's %1$s directory if they have a public %2$s method": [
                 "Automatically runs classes within the theme's %1$s directory if they have a public %2$s method"

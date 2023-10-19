@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ConstructWP\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-19 15:20+0000\n"
+"POT-Creation-Date: 2023-10-19 19:32+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andrew Palfrey <apalfrey1@uclan.ac.uk>\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
@@ -98,31 +98,31 @@ msgstr "Divider"
 msgid "Text"
 msgstr "Text"
 
-#: models/class-construct-wp-settings.php:212
+#: models/class-construct-wp-settings.php:305
 msgid "ConstructWP Settings"
 msgstr "ConstructWP Settings"
 
-#: models/class-construct-wp-settings.php:213
+#: models/class-construct-wp-settings.php:306
 msgid "ConstructWP"
 msgstr "ConstructWP"
 
-#: models/class-construct-wp-settings.php:224
+#: models/class-construct-wp-settings.php:317
 msgid "ConstructWP Settings - General"
 msgstr "ConstructWP Settings - General"
 
-#: models/class-construct-wp-settings.php:225
+#: models/class-construct-wp-settings.php:318
 msgid "General"
 msgstr "General"
 
-#: models/class-construct-wp-settings.php:233
+#: models/class-construct-wp-settings.php:326
 msgid "ConstructWP Settings - Optimize"
 msgstr "ConstructWP Settings - Optimise"
 
-#: models/class-construct-wp-settings.php:234
+#: models/class-construct-wp-settings.php:327
 msgid "Optimize"
 msgstr "Optimise"
 
-#: models/class-construct-wp-settings.php:296
+#: models/class-construct-wp-settings.php:389
 msgid "Settings"
 msgstr "Settings"
 
