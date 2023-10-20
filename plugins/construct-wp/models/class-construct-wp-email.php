@@ -79,10 +79,10 @@ class CWP_Email {
     private static function register_post_type() {
         register_post_type( 'cwp_email', array(
             'label'               => __( 'Email', 'construct-wp' ),
-            'labels'              => CWP_Utils::post_type_labels( array(
+            'labels'              => CWP_Utils::post_type_labels(
                 __( 'Email', 'construct-wp' ),
                 __( 'Emails', 'construct-wp' ),
-            ) ),
+            ),
             'supports'            => array( 'title', 'editor', 'custom-fields' ),
             'hierarchical'        => false,
             'public'              => true,
