@@ -83,9 +83,9 @@ class CWP_Settings {
         self::apply_defaults();
         self::register_settings();
         self::get_settings();
-        add_action( 'admin_menu', array( 'CWP_Settings', 'settings_page' ) );
-        add_action( 'admin_enqueue_scripts', array( 'CWP_Settings', 'admin_enqueue' ) );
-        add_action( 'plugin_action_links_' . CWP_BASENAME, array( 'CWP_Settings', 'settings_link' ), 10 );
+        add_action( 'admin_menu', array( __CLASS__, 'settings_page' ) );
+        add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue' ) );
+        add_action( 'plugin_action_links_' . CWP_BASENAME, array( __CLASS__, 'settings_link' ), 10 );
 
         self::$loaded = true;
     }

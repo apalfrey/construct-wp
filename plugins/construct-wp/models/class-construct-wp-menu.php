@@ -47,13 +47,13 @@ class CWP_Menu {
         }
 
         self::register_navs();
-        add_action( 'wp_nav_menu_item_custom_fields', array( 'CWP_Menu', 'menu_fields' ), 10, 2 );
-        add_action( 'wp_update_nav_menu_item', array( 'CWP_Menu', 'menu_update' ), 10, 2 );
-        add_filter( 'wp_get_nav_menu_items', array( 'CWP_Menu', 'filter_items' ), 10, 1 );
-        add_filter( 'manage_nav-menus_columns', array( 'CWP_Menu', 'screen_options' ), 20 );
+        add_action( 'wp_nav_menu_item_custom_fields', array( __CLASS__, 'menu_fields' ), 10, 2 );
+        add_action( 'wp_update_nav_menu_item', array( __CLASS__, 'menu_update' ), 10, 2 );
+        add_filter( 'wp_get_nav_menu_items', array( __CLASS__, 'filter_items' ), 10, 1 );
+        add_filter( 'manage_nav-menus_columns', array( __CLASS__, 'screen_options' ), 20 );
 
-        add_action( 'wp_nav_menu_item_custom_fields_customize_template', array( 'CWP_Menu', 'customize_menu_fields' ), 10 );
-        add_action( 'customize_save_after', array( 'CWP_Menu', 'customize_menu_update' ), 10, 1 );
+        add_action( 'wp_nav_menu_item_custom_fields_customize_template', array( __CLASS__, 'customize_menu_fields' ), 10 );
+        add_action( 'customize_save_after', array( __CLASS__, 'customize_menu_update' ), 10, 1 );
 
         self::$loaded = true;
     }

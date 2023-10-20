@@ -32,7 +32,7 @@ class CWP_Gutenberg {
             return;
         }
 
-        add_action( 'enqueue_block_editor_assets', array( 'CWP_Gutenberg', 'enqueue_assets' ) );
+        add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'enqueue_assets' ) );
 
         self::$loaded = true;
     }

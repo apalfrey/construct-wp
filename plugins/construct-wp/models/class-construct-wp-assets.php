@@ -47,22 +47,22 @@ class CWP_Assets {
         }
 
         // Gets path info for the template for use throughout the system.
-        add_filter( 'template_include', array( 'CWP_Assets', 'get_template_info' ), 1 );
+        add_filter( 'template_include', array( __CLASS__, 'get_template_info' ), 1 );
 
         // Include the current templates corresponding controller.
-        add_filter( 'template_include', array( 'CWP_Assets', 'template_controller' ), 1 );
+        add_filter( 'template_include', array( __CLASS__, 'template_controller' ), 1 );
 
         // Include the base styles & scripts.
-        add_action( 'wp_enqueue_scripts', array( 'CWP_Assets', 'base_enqueue' ) );
+        add_action( 'wp_enqueue_scripts', array( __CLASS__, 'base_enqueue' ) );
 
         // Include the current templates styles & scripts.
-        add_action( 'wp_enqueue_scripts', array( 'CWP_Assets', 'template_enqueue' ) );
+        add_action( 'wp_enqueue_scripts', array( __CLASS__, 'template_enqueue' ) );
 
         // Include admin styles & scripts.
-        add_action( 'admin_enqueue_scripts', array( 'CWP_Assets', 'admin_enqueue' ) );
+        add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue' ) );
 
         // Include customizer styles & scripts.
-        add_action( 'customize_controls_enqueue_scripts', array( 'CWP_Assets', 'customizer_enqueue' ) );
+        add_action( 'customize_controls_enqueue_scripts', array( __CLASS__, 'customizer_enqueue' ) );
 
         self::$loaded = true;
     }

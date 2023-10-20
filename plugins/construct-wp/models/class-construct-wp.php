@@ -45,17 +45,17 @@ class Construct_WP {
         // WordPress functionality setup.
         self::optimize();
         self::remove_admin_bar();
-        add_action( 'widgets_init', array( 'Construct_WP', 'register_sidebars' ) );
+        add_action( 'widgets_init', array( __CLASS__, 'register_sidebars' ) );
 
         // Basic theme support declaration.
         self::theme_support();
-        add_action( 'customize_register', array( 'Construct_WP', 'customize_settings' ) );
+        add_action( 'customize_register', array( __CLASS__, 'customize_settings' ) );
 
         // Add custom capabilities.
         CWP_User::custom_caps();
 
         // Sort page templates.
-        add_filter( 'theme_page_templates', array( 'Construct_WP', 'sort_templates' ), 10, 1 );
+        add_filter( 'theme_page_templates', array( __CLASS__, 'sort_templates' ), 10, 1 );
 
         // Restrict access to admin area.
         self::restrict_admin_access();
@@ -88,12 +88,12 @@ class Construct_WP {
         if ( $wp_bloat['feeds'] ) {
             remove_action( 'wp_head', 'feed_links', 2 );
             remove_action( 'wp_head', 'feed_links_extra', 3 );
-            add_action( 'do_feed_atom', array( 'Construct_WP', 'disable_feed' ), 1 );
-            add_action( 'do_feed_rdf', array( 'Construct_WP', 'disable_feed' ), 1 );
-            add_action( 'do_feed_rss', array( 'Construct_WP', 'disable_feed' ), 1 );
-            add_action( 'do_feed_rss2', array( 'Construct_WP', 'disable_feed' ), 1 );
-            add_action( 'do_feed_atom_comments', array( 'Construct_WP', 'disable_feed' ), 1 );
-            add_action( 'do_feed_rss2_comments', array( 'Construct_WP', 'disable_feed' ), 1 );
+            add_action( 'do_feed_atom', array( __CLASS__, 'disable_feed' ), 1 );
+            add_action( 'do_feed_rdf', array( __CLASS__, 'disable_feed' ), 1 );
+            add_action( 'do_feed_rss', array( __CLASS__, 'disable_feed' ), 1 );
+            add_action( 'do_feed_rss2', array( __CLASS__, 'disable_feed' ), 1 );
+            add_action( 'do_feed_atom_comments', array( __CLASS__, 'disable_feed' ), 1 );
+            add_action( 'do_feed_rss2_comments', array( __CLASS__, 'disable_feed' ), 1 );
         }
 
         // Disables RSD link.
@@ -118,8 +118,8 @@ class Construct_WP {
         // Disables WordPress version number.
         if ( $wp_bloat['version_number'] ) {
             remove_action( 'wp_head', 'wp_generator' );
-            add_filter( 'style_loader_src', array( 'Construct_WP', 'disable_script_version' ), 9999 );
-            add_filter( 'script_loader_src', array( 'Construct_WP', 'disable_script_version' ), 9999 );
+            add_filter( 'style_loader_src', array( __CLASS__, 'disable_script_version' ), 9999 );
+            add_filter( 'script_loader_src', array( __CLASS__, 'disable_script_version' ), 9999 );
             add_filter( 'the_generator', '__return_empty_string' );
         }
 

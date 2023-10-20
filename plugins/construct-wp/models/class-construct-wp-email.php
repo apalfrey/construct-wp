@@ -33,7 +33,7 @@ class CWP_Email {
             return;
         }
 
-        add_filter( 'cwp_capabilities', array( 'CWP_Email', 'capabilities' ) );
+        add_filter( 'cwp_capabilities', array( __CLASS__, 'capabilities' ) );
         self::register_post_type();
 
         self::$loaded = true;
