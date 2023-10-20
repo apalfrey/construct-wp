@@ -28,37 +28,42 @@ class CWP_Settings {
      * @var     array
      */
     public static $settings = array(
-        'cwp_remove_admin_bar'           => true,
+        // General.
+        'cwp_remove_admin_bar'           => false,
         'cwp_restrict_admin_access'      => true,
         'cwp_controllers'                => true,
+        'cwp_auto_include_theme_classes' => true,
+        'cwp_auto_run_theme_classes'     => true,
+        'cwp_theme_textdomain'           => false,
+        'cwp_footer_column_count'        => 3,
+
+        // Assets.
         'cwp_base_styles'                => true,
         'cwp_base_scripts'               => true,
         'cwp_template_styles'            => true,
         'cwp_template_scripts'           => true,
-        'cwp_auto_include_theme_classes' => true,
-        'cwp_auto_run_theme_classes'     => true,
-        'cwp_theme_textdomain'           => true,
-        'cwp_footer_column_count'        => 3,
+
+        // Optimize.
         'cwp_optimize'                   => true,
         'cwp_optimize_wp_bloat'          => array(
-            'feeds'          => true,
-            'rsd_link'       => true,
-            'rel_atts'       => true,
-            'rel_links'      => true,
+            'feeds'          => false,
+            'rsd_link'       => false,
+            'rel_atts'       => false,
+            'rel_links'      => false,
             'version_number' => true,
-            'json_api_links' => true,
-            'emoji'          => true,
+            'json_api_links' => false,
+            'emoji'          => false,
             'xmlrpc'         => true,
-            'jquery_migrate' => true,
-            'self_pingback'  => true,
+            'jquery_migrate' => false,
+            'self_pingback'  => false,
         ),
         'cwp_optimize_dashboard_meta'    => array(
-            'welcome'         => true,
-            'site_health'     => true,
-            'at_a_glance'     => true,
-            'activity'        => true,
-            'quick_draft'     => true,
-            'events_and_news' => true,
+            'welcome'         => false,
+            'site_health'     => false,
+            'at_a_glance'     => false,
+            'activity'        => false,
+            'quick_draft'     => false,
+            'events_and_news' => false,
         ),
     );
 
@@ -125,6 +130,7 @@ class CWP_Settings {
      * @return  void
      */
     private static function register_settings() {
+        // General.
         register_setting( 'cwp_settings', 'cwp_remove_admin_bar', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
@@ -141,30 +147,6 @@ class CWP_Settings {
             'type'         => 'boolean',
             'show_in_rest' => true,
             'default'      => self::$settings['cwp_controllers'],
-        ) );
-
-        register_setting( 'cwp_settings', 'cwp_base_styles', array(
-            'type'         => 'boolean',
-            'show_in_rest' => true,
-            'default'      => self::$settings['cwp_base_styles'],
-        ) );
-
-        register_setting( 'cwp_settings', 'cwp_base_scripts', array(
-            'type'         => 'boolean',
-            'show_in_rest' => true,
-            'default'      => self::$settings['cwp_base_scripts'],
-        ) );
-
-        register_setting( 'cwp_settings', 'cwp_template_styles', array(
-            'type'         => 'boolean',
-            'show_in_rest' => true,
-            'default'      => self::$settings['cwp_template_styles'],
-        ) );
-
-        register_setting( 'cwp_settings', 'cwp_template_scripts', array(
-            'type'         => 'boolean',
-            'show_in_rest' => true,
-            'default'      => self::$settings['cwp_template_scripts'],
         ) );
 
         register_setting( 'cwp_settings', 'cwp_auto_include_theme_classes', array(
@@ -191,8 +173,34 @@ class CWP_Settings {
             'default'      => self::$settings['cwp_footer_column_count'],
         ) );
 
+        // Assets.
+        register_setting( 'cwp_settings', 'cwp_base_styles', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => self::$settings['cwp_base_styles'],
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_base_scripts', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => self::$settings['cwp_base_scripts'],
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_template_styles', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => self::$settings['cwp_template_styles'],
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_template_scripts', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => self::$settings['cwp_template_scripts'],
+        ) );
+
         // TODO theme support.
 
+        // Optimize.
         register_setting( 'cwp_settings', 'cwp_optimize', array(
             'type'         => 'boolean',
             'show_in_rest' => true,
@@ -318,6 +326,15 @@ class CWP_Settings {
             __( 'General', 'construct-wp' ),
             'manage_options',
             'construct-wp-general',
+            array( __CLASS__, 'render_page' )
+        );
+
+        add_submenu_page(
+            'construct-wp',
+            __( 'ConstructWP Settings - Assets', 'construct-wp' ),
+            __( 'Assets', 'construct-wp' ),
+            'manage_options',
+            'construct-wp-assets',
             array( __CLASS__, 'render_page' )
         );
 
