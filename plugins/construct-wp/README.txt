@@ -4,7 +4,7 @@ Tags: framework, system
 Requires at least: 5.4
 Tested up to: 6.3
 Requires PHP: 7.4
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 License: GPL v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,24 @@ Controllers follow the same path and file name as their respective templates, lo
 Yes! Models and controllers can be auto-initiated if the class has a static method called `init`.
 
 == Changelog ==
+
+= 0.2.1 - 2023-10-20 =
+
+#### Added
+
+* Added loaded checks on `init` methods to prevent multiple inits
+* Added utils for creating post type & taxonomy labels
+* Default settings are now applied to the database
+* Settings used by ConstructWP are not collected and stored in the `CWP_Settings::$settings` property for use wherever
+
+#### Fixed
+
+* Fixed issue with settings not being available if they haven't been changed
+
+#### Changed
+
+* Replaced `get_option` calls with using the information stored in `CWP_Settings::$settings`
+* Moved asset-based settings into it's own page
 
 = 0.2.0 - 2023-10-19 =
 

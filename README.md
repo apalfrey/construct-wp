@@ -37,6 +37,24 @@ Yes! Models and controllers can be auto-initiated if the class has a static meth
 
 ## Changelog
 
+### 0.2.1 - 2023-10-20
+
+#### Added
+
+* Added loaded checks on `init` methods to prevent multiple inits
+* Added utils for creating post type & taxonomy labels
+* Default settings are now applied to the database
+* Settings used by ConstructWP are not collected and stored in the `CWP_Settings::$settings` property for use wherever
+
+#### Fixed
+
+* Fixed issue with settings not being available if they haven't been changed
+
+#### Changed
+
+* Replaced `get_option` calls with using the information stored in `CWP_Settings::$settings`
+* Moved asset-based settings into it's own page
+
 ### 0.2.0 - 2023-10-19
 
 #### Added
