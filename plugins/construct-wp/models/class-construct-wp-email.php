@@ -13,6 +13,15 @@
 class CWP_Email {
 
     /**
+     * Whether the class was loaded to prevent running again
+     *
+     * @since   1.0.0
+     * @access  private
+     * @var     boolean
+     */
+    private static $loaded = false;
+
+    /**
      * Initialises the email functionality
      *
      * @since   1.0.0
@@ -20,8 +29,14 @@ class CWP_Email {
      * @return  void
      */
     public static function init() {
+        if ( self::$loaded ) {
+            return;
+        }
+
         add_filter( 'cwp_capabilities', array( 'CWP_Email', 'capabilities' ) );
         self::register_post_type();
+
+        self::$loaded = true;
     }
 
     /**
@@ -64,9 +79,9 @@ class CWP_Email {
     private static function register_post_type() {
         register_post_type( 'cwp_email', array(
             'label'               => __( 'Email', 'construct-wp' ),
-            'labels'              => array(
-                'name'          => __( 'Emails', 'construct-wp' ),
-                'singular_name' => __( 'Email', 'construct-wp' ),
+            'labels'              => CWP_Utils::post_type_labels(
+                __( 'Email', 'construct-wp' ),
+                __( 'Emails', 'construct-wp' ),
             ),
             'supports'            => array( 'title', 'editor', 'custom-fields' ),
             'hierarchical'        => false,

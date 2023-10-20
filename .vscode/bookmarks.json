@@ -41,10 +41,10 @@
 			]
 		},
 		{
-			"path": "README.md",
+			"path": "CHANGELOG.md",
 			"bookmarks": [
 				{
-					"line": 37,
+					"line": 0,
 					"column": 0,
 					"label": "Changelog"
 				}

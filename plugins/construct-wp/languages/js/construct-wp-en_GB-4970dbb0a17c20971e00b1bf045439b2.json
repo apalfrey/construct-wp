@@ -13,26 +13,8 @@
             "ConstructWP": [
                 "ConstructWP"
             ],
-            "General": [
-                "General"
-            ],
-            "Remove admin bar": [
-                "Remove admin bar"
-            ],
-            "Removes the admin bar from the frontend if the user doesn't have the %s capability": [
-                "Removes the admin bar from the frontend if the user doesn't have the %s capability"
-            ],
-            "Restrict admin access": [
-                "Restrict admin access"
-            ],
-            "Redirects users to the frontend if they try to access the admin area without the %s capability": [
-                "Redirects users to the frontend if they try to access the admin area without the %s capability"
-            ],
-            "Enable controllers": [
-                "Enable controllers"
-            ],
-            "Enables controllers on the frontend based on the current template file": [
-                "Enables controllers on the frontend based on the current template file"
+            "Assets": [
+                "Assets"
             ],
             "Auto-enqueue theme styles": [
                 "Auto-enqueue theme styles"
@@ -58,14 +40,44 @@
             "Automatically enqueues a template's scripts based on the template name. e.g. %s": [
                 "Automatically enqueues a template's scripts based on the template name. e.g. %s"
             ],
+            "Unable to save settings": [
+                "Unable to save settings"
+            ],
+            "Settings saved!": [
+                "Settings saved!"
+            ],
+            "Save": [
+                "Save"
+            ],
+            "General": [
+                "General"
+            ],
+            "Remove admin bar": [
+                "Remove admin bar"
+            ],
+            "Removes the admin bar from the frontend if the user doesn't have the %s capability": [
+                "Removes the admin bar from the frontend if the user doesn't have the %s capability"
+            ],
+            "Restrict admin access": [
+                "Restrict admin access"
+            ],
+            "Redirects users to the frontend if they try to access the admin area without the %s capability": [
+                "Redirects users to the frontend if they try to access the admin area without the %s capability"
+            ],
+            "Enable controllers": [
+                "Enable controllers"
+            ],
+            "Enables controllers on the frontend based on the current template file": [
+                "Enables controllers on the frontend based on the current template file"
+            ],
             "Auto-include theme classes": [
-                "Auto-include theme styles"
+                "Auto-include theme classes"
             ],
             "Automatically includes classes within the theme's %s directory": [
                 "Automatically includes classes within the theme's %s directory"
             ],
             "Auto-run theme classes": [
-                "Auto-include theme styles"
+                "Auto-run theme classes"
             ],
             "Automatically runs classes within the theme's %1$s directory if they have a public %2$s method": [
                 "Automatically runs classes within the theme's %1$s directory if they have a public %2$s method"
@@ -81,15 +93,6 @@
             ],
             "The number of footer widget areas to create": [
                 "The number of footer widget areas to create"
-            ],
-            "Unable to save settings": [
-                "Unable to save settings"
-            ],
-            "Settings saved!": [
-                "Settings saved!"
-            ],
-            "Save": [
-                "Save"
             ],
             "Select all": [
                 "Select all"

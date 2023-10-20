@@ -95,7 +95,7 @@ class CWP_Assets {
      * @return  string              The template for the current page
      */
     public static function template_controller( $template ) {
-        $setting = boolval( get_option( 'cwp_controllers' ) );
+        $setting = CWP_Settings::$settings['cwp_controllers'];
 
         if ( ! $setting ) {
             return $template;
@@ -125,8 +125,8 @@ class CWP_Assets {
      * @return  void
      */
     public static function base_enqueue() {
-        $styles_setting  = boolval( get_option( 'cwp_base_styles' ) );
-        $scripts_setting = boolval( get_option( 'cwp_base_scripts' ) );
+        $styles_setting  = CWP_Settings::$settings['cwp_base_styles'];
+        $scripts_setting = CWP_Settings::$settings['cwp_base_scripts'];
 
         if ( ! $styles_setting && ! $scripts_setting ) {
             return;
@@ -166,8 +166,8 @@ class CWP_Assets {
      * @return  void
      */
     public static function template_enqueue() {
-        $styles_setting  = boolval( get_option( 'cwp_template_styles' ) );
-        $scripts_setting = boolval( get_option( 'cwp_template_scripts' ) );
+        $styles_setting  = CWP_Settings::$settings['cwp_template_styles'];
+        $scripts_setting = CWP_Settings::$settings['cwp_template_scripts'];
 
         if ( ! $styles_setting && ! $scripts_setting ) {
             return;

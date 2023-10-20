@@ -351,4 +351,137 @@ class CWP_Utils {
         return $pagination;
     }
 
+    /**
+     * Generates an array of post type labels
+     *
+     * @see https://developer.wordpress.org/reference/functions/get_post_type_labels/
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   string  $singular   The singular label
+     * @param   string  $plural     The plural label
+     * @return  array               Array of taxonomy labels
+     */
+    public static function post_type_labels( $singular, $plural ) {
+        $singular = strtolower( $singular );
+        $plural   = strtolower( $plural );
+
+        return array(
+            'name'                     => ucfirst( $plural ),
+            'singular_name'            => ucfirst( $singular ),
+            /* translators: %s post type singular label */
+            'add_new'                  => sprintf( __( 'Add %s', 'construct-wp' ), $singular ),
+            /* translators: %s post type singular label */
+            'add_new_item'             => sprintf( __( 'Add new %s', 'construct-wp' ), $singular ),
+            /* translators: %s post type singular label */
+            'edit_item'                => sprintf( __( 'Edit %s', 'construct-wp' ), $singular ),
+            /* translators: %s post type singular label */
+            'new_item'                 => sprintf( __( 'New %s', 'construct-wp' ), $singular ),
+            /* translators: %s post type singular label */
+            'view_item'                => sprintf( __( 'View %s', 'construct-wp' ), $singular ),
+            /* translators: %s post type plural label */
+            'view_items'               => sprintf( __( 'View %s', 'construct-wp' ), $plural ),
+            /* translators: %s post type plural label */
+            'search_items'             => sprintf( __( 'Search %s', 'construct-wp' ), $plural ),
+            /* translators: %s post type plural label */
+            'not_found'                => sprintf( __( 'No %s found', 'construct-wp' ), $plural ),
+            /* translators: %s post type plural label */
+            'not_found_in_trash'       => sprintf( __( 'No %s found in Trash', 'construct-wp' ), $plural ),
+            /* translators: %s post type singular label */
+            'parent_item_colon'        => sprintf( __( 'Parent %s:', 'construct-wp' ), $singular ),
+            /* translators: %s post type plural label */
+            'all_items'                => sprintf( __( 'All %s', 'construct-wp' ), $plural ),
+            /* translators: %s post type singular label */
+            'archives'                 => sprintf( __( '%s archives', 'construct-wp' ), ucfirst( $singular ) ),
+            /* translators: %s post type singular label */
+            'attributes'               => sprintf( __( '%s attributes', 'construct-wp' ), ucfirst( $singular ) ),
+            /* translators: %s post type singular label */
+            'insert_into_item'         => sprintf( __( 'Insert into %s', 'construct-wp' ), $singular ),
+            /* translators: %s post type singular label */
+            'uploaded_to_this_item'    => sprintf( __( 'Uploaded to this %s', 'construct-wp' ), $singular ),
+            'menu_name'                => ucfirst( $plural ),
+            /* translators: %s post type plural label */
+            'filter_items_list'        => sprintf( __( 'Filter %s list', 'construct-wp' ), $plural ),
+            /* translators: %s post type plural label */
+            'items_list_navigation'    => sprintf( __( '%s list navigation', 'construct-wp' ), ucfirst( $plural ) ),
+            /* translators: %s post type plural label */
+            'items_list'               => sprintf( __( '%s list', 'construct-wp' ), ucfirst( $plural ) ),
+            /* translators: %s post type singular label */
+            'item_published'           => sprintf( __( '%s published', 'construct-wp' ), ucfirst( $singular ) ),
+            /* translators: %s post type singular label */
+            'item_published_privately' => sprintf( __( '%s published privately', 'construct-wp' ), ucfirst( $singular ) ),
+            /* translators: %s post type singular label */
+            'item_reverted_to_draft'   => sprintf( __( '%s reverted to draft', 'construct-wp' ), ucfirst( $singular ) ),
+            /* translators: %s post type singular label */
+            'item_trashed'             => sprintf( __( '%s trashed', 'construct-wp' ), ucfirst( $singular ) ),
+            /* translators: %s post type singular label */
+            'item_scheduled'           => sprintf( __( '%s scheduled', 'construct-wp' ), ucfirst( $singular ) ),
+            /* translators: %s post type singular label */
+            'item_updated'             => sprintf( __( '%s updated', 'construct-wp' ), ucfirst( $singular ) ),
+            /* translators: %s post type singular label */
+            'item_link'                => sprintf( __( '%s link', 'construct-wp' ), ucfirst( $singular ) ),
+            /* translators: %s post type singular label */
+            'item_link_description'    => sprintf( __( 'A link to a %s', 'construct-wp' ), $singular ),
+        );
+    }
+
+    /**
+     * Generates an array of taxonomy labels
+     *
+     * @see https://developer.wordpress.org/reference/functions/get_taxonomy_labels/
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   string  $singular   The singular label
+     * @param   string  $plural     The plural label
+     * @return  array               Array of taxonomy labels
+     */
+    public static function taxonomy_labels( $singular, $plural ) {
+        $singular = strtolower( $singular );
+        $plural   = strtolower( $plural );
+
+        return array(
+            'name'                       => ucfirst( $plural ),
+            'singular_name'              => ucfirst( $singular ),
+            /* translators: %s taxonomy plural label */
+            'search_items'               => sprintf( __( 'Search %s', 'construct-wp' ), $plural ),
+            /* translators: %s taxonomy plural label */
+            'popular_items'              => sprintf( __( 'Popular %s', 'construct-wp' ), $plural ),
+            /* translators: %s taxonomy plural label */
+            'all_items'                  => sprintf( __( 'All %s', 'construct-wp' ), $plural ),
+            /* translators: %s taxonomy singular label */
+            'parent_item'                => sprintf( __( 'Parent %s', 'construct-wp' ), $singular ),
+            /* translators: %s taxonomy singular label */
+            'parent_item_colon'          => sprintf( __( 'Parent %s:', 'construct-wp' ), $singular ),
+            /* translators: %s taxonomy singular label */
+            'edit_item'                  => sprintf( __( 'Edit %s', 'construct-wp' ), $singular ),
+            /* translators: %s taxonomy singular label */
+            'view_item'                  => sprintf( __( 'View %s', 'construct-wp' ), $singular ),
+            /* translators: %s taxonomy singular label */
+            'update_item'                => sprintf( __( 'Update %s', 'construct-wp' ), $singular ),
+            /* translators: %s taxonomy singular label */
+            'add_new_item'               => sprintf( __( 'Add new %s', 'construct-wp' ), $singular ),
+            /* translators: %s taxonomy singular label */
+            'new_item_name'              => sprintf( __( 'New %s name', 'construct-wp' ), $singular ),
+            /* translators: %s taxonomy plural label */
+            'separate_items_with_commas' => sprintf( __( 'Separate %s with commas', 'construct-wp' ), $plural ),
+            /* translators: %s taxonomy plural label */
+            'add_or_remove_items'        => sprintf( __( 'Add or remove %s', 'construct-wp' ), $plural ),
+            /* translators: %s taxonomy plural label */
+            'not_found'                  => sprintf( __( 'No %s found', 'construct-wp' ), $plural ),
+            /* translators: %s taxonomy plural label */
+            'no_terms'                   => sprintf( __( 'No %s', 'construct-wp' ), $plural ),
+            /* translators: %s taxonomy plural label */
+            'items_list_navigation'      => sprintf( __( '%s list navigation', 'construct-wp' ), ucfirst( $plural ) ),
+            /* translators: %s taxonomy plural label */
+            'items_list'                 => sprintf( __( '%s list', 'construct-wp' ), ucfirst( $plural ) ),
+            /* translators: %s taxonomy plural label */
+            'back_to_items'              => sprintf( __( 'Back to %s', 'construct-wp' ), ucfirst( $plural ) ),
+            /* translators: %s taxonomy plural label */
+            'items_link_navigation'      => sprintf( __( '%s link', 'construct-wp' ), ucfirst( $plural ) ),
+            /* translators: %s taxonomy plural label */
+            'items_link'                 => sprintf( __( 'A link to a %s', 'construct-wp' ), ucfirst( $plural ) ),
+        );
+    }
+
 }
