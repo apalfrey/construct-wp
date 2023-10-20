@@ -60,24 +60,6 @@ class Construct_WP {
         // Restrict access to admin area.
         self::restrict_admin_access();
 
-        // Gets path info for the template for use throughout the system.
-        add_filter( 'template_include', array( 'CWP_Assets', 'get_template_info' ), 1 );
-
-        // Include the current templates corresponding controller.
-        add_filter( 'template_include', array( 'CWP_Assets', 'template_controller' ), 1 );
-
-        // Include the base styles & scripts.
-        add_action( 'wp_enqueue_scripts', array( 'CWP_Assets', 'base_enqueue' ) );
-
-        // Include the current templates styles & scripts.
-        add_action( 'wp_enqueue_scripts', array( 'CWP_Assets', 'template_enqueue' ) );
-
-        // Include admin styles & scripts.
-        add_action( 'admin_enqueue_scripts', array( 'CWP_Assets', 'admin_enqueue' ) );
-
-        // Include customizer styles & scripts.
-        add_action( 'customize_controls_enqueue_scripts', array( 'CWP_Assets', 'customizer_enqueue' ) );
-
         do_action( 'cwp_after_setup' );
 
         self::$loaded = true;
