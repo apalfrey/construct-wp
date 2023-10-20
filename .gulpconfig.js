@@ -5,7 +5,7 @@ const areas = {
         path: './plugins/construct-wp',
         name: 'construct-wp',
         title: 'ConstructWP',
-        version: '0.2.0',
+        version: '0.2.1',
     },
 }
 
@@ -235,7 +235,7 @@ module.exports = {
                     dest: `${areas.constructWp.path}/assets/js`,
                 },
                 minify: {
-                    process: process.env.NODE_ENV !== 'development',
+                    process: false,
                     separate: false,
                 },
                 pipes: {
@@ -324,6 +324,7 @@ module.exports = {
                         extensions: ['.js', '.jsx', '.json'],
                     },
                     optimization: {
+                        concatenateModules: false,
                         minimizer: [
                             new TerserPlugin( {
                                 parallel: true,
@@ -363,7 +364,25 @@ module.exports = {
             },
             uglify: {
                 output: {
-                    comments: '/^!|@preserve|@license|@cc_on/i',
+                    comments: '/^!|@preserve|@license|@cc_on|translators:/i',
+                },
+                mangle: {
+                    reserved: [
+                        '__',
+                        '_e',
+                        '_x',
+                        '_ex',
+                        '_n',
+                        '_nx',
+                        '_n_noop',
+                        '_nx_noop',
+                        'esc_html__',
+                        'esc_html_e',
+                        'esc_html_x',
+                        'esc_attr__',
+                        'esc_attr_e',
+                        'esc_attr_x',
+                    ],
                 },
             },
         },
