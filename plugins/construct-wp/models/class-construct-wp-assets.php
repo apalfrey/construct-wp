@@ -61,6 +61,9 @@ class CWP_Assets {
         // Include admin styles & scripts.
         add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue' ) );
 
+        // Include Gutenberg editor assets.
+        add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'gutenberg_editor_assets' ) );
+
         // Include customizer styles & scripts.
         add_action( 'customize_controls_enqueue_scripts', array( __CLASS__, 'customizer_enqueue' ) );
 
@@ -243,6 +246,31 @@ class CWP_Assets {
      */
     public static function admin_enqueue() {
         wp_enqueue_style( 'cwp-admin', CWP_PLUGIN_URL . 'assets/css/construct-wp-admin.css' );
+    }
+
+    /**
+     * Enqueue's the Gutenberg JS script & CSS styles. Called by the `enqueue_block_editor_assets`
+     * action hook.
+     *
+     * @since   1.0.0
+     * @access  public
+     * @return  void
+     */
+    public static function gutenberg_editor_assets() {
+        global $pagenow;
+
+        if ( $pagenow !== 'widgets.php' ) {
+            wp_enqueue_script( 'cwp-gutenberg', CWP_PLUGIN_URL . 'assets/js/construct-wp-gutenberg.js', array(
+                'wp-components',
+                'wp-data',
+                'wp-edit-post',
+                'wp-i18n',
+                'wp-plugins',
+            ), true );
+            wp_enqueue_style( 'cwp-gutenberg', CWP_PLUGIN_URL . 'assets/css/construct-wp-gutenberg.css', array( 'wp-edit-blocks' ), true );
+
+            wp_set_script_translations( 'cwp-gutenberg', 'construct-wp', CWP_PLUGIN_PATH . 'languages/js' );
+        }
     }
 
     /**
