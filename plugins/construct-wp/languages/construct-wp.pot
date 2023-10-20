@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Andrew Palfrey <apalfrey@apalfrey.me>\n"
 "Last-Translator: Andrew Palfrey <apalfrey@apalfrey.me>\n"
-"POT-Creation-Date: 2023-10-20 19:40+0000\n"
+"POT-Creation-Date: 2023-10-20 19:48+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -76,39 +76,39 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:313
+#: models/class-construct-wp-settings.php:315
 msgid "ConstructWP Settings"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:314
+#: models/class-construct-wp-settings.php:316
 msgid "ConstructWP"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:325
+#: models/class-construct-wp-settings.php:327
 msgid "ConstructWP Settings - General"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:326
+#: models/class-construct-wp-settings.php:328
 msgid "General"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:334
+#: models/class-construct-wp-settings.php:336
 msgid "ConstructWP Settings - Assets"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:335
+#: models/class-construct-wp-settings.php:337
 msgid "Assets"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:343
+#: models/class-construct-wp-settings.php:345
 msgid "ConstructWP Settings - Optimize"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:344
+#: models/class-construct-wp-settings.php:346
 msgid "Optimize"
 msgstr ""
 
-#: models/class-construct-wp-settings.php:406
+#: models/class-construct-wp-settings.php:408
 msgid "Settings"
 msgstr ""
 

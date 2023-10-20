@@ -292,10 +292,12 @@ class CWP_Settings {
             $option = get_option( $setting );
 
             if ( is_bool( $default ) ) {
-                self::$settings[$setting] = boolval( $option );
+                $option = boolval( $option );
             } else if ( is_numeric( $default ) ) {
-                self::$settings[$setting] = intval( $option );
+                $option = intval( $option );
             }
+
+            self::$settings[$setting] = $option;
         }
 
         self::$settings = apply_filters( 'cwp_settings', self::$settings );
