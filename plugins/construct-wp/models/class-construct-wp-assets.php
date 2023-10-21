@@ -71,37 +71,66 @@ class CWP_Assets {
     }
 
     /**
-     * Finds & generates the path/URI for assets based on whether they are in the parent or child theme,
-     * allowing for overrides. Either the path or URI can be returned based on whether $url is true or
-     * false.
+     * Gets the final path/URI of a file from the parent or child theme, allowing for overrides.
+     * Either the path or URI can be returned based on whether `$uri` is `true` or `false`. The
+     * path/URI can also be echo'd out by setting `$display` to `true`
      *
      * @since   1.0.0
      * @access  public
-     * @param   string          $path   The path for the asset to find, starting from the theme root
-     * @param   boolean         $uri    Whether to return the URL or path of the asset
-     * @return  string|null             Returns the URL/path if found, null if not
+     * @param   string          $file       The path for the file to find, starting from the theme root
+     * @param   boolean         $uri        Whether to return the URI or path of the file
+     * @param   boolean         $display    Echo's out the results
+     * @return  string|null                 Returns the URL/path if found, null if not
      */
-    public static function final_path( $path, $uri = false ) {
-        global $wp_filesystem;
+    public static function final_path( $file, $uri = false, $display = false ) {
+        return $uri ? self::get_final_uri( $file, $display ) : self::get_final_path( $file, $display );
+    }
 
-        $stylesheet = untrailingslashit( get_stylesheet_directory() ) . $path;
-        $template   = untrailingslashit( get_template_directory() ) . $path;
+    /**
+     * Gets the final path of a file from the parent or child theme, allowing for overrides
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   string          $file       The path for the file to find, starting from the theme root
+     * @param   boolean         $display    Echo's out the results
+     * @return  string|null                 Returns the path if found, null if not
+     */
+    public static function get_final_path( $file, $display = false ) {
+        $file = get_theme_file_path( $file );
 
-        if ( $wp_filesystem->exists( $stylesheet ) ) {
-            if ( $uri ) {
-                return untrailingslashit( get_stylesheet_directory_uri() ) . $path;
-            }
-
-            return $stylesheet;
-        } else if ( $wp_filesystem->exists( $template ) ) {
-            if ( $uri ) {
-                return untrailingslashit( get_template_directory_uri() ) . $path;
-            }
-
-            return $template;
+        if ( ! file_exists( $file ) ) {
+            return null;
         }
 
-        return null;
+        if ( $display ) {
+            echo $file;
+        }
+
+        return $file;
+    }
+
+    /**
+     * Gets the final URI of a file from the parent or child theme, allowing for overrides
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   string          $file       The path for the file to find, starting from the theme root
+     * @param   boolean         $display    Echo's out the results
+     * @return  string|null                 Returns the URI if found, null if not
+     */
+    public static function get_final_uri( $file, $display = false ) {
+        $path = get_theme_file_path( $file );
+        $file = get_theme_file_uri( $file );
+
+        if ( ! file_exists( $path ) ) {
+            return null;
+        }
+
+        if ( $display ) {
+            echo $file;
+        }
+
+        return $file;
     }
 
     /**
