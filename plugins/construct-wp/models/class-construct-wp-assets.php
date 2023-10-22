@@ -46,6 +46,10 @@ class CWP_Assets {
             return;
         }
 
+        // SVG functionality.
+        add_filter( 'upload_mimes', array( __CLASS__, 'svg_upload_mimes' ) );
+        add_filter( 'wp_check_filetype_and_ext', array( __CLASS__, 'svg_mime_check' ), 10, 4 );
+
         // Gets path info for the template for use throughout the system.
         add_filter( 'template_include', array( __CLASS__, 'get_template_info' ), 1 );
 
@@ -68,6 +72,53 @@ class CWP_Assets {
         add_action( 'customize_controls_enqueue_scripts', array( __CLASS__, 'customizer_enqueue' ) );
 
         self::$loaded = true;
+    }
+
+    /**
+     * Allow SVG uploads for users with the `cwp_upload_svg` capability
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   array   $upload_mimes   Allowed mime types
+     * @return  array                   Allowed mime types
+     */
+    public static function svg_upload_mimes( $upload_mimes ) {
+        if ( ! CWP_Settings::$settings['cwp_svg_upload'] || ! current_user_can( 'cwp_upload_svg' ) ) {
+            return $upload_mimes;
+        }
+
+        $upload_mimes['svg']  = 'image/svg+xml';
+        $upload_mimes['svgz'] = 'image/svg+xml';
+        return $upload_mimes;
+    }
+
+    /**
+     * Add SVG files mime check
+     *
+     * @since   1.0.0
+     * @access  public
+     * @param   array       $wp_check_filetype_and_ext  Values for the extension, mime type, and corrected filename
+     * @param   string      $file                       Full path to the file
+     * @param   string      $filename                   The name of the file (may differ from $file due to $file being in a tmp directory)
+     * @param   string[]    $mimes                      Array of mime types keyed by their file extension regex
+     * @return  array                                   Values for the extension, mime type, and corrected filename
+     */
+    public static function svg_mime_check( $wp_check_filetype_and_ext, $file, $filename, $mimes ) {
+        if ( ! $wp_check_filetype_and_ext['type'] ) {
+            $check_filetype  = wp_check_filetype( $filename, $mimes );
+            $ext             = $check_filetype['ext'];
+            $type            = $check_filetype['type'];
+            $proper_filename = $filename;
+
+            if ( $type && strpos( $type, 'image/' ) === 0 && $ext !== 'svg' ) {
+                $ext  = false;
+                $type = false;
+            }
+
+            $wp_check_filetype_and_ext = compact( 'ext', 'type', 'proper_filename' );
+        }
+
+        return $wp_check_filetype_and_ext;
     }
 
     /**

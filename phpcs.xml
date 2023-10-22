@@ -45,6 +45,7 @@
         <properties>
             <property name="custom_capabilities" type="array">
                 <element value="cwp_view_admin_dashboard" />
+                <element value="cwp_upload_svg" />
             </property>
         </properties>
 

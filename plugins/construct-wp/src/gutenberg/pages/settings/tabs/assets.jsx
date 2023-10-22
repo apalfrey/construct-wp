@@ -28,6 +28,7 @@ class AssetsTab extends Component {
             baseScripts: true,
             templateStyles: true,
             templateScripts: true,
+            svgUpload: false,
         }
     }
 
@@ -43,6 +44,7 @@ class AssetsTab extends Component {
                         baseScripts: !!response.cwp_base_scripts,
                         templateStyles: !!response.cwp_template_styles,
                         templateScripts: !!response.cwp_template_scripts,
+                        svgUpload: !!response.cwp_svg_upload,
                     } )
                 } )
             }
@@ -126,6 +128,22 @@ class AssetsTab extends Component {
                     disabled={this.state.isAPISaving}
                 />
 
+                <ToggleControl
+                    label={__( 'Enable SVG uploads', 'construct-wp' )}
+                    help={htmlToElem( sprintf(
+                        /* translators: %s - The capability in a code tag */
+                        __( 'Allows SVG uploads to the media library for users with the %s capability', 'construct-wp' ),
+                        '<code>cwp_upload_svg</code>'
+                    ) )}
+                    checked={this.state.svgUpload}
+                    onChange={() => {
+                        this.setState( {
+                            svgUpload: !this.state.svgUpload,
+                        } )
+                    }}
+                    disabled={this.state.isAPISaving}
+                />
+
                 <Button
                     variant="primary"
                     disabled={this.state.isAPISaving}
@@ -142,6 +160,7 @@ class AssetsTab extends Component {
                             cwp_base_scripts: this.state.baseScripts,
                             cwp_template_styles: this.state.templateStyles,
                             cwp_template_scripts: this.state.templateScripts,
+                            cwp_svg_upload: this.state.svgUpload,
                             /* eslint-enable camelcase */
                         } )
 
@@ -153,6 +172,7 @@ class AssetsTab extends Component {
                                     baseScripts: !!response.cwp_base_scripts,
                                     templateStyles: !!response.cwp_template_styles,
                                     templateScripts: !!response.cwp_template_scripts,
+                                    svgUpload: !!response.cwp_svg_upload,
                                 } )
 
                                 dispatch( 'core/notices' ).createSuccessNotice(

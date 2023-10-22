@@ -42,6 +42,7 @@ class CWP_Settings {
         'cwp_base_scripts'               => true,
         'cwp_template_styles'            => true,
         'cwp_template_scripts'           => true,
+        'cwp_svg_upload'                 => false,
 
         // Optimize.
         'cwp_optimize'                   => true,
@@ -196,6 +197,12 @@ class CWP_Settings {
             'type'         => 'boolean',
             'show_in_rest' => true,
             'default'      => self::$settings['cwp_template_scripts'],
+        ) );
+
+        register_setting( 'cwp_settings', 'cwp_svg_upload', array(
+            'type'         => 'boolean',
+            'show_in_rest' => true,
+            'default'      => self::$settings['cwp_svg_upload'],
         ) );
 
         // TODO theme support.

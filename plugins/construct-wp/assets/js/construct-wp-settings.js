@@ -239,7 +239,8 @@ class AssetsTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Componen
       baseStyles: true,
       baseScripts: true,
       templateStyles: true,
-      templateScripts: true
+      templateScripts: true,
+      svgUpload: false
     };
   }
   componentDidMount() {
@@ -252,7 +253,8 @@ class AssetsTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Componen
             baseStyles: !!response.cwp_base_styles,
             baseScripts: !!response.cwp_base_scripts,
             templateStyles: !!response.cwp_template_styles,
-            templateScripts: !!response.cwp_template_scripts
+            templateScripts: !!response.cwp_template_scripts,
+            svgUpload: !!response.cwp_svg_upload
           });
         });
       }
@@ -308,6 +310,17 @@ class AssetsTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Componen
         });
       },
       disabled: this.state.isAPISaving
+    }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: __('Enable SVG uploads', 'construct-wp'),
+      help: htmlToElem((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( /* translators: %s - The capability in a code tag */
+      __('Allows SVG uploads to the media library for users with the %s capability', 'construct-wp'), '<code>cwp_upload_svg</code>')),
+      checked: this.state.svgUpload,
+      onChange: () => {
+        this.setState({
+          svgUpload: !this.state.svgUpload
+        });
+      },
+      disabled: this.state.isAPISaving
     }), wp.element.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
       variant: "primary",
       disabled: this.state.isAPISaving,
@@ -322,7 +335,8 @@ class AssetsTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Componen
           cwp_base_styles: this.state.baseStyles,
           cwp_base_scripts: this.state.baseScripts,
           cwp_template_styles: this.state.templateStyles,
-          cwp_template_scripts: this.state.templateScripts
+          cwp_template_scripts: this.state.templateScripts,
+          cwp_svg_upload: this.state.svgUpload
           /* eslint-enable camelcase */
         });
 
@@ -332,7 +346,8 @@ class AssetsTab extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Componen
             baseStyles: !!response.cwp_base_styles,
             baseScripts: !!response.cwp_base_scripts,
             templateStyles: !!response.cwp_template_styles,
-            templateScripts: !!response.cwp_template_scripts
+            templateScripts: !!response.cwp_template_scripts,
+            svgUpload: !!response.cwp_svg_upload
           });
           (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.dispatch)('core/notices').createSuccessNotice(__('Settings saved!', 'construct-wp'), {
             type: 'snackbar',

@@ -63,6 +63,13 @@ class CWP_User {
                 'editor'        => true,
                 'administrator' => true,
             ),
+            'cwp_upload_svg'           => array(
+                'subscriber'    => false,
+                'contributor'   => false,
+                'author'        => false,
+                'editor'        => true,
+                'administrator' => true,
+            ),
         );
 
         $caps = apply_filters( 'cwp_capabilities', $caps );
